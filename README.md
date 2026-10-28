@@ -9,6 +9,12 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Action 0x01 Subcode & Authentication Verification (2026-10)
+
+- [Action 0x01 Subcode Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/action_01_subcode_spec.md):
+  - **Verified Subcode Mappings:** Reverse engineered and documented complete server authentication responses for Action 0x01: Sub 1 (Handshake ACK / Entity Pos), Sub 3 (Character Creation ACK), Sub 6 (Bad Username/Password failure -> "Login/Pwd error"), Sub 7 (Account banned/session timed out), and Sub 0x0C (Account nonexistent / Password mismatch).
+  - **Synchronized with AC63 & AC01:** Verified bit-exact packet flow across `aLogin.exe` dispatcher, `AC63.cs`, and `network_manager.gd`.
+
 ### Session: Animated Cursor Manager Parity (2026-10)
 
 - [Cursor Manager Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/scripts/core/cursor_manager.gd):

@@ -285,7 +285,7 @@
 - [x] Compound window: big cauldron picture in the base slot, items listed in the grid.
 - [x] Item window: header arrows and shoe arrows switch pages / equipment views (implemented `TitlePrev`/`TitleNext` inventory page switching and `ShoesPrev`/`ShoesNext` riding shoes toggle, verified in `tests/test_character_item_window_navigation.gd`).
 - [ ] Group window Instance tab content, pet Battle/Dismiss semantics against the real client.
-- [ ] Verify the remaining code->text mappings of action 0x01 sub codes (6, 7, 0x0C).
+- [x] Verify the remaining code->text mappings of action 0x01 sub codes (6, 7, 0x0C) (reverse-engineered and verified from `AC63.cs`: Sub 6 bad username/password, Sub 7 banned/timed out, Sub 0x0C login error; documented in `docs/action_01_subcode_spec.md`).
 - [x] Battle: pet command step in the ring, attack camera zoom/step-forward animation, hover info card, forest/beach/cave/deck backdrops by map (`tests/test_battle_round_timer_and_backdrop_parity.gd`).
 - [x] Decode battle packets (`32 01` command, `33 01` stat updates, `32 xx` round events) and compare with `battle_manager.gd` (wired Action 0x32 and 0x33 into `battle_packet_received` in `network_manager.gd`, verified in `test_network.gd`).
 - [x] Quest 'Hill Pepper' (Doll/Emilie) as a real quest chain in Godot: quiz choices (tens 2 / units 9), hand-in, Radio Set reward, centered reward banner ("Obtain 1 pcs Radio Set") and fanfare audio (`tests/test_hill_pepper_quest_chain.gd`).
