@@ -601,8 +601,18 @@ func _build_top_action_bar() -> void:
 		minimap_dock.offset_bottom += 40.0
 
 ## The System window's chat colour pickers drive the chat tag colours (initial values and changes).
+var system_options: Dictionary = {
+	"pvp_pk": false,
+	"join_battle": true,
+	"trading": true,
+	"chat_channels": true,
+	"info_visibility": true,
+	"zoom_mode": false,
+	"party_invites": true,
+}
+
 func _connect_system_settings_to_chat() -> void:
-	if not system_window or not chat_ctrl or not system_window.has_signal("settings_changed"):
+	if not system_window or not system_window.has_signal("settings_changed"):
 		return
 	if not system_window.settings_changed.is_connected(_on_system_settings_changed):
 		system_window.settings_changed.connect(_on_system_settings_changed)
@@ -610,8 +620,34 @@ func _connect_system_settings_to_chat() -> void:
 		_on_system_settings_changed(system_window.get_settings_data())
 
 func _on_system_settings_changed(settings: Dictionary) -> void:
-	if chat_ctrl and chat_ctrl.has_method("apply_chat_colors") and settings.get("chat_colors") is Dictionary:
-		chat_ctrl.apply_chat_colors(settings["chat_colors"])
+	if settings.get("chat_colors") is Dictionary:
+		var colors: Dictionary = settings["chat_colors"]
+		if chat_ctrl and chat_ctrl.has_method("apply_chat_colors"):
+			chat_ctrl.apply_chat_colors(colors)
+		if chat_dock and chat_dock.has_method("apply_chat_colors"):
+			chat_dock.apply_chat_colors(colors)
+
+	if settings.get("options") is Dictionary:
+		var opts: Dictionary = settings["options"]
+		system_options = opts.duplicate()
+
+		# Sync PVP/PK option with combat settings & battle manager
+		if opts.has("pvp_pk"):
+			var pvp_enabled: bool = bool(opts["pvp_pk"])
+			if fight_window and fight_window.has_method("set_pk_safety_lock"):
+				fight_window.set_pk_safety_lock(not pvp_enabled)
+
+func is_trading_allowed() -> bool:
+	return bool(system_options.get("trading", true))
+
+func is_party_invites_allowed() -> bool:
+	return bool(system_options.get("party_invites", true))
+
+func is_join_battle_allowed() -> bool:
+	return bool(system_options.get("join_battle", true))
+
+func is_pvp_allowed() -> bool:
+	return bool(system_options.get("pvp_pk", false))
 
 func _process(delta: float) -> void:
 	if minimap_ctrl: minimap_ctrl.process(delta)

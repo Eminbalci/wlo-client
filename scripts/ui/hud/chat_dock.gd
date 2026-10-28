@@ -56,6 +56,30 @@ var _chat_messages: Array[Dictionary] = []
 var _smooth_scroll_tween: Tween = null
 var _dock_width: float = 524.0
 
+var _channel_colors: Dictionary = {
+	"local": "#e8e8b0",
+	"whisper": "#ff66b2",
+	"team": "#4ab3ff",
+	"guild": "#32e070",
+	"world": "#ffea33",
+}
+
+## Applies dynamic chat channel colors from SystemWindow settings
+func apply_chat_colors(colors: Dictionary) -> void:
+	var key_map := {"local": "local", "whisper": "whisper", "party": "team", "team": "team", "guild": "guild", "world": "world"}
+	for k in key_map.keys():
+		if colors.has(k):
+			var val = colors[k]
+			var hex_str: String = ""
+			if val is Color:
+				hex_str = "#" + val.to_html(false).to_lower()
+			else:
+				hex_str = str(val).to_lower()
+				if not hex_str.begins_with("#"):
+					hex_str = "#" + hex_str
+			_channel_colors[key_map[k]] = hex_str
+	_update_channel_button_style()
+
 # Tab StyleBox cache
 var _style_tab_inactive: StyleBoxFlat = null
 var _style_tab_hover: StyleBoxFlat = null
@@ -431,12 +455,12 @@ func _update_channel_button_style() -> void:
 	if not btn_channel:
 		return
 	var ch_colors := {
-		"Local": Color(0.24, 0.78, 0.35, 1.0),
-		"Current": Color(0.24, 0.78, 0.35, 1.0),
-		"Team": Color(0.29, 0.70, 1.0, 1.0),
-		"Guild": Color(0.20, 0.88, 0.44, 1.0),
-		"Whisper": Color(1.0, 0.40, 0.70, 1.0),
-		"World": Color(1.0, 0.92, 0.20, 1.0),
+		"Local": Color(_channel_colors.get("local", "#24c759")),
+		"Current": Color(_channel_colors.get("local", "#24c759")),
+		"Team": Color(_channel_colors.get("team", "#4ab3ff")),
+		"Guild": Color(_channel_colors.get("guild", "#32e070")),
+		"Whisper": Color(_channel_colors.get("whisper", "#ff66b2")),
+		"World": Color(_channel_colors.get("world", "#ffea33")),
 		"System": Color(1.0, 0.75, 0.25, 1.0)
 	}
 	var border_col: Color = ch_colors.get(_current_channel, Color(0.24, 0.78, 0.35, 1.0))
@@ -526,15 +550,15 @@ func _format_line(sender: String, message: String, channel: String) -> String:
 	match ch_lower:
 		"local", "current":
 			label = "Local"
-			colour = "#e8e8b0"
+			colour = _channel_colors.get("local", "#e8e8b0")
 		"whisper":
-			colour = "#ff66b2"
-		"team":
-			colour = "#4ab3ff"
+			colour = _channel_colors.get("whisper", "#ff66b2")
+		"team", "party":
+			colour = _channel_colors.get("team", "#4ab3ff")
 		"guild":
-			colour = "#32e070"
+			colour = _channel_colors.get("guild", "#32e070")
 		"world":
-			colour = "#ffea33"
+			colour = _channel_colors.get("world", "#ffea33")
 	var target_name := sender.substr(3).strip_edges() if (ch_lower == "whisper" and sender.begins_with("To ")) else sender
 	return "[color=%s](%s)[url=whisper:%s]%s[/url]:%s[/color]\n" % [colour, label, target_name, sender, message]
 

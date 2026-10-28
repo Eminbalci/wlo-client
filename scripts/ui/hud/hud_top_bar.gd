@@ -147,6 +147,11 @@ func _on_action_requested(action_id: String) -> void:
 		"battle_settings", "pk_settings":
 			if _hud.has_method("toggle_fight_menu"):
 				_hud.toggle_fight_menu()
+		"trade":
+			if _hud.has_method("is_trading_allowed") and not _hud.is_trading_allowed():
+				_hud.add_chat_message("System", "Trading is currently disabled in System Settings.", "System")
+			elif _hud.has_method("add_chat_message"):
+				_hud.add_chat_message("System", "Select a target player to initiate trade.", "System")
 		_:
 			if _hud.has_method("add_chat_message"):
 				var label := action_id.replace("_", " ").capitalize()

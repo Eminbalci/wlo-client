@@ -9,6 +9,14 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: System Window Options, Chat Colors, & Gameplay Flags (2026-10)
+
+- [System Window Options, Chat Colors, & Gameplay Flags Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/system_window_options_and_chat_colors_spec.md):
+  - **Dynamic Chat Channel Color Propagation:** Integrated `SystemWindow` color pickers into both `ChatDock` and `HUDChat` via `apply_chat_colors()`. Translates Color objects and hex strings to dynamically colorize Local, Whisper, Team/Party, Guild, and World chat lines, and refreshes the channel button border and fill states.
+  - **PVP/PK Safety Lock Inversion:** Wired `system_options["pvp_pk"]` through `hud.gd` to synchronize with `fight_window.set_pk_safety_lock()` and `BattleManager`. When PVP is disabled, PK safety is strictly locked to prevent accidental combat; when PVP is enabled, PK safety unlocks.
+  - **Gameplay Permission Enforcement:** Implemented `is_trading_allowed()`, `is_party_invites_allowed()`, `is_join_battle_allowed()`, and `is_pvp_allowed()` on `HUD`. Guarded `TopActionBar` trade requests to notify the player when trading is disabled in System Settings.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_system_window_options_and_chat_colors.gd` (19/19 passed, 0 failures) and floating window suite `test_floating_windows_and_system_settings.gd` (146/146 passed).
+
 ### Session: Consumable Item Recovery & Status Effects (2026-10)
 
 - [Consumable Item Recovery Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/consumable_item_recovery_specification.md):

@@ -1,5 +1,22 @@
 # Wonderland Online Client - Task Tracker
 
+# System Window Options, Chat Colors, & Gameplay Flags
+- [x] 1. Dynamic Chat Color Propagation:
+  - [x] 1.1 In `scripts/ui/hud/chat_dock.gd`, added `apply_chat_colors()` and `_channel_colors` dictionary.
+  - [x] 1.2 Updated `_format_line()` and `_update_channel_button_style()` to use dynamic channel colors from SystemWindow.
+  - [x] 1.3 Wired `_on_system_settings_changed()` in `scripts/ui/hud.gd` to dispatch `chat_colors` to both `chat_ctrl` and `chat_dock`.
+- [x] 2. Gameplay Option Synchronization:
+  - [x] 2.1 Wired `system_options["pvp_pk"]` to invert PK safety lock in `FightWindow` and `BattleManager`.
+  - [x] 2.2 Added gameplay permission query methods on `HUD`: `is_trading_allowed()`, `is_party_invites_allowed()`, `is_join_battle_allowed()`, `is_pvp_allowed()`.
+  - [x] 2.3 Guarded `TopActionBar` trade requests against disabled trading settings.
+- [x] 3. Automated Testing & Verification:
+  - [x] 3.1 Created `tests/test_system_window_options_and_chat_colors.gd` testing dynamic chat colors, HUD option dispatch, PK safety inversion, and TopBar trade guard.
+  - [x] 3.2 Executed test suite via headless Godot console (19/19 passed, 0 failures, 100%).
+- [x] 4. Technical Documentation & Global Updates:
+  - [x] 4.1 Created `docs/system_window_options_and_chat_colors_spec.md`.
+  - [x] 4.2 Updated `README.md`.
+  - [x] 4.3 Marked completed in `todo.md`.
+
 # Consumable Item Recovery & Status Effects System
 - [x] 1. Data Decoding & ItemRecord Status Math:
   - [x] 1.1 Decoded status types 25 (HP), 26 (SP), 64 (Amity), and 36 (EXP) in `itemDat.wpdat` / `Item.dat` with `delta = raw_val - 100`.
@@ -207,7 +224,7 @@
 - [x] Admin tools first pass: Battle Studio toolbar wraps (was cut off at 1280 px). Still open there: Skill Studio side columns scroll horizontally.
 - [ ] LAST (requested by the user): admin tools (World Editor, Map/NPC/Item/Quest/Skill/Battle/Cutscene/Audio/Tent studios): fix UI, make their tests runnable (scene-based runner) and verify.
 - [x] HUD windows realigned to their baked skins: System, Friends, Skill (new categories), Shop (Buy/Trade toggles), Combat settings (light frame). See README "HUD Windows Realigned".
-- [ ] Apply System window options/colours: chat channel colours into the chat renderer (two chat implementations: `hud_chat.gd` and `chat_dock.gd`), PVP/PK and trading flags into gameplay.
+- [x] Apply System window options/colours: chat channel colours into the chat renderer (two chat implementations: `hud_chat.gd` and `chat_dock.gd`), PVP/PK and trading flags into gameplay.
 - [ ] Quest ("mission") and Team ("group") windows: verify against their skins (text slightly clipped in the quest window).
 - [ ] Skill window: no proficiency / weapon requirement data yet (shows "-" / "Any"); learned-skills model instead of listing all element skills.
 - [ ] Character select: "Loading" state while character data arrives (seen in the reference video).
