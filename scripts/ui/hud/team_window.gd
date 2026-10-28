@@ -322,7 +322,7 @@ func _build_party_member_slots() -> void:
 			n_lbl.name = "NameLabel"
 			card.add_child(n_lbl)
 		n_lbl.position = Vector2(52.0, 2.0)
-		n_lbl.size = Vector2(90.0, 16.0)
+		n_lbl.size = Vector2(68.0, 16.0)
 		_apply_wlo_typography(n_lbl, 11, Color(1.0, 0.98, 0.92, 1.0))
 		n_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -333,7 +333,7 @@ func _build_party_member_slots() -> void:
 			lv_lbl.name = "LevelLabel"
 			card.add_child(lv_lbl)
 		lv_lbl.position = Vector2(52.0, 17.0)
-		lv_lbl.size = Vector2(90.0, 14.0)
+		lv_lbl.size = Vector2(68.0, 14.0)
 		_apply_wlo_typography(lv_lbl, 10, Color(1.0, 0.88, 0.45, 1.0))
 		lv_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -343,8 +343,8 @@ func _build_party_member_slots() -> void:
 			l_bdg = TextureRect.new()
 			l_bdg.name = "LeaderBadge"
 			card.add_child(l_bdg)
-		l_bdg.position = Vector2(100.0, 17.0)
-		l_bdg.size = Vector2(44.0, 14.0)
+		l_bdg.position = Vector2(96.0, 17.0)
+		l_bdg.size = Vector2(24.0, 14.0)
 		l_bdg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		l_bdg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		l_bdg.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -357,8 +357,8 @@ func _build_party_member_slots() -> void:
 			hp_bar = ProgressBar.new()
 			hp_bar.name = "HpBar"
 			card.add_child(hp_bar)
-		hp_bar.position = Vector2(150.0, 8.0)
-		hp_bar.size = Vector2(60.0, 6.0)
+		hp_bar.position = Vector2(122.0, 8.0)
+		hp_bar.size = Vector2(50.0, 6.0)
 		hp_bar.show_percentage = false
 		hp_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_apply_textured_bar_style(hp_bar, "hp")
@@ -368,8 +368,8 @@ func _build_party_member_slots() -> void:
 			hp_lbl = Label.new()
 			hp_lbl.name = "HpLabel"
 			card.add_child(hp_lbl)
-		hp_lbl.position = Vector2(150.0, 8.0)
-		hp_lbl.size = Vector2(60.0, 6.0)
+		hp_lbl.position = Vector2(122.0, 8.0)
+		hp_lbl.size = Vector2(50.0, 6.0)
 		hp_lbl.modulate.a = 0.0 # the real row shows bars only
 		_apply_wlo_typography(hp_lbl, 9, Color(0.95, 0.95, 0.95, 1.0))
 		hp_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -381,8 +381,8 @@ func _build_party_member_slots() -> void:
 			sp_bar = ProgressBar.new()
 			sp_bar.name = "SpBar"
 			card.add_child(sp_bar)
-		sp_bar.position = Vector2(150.0, 18.0)
-		sp_bar.size = Vector2(60.0, 6.0)
+		sp_bar.position = Vector2(122.0, 18.0)
+		sp_bar.size = Vector2(50.0, 6.0)
 		sp_bar.show_percentage = false
 		sp_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_apply_textured_bar_style(sp_bar, "sp")
@@ -392,8 +392,8 @@ func _build_party_member_slots() -> void:
 			sp_lbl = Label.new()
 			sp_lbl.name = "SpLabel"
 			card.add_child(sp_lbl)
-		sp_lbl.position = Vector2(150.0, 18.0)
-		sp_lbl.size = Vector2(60.0, 6.0)
+		sp_lbl.position = Vector2(122.0, 18.0)
+		sp_lbl.size = Vector2(50.0, 6.0)
 		sp_lbl.modulate.a = 0.0
 		_apply_wlo_typography(sp_lbl, 9, Color(0.95, 0.95, 0.95, 1.0))
 		sp_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

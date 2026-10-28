@@ -397,11 +397,11 @@ func toggle_inventory() -> void:
 ## Geometry measured from form_taskview_1: ten baked list rows on the left (x 17, y 53, pitch 24)
 ## and the "Taskview" panel on the right (x 218..410, y 53..318).
 const QUEST_ROW_COUNT: int = 10
-const QUEST_ROW_ORIGIN: Vector2 = Vector2(17, 53)
-const QUEST_ROW_SIZE: Vector2 = Vector2(193, 22)
+const QUEST_ROW_ORIGIN: Vector2 = Vector2(14, 53)
+const QUEST_ROW_SIZE: Vector2 = Vector2(202, 22)
 const QUEST_ROW_PITCH: float = 24.0
-const QUEST_DETAIL_POS: Vector2 = Vector2(222, 57)
-const QUEST_DETAIL_SIZE: Vector2 = Vector2(186, 236)
+const QUEST_DETAIL_POS: Vector2 = Vector2(220, 54)
+const QUEST_DETAIL_SIZE: Vector2 = Vector2(196, 238)
 const QUEST_PAGE_PREV_POS: Vector2 = Vector2(72, 298)
 const QUEST_PAGE_NEXT_POS: Vector2 = Vector2(136, 298)
 
@@ -524,15 +524,30 @@ func _refresh_quest_rows() -> void:
 			mark.add_theme_font_size_override("font_size", 13)
 			mark.add_theme_color_override("font_color", Color(0.88, 0.1, 0.1, 1.0))
 			row.add_child(mark)
+		var title_lbl := row.get_node_or_null("TitleLabel") as Label
+		if title_lbl == null:
+			title_lbl = Label.new()
+			title_lbl.name = "TitleLabel"
+			title_lbl.position = Vector2(22, 0)
+			title_lbl.size = Vector2(QUEST_ROW_SIZE.x - 24, QUEST_ROW_SIZE.y)
+			title_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			title_lbl.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+			title_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			title_lbl.add_theme_font_size_override("font_size", 10)
+			title_lbl.add_theme_color_override("font_color", Color(0.16, 0.22, 0.40, 1.0))
+			row.add_child(title_lbl)
+		row.text = ""
 		if entry_index < _quest_titles.size():
 			var entry: Dictionary = _quest_titles[entry_index]
-			# the original puts a red check in front of finished quests and nothing in front of open ones
-			row.text = "      " + str(entry.get("title", "Quest"))
+			var t_str: String = str(entry.get("title", "Quest"))
+			title_lbl.text = t_str
+			row.tooltip_text = t_str
 			mark.visible = bool(entry.get("completed", false))
 			row.disabled = false
 			row.visible = true
 		else:
-			row.text = ""
+			title_lbl.text = ""
+			row.tooltip_text = ""
 			mark.visible = false
 			row.visible = false
 

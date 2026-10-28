@@ -265,7 +265,7 @@
 - [ ] LAST (requested by the user): admin tools (World Editor, Map/NPC/Item/Quest/Skill/Battle/Cutscene/Audio/Tent studios): fix UI, make their tests runnable (scene-based runner) and verify.
 - [x] HUD windows realigned to their baked skins: System, Friends, Skill (new categories), Shop (Buy/Trade toggles), Combat settings (light frame). See README "HUD Windows Realigned".
 - [x] Apply System window options/colours: chat channel colours into the chat renderer (two chat implementations: `hud_chat.gd` and `chat_dock.gd`), PVP/PK and trading flags into gameplay.
-- [ ] Quest ("mission") and Team ("group") windows: verify against their skins (text slightly clipped in the quest window).
+- [x] Quest ("mission") and Team ("group") windows: verify against their skins (text slightly clipped in the quest window resolved with TitleLabel ellipsis and HP/SP bar repositioning).
 - [x] Skill window: no proficiency / weapon requirement data yet (shows "-" / "Any"); learned-skills model instead of listing all element skills.
 - [ ] Character select: "Loading" state while character data arrives (seen in the reference video).
 - [x] Close buttons over the baked x sphere, cursor mapping, chat colours, compound window, sinking cutscene visuals, battle sprites/buttons/gauge, encounters and battle-to-world flow (see README).

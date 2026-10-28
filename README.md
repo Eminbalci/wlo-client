@@ -9,6 +9,13 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Quest & Team Window Skin Alignment (2026-10)
+
+- [Quest & Team Window Skin Alignment Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/quest_and_team_window_skin_alignment_spec.md):
+  - **Quest Window Listing & Ellipsis Parity:** Replaced artificial space indentation on quest row buttons with a dedicated `TitleLabel` at `Vector2(22, 0)` with `size = Vector2(178, 22)`, `TextServer.OVERRUN_TRIM_ELLIPSIS`, and tooltip reflection. Adjusted `QUEST_ROW_ORIGIN` to `(14, 53)` and `QUEST_ROW_SIZE` to `(202, 22)`, completely resolving text truncation and margin overflow.
+  - **Team Window Bar Overlap Resolution:** Relocated party member HP/SP bars to `Vector2(122.0, 8.0)` and `Vector2(122.0, 18.0)` with width 50px (X=122..172) and adjusted name/level labels to 68px width. Leaves a clean 6px margin before member control buttons ("Battle", "Ride", "Dismiss" at X=178), eliminating visual bar overlapping.
+  - **Verification:** 100% zero-error pass rate across `tests/test_team_window_and_companions.gd` (117/117 passed), `tests/test_companion_ride_mode.gd` (48/48 passed), and `tests/test_quest_dialogue_connection.gd` (100% passed).
+
 ### Session: System Window Options, Chat Colors, & Gameplay Flags (2026-10)
 
 - [System Window Options, Chat Colors, & Gameplay Flags Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/system_window_options_and_chat_colors_spec.md):
