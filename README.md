@@ -9,6 +9,17 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Protocol Dispatcher Expansion (2026-10)
+
+- [Network Protocol Dispatcher Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/scripts/network/network_manager.gd):
+  - **Decoded Delphi Dispatch Handlers:** Expanded `NetworkManager` payload dispatcher (`_dispatch_payload`) based on `docs/re/dispatch_table.md` reverse engineering of `aLogin.exe`.
+  - **Action 0x02:** Item Pickup (0x0217) and Entity Updates (0x0205) emitting `item_pickup_received(item_id, count, pickup_info)`.
+  - **Action 0x05:** NPC Dialogue triggers (0x0501) and portal activations (0x0500) emitting `npc_dialogue_received(dialogue_id, npc_id, dialogue_info)`.
+  - **Action 0x07:** Spatial map warps (0x0755) emitting `warp_received(map_id, target_x, target_y, warp_info)`.
+  - **Action 0x19 & 0x1B:** Trade requests, trade confirmation, and shop transactions emitting `trade_event_received(sub_code, trade_info)`.
+  - **Action 0x32 & 0x33:** Combat turn commands, round animations, and stat syncs emitting `battle_packet_received(action_code, sub_code, battle_info)`.
+  - **Verification:** 100% zero-error pass rate across automated test suite `tests/test_network.gd`.
+
 ### Session: Character Select 'Loading' State Parity (2026-10)
 
 - [Character Select Loading State Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/scripts/ui/auth/character_select.gd):

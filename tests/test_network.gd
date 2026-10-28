@@ -471,8 +471,59 @@ func test_network_manager_dispatcher_responses() -> bool:
 		nm.free()
 		return false
 
+	# 5. Extended Dispatcher Handlers (Warp 0x07, Dialogue 0x05, Item 0x02, Battle 0x32/0x33, Trade 0x19/0x1B)
+	var warps: Array = []
+	var dialogues: Array = []
+	var pickups: Array = []
+	var battles: Array = []
+	nm.warp_received.connect(func(mid, x, y, inf): warps.append([mid, x, y]))
+	nm.npc_dialogue_received.connect(func(did, nid, inf): dialogues.append([did, nid]))
+	nm.item_pickup_received.connect(func(iid, cnt, inf): pickups.append([iid, cnt]))
+	nm.battle_packet_received.connect(func(ac, sc, inf): battles.append([ac, sc]))
+
+	# Test Warp (Action 0x07, Sub 0x55, Map 10001, X 300, Y 500)
+	var warp_bytes := PackedByteArray([0x07, 0x55])
+	warp_bytes.resize(8)
+	warp_bytes.encode_u16(2, 10001)
+	warp_bytes.encode_u16(4, 300)
+	warp_bytes.encode_u16(6, 500)
+	nm._dispatch_payload(warp_bytes)
+	if warps.is_empty() or warps[0][0] != 10001 or warps[0][1] != 300:
+		push_error("FAIL: warp_received dispatch failed")
+		nm.free()
+		return false
+
+	# Test NPC Dialogue (Action 0x05, Sub 0x01, Talk 20222, NPC 14141)
+	var dial_bytes := PackedByteArray([0x05, 0x01])
+	dial_bytes.resize(6)
+	dial_bytes.encode_u16(2, 20222)
+	dial_bytes.encode_u16(4, 14141)
+	nm._dispatch_payload(dial_bytes)
+	if dialogues.is_empty() or dialogues[0][0] != 20222 or dialogues[0][1] != 14141:
+		push_error("FAIL: npc_dialogue_received dispatch failed")
+		nm.free()
+		return false
+
+	# Test Item Pickup (Action 0x02, Sub 0x17, Item 30028, Count 2)
+	var item_bytes := PackedByteArray([0x02, 0x17])
+	item_bytes.resize(5)
+	item_bytes.encode_u16(2, 30028)
+	item_bytes[4] = 2
+	nm._dispatch_payload(item_bytes)
+	if pickups.is_empty() or pickups[0][0] != 30028 or pickups[0][1] != 2:
+		push_error("FAIL: item_pickup_received dispatch failed")
+		nm.free()
+		return false
+
+	# Test Battle Command/Event (Action 0x32, Sub 0x01)
+	nm._dispatch_payload(PackedByteArray([0x32, 0x01, 0x05]))
+	if battles.is_empty() or battles[0][0] != 0x32 or battles[0][1] != 0x01:
+		push_error("FAIL: battle_packet_received dispatch failed")
+		nm.free()
+		return false
+
 	nm.free()
-	print("  PASS: NetworkManager Dispatcher Signals")
+	print("  PASS: NetworkManager Dispatcher Signals (including Warp, Dialogue, Item, Battle)")
 	return true
 
 func test_network_manager_telemetry_opcodes() -> bool:

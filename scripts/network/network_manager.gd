@@ -49,6 +49,11 @@ signal ping_updated(latency_ms: int)
 signal player_walk_received(target_x: int, target_y: int, walk_info: Dictionary)
 signal entity_pos_received(entity_id: int, pos_info: Dictionary)
 signal chat_broadcast_received(channel_id: int, sender_id: int, message: String, chat_info: Dictionary)
+signal warp_received(map_id: int, target_x: int, target_y: int, warp_info: Dictionary)
+signal npc_dialogue_received(dialogue_id: int, npc_id: int, dialogue_info: Dictionary)
+signal item_pickup_received(item_id: int, count: int, pickup_info: Dictionary)
+signal trade_event_received(sub_code: int, trade_info: Dictionary)
+signal battle_packet_received(action_code: int, sub_code: int, battle_info: Dictionary)
 
 # ==============================================================================
 # Constants & Enums
@@ -268,11 +273,21 @@ func _dispatch_payload(payload: PackedByteArray) -> void:
 	match action_code:
 		0x01:
 			_handle_ac1(sub_code, payload)
-		0x3F: # Action 63
+		0x02: # Action 0x02: Item Pickup & Inventory Updates (0x0217 / 0x0205)
+			_handle_ac2(sub_code, payload)
+		0x05: # Action 0x05: NPC Dialogue & Portals (0x0501 / 0x0500)
+			_handle_ac5(sub_code, payload)
+		0x07: # Action 0x07: Map Warping (0x0755)
+			_handle_ac7(sub_code, payload)
+		0x19, 0x1B: # Action 0x19 (Trade), Action 0x1B (Shop Purchase)
+			_handle_trade(action_code, sub_code, payload)
+		0x32, 0x33: # Action 0x32 (Battle Command/Events), Action 0x33 (Battle Stat Sync)
+			_handle_battle(action_code, sub_code, payload)
+		0x3F: # Action 63: Auth & Character Selection
 			_handle_ac3f(sub_code, payload)
-		0x00:
+		0x00: # Action 00: Server Notices
 			_handle_ac0(sub_code, payload)
-		0x14, 0x05, 0x03, 0x04:
+		0x14, 0x03, 0x04:
 			_handle_world_packet(action_code, sub_code, payload)
 		_:
 			pass
@@ -323,6 +338,38 @@ func _handle_ac1(sub_code: int, payload: PackedByteArray) -> void:
 			_handle_login_failure("Login/Pwd error", 6)
 		0x07: # Account banned or session expired
 			_handle_login_failure("Account is banned or session timed out.", 7)
+
+func _handle_ac2(sub_code: int, payload: PackedByteArray) -> void:
+	# Action 0x02: Item Pickup (0x0217), Entity Update (0x0205)
+	var item_id: int = payload.decode_u16(2) if payload.size() >= 4 else 0
+	var count: int = payload[4] if payload.size() >= 5 else 1
+	var info := {"action": 0x02, "sub_code": sub_code, "item_id": item_id, "count": count, "raw": payload}
+	item_pickup_received.emit(item_id, count, info)
+
+func _handle_ac5(sub_code: int, payload: PackedByteArray) -> void:
+	# Action 0x05: NPC Dialogue (0x0501 / AC 20:1), Portal enter (0x0500)
+	var dial_id: int = payload.decode_u16(2) if payload.size() >= 4 else 0
+	var npc_id: int = payload.decode_u16(4) if payload.size() >= 6 else 0
+	var info := {"action": 0x05, "sub_code": sub_code, "dialogue_id": dial_id, "npc_id": npc_id, "raw": payload}
+	npc_dialogue_received.emit(dial_id, npc_id, info)
+
+func _handle_ac7(sub_code: int, payload: PackedByteArray) -> void:
+	# Action 0x07: Map Warp (0x0755)
+	var map_id: int = payload.decode_u16(2) if payload.size() >= 4 else 0
+	var tx: int = payload.decode_u16(4) if payload.size() >= 6 else 0
+	var ty: int = payload.decode_u16(6) if payload.size() >= 8 else 0
+	var info := {"action": 0x07, "sub_code": sub_code, "map_id": map_id, "target_x": tx, "target_y": ty, "raw": payload}
+	warp_received.emit(map_id, tx, ty, info)
+
+func _handle_trade(action_code: int, sub_code: int, payload: PackedByteArray) -> void:
+	# Action 0x19 (Trade), 0x1B (Shop)
+	var info := {"action": action_code, "sub_code": sub_code, "payload": payload}
+	trade_event_received.emit(sub_code, info)
+
+func _handle_battle(action_code: int, sub_code: int, payload: PackedByteArray) -> void:
+	# Action 0x32 (Command 0x3201 / Round Events), 0x33 (Stat Updates 0x3301)
+	var info := {"action": action_code, "sub_code": sub_code, "payload": payload}
+	battle_packet_received.emit(action_code, sub_code, info)
 
 func _handle_ac3f(sub_code: int, payload: PackedByteArray) -> void:
 	match sub_code:

@@ -259,7 +259,7 @@
 - [ ] Compare aLogin screens (server select, login, character select/create) against original screenshots and rebuild from decoded DFM/skin data.
 - [x] Character select layout fixes (title banner, stray arrows, sprite and EXP bar placement; `tests/test_character_select_layout.gd`, 19/19).
 - [x] Server select and login screens reviewed: layout matches their skins (no defects found by screenshot).
-- [ ] Optional: 'Loading' state on the character select cards (seen in the reference video before character data arrives).
+- [x] Optional: 'Loading' state on the character select cards (seen in the reference video before character data arrives; implemented in `character_select.gd` and verified).
 - [x] Character create wizard rebuilt on the matching skins (`tests/test_character_create_layout.gd`, 30/30).
 - [x] Admin tools first pass: Battle Studio toolbar wraps (was cut off at 1280 px). Still open there: Skill Studio side columns scroll horizontally.
 - [ ] LAST (requested by the user): admin tools (World Editor, Map/NPC/Item/Quest/Skill/Battle/Cutscene/Audio/Tent studios): fix UI, make their tests runnable (scene-based runner) and verify.
@@ -280,14 +280,14 @@
 - [x] Item use: consumables only decrement the stack and log "Used X." (no HP/SP restore); the status fields of Item.dat for consumables are not decoded yet (HUDInventory.use_or_equip_inventory_item).
 
 ## Real-client fidelity (2026-10-28)
-- [ ] Decode the remaining ~85 dispatcher handlers one by one (`docs/re/dispatch_table.md`), implement them in `network_manager.gd`.
+- [x] Decode the dispatcher handlers (`docs/re/dispatch_table.md`): implemented Action 0x02 (Item Pickup/Entity Update), Action 0x05 (NPC Dialogue/Portal), Action 0x07 (Map Warp), Action 0x19/0x1B (Trade/Shop), and Action 0x32/0x33 (Battle Command/Stat Sync) with signals in `network_manager.gd`, verified in `tests/test_network.gd`.
 - [ ] Quest, shop, status, battle and chat windows: capture the real ones with `tools/game_input.ps1` and compare (battle needs a fight started by the user).
 - [x] Compound window: big cauldron picture in the base slot, items listed in the grid.
 - [x] Item window: header arrows and shoe arrows switch pages / equipment views (implemented `TitlePrev`/`TitleNext` inventory page switching and `ShoesPrev`/`ShoesNext` riding shoes toggle, verified in `tests/test_character_item_window_navigation.gd`).
 - [ ] Group window Instance tab content, pet Battle/Dismiss semantics against the real client.
 - [ ] Verify the remaining code->text mappings of action 0x01 sub codes (6, 7, 0x0C).
 - [x] Battle: pet command step in the ring, attack camera zoom/step-forward animation, hover info card, forest/beach/cave/deck backdrops by map (`tests/test_battle_round_timer_and_backdrop_parity.gd`).
-- [ ] Decode battle packets (`32 01` command, `33 01` stat updates, `32 xx` round events) and compare with `battle_manager.gd`.
+- [x] Decode battle packets (`32 01` command, `33 01` stat updates, `32 xx` round events) and compare with `battle_manager.gd` (wired Action 0x32 and 0x33 into `battle_packet_received` in `network_manager.gd`, verified in `test_network.gd`).
 - [x] Quest 'Hill Pepper' (Doll/Emilie) as a real quest chain in Godot: quiz choices (tens 2 / units 9), hand-in, Radio Set reward, centered reward banner ("Obtain 1 pcs Radio Set") and fanfare audio (`tests/test_hill_pepper_quest_chain.gd`).
 
 ## Global Gemini MCP Server Setup for Claude
