@@ -66,5 +66,14 @@ func _run() -> void:
 	arrow_l.pressed.emit()
 	_check(screen._slot_rotations[0] == before, "Left arrow rotates it back")
 
+	# Test Loading state
+	screen.set_loading(true)
+	_check(screen.is_loading, "Character select is_loading flag is true")
+	var loading_overlay_0 = screen.card_slot_0.get_node_or_null("LoadingOverlay")
+	_check(loading_overlay_0 != null and loading_overlay_0.visible, "Slot 0 shows loading overlay")
+	screen.set_loading(false)
+	_check(not screen.is_loading, "Character select is_loading flag is false")
+	_check(loading_overlay_0 != null and not loading_overlay_0.visible, "Slot 0 loading overlay is hidden")
+
 	print("\n--- %d TESTS, %d FAILED ---" % [_count, _failures])
 	quit(1 if _failures > 0 else 0)

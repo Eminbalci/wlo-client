@@ -267,7 +267,7 @@
 - [x] Apply System window options/colours: chat channel colours into the chat renderer (two chat implementations: `hud_chat.gd` and `chat_dock.gd`), PVP/PK and trading flags into gameplay.
 - [x] Quest ("mission") and Team ("group") windows: verify against their skins (text slightly clipped in the quest window resolved with TitleLabel ellipsis and HP/SP bar repositioning).
 - [x] Skill window: no proficiency / weapon requirement data yet (shows "-" / "Any"); learned-skills model instead of listing all element skills.
-- [ ] Character select: "Loading" state while character data arrives (seen in the reference video).
+- [x] Character select: "Loading" state while character data arrives (implemented `set_loading(bool)`, `is_loading`, centered loading overlay with disabled button controls; verified in `tests/test_character_select_layout.gd`).
 - [x] Close buttons over the baked x sphere, cursor mapping, chat colours, compound window, sinking cutscene visuals, battle sprites/buttons/gauge, encounters and battle-to-world flow (see README).
 - [x] Battle: real battle backgrounds by environment/bg_id (Forest, Beach, Cave, Deck), 20-30s centered cyan digital countdown timer with warning red color below 5s, configurable turn limit in BattleManager.
 - [x] Battle: 2-phase player-to-pet command radial ring handoff, permission gating (Catch/Item disabled for pet), dynamic combat camera attack zoom, and caster lunges.

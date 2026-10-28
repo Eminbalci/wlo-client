@@ -9,6 +9,13 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Character Select 'Loading' State Parity (2026-10)
+
+- [Character Select Loading State Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/scripts/ui/auth/character_select.gd):
+  - **Remote Synchronization Overlay:** Added `set_loading(bool)` and `is_loading` state on `CharacterSelect` matching reference video behavior before remote character packets arrive.
+  - **Visual & Interaction Shield:** Displays centered translucent loading veil with cyan typography and disables slot creation/login/delete buttons while loading.
+  - **Verification:** 100% zero-error pass rate across automated test suite `tests/test_character_select_layout.gd` (23/23 passed).
+
 ### Session: Quest 'Hill Pepper' (Doll & Emilie) Authentic Implementation (2026-10)
 
 - [Hill Pepper Quest Chain Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/hill_pepper_quest_chain_spec.md):

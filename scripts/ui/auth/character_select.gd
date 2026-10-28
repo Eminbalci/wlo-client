@@ -56,6 +56,7 @@ const ELEMENT_ICONS: Dictionary = {
 
 var account_name: String = "default"
 var selected_slot_index: int = 0
+var is_loading: bool = false
 var _characters: Dictionary = {}
 var _slot_rotations: Dictionary = {0: DEFAULT_HEADING, 1: DEFAULT_HEADING, 2: DEFAULT_HEADING}
 var _anim_timer: float = 0.0
@@ -300,6 +301,54 @@ func refresh_characters() -> void:
 func set_slot_character(slot_idx: int, char_data: Dictionary) -> void:
 	_characters[str(slot_idx)] = char_data
 	_update_slot_card(slot_idx)
+
+func set_loading(loading: bool) -> void:
+	is_loading = loading
+	_update_loading_state()
+
+func _update_loading_state() -> void:
+	for s_idx in [0, 1]:
+		var c_node: Control = _get_card_node(s_idx)
+		if not c_node:
+			continue
+		var loading_overlay := c_node.get_node_or_null("LoadingOverlay") as Control
+		if is_loading:
+			if not loading_overlay:
+				loading_overlay = Control.new()
+				loading_overlay.name = "LoadingOverlay"
+				loading_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+				loading_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+				
+				var bg := ColorRect.new()
+				bg.name = "LoadingBg"
+				bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+				bg.color = Color(0.04, 0.06, 0.1, 0.75)
+				loading_overlay.add_child(bg)
+
+				var lbl := Label.new()
+				lbl.name = "LoadingLabel"
+				lbl.text = "Loading..."
+				lbl.set_anchors_preset(Control.PRESET_CENTER)
+				lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+				lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+				lbl.add_theme_font_size_override("font_size", 14)
+				lbl.add_theme_color_override("font_color", Color(0.3, 0.9, 1.0, 1.0))
+				lbl.add_theme_color_override("font_outline_color", Color(0.0, 0.1, 0.2, 1.0))
+				lbl.add_theme_constant_override("outline_size", 2)
+				loading_overlay.add_child(lbl)
+
+				c_node.add_child(loading_overlay)
+			loading_overlay.visible = true
+			var b_create := c_node.get_node_or_null("BtnCreateChar") as TextureButton
+			if b_create: b_create.disabled = true
+			var b_login := c_node.get_node_or_null("InfoOverlay/BtnLogin") as TextureButton
+			if b_login: b_login.disabled = true
+			var b_del := c_node.get_node_or_null("InfoOverlay/BtnDelChar") as TextureButton
+			if b_del: b_del.disabled = true
+		else:
+			if loading_overlay:
+				loading_overlay.visible = false
+			_update_slot_card(s_idx)
 
 func select_slot(slot_idx: int) -> void:
 	selected_slot_index = clampi(slot_idx, 0, 2)
