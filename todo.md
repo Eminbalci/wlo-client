@@ -283,7 +283,7 @@
 - [ ] Decode the remaining ~85 dispatcher handlers one by one (`docs/re/dispatch_table.md`), implement them in `network_manager.gd`.
 - [ ] Quest, shop, status, battle and chat windows: capture the real ones with `tools/game_input.ps1` and compare (battle needs a fight started by the user).
 - [x] Compound window: big cauldron picture in the base slot, items listed in the grid.
-- [ ] Item window: header arrows and shoe arrows switch pages / equipment views (behaviour unknown; observe in the real client).
+- [x] Item window: header arrows and shoe arrows switch pages / equipment views (implemented `TitlePrev`/`TitleNext` inventory page switching and `ShoesPrev`/`ShoesNext` riding shoes toggle, verified in `tests/test_character_item_window_navigation.gd`).
 - [ ] Group window Instance tab content, pet Battle/Dismiss semantics against the real client.
 - [ ] Verify the remaining code->text mappings of action 0x01 sub codes (6, 7, 0x0C).
 - [x] Battle: pet command step in the ring, attack camera zoom/step-forward animation, hover info card, forest/beach/cave/deck backdrops by map (`tests/test_battle_round_timer_and_backdrop_parity.gd`).

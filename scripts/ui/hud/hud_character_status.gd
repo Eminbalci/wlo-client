@@ -56,8 +56,17 @@ var stat_add_buttons: Dictionary = {} # String (stat_name) -> Button
 var header_name: Label = null
 var header_level: Label = null
 var header_potential: Label = null
+var current_potential: int = 0
 var header_element: TextureRect = null
 var header_buttons: Dictionary = {} # String -> TextureButton
+
+var current_inventory_page: int = 0 # 0 = Page 1, 1 = Page 2
+const TOTAL_INVENTORY_PAGES: int = 2
+
+var shoes_view_mode: int = 0 # 0 = Normal Footwear/Boots, 1 = Riding Shoes / Mount Gear
+
+signal inventory_page_changed(page_idx: int)
+signal shoes_view_mode_changed(mode_idx: int)
 
 # Equipment Sockets and Data
 var equipment_slots: Dictionary = {} # socket_name (String) -> Button
@@ -152,6 +161,16 @@ func _build_window_extras() -> void:
 		char_window.add_child(btn)
 		header_buttons[spec[0]] = btn
 	header_buttons["Close"].pressed.connect(_on_header_close_pressed)
+	if header_buttons.has("TitlePrev"):
+		header_buttons["TitlePrev"].pressed.connect(_on_title_prev_pressed)
+	if header_buttons.has("TitleNext"):
+		header_buttons["TitleNext"].pressed.connect(_on_title_next_pressed)
+	if header_buttons.has("ShoesPrev"):
+		header_buttons["ShoesPrev"].pressed.connect(_on_shoes_toggle_pressed)
+	if header_buttons.has("ShoesNext"):
+		header_buttons["ShoesNext"].pressed.connect(_on_shoes_toggle_pressed)
+	if header_buttons.has("Potential"):
+		header_buttons["Potential"].pressed.connect(_on_potential_button_pressed)
 	_refresh_header()
 
 
@@ -182,6 +201,40 @@ func _on_header_close_pressed() -> void:
 		hud.toggle_inventory()
 	elif char_window != null:
 		char_window.hide()
+
+func _on_title_prev_pressed() -> void:
+	if current_inventory_page > 0:
+		set_inventory_page(current_inventory_page - 1)
+
+func _on_title_next_pressed() -> void:
+	if current_inventory_page < TOTAL_INVENTORY_PAGES - 1:
+		set_inventory_page(current_inventory_page + 1)
+
+func set_inventory_page(page: int) -> void:
+	current_inventory_page = clampi(page, 0, TOTAL_INVENTORY_PAGES - 1)
+	if hud and "inventory_ctrl" in hud and hud.inventory_ctrl:
+		if hud.inventory_ctrl.has_method("set_page"):
+			hud.inventory_ctrl.set_page(current_inventory_page)
+	inventory_page_changed.emit(current_inventory_page)
+	if hud and hud.has_method("add_chat_message"):
+		hud.add_chat_message("System", "Switched to inventory page %d/%d." % [current_inventory_page + 1, TOTAL_INVENTORY_PAGES], "System")
+
+func _on_shoes_toggle_pressed() -> void:
+	shoes_view_mode = 1 if shoes_view_mode == 0 else 0
+	shoes_view_mode_changed.emit(shoes_view_mode)
+	var shoes_btn = char_window.get_node_or_null("Slot_shoes") as Button if char_window else null
+	if shoes_btn:
+		if shoes_view_mode == 1:
+			shoes_btn.tooltip_text = "Riding Shoes / Mount Gear Slot"
+		else:
+			shoes_btn.tooltip_text = "Shoes Slot (Boots)"
+	if hud and hud.has_method("add_chat_message"):
+		var mode_name: String = "Riding / Mount Gear" if shoes_view_mode == 1 else "Normal Footwear"
+		hud.add_chat_message("System", "Shoes view switched to: %s." % mode_name, "System")
+
+func _on_potential_button_pressed() -> void:
+	if hud and hud.has_method("add_chat_message"):
+		hud.add_chat_message("System", "Potential System: Current Potential Level %d." % current_potential, "System")
 
 
 ## Configures the 6 authentic equipment sockets around the paper doll

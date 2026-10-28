@@ -9,6 +9,14 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Character & Item Window Navigation (2026-10)
+
+- [Character & Item Window Navigation Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/character_item_window_navigation_spec.md):
+  - **Header Inventory Page Navigation:** Wired `TitlePrev` (146, 21) and `TitleNext` (221, 21) arrows in `HUDCharacterStatus` (`Form_RoleStatus_1`) to cycle inventory bag pages (Page 1: slots 0..24, Page 2: slots 25..49) with `inventory_page_changed` signal and `HUDInventory.set_page(new_page)`.
+  - **Riding Shoes / Mount Gear View Toggle:** Wired `ShoesPrev` (40, 237) and `ShoesNext` (139, 237) arrows to toggle footwear slot between normal player shoes/boots and mount riding shoes, updating tooltip and emitting `shoes_view_mode_changed`.
+  - **Potential Awakening Button:** Implemented `Potential` button at (126, 79) with tier inspection and visual feedback.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_character_item_window_navigation.gd`, `tests/test_consumable_item_recovery.gd` (35/35 passed), and `tests/test_floating_windows_and_system_settings.gd` (146/146 passed).
+
 ### Session: Battle Round Timer, Dynamic Backdrop, & Pet Ring (2026-10)
 
 - [Battle Round Timer, Dynamic Backdrop, & Pet Ring Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/battle_round_timer_and_backdrop_spec.md):

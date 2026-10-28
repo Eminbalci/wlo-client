@@ -18,6 +18,15 @@ var inventory_icons: Array[TextureRect] = []
 var inventory_counts: Array[Label] = []
 var inventory_data: Array[Dictionary] = []
 var current_gold: int = 0
+var current_page: int = 0
+const TOTAL_PAGES: int = 2
+signal page_changed(new_page: int)
+
+func set_page(page: int) -> void:
+	current_page = clampi(page, 0, TOTAL_PAGES - 1)
+	page_changed.emit(current_page)
+	if hud and hud.has_method("add_chat_message"):
+		hud.add_chat_message("System", "Inventory Page: %d/%d" % [current_page + 1, TOTAL_PAGES], "System")
 
 ## Closes / hides the inventory and character status window
 func close_inventory() -> void:
