@@ -446,6 +446,38 @@ func update_character_stats(
 	_update_combat_stats()
 	_update_stat_allocation_buttons_visibility()
 
+## Restores character HP up to current_max_hp and synchronizes all docks and UI readouts
+func restore_hp(amount: int) -> int:
+	if amount <= 0:
+		return 0
+	var old_hp: int = current_hp
+	current_hp = mini(current_max_hp, current_hp + amount)
+	var restored: int = current_hp - old_hp
+	if stat_left_hp:
+		stat_left_hp.text = "%d / %d" % [current_hp, current_max_hp]
+	_refresh_header()
+	_sync_active_character_data()
+	if hud and hud.has_method("set_player_stats"):
+		var exp_pct: float = float(current_exp) / float(maxi(1, current_max_exp))
+		hud.set_player_stats(current_name, current_level, current_hp, current_max_hp, current_sp, current_max_sp, exp_pct)
+	return restored
+
+## Restores character SP up to current_max_sp and synchronizes all docks and UI readouts
+func restore_sp(amount: int) -> int:
+	if amount <= 0:
+		return 0
+	var old_sp: int = current_sp
+	current_sp = mini(current_max_sp, current_sp + amount)
+	var restored: int = current_sp - old_sp
+	if stat_left_sp:
+		stat_left_sp.text = "%d / %d" % [current_sp, current_max_sp]
+	_refresh_header()
+	_sync_active_character_data()
+	if hud and hud.has_method("set_player_stats"):
+		var exp_pct: float = float(current_exp) / float(maxi(1, current_max_exp))
+		hud.set_player_stats(current_name, current_level, current_hp, current_max_hp, current_sp, current_max_sp, exp_pct)
+	return restored
+
 ## Sets up interactive [+] stat point allocation buttons in CharacterWindow
 func _setup_stat_allocation_buttons() -> void:
 	if not char_window:

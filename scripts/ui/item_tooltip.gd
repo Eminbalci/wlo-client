@@ -205,6 +205,23 @@ func display_item(item_data: Dictionary) -> void:
 				"text": "%s %s%d" % [str(k), "+" if delta >= 0 else "", delta],
 				"is_positive": delta >= 0
 			})
+	else:
+		if int(item_data.get("hp_restore", 0)) > 0:
+			var hp_val: int = int(item_data["hp_restore"])
+			stats.append({
+				"name": "HP",
+				"delta": hp_val,
+				"text": "HP +%d" % hp_val,
+				"is_positive": true
+			})
+		if int(item_data.get("sp_restore", 0)) > 0:
+			var sp_val: int = int(item_data["sp_restore"])
+			stats.append({
+				"name": "SP",
+				"delta": sp_val,
+				"text": "SP +%d" % sp_val,
+				"is_positive": true
+			})
 	
 	for s in stats:
 		var stat_lbl := Label.new()

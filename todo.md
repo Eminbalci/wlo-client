@@ -1,5 +1,25 @@
 # Wonderland Online Client - Task Tracker
 
+# Consumable Item Recovery & Status Effects System
+- [x] 1. Data Decoding & ItemRecord Status Math:
+  - [x] 1.1 Decoded status types 25 (HP), 26 (SP), 64 (Amity), and 36 (EXP) in `itemDat.wpdat` / `Item.dat` with `delta = raw_val - 100`.
+  - [x] 1.2 Added `get_hp_restore()`, `get_sp_restore()`, and `get_amity_restore()` to `ItemRecord`.
+  - [x] 1.3 Updated `get_formatted_stats()` to render consumable recovery badges ("HP +50", "SP +150") in tooltips.
+- [x] 2. Character Status & HUD Synchronization:
+  - [x] 2.1 Added `restore_hp(amount)` and `restore_sp(amount)` in `HUDCharacterStatus` with clamping up to `current_max_hp` / `current_max_sp`.
+  - [x] 2.2 Synchronized `stat_left_hp`, `stat_left_sp`, `CharacterManager.save_character`, and HUD player status dock bar tweens.
+- [x] 3. Inventory Item Consumption Pipeline:
+  - [x] 3.1 Extended `HUDInventory.use_or_equip_inventory_item()` to execute HP/SP healing when consuming foods and medicines.
+  - [x] 3.2 Implemented audio feedback (`wav0151.wav`), chat logging (`Used Bread (+50 HP)`), and floating toast notifications.
+  - [x] 3.3 Decremented item stacks properly down to empty slots.
+- [x] 4. Automated Testing & Verification:
+  - [x] 4.1 Created `tests/test_consumable_item_recovery.gd` covering database decoding, status math, controller healing, inventory use, and tooltip badges.
+  - [x] 4.2 Ran test suite via headless Godot console (35/35 passed, 0 failures, 100%).
+- [x] 5. Technical Documentation & Global Updates:
+  - [x] 5.1 Created `docs/consumable_item_recovery_specification.md`.
+  - [x] 5.2 Updated `README.md`.
+  - [x] 5.3 Marked completed in `todo.md`.
+
 # Clean Workspace & Repository Deployment (Eminbalci/wlo-client)
 - [x] 1. Clean Unnecessary Temporary Files & Dumps:
   - [x] 1.1 Remove loose screenshot, debug render, and crop PNGs + .import files from root folder.
@@ -199,7 +219,7 @@
 - [ ] Cursors: verify the inferred roles (cursor9 mushroom, cursor12-14 hammers, cursor2 alt pointer) against the real game.
 - [x] Top-right action bar added after comparing with the running real client.
 - [ ] Real client comparison still open: ask the user to open the inventory, a shop, the skill window and a battle in the real game, then capture each with `PrintWindow` (see README) and compare layouts.
-- [ ] Item use: consumables only decrement the stack and log "Used X." (no HP/SP restore); the status fields of Item.dat for consumables are not decoded yet (HUDInventory.use_or_equip_inventory_item).
+- [x] Item use: consumables only decrement the stack and log "Used X." (no HP/SP restore); the status fields of Item.dat for consumables are not decoded yet (HUDInventory.use_or_equip_inventory_item).
 
 ## Real-client fidelity (2026-10-28)
 - [ ] Decode the remaining ~85 dispatcher handlers one by one (`docs/re/dispatch_table.md`), implement them in `network_manager.gd`.

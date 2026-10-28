@@ -215,17 +215,52 @@ func create_item_record(
 		var res: int = _resolve_item_icon_id(id)
 		if res > 0:
 			final_icon = res
+
+	var hp_rest: int = 0
+	var sp_rest: int = 0
+	var amity_rest: int = 0
+	var final_desc: String = desc
+	var final_name: String = iname
+	var final_equip: String = equip_slot
+
+	if id > 0:
+		var db = _get_game_database()
+		if db and "items" in db and db.items:
+			var rec = db.items.get_item(id)
+			if rec:
+				if final_name.is_empty():
+					final_name = rec.name
+				if final_desc.is_empty():
+					final_desc = rec.description
+				if final_equip.is_empty() and rec.equip_pos > 0 and rec.equip_pos <= 6:
+					match rec.equip_pos:
+						1: final_equip = "head"
+						2: final_equip = "body"
+						3: final_equip = "weapon"
+						4: final_equip = "wrist"
+						5: final_equip = "shoes"
+						6: final_equip = "special"
+				if rec.has_method("get_hp_restore"):
+					hp_rest = rec.get_hp_restore()
+				if rec.has_method("get_sp_restore"):
+					sp_rest = rec.get_sp_restore()
+				if rec.has_method("get_amity_restore"):
+					amity_rest = rec.get_amity_restore()
+
 	return {
 		"id": id,
 		"icon_id": final_icon,
 		"count": count,
-		"name": iname,
-		"desc": desc,
-		"description": desc,
-		"equip_slot": equip_slot,
+		"name": final_name,
+		"desc": final_desc,
+		"description": final_desc,
+		"equip_slot": final_equip,
 		"jma": jma,
 		"jmp": jmp,
-		"stats": stats
+		"stats": stats,
+		"hp_restore": hp_rest,
+		"sp_restore": sp_rest,
+		"amity_restore": amity_rest
 	}
 
 ## Adds an item to the first available inventory slot (or stacks with existing)
@@ -454,7 +489,7 @@ func use_or_equip_inventory_item(slot_idx: int) -> void:
 			3: eslot = "weapon"
 			4: eslot = "wrist"
 			5: eslot = "shoes"
-			6, 7: eslot = "special"
+			6: eslot = "special"
 
 	if not eslot.is_empty():
 		var char_ctrl = _get_character_status_controller()
@@ -482,13 +517,62 @@ func use_or_equip_inventory_item(slot_idx: int) -> void:
 		# 3. Consumable item use
 		var iname: String = str(item.get("name", "Item"))
 		var count: int = int(item.get("count", 1))
+
+		# Resolve HP/SP restoration
+		var hp_rest: int = int(item.get("hp_restore", 0))
+		var sp_rest: int = int(item.get("sp_restore", 0))
+		var amity_rest: int = int(item.get("amity_restore", 0))
+
+		if hp_rest <= 0 and sp_rest <= 0 and amity_rest <= 0:
+			var db = _get_game_database()
+			if db and "items" in db and db.items:
+				var rec = db.items.get_item(item_id)
+				if rec:
+					if rec.has_method("get_hp_restore"):
+						hp_rest = rec.get_hp_restore()
+					if rec.has_method("get_sp_restore"):
+						sp_rest = rec.get_sp_restore()
+					if rec.has_method("get_amity_restore"):
+						amity_rest = rec.get_amity_restore()
+
+		var restore_parts: Array[String] = []
+		var char_ctrl = _get_character_status_controller()
+		if char_ctrl:
+			if hp_rest > 0 and char_ctrl.has_method("restore_hp"):
+				var act_hp: int = char_ctrl.restore_hp(hp_rest)
+				restore_parts.append("+%d HP" % act_hp)
+			if sp_rest > 0 and char_ctrl.has_method("restore_sp"):
+				var act_sp: int = char_ctrl.restore_sp(sp_rest)
+				restore_parts.append("+%d SP" % act_sp)
+
 		if count > 1:
 			item["count"] = count - 1
 			_refresh_inventory_slot(slot_idx)
 		else:
 			inventory_data[slot_idx] = {}
 			_refresh_inventory_slot(slot_idx)
-		_log_system_message("Used %s." % iname)
+
+		_play_auth_click()
+
+		if restore_parts.is_empty():
+			_log_system_message("Used %s." % iname)
+			if hud and hud.has_method("show_toast"):
+				hud.show_toast("Used %s" % iname)
+		else:
+			var effect_str: String = ", ".join(restore_parts)
+			_log_system_message("Used %s (%s)." % [iname, effect_str])
+			if hud and hud.has_method("show_toast"):
+				hud.show_toast("Used %s (%s)" % [iname, effect_str])
+
+func _play_auth_click() -> void:
+	var auth_audio = hud.get_node_or_null("/root/AuthAudio") if (hud and hud.is_inside_tree()) else null
+	if auth_audio and auth_audio.has_method("play_ui_click"):
+		auth_audio.play_ui_click()
+	elif hud and hud.has_node("SFXPlayer"):
+		var sp: AudioStreamPlayer = hud.get_node("SFXPlayer") as AudioStreamPlayer
+		if sp:
+			sp.stream = load("res://assets/sound/wav0151.wav")
+			sp.play()
 
 ## Shows authentic hover tooltip for an item in inventory
 func show_inventory_item_tooltip(slot_idx: int, slot_global_pos: Vector2, slot_size: Vector2) -> void:
@@ -641,17 +725,41 @@ func _get_archive_loader() -> Node:
 		return loop.root.get_node_or_null("ArchiveLoader")
 	return null
 
+static var _static_game_db: Node = null
+var character_status_ctrl: Variant = null
+
 func _get_game_database() -> Node:
+	var gdb: Node = null
 	if hud and hud.is_inside_tree():
-		return hud.get_node_or_null("/root/GameDatabase")
-	var loop = Engine.get_main_loop()
-	if loop is SceneTree and loop.root:
-		return loop.root.get_node_or_null("GameDatabase")
-	return null
+		gdb = hud.get_node_or_null("/root/GameDatabase")
+	if not gdb:
+		var loop = Engine.get_main_loop()
+		if loop is SceneTree and loop.root:
+			gdb = loop.root.get_node_or_null("GameDatabase")
+	if not gdb and hud and hud.is_inside_tree() and hud.get_tree() and hud.get_tree().root:
+		gdb = hud.get_tree().root.get_node_or_null("GameDatabase")
+	if not gdb:
+		if not _static_game_db:
+			var gd_script = load("res://scripts/database/game_database.gd")
+			if gd_script:
+				_static_game_db = gd_script.new()
+				_static_game_db.load_all()
+		gdb = _static_game_db
+	if gdb and "items" in gdb and gdb.items and gdb.items._items.is_empty():
+		if gdb.has_method("load_all"):
+			gdb.load_all()
+	return gdb
 
 func _get_character_status_controller() -> Variant:
-	if hud and "character_status" in hud:
-		return hud.get("character_status")
+	if character_status_ctrl:
+		return character_status_ctrl
+	if hud:
+		var ctrl = hud.get("character_status_ctrl")
+		if ctrl:
+			return ctrl
+		ctrl = hud.get("character_status")
+		if ctrl:
+			return ctrl
 	return null
 
 func _log_system_message(msg: String) -> void:

@@ -9,6 +9,15 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Consumable Item Recovery & Status Effects (2026-10)
+
+- [Consumable Item Recovery Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/consumable_item_recovery_specification.md):
+  - **Decoded Status Types 25 (HP), 26 (SP), and 64 (Amity):** Reverse engineered status values from `itemDat.wpdat` and `Item.dat` (`delta = raw_val - 100`). Items like Bread (32011) restore 50 HP, Rice Wine (32002) restores 150 SP, and Multi Bread (32013) restores 140 HP and 60 SP.
+  - **ItemRecord Recovery Helpers:** Added `get_hp_restore()`, `get_sp_restore()`, and `get_amity_restore()` to `ItemRecord`. Enhanced `get_formatted_stats()` to distinguish consumable recovery tags ("HP +50") from equipment bonuses ("MaxHP +50"), styled in authentic Royal Green in hover tooltips.
+  - **HUD Character Status Restoration:** Added `restore_hp(amount)` and `restore_sp(amount)` in `HUDCharacterStatus` with automatic clamping to `current_max_hp` / `current_max_sp`, updating character window text, synchronizing `CharacterManager`, and driving smooth HUD status dock bar animations.
+  - **Inventory Consumption Pipeline:** Extended `HUDInventory.use_or_equip_inventory_item()` to execute HP/SP restoration on consumption, play `wav0151.wav`, decrement item stacks, output formatted chat log messages (`Used Multi Bread (+140 HP, +60 SP).`), and show center toast popups.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_consumable_item_recovery.gd` (35/35 passed, 0 failures) and regression suites `test_notebook_window.gd` and `test_floating_windows_and_system_settings.gd` (146/146 passed).
+
 ### Session: Companion Ride Mode (NPC / Pet Mounting System) (2026-10)
 
 - [Companion Ride Mode Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/companion_ride_mode_specification.md):

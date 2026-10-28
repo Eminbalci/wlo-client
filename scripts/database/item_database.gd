@@ -59,8 +59,30 @@ class ItemRecord:
 			7, 8: return "Consumable"
 			_: return "Item"
 
+	func get_hp_restore() -> int:
+		var total: int = 0
+		for i in range(mini(status_types.size(), status_values.size())):
+			if status_types[i] == 25 and status_values[i] > 100:
+				total += (status_values[i] - 100)
+		return total
+
+	func get_sp_restore() -> int:
+		var total: int = 0
+		for i in range(mini(status_types.size(), status_values.size())):
+			if status_types[i] == 26 and status_values[i] > 100:
+				total += (status_values[i] - 100)
+		return total
+
+	func get_amity_restore() -> int:
+		var total: int = 0
+		for i in range(mini(status_types.size(), status_values.size())):
+			if status_types[i] == 64 and status_values[i] > 100:
+				total += (status_values[i] - 100)
+		return total
+
 	func get_formatted_stats() -> Array[Dictionary]:
 		var stats: Array[Dictionary] = []
+		var is_consumable: bool = (equip_pos in [7, 8] or item_type in [20, 23])
 		for i in range(mini(status_types.size(), status_values.size())):
 			var st: int = status_types[i]
 			var raw_val: int = status_values[i]
@@ -74,8 +96,12 @@ class ItemRecord:
 				215, 43, 27: stat_name = "MATK"
 				216, 44, 33: stat_name = "MDEF"
 				214, 45, 30: stat_name = "SPD"
-				207, 205, 25: stat_name = "MaxHP"
-				208, 206, 26: stat_name = "MaxSP"
+				207, 205: stat_name = "MaxHP"
+				208, 206: stat_name = "MaxSP"
+				25: stat_name = "HP" if is_consumable else "MaxHP"
+				26: stat_name = "SP" if is_consumable else "MaxSP"
+				64: stat_name = "Amity"
+				36: stat_name = "EXP"
 				_: stat_name = "Stat_%d" % st
 			stats.append({
 				"name": stat_name,
