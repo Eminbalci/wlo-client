@@ -17,6 +17,15 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
   - **Gameplay Permission Enforcement:** Implemented `is_trading_allowed()`, `is_party_invites_allowed()`, `is_join_battle_allowed()`, and `is_pvp_allowed()` on `HUD`. Guarded `TopActionBar` trade requests to notify the player when trading is disabled in System Settings.
   - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_system_window_options_and_chat_colors.gd` (19/19 passed, 0 failures) and floating window suite `test_floating_windows_and_system_settings.gd` (146/146 passed).
 
+### Session: Compound Window Authentic Parity (Form_Compound_1) (2026-10)
+
+- [Compound Window Parity Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/compound_window_parity_specification.md):
+  - **Authentic Cauldron Illustration:** Extracted pixel-perfect cauldron illustration (`assets/hud/compound_cauldron.png`, 80x95) directly from real game client capture (`docs/reference/real_client/compound.png`) and mounted `cauldron_rect` TextureRect at `Vector2(198, 70)` right above the synthesis slots.
+  - **Visual Plus Connectors:** Sliced authentic `+` connector icons (`assets/hud/icon_compound_plus.png`, 16x16) positioned between the Main Base slot and Sub Material slots 0..3 (Y=212, 269, 320, 371).
+  - **Empty Base Slot Watermark:** Implemented empty watermark rendering on `CompoundItem_Main` displaying `compound_cauldron.png` at 45% alpha, automatically switching to full opacity item icons when filled.
+  - **Dynamic 50-Slot Bag Grid:** Initialized the 50-slot inventory bag grid (`GridBag`) dynamically from player inventory (`HUDInventory.inventory_data`), with graceful fallback to authentic default compoundable materials (ores, wood, grass, clay, water, alchemy books) when opened in standalone mode.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_compound_window_parity.gd` and regression suite `tests/test_compound_window_and_simulator_spawner.gd` (10/10 passed).
+
 ### Session: Consumable Item Recovery & Status Effects (2026-10)
 
 - [Consumable Item Recovery Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/consumable_item_recovery_specification.md):

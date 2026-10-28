@@ -29,6 +29,8 @@ var btn_compsk_2: TextureButton = null
 var btn_compsk_3: TextureButton = null
 var role_frame_rect: TextureRect = null
 var role_avatar_rect: TextureRect = null
+var cauldron_rect: TextureRect = null
+var plus_connectors: Array[TextureRect] = []
 var grid_container: GridContainer = null
 var main_slot_btn: TextureButton = null
 var sub_slot_btns: Array[TextureButton] = []
@@ -134,6 +136,7 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	_setup_ui_layout()
 	_load_animation_frames()
+	refresh_inventory_from_hud()
 	_refresh_slots_ui()
 
 func setup(hud: Control) -> void:
@@ -163,7 +166,29 @@ func refresh_inventory_from_hud() -> void:
 				var it: Dictionary = slot_info.duplicate(true)
 				it["orig_slot"] = i
 				_inventory_items.append(it)
+	if _inventory_items.is_empty():
+		var default_mats := _get_default_bag_materials()
+		for i in range(default_mats.size()):
+			var it: Dictionary = default_mats[i].duplicate(true)
+			it["orig_slot"] = i
+			_inventory_items.append(it)
 	_populate_bag_grid()
+
+func _get_default_bag_materials() -> Array[Dictionary]:
+	return [
+		{"id": 36005, "name": "Iron Ore", "icon_id": 1332, "count": 20, "rank": 1},
+		{"id": 36006, "name": "Copper Ore", "icon_id": 1333, "count": 15, "rank": 1},
+		{"id": 36007, "name": "Silver Ore", "icon_id": 1334, "count": 10, "rank": 2},
+		{"id": 36008, "name": "Gold Ore", "icon_id": 1335, "count": 5, "rank": 3},
+		{"id": 36001, "name": "Common Wood", "icon_id": 1001, "count": 30, "rank": 1},
+		{"id": 36002, "name": "Common Grass", "icon_id": 1002, "count": 25, "rank": 1},
+		{"id": 36003, "name": "Pure Water", "icon_id": 1003, "count": 20, "rank": 1},
+		{"id": 36004, "name": "Hard Clay", "icon_id": 1004, "count": 18, "rank": 1},
+		{"id": 47001, "name": "Alchemy Book I", "icon_id": 1050, "count": 3, "rank": 1},
+		{"id": 11033, "name": "Iron Sword", "icon_id": 2466, "count": 1, "rank": 2},
+		{"id": 32011, "name": "Bread", "icon_id": 1011, "count": 10, "rank": 1},
+		{"id": 32002, "name": "Rice Wine", "icon_id": 1292, "count": 5, "rank": 1}
+	]
 
 func _setup_ui_layout() -> void:
 	# 1. Background Form Frame
@@ -264,7 +289,18 @@ func _setup_ui_layout() -> void:
 	btn_compsk_3.visible = false
 	add_child(btn_compsk_3)
 
-	# 4c. Active Role Standee Frame (Icon_RoleSelectFrame: 49x65 at X=204, Y=82)
+	# 4c. Authentic Cauldron Illustration (at X=198, Y=70, 80x95)
+	cauldron_rect = TextureRect.new()
+	cauldron_rect.name = "CauldronPicture"
+	cauldron_rect.texture = _load_texture("assets/hud/compound_cauldron.png")
+	cauldron_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	cauldron_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	cauldron_rect.position = Vector2(198, 70)
+	cauldron_rect.size = Vector2(80, 95)
+	cauldron_rect.mouse_filter = Control.MOUSE_FILTER_PASS
+	add_child(cauldron_rect)
+
+	# Keep role_frame_rect and role_avatar_rect for backwards-compatibility
 	role_frame_rect = TextureRect.new()
 	role_frame_rect.name = "RoleSelectFrame"
 	role_frame_rect.texture = _load_texture("assets/hud/icon_role_select_frame.png")
@@ -272,6 +308,7 @@ func _setup_ui_layout() -> void:
 	role_frame_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	role_frame_rect.position = Vector2(204, 82)
 	role_frame_rect.size = Vector2(49, 65)
+	role_frame_rect.visible = false
 	role_frame_rect.mouse_filter = Control.MOUSE_FILTER_PASS
 	add_child(role_frame_rect)
 
@@ -281,6 +318,7 @@ func _setup_ui_layout() -> void:
 	role_avatar_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	role_avatar_rect.position = Vector2(208, 92)
 	role_avatar_rect.size = Vector2(41, 47)
+	role_avatar_rect.visible = false
 	role_avatar_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(role_avatar_rect)
 	_refresh_role_avatar()
@@ -317,6 +355,26 @@ func _setup_ui_layout() -> void:
 		sub_btn.gui_input.connect(_on_sub_slot_gui_input.bind(i))
 		add_child(sub_btn)
 		sub_slot_btns.append(sub_btn)
+
+	# 7b. Plus Connector Icons between the 5 slots
+	plus_connectors.clear()
+	var plus_positions: Array[Vector2] = [
+		Vector2(217, 212),
+		Vector2(217, 269),
+		Vector2(217, 320),
+		Vector2(217, 371)
+	]
+	for idx in range(4):
+		var plus := TextureRect.new()
+		plus.name = "PlusConnector_%d" % idx
+		plus.texture = _load_texture("assets/hud/icon_compound_plus.png")
+		plus.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		plus.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		plus.position = plus_positions[idx]
+		plus.size = Vector2(16, 16)
+		plus.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(plus)
+		plus_connectors.append(plus)
 
 	# 8. Status / Feedback Label
 	status_label = Label.new()
@@ -527,10 +585,17 @@ func _render_slot_content(btn: TextureButton, data: Dictionary) -> void:
 	btn.move_child(count_lbl, -1)
 	
 	if data.is_empty() or int(data.get("id", 0)) <= 0:
-		icon.texture = null
+		if btn == main_slot_btn:
+			icon.texture = _load_texture("assets/hud/compound_cauldron.png")
+			icon.modulate = Color(1.0, 1.0, 1.0, 0.45)
+		else:
+			icon.texture = null
+			icon.modulate = Color.WHITE
 		count_lbl.text = ""
 		btn.tooltip_text = ""
 		return
+	
+	icon.modulate = Color.WHITE
 	
 	var item_id: int = int(data.get("id", 0))
 	var icon_id: int = int(data.get("icon_id", 1000))

@@ -1,5 +1,26 @@
 # Wonderland Online Client - Task Tracker
 
+# Compound Window Authentic Parity (Form_Compound_1)
+- [x] 1. Authentic Visual Assets Extraction:
+  - [x] 1.1 Extracted pixel-perfect cauldron illustration (`assets/hud/compound_cauldron.png`, 80x95) from real client capture (`compound.png`).
+  - [x] 1.2 Extracted authentic `+` connector sign (`assets/hud/icon_compound_plus.png`, 16x16) linking the 5 synthesis slots.
+- [x] 2. UI Layout & Slot State Parity:
+  - [x] 2.1 Added `cauldron_rect` TextureRect displaying authentic cauldron artwork at Vector2(198, 70).
+  - [x] 2.2 Added 4 `plus_connectors` between Main Base slot and Sub Material slots 0..3 (Y=212, 269, 320, 371).
+  - [x] 2.3 Implemented empty base slot watermark (`compound_cauldron.png` at 45% alpha), switching to full opacity item icon when filled.
+- [x] 3. Dynamic Bag Grid Population:
+  - [x] 3.1 Initialized 50-slot inventory bag grid (`GridBag`) dynamically from player inventory (`HUDInventory.inventory_data`).
+  - [x] 3.2 Added authentic default compoundable materials (ores, wood, grass, clay, water, alchemy books) when opened in standalone mode.
+  - [x] 3.3 Maintained full left-click and right-click transfer between bag and synthesis slots, returning placed items on close.
+- [x] 4. Automated Testing & Verification:
+  - [x] 4.1 Created `tests/test_compound_window_parity.gd` verifying cauldron picture, plus connectors, main slot watermark, item placement, and 50-slot grid population.
+  - [x] 4.2 Executed test suite via headless Godot console (100% pass, 0 failures).
+  - [x] 4.3 Verified regression suite `tests/test_compound_window_and_simulator_spawner.gd` (10/10 passed, 100%).
+- [x] 5. Technical Documentation & Global Updates:
+  - [x] 5.1 Created `docs/compound_window_parity_specification.md`.
+  - [x] 5.2 Updated `README.md`.
+  - [x] 5.3 Marked completed in `todo.md`.
+
 # System Window Options, Chat Colors, & Gameplay Flags
 - [x] 1. Dynamic Chat Color Propagation:
   - [x] 1.1 In `scripts/ui/hud/chat_dock.gd`, added `apply_chat_colors()` and `_channel_colors` dictionary.
@@ -241,7 +262,7 @@
 ## Real-client fidelity (2026-10-28)
 - [ ] Decode the remaining ~85 dispatcher handlers one by one (`docs/re/dispatch_table.md`), implement them in `network_manager.gd`.
 - [ ] Quest, shop, status, battle and chat windows: capture the real ones with `tools/game_input.ps1` and compare (battle needs a fight started by the user).
-- [ ] Compound window: big cauldron picture in the base slot, items listed in the grid.
+- [x] Compound window: big cauldron picture in the base slot, items listed in the grid.
 - [ ] Item window: header arrows and shoe arrows switch pages / equipment views (behaviour unknown; observe in the real client).
 - [ ] Group window Instance tab content, pet Battle/Dismiss semantics against the real client.
 - [ ] Verify the remaining code->text mappings of action 0x01 sub codes (6, 7, 0x0C).
