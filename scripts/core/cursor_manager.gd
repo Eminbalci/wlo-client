@@ -70,7 +70,7 @@ func _ready() -> void:
 	set_cursor_state(CursorType.NORMAL)
 
 func _preload_cursors() -> void:
-	var loader = get_node_or_null("/root/ArchiveLoader")
+	var loader = (get_tree().root.get_node_or_null("ArchiveLoader") if (is_inside_tree() and get_tree() and get_tree().root) else null)
 	if not loader:
 		return
 	for c_type in [CursorType.NORMAL, CursorType.ATTACK, CursorType.TALK, CursorType.HARVEST, CursorType.PORTAL, CursorType.SHOP, CursorType.QUEST]:
@@ -151,11 +151,15 @@ func get_active_frames() -> Array[ImageTexture]:
 func get_current_frame_index() -> int:
 	return _frame_index
 
+## Returns the active hotspot vector for a cursor type
+func get_hotspot(c_type: CursorType = _current_type) -> Vector2:
+	return _hotspot_map.get(c_type, Vector2(0, 0))
+
 func _get_or_load_frames(c_type: CursorType) -> Array[ImageTexture]:
 	if _cursor_cache.has(c_type) and not _cursor_cache[c_type].is_empty():
 		return _cursor_cache[c_type]
 	
-	var loader = get_node_or_null("/root/ArchiveLoader")
+	var loader = (get_tree().root.get_node_or_null("ArchiveLoader") if (is_inside_tree() and get_tree() and get_tree().root) else null)
 	if not loader:
 		loader = preload("res://scripts/core/archive_loader.gd").new()
 	

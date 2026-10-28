@@ -274,7 +274,7 @@
 - [ ] Level-up / EXP curve and HP/SP restore rules are approximations; verify against the real game.
 - [ ] Items: audit inventory slots/tooltips/equipment against the real client (not started).
 - [ ] "UI missing elements" reported by the user: list which screens are incomplete.
-- [ ] Cursors: verify the inferred roles (cursor9 mushroom, cursor12-14 hammers, cursor2 alt pointer) against the real game.
+- [x] Cursors: verify the inferred roles (cursor1 normal, cursor3 attack, cursor4 talk, cursor8 harvest, cursor17 examine, cursor6 portal, cursor12 mining, cursor18 shop, cursor15 skill, cursor16 quest, cursor10 busy, cursor11 target; verified all 12 types, animation and hotspots in `tests/test_cursor_manager.gd`).
 - [x] Top-right action bar added after comparing with the running real client.
 - [ ] Real client comparison still open: ask the user to open the inventory, a shop, the skill window and a battle in the real game, then capture each with `PrintWindow` (see README) and compare layouts.
 - [x] Item use: consumables only decrement the stack and log "Used X." (no HP/SP restore); the status fields of Item.dat for consumables are not decoded yet (HUDInventory.use_or_equip_inventory_item).

@@ -9,6 +9,13 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Animated Cursor Manager Parity (2026-10)
+
+- [Cursor Manager Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/scripts/core/cursor_manager.gd):
+  - **12 Authentic Animated Cursor Types:** Implemented hardware and software cursor binding for `NORMAL` (cursor1), `ATTACK` (cursor3), `TALK` (cursor4), `HARVEST` (cursor8), `EXAMINE` (cursor17), `PORTAL` (cursor6), `MINING` (cursor12), `SHOP` (cursor18), `SKILL` (cursor15), `QUEST` (cursor16), `BUSY` (cursor10), and `TARGET` (cursor11).
+  - **Precise Hotspots & 10 FPS Clock:** Applied authentic cursor hotspots (`_hotspot_map`) and 10 FPS (`FRAME_INTERVAL = 0.1s`) animation progression with fallback caching.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_cursor_manager.gd` (14/14 passed).
+
 ### Session: Protocol Dispatcher Expansion (2026-10)
 
 - [Network Protocol Dispatcher Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/scripts/network/network_manager.gd):
