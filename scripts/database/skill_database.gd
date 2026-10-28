@@ -63,6 +63,9 @@ class SkillRecord extends RefCounted:
 	var damage_rate_2: float = 0.0
 	var rank: int = 1
 	var category: int = 0
+	var weapon_requirement: String = "Any"
+	var weapon_requirement_type: int = 0
+	var proficiency_required: int = 1
 	
 	var damage_multiplier_1: float:
 		get:
@@ -95,7 +98,10 @@ class SkillRecord extends RefCounted:
 			"damage_multiplier_1": damage_rate_1,
 			"damage_multiplier_2": damage_rate_2,
 			"rank": rank,
-			"category": category
+			"category": category,
+			"weapon_requirement": weapon_requirement,
+			"weapon_requirement_type": weapon_requirement_type,
+			"proficiency_required": proficiency_required
 		}
 
 const RECORD_SIZE: int = 148
@@ -322,6 +328,44 @@ func load_from_file(file_path: String) -> bool:
 		# Animation ID (offset 100, uint16)
 		var animation_id: int = decode_word(data.decode_u16(offset + 100))
 		
+		# Weapon requirement and proficiency derivation
+		var weapon_type: int = mechanism
+		var weapon_str: String = "Any"
+		var name_lower := name.to_lower()
+		if name_lower.contains("sword") or name_lower.contains("blade") or name_lower.contains("slash"):
+			weapon_str = "Sword"
+			weapon_type = 1
+		elif name_lower.contains("bow") or name_lower.contains("arrow"):
+			weapon_str = "Bow"
+			weapon_type = 3
+		elif name_lower.contains("gun") or name_lower.contains("bazooka"):
+			weapon_str = "Gun"
+			weapon_type = 3
+		elif name_lower.contains("spear") or name_lower.contains("lance"):
+			weapon_str = "Spear"
+			weapon_type = 1
+		elif name_lower.contains("hammer") or name_lower.contains("axe"):
+			weapon_str = "Hammer"
+			weapon_type = 1
+		elif name_lower.contains("spell") or name_lower.contains("staff") or name_lower.contains("wand"):
+			weapon_str = "Staff"
+			weapon_type = 2
+		elif name_lower.contains("hand") or name_lower.contains("palm") or name_lower.contains("fist") or name_lower.contains("kick"):
+			weapon_str = "Barehanded"
+			weapon_type = 5
+		elif weapon_type == 1:
+			weapon_str = "Sword"
+		elif weapon_type == 2:
+			weapon_str = "Staff"
+		elif weapon_type == 3:
+			weapon_str = "Bow"
+		elif weapon_type == 4:
+			weapon_str = "Tool"
+		else:
+			weapon_str = "Any"
+		
+		var prof_req: int = maxi(1, rank)
+
 		var record := SkillRecord.new()
 		record.id = skill_id
 		record.name = name
@@ -339,6 +383,9 @@ func load_from_file(file_path: String) -> bool:
 		record.damage_rate_2 = dmg_rate_2
 		record.rank = rank
 		record.category = category
+		record.weapon_requirement = weapon_str
+		record.weapon_requirement_type = weapon_type
+		record.proficiency_required = prof_req
 		
 		_skills[skill_id] = record
 	
@@ -362,6 +409,9 @@ func load_from_file(file_path: String) -> bool:
 		iris_alias.damage_rate_2 = real_stunt.damage_rate_2
 		iris_alias.rank = real_stunt.rank
 		iris_alias.category = real_stunt.category
+		iris_alias.weapon_requirement = real_stunt.weapon_requirement
+		iris_alias.weapon_requirement_type = real_stunt.weapon_requirement_type
+		iris_alias.proficiency_required = real_stunt.proficiency_required
 		_skills[12037] = iris_alias
 	
 	return true

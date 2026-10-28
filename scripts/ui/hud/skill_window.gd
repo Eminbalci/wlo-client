@@ -49,6 +49,9 @@ var _player_element: int = 3 # Fire until the HUD reports the character's elemen
 var _selected_skill_id: int = -1
 var _selected_skill_data: Dictionary = {}
 
+var learned_skills_only: bool = false
+var _learned_skill_ids: Dictionary = {}
+
 var _displayed_skills: Array[Dictionary] = []
 
 # Node references
@@ -136,6 +139,56 @@ func _update_player_element_tab() -> void:
 			_player_element = SkillDatabaseScript.Element.WIND
 		_:
 			_player_element = SkillDatabaseScript.Element.FIRE
+
+func is_skill_learned(skill_id: int) -> bool:
+	return _learned_skill_ids.has(skill_id)
+
+func learn_skill(skill_id: int) -> void:
+	_learned_skill_ids[skill_id] = true
+	if visible and learned_skills_only:
+		refresh_skill_list()
+
+func unlearn_skill(skill_id: int) -> void:
+	_learned_skill_ids.erase(skill_id)
+	if visible and learned_skills_only:
+		refresh_skill_list()
+
+func set_learned_skills_only(enabled: bool) -> void:
+	learned_skills_only = enabled
+	if visible:
+		refresh_skill_list()
+
+func get_learned_skill_ids() -> Array[int]:
+	var out: Array[int] = []
+	for k in _learned_skill_ids.keys():
+		out.append(int(k))
+	return out
+
+func init_default_learned_skills(role_id: int = 1, element: int = 3) -> void:
+	_learned_skill_ids.clear()
+	# Basic intro skills
+	_learned_skill_ids[10001] = true # Hand Attack
+	_learned_skill_ids[60021] = true # Defense
+	_learned_skill_ids[60041] = true # Flee
+	# Starter stunt for role
+	var stunt_id: int = int(SkillDatabaseScript.STARTER_SKILLS.get(role_id, 15038))
+	_learned_skill_ids[stunt_id] = true
+	# Starter element skill
+	match element:
+		SkillDatabaseScript.Element.EARTH:
+			_learned_skill_ids[11001] = true # Rock Attack
+		SkillDatabaseScript.Element.WATER:
+			_learned_skill_ids[12001] = true # Water Bullet
+			_learned_skill_ids[15042] = true # Recover
+		SkillDatabaseScript.Element.FIRE:
+			_learned_skill_ids[13001] = true # Fire Ball
+			_learned_skill_ids[13002] = true # Fiery Attack
+		SkillDatabaseScript.Element.WIND:
+			_learned_skill_ids[14001] = true # Wind Blade
+	# Life skills
+	_learned_skill_ids[10021] = true # Collection
+	_learned_skill_ids[10022] = true # Cutting
+	_learned_skill_ids[10023] = true # Mining
 
 ## Builds all internal UI nodes idempotently
 func _build_ui_if_needed() -> void:
@@ -615,6 +668,17 @@ func refresh_skill_list() -> void:
 		# Fallback sample skills for testing / offline
 		raw_skills = _get_fallback_skills_for_tab(_active_tab)
 
+	# Filter for learned skills if enabled
+	if learned_skills_only:
+		if _learned_skill_ids.is_empty():
+			init_default_learned_skills(role_id, _player_element)
+		var filtered: Array = []
+		for s in raw_skills:
+			var sid: int = int(s.get("id", 0))
+			if is_skill_learned(sid):
+				filtered.append(s)
+		raw_skills = filtered
+
 	# Sort skills: starter stunt first, then by ID
 	raw_skills.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		var a_id: int = int(a.get("id", 0))
@@ -854,10 +918,12 @@ func _update_detail_panel(data: Dictionary) -> void:
 		detail_grade_label.text = str(rank)
 	if detail_way_label:
 		detail_way_label.text = "%s / %s" % [stype, target]
+	var prof: int = int(data.get("proficiency_required", data.get("rank", 1)))
+	var wep: String = str(data.get("weapon_requirement", "Any"))
 	if detail_proficiency_label:
-		detail_proficiency_label.text = "-"
+		detail_proficiency_label.text = "Grade %d" % prof if prof > 0 else "-"
 	if detail_weapon_label:
-		detail_weapon_label.text = "Any"
+		detail_weapon_label.text = wep
 
 func _clear_detail_panel() -> void:
 	if detail_icon: detail_icon.texture = null

@@ -1,5 +1,24 @@
 # Wonderland Online Client - Task Tracker
 
+# Skill Window Weapon Requirements, Proficiency, & Learned Skills Model
+- [x] 1. Data Decoding in `SkillDatabase`:
+  - [x] 1.1 Decoded combat mechanism (offset 27..28) and weapon classes (Sword, Bow, Gun, Spear, Staff, Barehanded, Any).
+  - [x] 1.2 Decoded proficiency requirement from rank (offset 30, Grade 1..10).
+  - [x] 1.3 Extended `SkillRecord` and `to_dict()` with `weapon_requirement`, `weapon_requirement_type`, and `proficiency_required`.
+- [x] 2. Skill Window Detail Inspection Parity:
+  - [x] 2.1 Replaced static `"-"` and `"Any"` placeholders in `_update_detail_panel()` with dynamic `detail_weapon_label` and `detail_proficiency_label` ("Grade %d").
+- [x] 3. Learned Skills Model & Filtering:
+  - [x] 3.1 Implemented `_learned_skill_ids` dictionary, `is_skill_learned()`, `learn_skill()`, `unlearn_skill()`, and `init_default_learned_skills()`.
+  - [x] 3.2 Implemented `learned_skills_only` toggle mode to filter listed skills to only unlocked skills.
+- [x] 4. Automated Testing & Verification:
+  - [x] 4.1 Created `tests/test_skill_window_weapon_and_learned_skills.gd` verifying database weapon/proficiency decoding, UI detail panel updates, and learned skills filtering.
+  - [x] 4.2 Executed test suite with headless Godot console (100% pass, 0 failures).
+  - [x] 4.3 Verified regression suites `tests/test_skill_window_and_hotbar.gd` (83/83 passed) and `tests/test_floating_windows_and_system_settings.gd` (146/146 passed).
+- [x] 5. Technical Documentation & Global Updates:
+  - [x] 5.1 Created `docs/skill_window_weapon_and_learned_skills_spec.md`.
+  - [x] 5.2 Updated `README.md`.
+  - [x] 5.3 Marked completed in `todo.md`.
+
 # Compound Window Authentic Parity (Form_Compound_1)
 - [x] 1. Authentic Visual Assets Extraction:
   - [x] 1.1 Extracted pixel-perfect cauldron illustration (`assets/hud/compound_cauldron.png`, 80x95) from real client capture (`compound.png`).
@@ -247,7 +266,7 @@
 - [x] HUD windows realigned to their baked skins: System, Friends, Skill (new categories), Shop (Buy/Trade toggles), Combat settings (light frame). See README "HUD Windows Realigned".
 - [x] Apply System window options/colours: chat channel colours into the chat renderer (two chat implementations: `hud_chat.gd` and `chat_dock.gd`), PVP/PK and trading flags into gameplay.
 - [ ] Quest ("mission") and Team ("group") windows: verify against their skins (text slightly clipped in the quest window).
-- [ ] Skill window: no proficiency / weapon requirement data yet (shows "-" / "Any"); learned-skills model instead of listing all element skills.
+- [x] Skill window: no proficiency / weapon requirement data yet (shows "-" / "Any"); learned-skills model instead of listing all element skills.
 - [ ] Character select: "Loading" state while character data arrives (seen in the reference video).
 - [x] Close buttons over the baked x sphere, cursor mapping, chat colours, compound window, sinking cutscene visuals, battle sprites/buttons/gauge, encounters and battle-to-world flow (see README).
 - [ ] Battle: compare with the real game's battle screen (needs screenshots from the user: the real client login cannot be driven by the assistant); real battle background by `bg_id`, 30 s round timer per the protocol notes, enemy grid positions from the server.

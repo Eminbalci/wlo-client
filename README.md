@@ -17,6 +17,14 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
   - **Gameplay Permission Enforcement:** Implemented `is_trading_allowed()`, `is_party_invites_allowed()`, `is_join_battle_allowed()`, and `is_pvp_allowed()` on `HUD`. Guarded `TopActionBar` trade requests to notify the player when trading is disabled in System Settings.
   - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_system_window_options_and_chat_colors.gd` (19/19 passed, 0 failures) and floating window suite `test_floating_windows_and_system_settings.gd` (146/146 passed).
 
+### Session: Skill Window Weapon Requirements, Proficiency, & Learned Skills (2026-10)
+
+- [Skill Window Weapon & Learned Skills Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/skill_window_weapon_and_learned_skills_spec.md):
+  - **Decoded Weapon & Mechanism Classes:** Reverse engineered combat mechanism bytes (offset 27..28) in `Skill.dat` mapping skills to authentic weapon requirements (Sword, Bow, Gun, Spear, Staff, Barehanded, Any).
+  - **Dynamic Proficiency Requirements:** Decoded skill rank (offset 30) to compute authentic proficiency requirements displayed as `"Grade %d"` in the detail inspection panel.
+  - **Learned Skills Progression Model:** Implemented `learned_skills_only` filter mode and `_learned_skill_ids` dictionary with starter stunt, element spells, and life skills for each character role, preventing unlearned endgame spells from cluttering the beginner view.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_skill_window_weapon_and_learned_skills.gd` and regression suites `test_skill_window_and_hotbar.gd` (83/83) and `test_floating_windows_and_system_settings.gd` (146/146).
+
 ### Session: Compound Window Authentic Parity (Form_Compound_1) (2026-10)
 
 - [Compound Window Parity Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/compound_window_parity_specification.md):
