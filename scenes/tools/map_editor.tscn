@@ -1,0 +1,849 @@
+[gd_scene load_steps=2 format=3 uid="uid://map_editor_tool_01"]
+
+[ext_resource type="Script" path="res://scripts/tools/map_editor.gd" id="1_editor"]
+
+[node name="MapEditor" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_editor")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.1, 0.13, 1)
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="TopBar" type="PanelContainer" parent="MainVBox"]
+layout_mode = 2
+
+[node name="TopHBox" type="HFlowContainer" parent="MainVBox/TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = " WLO Map Editor "
+
+[node name="Sep1" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="BtnNew" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "New"
+
+[node name="BtnLoad" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Load Map"
+
+[node name="BtnSaveBinary" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Save .MapData"
+
+[node name="BtnExportJson" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Export JSON"
+
+[node name="BtnImportJson" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Import JSON"
+
+[node name="BtnExportScene" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Export .tscn"
+
+[node name="Sep2" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="CheckGrid" type="CheckBox" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+button_pressed = true
+text = "Grid"
+
+[node name="CheckCollision" type="CheckBox" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+button_pressed = true
+text = "Collision"
+
+[node name="CheckPortals" type="CheckBox" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+button_pressed = true
+text = "Portals"
+
+[node name="CheckItems" type="CheckBox" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+button_pressed = true
+text = "Items"
+
+[node name="CheckNPCs" type="CheckBox" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+button_pressed = true
+text = "NPCs"
+
+[node name="CheckWalkable" type="CheckBox" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Show Walkable"
+
+[node name="Sep3" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="BtnZoomOut" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = " - "
+
+[node name="ZoomLabel" type="Label" parent="MainVBox/TopBar/TopHBox"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "50%"
+horizontal_alignment = 1
+
+[node name="BtnZoomIn" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = " + "
+
+[node name="BtnZoomReset" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "1:1"
+
+[node name="BtnRecenter" type="Button" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Fit View"
+
+[node name="BodyArea" type="HSplitContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 320
+
+[node name="Sidebar" type="PanelContainer" parent="MainVBox/BodyArea"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="MainVBox/BodyArea/Sidebar"]
+layout_mode = 2
+current_tab = 0
+clip_tabs = true
+
+[node name="MapSetup" type="TabBar" parent="MainVBox/BodyArea/Sidebar/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Scroll" type="ScrollContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="SecProps" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Map Identity"
+
+[node name="MapIdHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/MapIdHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Map ID:"
+
+[node name="MapIdSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/MapIdHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 99999.0
+value = 10001.0
+
+[node name="MapNameHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/MapNameHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Map Name:"
+
+[node name="MapNameEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/MapNameHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ship Deck"
+
+[node name="SecPreset" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Map Browser (1,119 Maps)"
+
+[node name="MapSearchHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/MapSearchHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Search:"
+
+[node name="MapSearchEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/MapSearchHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search map ID or name..."
+
+[node name="PresetHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+
+[node name="PresetSelect" type="OptionButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/PresetHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnLoadPreset" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/PresetHBox"]
+layout_mode = 2
+text = "Load"
+
+[node name="SecMapNpcDock" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Map NPCs Dock"
+
+[node name="MapNpcDockList" type="ItemList" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+
+[node name="SecArt" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Background Artwork"
+
+[node name="BgSourceHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/BgSourceHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Source:"
+
+[node name="BgSourceSelect" type="OptionButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/BgSourceHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BgPathHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+
+[node name="BgPathEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/BgPathHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "res://assets/pic/10001.jpg"
+
+[node name="BtnBrowseBg" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/BgPathHBox"]
+layout_mode = 2
+text = "..."
+
+[node name="BtnLoadBg" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+text = "Reload Map & Artwork"
+
+[node name="SecDims" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Dimensions (20px Grid)"
+
+[node name="DimensionsLabel" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+text = "Dimensions: 2084 x 2400 px (105 x 120 tiles)"
+
+[node name="DimsHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+
+[node name="LabelW" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/DimsHBox"]
+layout_mode = 2
+text = "W:"
+
+[node name="WidthSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/DimsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 100.0
+max_value = 20000.0
+step = 20.0
+value = 2084.0
+
+[node name="LabelH" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/DimsHBox"]
+layout_mode = 2
+text = "H:"
+
+[node name="HeightSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/DimsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 100.0
+max_value = 20000.0
+step = 20.0
+value = 2400.0
+
+[node name="BtnResizeGrid" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+text = "Apply Custom Dimensions"
+
+[node name="SecSpawn" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Player Default Spawn"
+
+[node name="SpawnHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+
+[node name="LabelX" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/SpawnHBox"]
+layout_mode = 2
+text = "X:"
+
+[node name="SpawnXSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/SpawnHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 20000.0
+value = 1040.0
+
+[node name="LabelY" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/SpawnHBox"]
+layout_mode = 2
+text = "Y:"
+
+[node name="SpawnYSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox/SpawnHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 20000.0
+value = 1070.0
+
+[node name="BtnSpawnCenter" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/MapSetup/Scroll/VBox"]
+layout_mode = 2
+text = "Set Spawn to Center"
+
+[node name="Collision" type="TabBar" parent="MainVBox/BodyArea/Sidebar/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Scroll" type="ScrollContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="SecTool" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Collision Painting Tool"
+
+[node name="ToolSelect" type="OptionButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+
+[node name="SecFlag" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Tile Collision Flag"
+
+[node name="CollisionFlagSelect" type="OptionButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+
+[node name="SecBrush" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Brush Size"
+
+[node name="BrushSizeSelect" type="OptionButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+
+[node name="SecActions" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Batch Operations"
+
+[node name="BtnFillAll" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+text = "Fill Entire Map with Flag"
+
+[node name="BtnClearCollision" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+text = "Clear All (Make Walkable)"
+
+[node name="BtnInvertCollision" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+text = "Invert Walkable / Solid"
+
+[node name="SecStats" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "Collision Statistics"
+
+[node name="CollisionStatsLabel" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Collision/Scroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 0.9, 1)
+text = "Calculating stats..."
+
+[node name="Portals" type="TabBar" parent="MainVBox/BodyArea/Sidebar/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Scroll" type="ScrollContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="BtnPlacePortalMode" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+layout_mode = 2
+text = "+ Place Portal Tool (Click Map)"
+
+[node name="IdHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/IdHBox"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Portal ID:"
+
+[node name="PortalIdSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/IdHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 9999.0
+value = 1.0
+
+[node name="NameHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/NameHBox"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Portal Name:"
+
+[node name="PortalNameEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/NameHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Portal"
+
+[node name="TargetMapHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/TargetMapHBox"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Target Map:"
+
+[node name="PortalTargetMapSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/TargetMapHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 99999.0
+value = 10002.0
+
+[node name="DestHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+layout_mode = 2
+
+[node name="LabelX" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/DestHBox"]
+layout_mode = 2
+text = "Dest X:"
+
+[node name="PortalDestXSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/DestHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 20000.0
+value = 674.0
+
+[node name="LabelY" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/DestHBox"]
+layout_mode = 2
+text = "Y:"
+
+[node name="PortalDestYSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/DestHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 20000.0
+value = 1067.0
+
+[node name="RadiusHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/RadiusHBox"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Trigger Rad:"
+
+[node name="PortalRadiusSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/RadiusHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 10.0
+max_value = 300.0
+value = 56.0
+
+[node name="ColorHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/ColorHBox"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Aura Color:"
+
+[node name="PortalColorPicker" type="ColorPickerButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/ColorHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.2, 0.75, 1, 0.85)
+
+[node name="ActionsHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+layout_mode = 2
+
+[node name="BtnAddPortal" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/ActionsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add / Update"
+
+[node name="BtnDeletePortal" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox/ActionsHBox"]
+layout_mode = 2
+text = "Delete"
+
+[node name="PortalItemList" type="ItemList" parent="MainVBox/BodyArea/Sidebar/TabContainer/Portals/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+
+[node name="Items" type="TabBar" parent="MainVBox/BodyArea/Sidebar/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Scroll" type="ScrollContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="BtnPlaceItemMode" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox"]
+layout_mode = 2
+text = "+ Place Ground Item Tool (Click Map)"
+
+[node name="IdHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/IdHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Item ID:"
+
+[node name="ItemIdSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/IdHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 99999.0
+value = 46113.0
+
+[node name="NameHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/NameHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Item Name:"
+
+[node name="ItemNameEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/NameHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shell"
+
+[node name="SlotHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/SlotHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Slot Index:"
+
+[node name="ItemSlotSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/SlotHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 50.0
+value = 1.0
+
+[node name="RespawnHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/RespawnHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Respawn (s):"
+
+[node name="ItemRespawnSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/RespawnHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 10.0
+max_value = 3600.0
+step = 10.0
+value = 120.0
+
+[node name="QuickItemSelect" type="OptionButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox"]
+layout_mode = 2
+
+[node name="ActionsHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox"]
+layout_mode = 2
+
+[node name="BtnAddItem" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/ActionsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add / Update"
+
+[node name="BtnDeleteItem" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox/ActionsHBox"]
+layout_mode = 2
+text = "Delete"
+
+[node name="ItemItemList" type="ItemList" parent="MainVBox/BodyArea/Sidebar/TabContainer/Items/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+
+[node name="NPCs" type="TabBar" parent="MainVBox/BodyArea/Sidebar/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="Scroll" type="ScrollContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="BtnPlaceNpcMode" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+text = "+ Place NPC Tool (Click Map)"
+
+[node name="IdHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/IdHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "NPC ID:"
+
+[node name="NpcIdSpin" type="SpinBox" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/IdHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 99999.0
+value = 14001.0
+
+[node name="NameHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/NameHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Name:"
+
+[node name="NpcNameEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/NameHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Crew on Deck"
+
+[node name="JmpHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/JmpHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Model JMP:"
+
+[node name="NpcJmpEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/JmpHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1037.jmp"
+
+[node name="JmaHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/JmaHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Model JMA:"
+
+[node name="NpcJmaEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/JmaHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "001.jma"
+
+[node name="HeadingHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/HeadingHBox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Heading:"
+
+[node name="NpcHeadingSelect" type="OptionButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/HeadingHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelDiag" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+text = "Dialogue Text:"
+
+[node name="NpcDialogueEdit" type="TextEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "I enjoy my work."
+
+[node name="LabelChoices" type="Label" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+text = "Dialogue Choices (comma separated):"
+
+[node name="NpcChoicesEdit" type="LineEdit" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+text = "Keep up the good work!"
+
+[node name="QuickNpcSelect" type="OptionButton" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+
+[node name="ActionsHBox" type="HBoxContainer" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+layout_mode = 2
+
+[node name="BtnAddNpc" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/ActionsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add / Update"
+
+[node name="BtnDeleteNpc" type="Button" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox/ActionsHBox"]
+layout_mode = 2
+text = "Delete"
+
+[node name="NpcItemList" type="ItemList" parent="MainVBox/BodyArea/Sidebar/TabContainer/NPCs/Scroll/VBox"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+
+[node name="CanvasPanel" type="PanelContainer" parent="MainVBox/BodyArea"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CanvasControl" type="Control" parent="MainVBox/BodyArea/CanvasPanel"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+
+[node name="StatusBar" type="PanelContainer" parent="MainVBox"]
+layout_mode = 2
+
+[node name="StatusHBox" type="HFlowContainer" parent="MainVBox/StatusBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 4
+
+[node name="StatusCoords" type="Label" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+text = "World: (0, 0) | Grid: [0, 0]"
+
+[node name="Sep1" type="VSeparator" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+
+[node name="StatusFlag" type="Label" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+text = "Flag: WALKABLE"
+
+[node name="Sep2" type="VSeparator" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+
+[node name="StatusEntities" type="Label" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+text = "Portals: 0 | Items: 0 | NPCs: 0"
+
+[node name="Sep3" type="VSeparator" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+
+[node name="StatusDimensions" type="Label" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+text = "2084 x 2400 px (105 x 120 tiles)"
+
+[node name="Sep4" type="VSeparator" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+
+[node name="StatusHelp" type="Label" parent="MainVBox/StatusBar/StatusHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LMB: Paint/Place | RMB/MMB: Pan | Wheel: Zoom"
+
+[node name="FileDialogSaveBinary" type="FileDialog" parent="."]
+title = "Export WLO Binary MapData"
+size = Vector2i(600, 400)
+filters = PackedStringArray("*.MapData ; WLO Binary MapData")
+
+[node name="FileDialogSaveJson" type="FileDialog" parent="."]
+title = "Export Map JSON"
+size = Vector2i(600, 400)
+filters = PackedStringArray("*.json ; Map JSON Data")
+
+[node name="FileDialogLoadJson" type="FileDialog" parent="."]
+title = "Import Map JSON"
+size = Vector2i(600, 400)
+file_mode = 0
+filters = PackedStringArray("*.json ; Map JSON Data")
+
+[node name="FileDialogSaveScene" type="FileDialog" parent="."]
+title = "Export Godot Map Scene"
+size = Vector2i(600, 400)
+filters = PackedStringArray("*.tscn ; Godot Scene")
+
+[node name="FileDialogBrowseBg" type="FileDialog" parent="."]
+title = "Select Map Background Image"
+size = Vector2i(600, 400)
+file_mode = 0
+filters = PackedStringArray("*.jpg, *.jpeg, *.png, *.bmp ; Image Files")

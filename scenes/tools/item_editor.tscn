@@ -1,0 +1,590 @@
+[gd_scene load_steps=6 format=3 uid="uid://item_editor_tool_001"]
+
+[ext_resource type="Script" path="res://scripts/tools/item_editor.gd" id="1_editor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.05, 0.07, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.08, 0.11, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.3, 0.42, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_preview_icon"]
+bg_color = Color(0.04, 0.05, 0.08, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.5, 0.7, 0.8)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tooltip"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.87, 0.92, 1, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.12, 0.24, 0.42, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[node name="ItemEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_editor")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="TopToolbar" type="PanelContainer" parent="MainVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxToolbar" type="HBoxContainer" parent="MainVBox/TopToolbar"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblTitle" type="Label" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.82, 0.35, 1)
+theme_override_font_sizes/font_size = 14
+text = "ITEM, EQUIPMENT & ALCHEMY STUDIO"
+
+[node name="VSep1" type="VSeparator" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="OptPresets" type="OptionButton" parent="MainVBox/TopToolbar/HBoxToolbar"]
+custom_minimum_size = Vector2(140, 26)
+layout_mode = 2
+
+[node name="BtnNewItem" type="Button" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New Item"
+
+[node name="BtnSaveJSON" type="Button" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Save JSON"
+
+[node name="BtnLoadJSON" type="Button" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Load JSON"
+
+[node name="VSep2" type="VSeparator" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="LblStatus" type="Label" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.65, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Ready"
+text_overrun_behavior = 3
+
+[node name="MainHSplit" type="HSplitContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 390
+
+[node name="ScrollLeft" type="ScrollContainer" parent="MainVBox/MainHSplit"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxLeft" type="VBoxContainer" parent="MainVBox/MainHSplit/ScrollLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="PanelItemMaster" type="PanelContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxMaster" type="VBoxContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblSecMaster" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.65, 0.95, 1)
+text = "ITEM MASTER SPECIFICATIONS"
+
+[node name="HBoxIDName" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblItemID" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIDName"]
+layout_mode = 2
+text = "Item ID:"
+
+[node name="SpinItemID" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIDName"]
+layout_mode = 2
+min_value = 1.0
+max_value = 99999.0
+value = 23001.0
+
+[node name="LblItemName" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIDName"]
+layout_mode = 2
+text = "Name:"
+
+[node name="EditItemName" type="LineEdit" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIDName"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bronze Sword"
+
+[node name="HBoxIconSlot" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblIconID" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIconSlot"]
+layout_mode = 2
+text = "Icon ID:"
+
+[node name="SpinIconID" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIconSlot"]
+layout_mode = 2
+min_value = 0.0
+max_value = 99999.0
+value = 1000.0
+
+[node name="IconPreviewPanel" type="PanelContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIconSlot"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_preview_icon")
+
+[node name="RectIconPreview" type="TextureRect" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIconSlot/IconPreviewPanel"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LblEquipSlot" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIconSlot"]
+layout_mode = 2
+text = "Slot:"
+
+[node name="OptEquipSlot" type="OptionButton" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxIconSlot"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxLevelRank" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblLevelReq" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxLevelRank"]
+layout_mode = 2
+text = "Req Lvl:"
+
+[node name="SpinLevelReq" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxLevelRank"]
+layout_mode = 2
+min_value = 0.0
+max_value = 200.0
+value = 10.0
+
+[node name="LblRank" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxLevelRank"]
+layout_mode = 2
+text = "Rank:"
+
+[node name="SpinRank" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxLevelRank"]
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+value = 3.0
+
+[node name="HBoxDurability" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblDurability" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxDurability"]
+layout_mode = 2
+text = "Durability:"
+
+[node name="SpinDurability" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxDurability"]
+layout_mode = 2
+min_value = 0.0
+max_value = 999.0
+value = 50.0
+
+[node name="LblMaxDur" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxDurability"]
+layout_mode = 2
+text = "Max:"
+
+[node name="SpinMaxDurability" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxDurability"]
+layout_mode = 2
+min_value = 1.0
+max_value = 999.0
+value = 50.0
+
+[node name="HBoxPrices" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblBuyPrice" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxPrices"]
+layout_mode = 2
+text = "Buy Price:"
+
+[node name="SpinBuyPrice" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxPrices"]
+layout_mode = 2
+min_value = 0.0
+max_value = 9999999.0
+value = 150.0
+
+[node name="LblSellPrice" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxPrices"]
+layout_mode = 2
+text = "Sell:"
+
+[node name="SpinSellPrice" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster/HBoxPrices"]
+layout_mode = 2
+min_value = 0.0
+max_value = 9999999.0
+value = 75.0
+
+[node name="LblDesc" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster"]
+layout_mode = 2
+text = "Description:"
+
+[node name="EditDescription" type="TextEdit" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelItemMaster/VBoxMaster"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "A standard bronze sword forged by village blacksmiths."
+wrap_mode = 1
+
+[node name="PanelStats" type="PanelContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxStats" type="VBoxContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblSecStats" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.65, 0.95, 1)
+text = "STAT MODIFIERS BUILDER"
+
+[node name="GridStats" type="GridContainer" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 6
+columns = 4
+
+[node name="LblAtk" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+text = "ATK:"
+
+[node name="SpinAtk" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+min_value = -999.0
+max_value = 999.0
+value = 12.0
+
+[node name="LblDef" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+text = "DEF:"
+
+[node name="SpinDef" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+min_value = -999.0
+max_value = 999.0
+value = 0.0
+
+[node name="LblMatk" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+text = "MATK:"
+
+[node name="SpinMatk" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+min_value = -999.0
+max_value = 999.0
+value = 0.0
+
+[node name="LblMdef" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+text = "MDEF:"
+
+[node name="SpinMdef" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+min_value = -999.0
+max_value = 999.0
+value = 0.0
+
+[node name="LblSpd" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+text = "SPD:"
+
+[node name="SpinSpd" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+min_value = -999.0
+max_value = 999.0
+value = -2.0
+
+[node name="LblHpBonus" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+text = "HP:"
+
+[node name="SpinHpBonus" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+min_value = -9999.0
+max_value = 9999.0
+value = 0.0
+
+[node name="LblSpBonus" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+text = "SP:"
+
+[node name="SpinSpBonus" type="SpinBox" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats/GridStats"]
+layout_mode = 2
+min_value = -9999.0
+max_value = 9999.0
+value = 0.0
+
+[node name="LblSummaryHeader" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats"]
+layout_mode = 2
+text = "Active Stat Deltas:"
+
+[node name="LblStatsSummary" type="Label" parent="MainVBox/MainHSplit/ScrollLeft/VBoxLeft/PanelStats/VBoxStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 0.5, 1)
+text = "ATK +12 | SPD -2"
+
+[node name="ScrollRight" type="ScrollContainer" parent="MainVBox/MainHSplit"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxRight" type="VBoxContainer" parent="MainVBox/MainHSplit/ScrollRight"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="PanelAlchemy" type="PanelContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxAlchemy" type="VBoxContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblSecAlchemy" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.65, 0.35, 1)
+text = "WLO ALCHEMY & SYNTHESIS STUDIO"
+
+[node name="HBoxRecipeName" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblRecipe" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxRecipeName"]
+layout_mode = 2
+text = "Recipe:"
+
+[node name="EditRecipeName" type="LineEdit" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxRecipeName"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bronze Sword Forging"
+
+[node name="HBoxMatA" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblMatA" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxMatA"]
+layout_mode = 2
+text = "Material A ID:"
+
+[node name="SpinMatAID" type="SpinBox" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxMatA"]
+layout_mode = 2
+min_value = 1.0
+max_value = 99999.0
+value = 23001.0
+
+[node name="LblMatARank" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxMatA"]
+layout_mode = 2
+text = "Rank:"
+
+[node name="SpinMatARank" type="SpinBox" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxMatA"]
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+value = 3.0
+
+[node name="HBoxMatB" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblMatB" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxMatB"]
+layout_mode = 2
+text = "Material B ID:"
+
+[node name="SpinMatBID" type="SpinBox" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxMatB"]
+layout_mode = 2
+min_value = 1.0
+max_value = 99999.0
+value = 21005.0
+
+[node name="LblMatBRank" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxMatB"]
+layout_mode = 2
+text = "Rank:"
+
+[node name="SpinMatBRank" type="SpinBox" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxMatB"]
+layout_mode = 2
+min_value = 1.0
+max_value = 100.0
+value = 5.0
+
+[node name="HBoxCatalyst" type="HBoxContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblCatalyst" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxCatalyst"]
+layout_mode = 2
+text = "Catalyst:"
+
+[node name="OptCatalystTier" type="OptionButton" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy/HBoxCatalyst"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSepSynth" type="HSeparator" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+
+[node name="LblSynthBaseRank" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+text = "Base Rank: 4"
+
+[node name="LblSynthRankRange" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.5, 1)
+text = "Expected Range: Rank 3 ~ 6"
+
+[node name="LblSynthSuccessRate" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 0.5, 1)
+text = "Success Rate: 78%"
+
+[node name="BarSynthSuccess" type="ProgressBar" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+step = 1.0
+value = 78.0
+show_percentage = false
+
+[node name="BtnExportRecipe" type="Button" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelAlchemy/VBoxAlchemy"]
+layout_mode = 2
+text = "Export Recipe JSON"
+
+[node name="PanelTooltipOuter" type="PanelContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxTooltipOuter" type="VBoxContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblSecTooltip" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.65, 0.95, 1)
+text = "LIVE TOOLTIP PREVIEW (WLO PARCHMENT STYLE)"
+
+[node name="PanelTooltipPreview" type="PanelContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tooltip")
+
+[node name="VBoxTooltip" type="VBoxContainer" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="LblTooltipTitle" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.22, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "Bronze Sword"
+
+[node name="LblTooltipSlot" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "Type: Weapon (Rank 3)"
+
+[node name="LblTooltipLevel" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "Req Level: 10"
+
+[node name="HSepTT1" type="HSeparator" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+
+[node name="LblTooltipStats" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.45, 0.2, 1)
+theme_override_font_sizes/font_size = 12
+text = "ATK +12
+SPD -2"
+
+[node name="HSepTT2" type="HSeparator" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+
+[node name="LblTooltipDurability" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.3, 0.35, 1)
+theme_override_font_sizes/font_size = 11
+text = "Durability: 50 / 50"
+
+[node name="LblTooltipDesc" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.25, 0.3, 1)
+theme_override_font_sizes/font_size = 11
+text = "A standard bronze sword forged by village blacksmiths."
+autowrap_mode = 2
+
+[node name="LblTooltipPrices" type="Label" parent="MainVBox/MainHSplit/ScrollRight/VBoxRight/PanelTooltipOuter/VBoxTooltipOuter/PanelTooltipPreview/VBoxTooltip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.3, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "Buy: 150 G  |  Sell: 75 G"

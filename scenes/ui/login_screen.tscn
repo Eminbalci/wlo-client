@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6a8f1e2d4567"]
+
+[ext_resource type="Script" path="res://scripts/ui/login_screen.gd" id="1_login"]
+[ext_resource type="PackedScene" path="res://scenes/ui/auth/server_select.tscn" id="2_server"]
+[ext_resource type="PackedScene" path="res://scenes/ui/auth/login_dialog.tscn" id="3_dialog"]
+[ext_resource type="PackedScene" path="res://scenes/ui/auth/character_select.tscn" id="4_select"]
+[ext_resource type="PackedScene" path="res://scenes/ui/auth/character_create.tscn" id="5_create"]
+[ext_resource type="Texture2D" path="res://assets/pic/LogPic1.jpg" id="6_bg"]
+[ext_resource type="Texture2D" path="res://assets/auth/icon_login_logo.png" id="7_logo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_offline_normal"]
+bg_color = Color(0.12, 0.14, 0.18, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.42, 0.52, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_offline_hover"]
+bg_color = Color(0.18, 0.22, 0.3, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.6, 0.75, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="LoginScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_login")
+
+[node name="BackgroundRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_bg")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="LogoRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -195.0
+offset_top = 15.0
+offset_right = -12.0
+offset_bottom = 104.0
+grow_horizontal = 0
+texture = ExtResource("7_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ServerSelect" parent="." instance=ExtResource("2_server")]
+layout_mode = 1
+
+[node name="LoginDialog" parent="." instance=ExtResource("3_dialog")]
+visible = false
+layout_mode = 1
+
+[node name="CharacterSelect" parent="." instance=ExtResource("4_select")]
+visible = false
+layout_mode = 1
+
+[node name="CharacterCreate" parent="." instance=ExtResource("5_create")]
+visible = false
+layout_mode = 1
+
+[node name="WorldEditorButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -290.0
+offset_top = -36.0
+offset_right = -150.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.9, 0.95, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_offline_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_offline_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_offline_hover")
+text = "World Editor (F12)"
+
+[node name="OfflineButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -36.0
+offset_right = -16.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.85, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_offline_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_offline_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_offline_hover")
+text = "Offline Mode (F1)"

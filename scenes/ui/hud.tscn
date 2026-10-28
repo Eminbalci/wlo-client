@@ -1,0 +1,1548 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+[ext_resource type="Script" path="res://scripts/ui/minimap_marker.gd" id="2_minimap_marker"]
+[ext_resource type="Script" path="res://scripts/ui/minimap_waypoint.gd" id="3_minimap_waypoint"]
+[ext_resource type="Texture2D" uid="uid://4hff8w7tnac5" path="res://assets/hud/avatar_role_6_0.png" id="4_avatar_role_6_0"]
+[ext_resource type="Texture2D" uid="uid://dhoq4og41yatp" path="res://assets/hud/icon_element_3.png" id="5_icon_element_3"]
+[ext_resource type="Script" path="res://scripts/ui/hud/system_window.gd" id="6_system_window"]
+[ext_resource type="Texture2D" path="res://assets/hud/form_system_2.png" id="7_form_system_2"]
+[ext_resource type="Script" path="res://scripts/ui/hud/friends_window.gd" id="8_friends_window"]
+[ext_resource type="Texture2D" path="res://assets/hud/form_friend_2.png" id="9_form_friend_2"]
+[ext_resource type="Script" path="res://scripts/ui/hud/fight_window.gd" id="10_fight_window"]
+[ext_resource type="Texture2D" path="res://assets/hud/form_fight_1.png" id="11_form_fight_1"]
+[ext_resource type="Script" path="res://scripts/ui/hud/team_window.gd" id="12_team_window"]
+[ext_resource type="Texture2D" path="res://assets/hud/form_team_2.png" id="13_form_team_2"]
+[ext_resource type="Script" path="res://scripts/ui/hud/skill_window.gd" id="14_skill_window"]
+[ext_resource type="Texture2D" path="res://assets/hud/form_skill_1.png" id="15_form_skill_1"]
+[ext_resource type="Script" path="res://scripts/ui/shop/shop_window.gd" id="16_shop_window"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chat_bg"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.03, 0.04, 0.06, 0.72)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.72, 0.58, 0.32, 0.85)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_channel_norm"]
+bg_color = Color(0.04, 0.09, 0.06, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.72, 0.28, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_channel_press"]
+bg_color = Color(0.02, 0.05, 0.03, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.14, 0.55, 0.22, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_channel_hover"]
+bg_color = Color(0.08, 0.16, 0.1, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.9, 0.38, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HUD" type="Control" unique_id=1328354206]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hud")
+
+[node name="PlayerStatusDock" type="Control" parent="." unique_id=283085057]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 241.0
+offset_bottom = 185.0
+mouse_filter = 2
+
+[node name="AvatarBg" type="ColorRect" parent="PlayerStatusDock" unique_id=853007967]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 82.0
+offset_bottom = 82.0
+mouse_filter = 2
+color = Color(0.160784, 0.160784, 0.160784, 1)
+
+[node name="AvatarRect" type="TextureRect" parent="PlayerStatusDock" unique_id=12608275]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -4.0
+offset_right = 102.0
+offset_bottom = 68.0
+mouse_filter = 2
+texture = ExtResource("4_avatar_role_6_0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusBackground" type="TextureRect" parent="PlayerStatusDock" unique_id=1377259234]
+layout_mode = 0
+offset_right = 241.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="HpChannelUnder" type="TextureRect" parent="PlayerStatusDock" unique_id=794561739]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 37.0
+offset_right = 125.0
+offset_bottom = 75.0
+mouse_filter = 2
+
+[node name="SpChannelUnder" type="TextureRect" parent="PlayerStatusDock" unique_id=2053692453]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 38.0
+offset_right = 131.0
+offset_bottom = 85.0
+mouse_filter = 2
+
+[node name="HpBar" type="TextureProgressBar" parent="PlayerStatusDock" unique_id=351406739]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 37.0
+offset_right = 125.0
+offset_bottom = 75.0
+mouse_filter = 2
+max_value = 245.0
+value = 245.0
+
+[node name="SpBar" type="TextureProgressBar" parent="PlayerStatusDock" unique_id=1283935867]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 38.0
+offset_right = 131.0
+offset_bottom = 85.0
+mouse_filter = 2
+max_value = 180.0
+value = 180.0
+
+[node name="ElementIcon" type="TextureRect" parent="PlayerStatusDock" unique_id=1597198549]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 7.0
+offset_right = 133.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource("5_icon_element_3")
+expand_mode = 1
+
+[node name="NameLabel" type="Label" parent="PlayerStatusDock" unique_id=1454927996]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 7.0
+offset_right = 210.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Daniel"
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="PlayerStatusDock" unique_id=7233163]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 60.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "LV 10"
+vertical_alignment = 1
+
+[node name="HpLabel" type="Label" parent="PlayerStatusDock" unique_id=474537637]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 112.0
+offset_right = 120.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "HP   245/245"
+vertical_alignment = 1
+
+[node name="SpLabel" type="Label" parent="PlayerStatusDock" unique_id=521733241]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 120.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "SP   180/180"
+vertical_alignment = 1
+
+[node name="ExpTitleLabel" type="Label" parent="PlayerStatusDock" unique_id=566958246]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 144.0
+offset_right = 36.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "EXP"
+vertical_alignment = 1
+
+[node name="ExpBar" type="TextureProgressBar" parent="PlayerStatusDock" unique_id=866680912]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 148.0
+offset_right = 85.0
+offset_bottom = 156.0
+mouse_filter = 2
+value = 45.0
+
+[node name="ExpLabel" type="Label" parent="PlayerStatusDock" unique_id=739370994]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 144.0
+offset_right = 130.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "45%"
+vertical_alignment = 1
+
+[node name="GoldLabel" type="Label" parent="PlayerStatusDock" unique_id=737205979]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 160.0
+offset_right = 120.0
+offset_bottom = 176.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Gold 500"
+vertical_alignment = 1
+
+[node name="RadarMinimapDock" type="Control" parent="." unique_id=1311802851]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -226.0
+offset_bottom = 144.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="MinimapView" type="TextureRect" parent="RadarMinimapDock" unique_id=920697897]
+clip_contents = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 218.0
+offset_bottom = 137.0
+mouse_filter = 0
+expand_mode = 1
+
+[node name="PlayerMarker" type="Control" parent="RadarMinimapDock/MinimapView" unique_id=905290523]
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("2_minimap_marker")
+
+[node name="WaypointMarker" type="Control" parent="RadarMinimapDock/MinimapView" unique_id=1306246978]
+visible = false
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("3_minimap_waypoint")
+
+[node name="MinimapFrame" type="TextureRect" parent="RadarMinimapDock" unique_id=385947091]
+layout_mode = 0
+offset_right = 226.0
+offset_bottom = 144.0
+mouse_filter = 2
+
+[node name="MapNameLabel" type="Label" parent="RadarMinimapDock" unique_id=449835744]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 6.0
+offset_right = 112.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Ship Deck"
+vertical_alignment = 1
+
+[node name="CoordinatesLabel" type="Label" parent="RadarMinimapDock" unique_id=2392438]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 6.0
+offset_right = 210.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.85, 0.95, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "(1542, 675)"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BtnZoomOut" type="Button" parent="RadarMinimapDock" unique_id=1043863501]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 114.0
+offset_right = 184.0
+offset_bottom = 132.0
+tooltip_text = "Zoom Out"
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 9
+theme_override_constants/outline_size = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "-"
+
+[node name="BtnZoomIn" type="Button" parent="RadarMinimapDock" unique_id=1524093859]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 114.0
+offset_right = 204.0
+offset_bottom = 132.0
+tooltip_text = "Zoom In"
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 9
+theme_override_constants/outline_size = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "+"
+
+[node name="BtnMinimapToggle" type="Button" parent="RadarMinimapDock" unique_id=372417465]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 114.0
+offset_right = 224.0
+offset_bottom = 132.0
+tooltip_text = "Toggle Minimap Style / Collapse"
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 9
+theme_override_constants/outline_size = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "M"
+
+[node name="ChatDock" type="Control" parent="." unique_id=137062787]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_right = 524.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ChannelTabs" type="HBoxContainer" parent="ChatDock" unique_id=1743505753]
+layout_mode = 0
+offset_top = -107.0
+offset_right = 320.0
+offset_bottom = -86.0
+theme_override_constants/separation = 2
+
+[node name="BtnTabAll" type="Button" parent="ChatDock/ChannelTabs" unique_id=2066268657]
+layout_mode = 2
+tooltip_text = "All Channels"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "All"
+
+[node name="BtnTabCurrent" type="Button" parent="ChatDock/ChannelTabs" unique_id=995072306]
+layout_mode = 2
+tooltip_text = "Current (Local) Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "Current"
+
+[node name="BtnTabTeam" type="Button" parent="ChatDock/ChannelTabs" unique_id=236768247]
+layout_mode = 2
+tooltip_text = "Team Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "Team"
+
+[node name="BtnTabGuild" type="Button" parent="ChatDock/ChannelTabs" unique_id=1120721427]
+layout_mode = 2
+tooltip_text = "Guild Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "Guild"
+
+[node name="BtnTabWhisper" type="Button" parent="ChatDock/ChannelTabs" unique_id=645027748]
+layout_mode = 2
+tooltip_text = "Whisper Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "Whisper"
+
+[node name="BtnTabSystem" type="Button" parent="ChatDock/ChannelTabs" unique_id=273627696]
+layout_mode = 2
+tooltip_text = "System Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "System"
+
+[node name="ChatHistoryPanel" type="PanelContainer" parent="ChatDock" unique_id=813146312]
+layout_mode = 0
+offset_top = -86.0
+offset_right = 524.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_chat_bg")
+
+[node name="ChatResizeHandle" type="Control" parent="ChatDock/ChatHistoryPanel" unique_id=999425419]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_default_cursor_shape = 9
+
+[node name="ChatFrameNinePatch" type="NinePatchRect" parent="ChatDock/ChatHistoryPanel" unique_id=554359379]
+visible = false
+layout_mode = 2
+patch_margin_left = 45
+patch_margin_top = 22
+patch_margin_right = 25
+patch_margin_bottom = 22
+
+[node name="PanelTalkFormLeft" type="TextureRect" parent="ChatDock/ChatHistoryPanel" unique_id=772719746]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="BtnMsgLock" type="TextureButton" parent="ChatDock/ChatHistoryPanel/PanelTalkFormLeft" unique_id=1569791837]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 2.0
+offset_right = 32.0
+offset_bottom = 20.0
+tooltip_text = "Lock Chat Scroll"
+
+[node name="BtnChatSwitch" type="TextureButton" parent="ChatDock/ChatHistoryPanel/PanelTalkFormLeft" unique_id=335722216]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 62.0
+offset_right = 42.0
+offset_bottom = 85.0
+tooltip_text = "Chat Box Switch"
+
+[node name="BtnChatSize" type="TextureButton" parent="ChatDock/ChatHistoryPanel" unique_id=1711571664]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Chat Window Size"
+
+[node name="ChatHistory" type="RichTextLabel" parent="ChatDock/ChatHistoryPanel" unique_id=1433515571]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 12
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
+bbcode_enabled = true
+scroll_following = true
+
+[node name="ChatInputBackground" type="TextureRect" parent="ChatDock" unique_id=370074367]
+layout_mode = 0
+offset_right = 524.0
+offset_bottom = 25.0
+mouse_filter = 0
+expand_mode = 1
+
+[node name="BtnMail" type="TextureButton" parent="ChatDock" unique_id=1346281489]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 29.0
+offset_bottom = 23.0
+tooltip_text = "Mailbox [M]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnChannel" type="Button" parent="ChatDock" unique_id=1006712722]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 23.0
+tooltip_text = "Chat Channel: Local"
+theme_override_styles/normal = SubResource("StyleBoxFlat_channel_norm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_channel_press")
+theme_override_styles/hover = SubResource("StyleBoxFlat_channel_hover")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_constants/outline_size = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Local"
+
+[node name="WhisperTarget" type="LineEdit" parent="ChatDock" unique_id=794241521]
+visible = false
+layout_mode = 0
+offset_left = 74.0
+offset_top = 2.0
+offset_right = 160.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.68, 0.68, 0.64, 0.65)
+placeholder_text = "Target"
+
+[node name="ChatInput" type="LineEdit" parent="ChatDock" unique_id=289221608]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 2.0
+offset_right = 494.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.68, 0.6, 0.6)
+placeholder_text = "Press Enter to chat..."
+
+[node name="BtnEmote" type="TextureButton" parent="ChatDock" unique_id=862400779]
+layout_mode = 0
+offset_left = 495.0
+offset_top = 1.0
+offset_right = 520.0
+offset_bottom = 24.0
+tooltip_text = "Chat Emotes"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SendButton" type="Button" parent="ChatDock" unique_id=933840519]
+visible = false
+layout_mode = 0
+
+[node name="ChannelDropdown" type="PanelContainer" parent="ChatDock" unique_id=926528099]
+visible = false
+layout_mode = 0
+offset_left = 30.0
+offset_top = -118.0
+offset_right = 74.0
+offset_bottom = -2.0
+
+[node name="ChannelList" type="VBoxContainer" parent="ChatDock/ChannelDropdown" unique_id=831593933]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="BtnChanGuild" type="Button" parent="ChatDock/ChannelDropdown/ChannelList" unique_id=1677739557]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Guild"
+
+[node name="BtnChanTeam" type="Button" parent="ChatDock/ChannelDropdown/ChannelList" unique_id=2050584208]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Team"
+
+[node name="BtnChanWhisper" type="Button" parent="ChatDock/ChannelDropdown/ChannelList" unique_id=2140275153]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Whisper"
+
+[node name="BtnChanWorld" type="Button" parent="ChatDock/ChannelDropdown/ChannelList" unique_id=345643508]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "World"
+
+[node name="BtnChanLocal" type="Button" parent="ChatDock/ChannelDropdown/ChannelList" unique_id=89024391]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Local"
+
+[node name="EmotePopup" type="Control" parent="ChatDock" unique_id=842798331]
+visible = false
+anchors_preset = 0
+offset_left = 258.0
+offset_top = -75.0
+offset_right = 521.0
+offset_bottom = -4.0
+
+[node name="EmoteBackground" type="TextureRect" parent="ChatDock/EmotePopup" unique_id=1009842128]
+layout_mode = 0
+offset_right = 263.0
+offset_bottom = 69.0
+
+[node name="EmoteCloseBtn" type="Button" parent="ChatDock/EmotePopup" unique_id=1548919109]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 2.0
+offset_right = 260.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 9
+text = "X"
+
+[node name="EmoteGrid" type="GridContainer" parent="ChatDock/EmotePopup" unique_id=37780888]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 238.0
+offset_bottom = 66.0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 11
+
+[node name="BottomActionDock" type="Control" parent="." unique_id=989842122]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -282.0
+offset_top = -78.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="LocationLabel" type="Label" parent="BottomActionDock" unique_id=220793689]
+layout_mode = 0
+offset_right = 278.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 2
+text = "Ship Deck  X: 899  Y: 1102"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ActionBackground" type="TextureRect" parent="BottomActionDock" unique_id=424311095]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 34.0
+offset_right = 275.0
+offset_bottom = 71.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButtonContainer" type="HBoxContainer" parent="BottomActionDock" unique_id=1818707628]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 22.0
+offset_right = 280.0
+offset_bottom = 66.0
+theme_override_constants/separation = 4
+
+[node name="BtnStatus" type="TextureButton" parent="BottomActionDock/ButtonContainer" unique_id=521555063]
+custom_minimum_size = Vector2(41, 51)
+layout_mode = 2
+tooltip_text = "Character Status & Inventory [C / I]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnSkill" type="TextureButton" parent="BottomActionDock/ButtonContainer" unique_id=1851624953]
+custom_minimum_size = Vector2(46, 51)
+layout_mode = 2
+tooltip_text = "Skills [S]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnQuest" type="TextureButton" parent="BottomActionDock/ButtonContainer" unique_id=517587997]
+custom_minimum_size = Vector2(42, 52)
+layout_mode = 2
+tooltip_text = "Compound [V]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnTeam" type="TextureButton" parent="BottomActionDock/ButtonContainer" unique_id=1714633821]
+custom_minimum_size = Vector2(46, 49)
+layout_mode = 2
+tooltip_text = "Team & Party [T]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnFriends" type="TextureButton" parent="BottomActionDock/ButtonContainer" unique_id=157127051]
+custom_minimum_size = Vector2(46, 54)
+layout_mode = 2
+tooltip_text = "Friends & Community [F]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnSystem" type="TextureButton" parent="BottomActionDock/ButtonContainer" unique_id=110572800]
+custom_minimum_size = Vector2(47, 51)
+layout_mode = 2
+tooltip_text = "System Settings [Esc]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="HotbarDock" type="Control" parent="." unique_id=1721226527]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 163.0
+offset_bottom = 437.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="HotbarBackground" type="TextureRect" parent="HotbarDock" unique_id=1001935511]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 274.0
+mouse_filter = 0
+
+[node name="SlotsContainer" type="Control" parent="HotbarDock" unique_id=1781279107]
+anchors_preset = 0
+offset_right = 56.0
+offset_bottom = 274.0
+mouse_filter = 2
+
+[node name="DialogueSystem" type="Control" parent="." unique_id=785292435]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FormTalk1" type="Control" parent="DialogueSystem" unique_id=950841172]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -293.5
+offset_top = 48.0
+offset_right = 293.5
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 1
+mouse_filter = 2
+
+[node name="TalkBackground" type="TextureRect" parent="DialogueSystem/FormTalk1" unique_id=99973761]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+expand_mode = 1
+stretch_mode = 0
+
+[node name="PortraitFrame" type="Control" parent="DialogueSystem/FormTalk1" unique_id=121552210]
+anchors_preset = 0
+offset_left = 449.0
+offset_top = 28.0
+offset_right = 533.0
+offset_bottom = 110.0
+mouse_filter = 2
+
+[node name="PortraitTexture" type="TextureRect" parent="DialogueSystem/FormTalk1/PortraitFrame" unique_id=860493746]
+layout_mode = 0
+offset_right = 84.0
+offset_bottom = 82.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpeakerNameplate" type="Label" parent="DialogueSystem/FormTalk1" unique_id=672130955]
+layout_mode = 0
+offset_left = 439.0
+offset_top = 106.0
+offset_right = 543.0
+offset_bottom = 126.0
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 0.95, 0.5, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Captain Robinson"
+vertical_alignment = 1
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueSystem/FormTalk1" unique_id=2120360798]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 40.0
+offset_right = 420.0
+offset_bottom = 120.0
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 12
+theme_override_colors/default_color = Color(1, 0.95, 0.25, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+bbcode_enabled = true
+text = "Hello, I'm captain here. Welcome to Ocean Star. We are to pass by South Ocean islands."
+
+[node name="NextIcon" type="TextureRect" parent="DialogueSystem/FormTalk1" unique_id=1138383618]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 124.0
+offset_right = 277.0
+offset_bottom = 155.0
+mouse_filter = 0
+
+[node name="FormTalk3" type="Control" parent="DialogueSystem" unique_id=1191702214]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -360.0
+offset_right = 352.0
+offset_bottom = -192.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ChoiceBackground" type="TextureRect" parent="DialogueSystem/FormTalk3" unique_id=1006472799]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+expand_mode = 1
+stretch_mode = 0
+
+[node name="ChoiceTitle" type="Label" parent="DialogueSystem/FormTalk3" unique_id=952837929]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 220.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Decision:"
+vertical_alignment = 1
+
+[node name="ChoiceList" type="VBoxContainer" parent="DialogueSystem/FormTalk3" unique_id=413211292]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 38.0
+offset_right = 308.0
+offset_bottom = 155.0
+theme_override_constants/separation = 4
+
+[node name="FloatingWindows" type="Control" parent="." unique_id=179385367]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InventoryWindow" type="Control" parent="FloatingWindows" unique_id=222866573]
+visible = false
+anchors_preset = 0
+offset_left = 290.0
+offset_top = 120.0
+offset_right = 499.0
+offset_bottom = 407.0
+
+[node name="Background" type="TextureRect" parent="FloatingWindows/InventoryWindow" unique_id=1528076216]
+layout_mode = 0
+offset_right = 209.0
+offset_bottom = 287.0
+mouse_filter = 0
+
+[node name="TitleLabel" type="Label" parent="FloatingWindows/InventoryWindow" unique_id=242743101]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Inventory [I]"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="FloatingWindows/InventoryWindow" unique_id=873902417]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 8.0
+offset_right = 197.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true
+
+[node name="CharacterWindow" type="Control" parent="FloatingWindows" unique_id=362111523]
+visible = false
+anchors_preset = 0
+offset_left = 180.0
+offset_top = 60.0
+offset_right = 566.0
+offset_bottom = 521.0
+
+[node name="Background" type="TextureRect" parent="FloatingWindows/CharacterWindow" unique_id=891527400]
+layout_mode = 0
+offset_right = 386.0
+offset_bottom = 461.0
+mouse_filter = 0
+
+[node name="TitleLabel" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=1220639630]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Character Status [C]"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="FloatingWindows/CharacterWindow" unique_id=1069245811]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 8.0
+offset_right = 374.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true
+
+[node name="PaperDoll" type="TextureRect" parent="FloatingWindows/CharacterWindow" unique_id=837040024]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 127.0
+offset_right = 165.0
+offset_bottom = 255.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatName" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=663540244]
+visible = false
+layout_mode = 0
+offset_left = 225.0
+offset_top = 35.0
+offset_right = 360.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "Betty"
+vertical_alignment = 1
+
+[node name="StatLevel" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=744978688]
+visible = false
+layout_mode = 0
+offset_left = 246.0
+offset_top = 55.0
+offset_right = 295.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "10"
+vertical_alignment = 1
+
+[node name="StatElement" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=944184231]
+visible = false
+layout_mode = 0
+offset_left = 300.0
+offset_top = 55.0
+offset_right = 360.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "Earth"
+vertical_alignment = 1
+
+[node name="StatLeftHp" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=924168552]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 274.0
+offset_right = 160.0
+offset_bottom = 288.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "320 / 320"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLeftSp" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=632743403]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 288.0
+offset_right = 160.0
+offset_bottom = 302.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "150 / 150"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLeftExp" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=300851397]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 302.0
+offset_right = 160.0
+offset_bottom = 316.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "4500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldLabel" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=447443137]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 318.0
+offset_right = 100.0
+offset_bottom = 332.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLeftFree" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=569053835]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 314.0
+offset_right = 182.0
+offset_bottom = 328.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatAtk" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=643022652]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 335.0
+offset_right = 100.0
+offset_bottom = 349.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "34"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLeftStr" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=940632536]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 335.0
+offset_right = 176.0
+offset_bottom = 349.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatDef" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=1463149781]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 351.0
+offset_right = 100.0
+offset_bottom = 365.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "28"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLeftCon" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=1426253489]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 351.0
+offset_right = 176.0
+offset_bottom = 365.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatMatk" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=815714901]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 367.0
+offset_right = 100.0
+offset_bottom = 381.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLeftInt" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=1819281899]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 367.0
+offset_right = 176.0
+offset_bottom = 381.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatMdef" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=1128910262]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 383.0
+offset_right = 100.0
+offset_bottom = 397.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "14"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLeftWis" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=1974865260]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 383.0
+offset_right = 176.0
+offset_bottom = 397.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatSpd" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=1812551097]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 399.0
+offset_right = 100.0
+offset_bottom = 413.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "22"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatLeftAgi" type="Label" parent="FloatingWindows/CharacterWindow" unique_id=693743642]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 399.0
+offset_right = 176.0
+offset_bottom = 413.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 1
+text = "18"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryGrid" type="Control" parent="FloatingWindows/CharacterWindow" unique_id=964657588]
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 71.0
+offset_right = 362.0
+offset_bottom = 377.0
+mouse_filter = 1
+
+[node name="FightWindow" type="Control" parent="FloatingWindows" unique_id=1824308432]
+visible = false
+anchors_preset = 0
+offset_left = 610.0
+offset_top = 150.0
+offset_right = 763.0
+offset_bottom = 265.0
+script = ExtResource("10_fight_window")
+
+[node name="Background" type="TextureRect" parent="FloatingWindows/FightWindow" unique_id=1418655288]
+layout_mode = 0
+offset_right = 153.0
+offset_bottom = 115.0
+mouse_filter = 0
+texture = ExtResource("11_form_fight_1")
+
+[node name="CloseButton" type="Button" parent="FloatingWindows/FightWindow" unique_id=1238644163]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 8.0
+offset_right = 141.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true
+
+[node name="FriendsWindow" type="Control" parent="FloatingWindows" unique_id=1874889179]
+visible = false
+layout_mode = 0
+offset_left = 220.0
+offset_top = 60.0
+offset_right = 576.0
+offset_bottom = 553.0
+script = ExtResource("8_friends_window")
+
+[node name="Background" type="TextureRect" parent="FloatingWindows/FriendsWindow" unique_id=528159126]
+layout_mode = 0
+offset_right = 356.0
+offset_bottom = 493.0
+mouse_filter = 0
+texture = ExtResource("9_form_friend_2")
+
+[node name="TitleLabel" type="Label" parent="FloatingWindows/FriendsWindow" unique_id=2134312692]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = 160.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Friends [F]"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="FloatingWindows/FriendsWindow" unique_id=1371364958]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 8.0
+offset_right = 344.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true
+
+[node name="SkillWindow" type="Control" parent="FloatingWindows" unique_id=1322345562]
+visible = false
+anchors_preset = 0
+offset_left = 240.0
+offset_top = 80.0
+offset_right = 530.0
+offset_bottom = 539.0
+script = ExtResource("14_skill_window")
+
+[node name="Background" type="TextureRect" parent="FloatingWindows/SkillWindow" unique_id=1025285765]
+layout_mode = 0
+offset_right = 290.0
+offset_bottom = 459.0
+mouse_filter = 0
+texture = ExtResource("15_form_skill_1")
+
+[node name="TitleLabel" type="Label" parent="FloatingWindows/SkillWindow" unique_id=909386257]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = 140.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Skills [S]"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="FloatingWindows/SkillWindow" unique_id=1578964236]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 8.0
+offset_right = 278.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true
+
+[node name="TeamWindow" type="Control" parent="FloatingWindows" unique_id=1253169967]
+visible = false
+layout_mode = 0
+offset_left = 200.0
+offset_top = 40.0
+offset_right = 571.0
+offset_bottom = 579.0
+script = ExtResource("12_team_window")
+
+[node name="Background" type="TextureRect" parent="FloatingWindows/TeamWindow" unique_id=265534709]
+layout_mode = 0
+offset_right = 371.0
+offset_bottom = 539.0
+mouse_filter = 0
+texture = ExtResource("13_form_team_2")
+
+[node name="TitleLabel" type="Label" parent="FloatingWindows/TeamWindow" unique_id=1806808419]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = 140.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Team [T]"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="FloatingWindows/TeamWindow" unique_id=2060294235]
+layout_mode = 0
+offset_left = 341.0
+offset_top = 8.0
+offset_right = 359.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true
+
+[node name="QuestWindow" type="Control" parent="FloatingWindows" unique_id=532661798]
+visible = false
+anchors_preset = 0
+offset_left = 180.0
+offset_top = 100.0
+offset_right = 612.0
+offset_bottom = 467.0
+
+[node name="Background" type="TextureRect" parent="FloatingWindows/QuestWindow" unique_id=1742472021]
+layout_mode = 0
+offset_right = 432.0
+offset_bottom = 367.0
+mouse_filter = 0
+
+[node name="TitleLabel" type="Label" parent="FloatingWindows/QuestWindow" unique_id=2093531517]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = 160.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Quest Log [Q]"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="FloatingWindows/QuestWindow" unique_id=594766268]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 8.0
+offset_right = 420.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true
+
+[node name="SystemWindow" type="Control" parent="FloatingWindows" unique_id=1952338302]
+visible = false
+layout_mode = 0
+offset_left = 200.0
+offset_top = 80.0
+offset_right = 588.0
+offset_bottom = 531.0
+script = ExtResource("6_system_window")
+
+[node name="Background" type="TextureRect" parent="FloatingWindows/SystemWindow" unique_id=1390123592]
+layout_mode = 0
+offset_right = 388.0
+offset_bottom = 451.0
+mouse_filter = 0
+texture = ExtResource("7_form_system_2")
+
+[node name="TitleLabel" type="Label" parent="FloatingWindows/SystemWindow" unique_id=669692546]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = 160.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "System Setup [Esc]"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="FloatingWindows/SystemWindow" unique_id=1670542394]
+layout_mode = 0
+offset_left = 358.0
+offset_top = 8.0
+offset_right = 376.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true
+
+[node name="ShopWindow" type="Control" parent="FloatingWindows"]
+visible = false
+layout_mode = 0
+offset_left = 195.0
+offset_top = 37.0
+offset_right = 604.0
+offset_bottom = 562.0
+mouse_filter = 1
+script = ExtResource("16_shop_window")

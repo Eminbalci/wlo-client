@@ -1,0 +1,242 @@
+# Wonderland Online Client - Task Tracker
+
+# Clean Workspace & Repository Deployment (Eminbalci/wlo-client)
+- [ ] 1. Clean Unnecessary Temporary Files & Dumps:
+  - [ ] 1.1 Remove loose screenshot, debug render, and crop PNGs + .import files from root folder.
+  - [ ] 1.2 Remove temporary reverse-engineering dump folders: `dump_008`, `dump_bmg`, `dump_btn_rolepic`, `dump_heads_test`, `dump_jrole`, `dump_roleinfo`, `dump_rolepic_clean`, `scratch`, `screenshots_auth`, `test_screenshots`.
+  - [ ] 1.3 Remove 1.4 GB unused dead file `assets/data/odd.dat` and `assets/pic/Thumbs.db`.
+- [ ] 2. Configure Git & .gitignore:
+  - [ ] 2.1 Write production Godot 4 `.gitignore` excluding `.godot/`, temporary dumps, and oversized binary archives (>100MB) that exceed GitHub file limits.
+  - [ ] 2.2 Initialize git repository and set remote to `https://github.com/Eminbalci/wlo-client.git`.
+  - [ ] 2.3 Verify repository status with `git status`.
+- [ ] 3. Commit & Push to GitHub:
+  - [ ] 3.1 Stage all clean source code, scenes, shaders, assets, docs, and tests.
+  - [ ] 3.2 Commit with descriptive commit message.
+  - [ ] 3.3 Push to `main` branch on `https://github.com/Eminbalci/wlo-client`.
+- [ ] 4. Documentation & Verification:
+  - [ ] 4.1 Update `README.md` with repository link and clean project setup instructions.
+  - [ ] 4.2 Document workspace cleanup and repository structure in `docs/workspace_cleanup_and_git_setup.md`.
+  - [ ] 4.3 Update `todo.md` marking completed tasks.
+
+# Companion Ride Mode (NPC / Pet Mounting System)
+- [ ] 1. Asset Slicing & UI Controls (`team_window.gd`):
+  - [ ] 1.1 Slice `Btn_AssignRide_1.bmp` into authentic 3-state transparent textures: `btn_assign_ride_normal.png`, `btn_assign_ride_hover.png`, `btn_assign_ride_pressed.png` in `assets/hud/`.
+  - [ ] 1.2 In `scripts/ui/hud/team_window.gd`, add "Ride" button alongside "Battle" / "Dismiss" on each pet row (`row_ride_buttons`).
+  - [ ] 1.3 Implement Ride state machine: a pet can be Rest, Battle, or Ride (mutually exclusive across all pets).
+  - [ ] 1.4 Wire `companion_ride_toggled(pet_id, is_riding)` and `companion_mounted(pet_dict)` signals.
+- [ ] 2. AdjustRidePetPos Data Parser & Offset Calculations:
+  - [ ] 2.1 Create parser in `scripts/world/ride_data.gd` to load and parse `assets/data/AdjustRidePetPos.txt`.
+  - [ ] 2.2 Provide heading-indexed (0..7) offset resolution for `StandPos` and `MovePos` per character sex/role and NPC model.
+  - [ ] 2.3 Provide graceful defaults for pets not explicitly listed in `AdjustRidePetPos.txt` (e.g. S. Monkey 1103).
+- [ ] 3. Player Entity & MapView Mount Kinematics:
+  - [ ] 3.1 In `scripts/world/player.gd`, implement `mount_pet(pet_data: Dictionary)` and `dismount_pet()`.
+  - [ ] 3.2 In `PlayerEntity`, manage mount display under player: mount plays walk (0..31) / stand (32..63) matching player heading, while player assumes sitting/riding pose (frames 64..95) offset by `AdjustRidePetPos`.
+  - [ ] 3.3 Apply authentic mounted speed bonus (e.g. 1.35x, 160 px/s).
+  - [ ] 3.4 In `scripts/map/map_view.gd`, connect `team_window` ride signals to `player.mount_pet()` / `player.dismount_pet()`, hiding overland follower while mounted.
+- [ ] 4. Automated Testing & Verification:
+  - [ ] 4.1 Create test suite in `tests/test_companion_ride_mode.gd` verifying Ride button toggling, mutual exclusion with Battle mode, offset math, mount attachment, speed bonus, and dismount.
+  - [ ] 4.2 Run tests via headless Godot runner and confirm 100% zero-error pass rate.
+- [ ] 5. Technical Documentation & Global Updates:
+  - [ ] 5.1 Create `docs/companion_ride_mode_specification.md`.
+  - [ ] 5.2 Update global `readme.md`.
+  - [ ] 5.3 Mark completed tasks in `todo.md`.
+
+# Companion Follower Breadcrumb Walking & Path Kinematics (No-Teleport Fix)
+- [x] 1. Follower Breadcrumb Trail & Smooth Walking Kinematics:
+  - [x] 1.1 In `scripts/map/map_view.gd`, implement breadcrumb trail (`_follower_trail`) so the companion walks along the player's path rather than snapping to an instant backward vector.
+  - [x] 1.2 Keep `_companion_follower.is_moving = true` continuously while following breadcrumbs so the authentic 4-frame walk animation plays smoothly without stopping every frame.
+  - [x] 1.3 Stop walking (`is_moving = false`, call `_update_frame()`) only when the follower arrives within trailing distance (<= 48px) and the player has stopped, orienting heading to face the player.
+  - [x] 1.4 Remove artificial teleport threshold (`dist > 450.0`) during normal walking; only allow position snap on extreme map transitions (> 900px).
+- [x] 2. Interaction & Signal Conflict Fixes:
+  - [x] 2.1 In `find_npc_near_world_pos`, explicitly exclude `_companion_follower` so clicking near the pet does not interrupt player movement.
+  - [x] 2.2 Disable `ClickArea` on `_companion_follower` in `spawn_companion_follower()`.
+  - [x] 2.3 Remove redundant call from `_on_player_position_updated()` to let `_process(delta)` drive smooth movement exclusively.
+- [x] 3. Automated Testing & Verification:
+  - [x] 3.1 Update `tests/test_team_window_and_companions.gd` to verify breadcrumb trailing, continuous walk state, and no-teleport behavior.
+  - [x] 3.2 Run headless test suites and confirm 100% zero-error pass rate.
+- [x] 4. Documentation & Global Updates:
+  - [x] 4.1 Update `docs/companion_battle_mode_and_follower_spec.md`.
+  - [x] 4.2 Update `readme.md`.
+  - [x] 4.3 Mark tasks completed in `todo.md`.
+
+# Companion Battle Mode, Walking Follower, & Authentic NPC Portraits
+- [x] 1. Single Pet Battle Mode Enforcement & UI State:
+  - [x] 1.1 In `scripts/ui/hud/team_window.gd`, enforce strictly ONE pet in Battle mode at any time.
+  - [x] 1.2 Update `_refresh_pet_rows()` and `_refresh_real_client_controls()` so `row_battle_buttons[i]` displays "Rest" when summoned (`is_summoned == true`) and "Battle" when inactive.
+  - [x] 1.3 Update `_on_pet_row_button()`: if clicking "Battle" on an inactive pet, recall all other summoned pets and summon the target pet; if clicking "Rest" on the currently summoned pet, recall it.
+- [x] 2. Companion Overland Walking & Follow Movement:
+  - [x] 2.1 Correct S. Monkey model JMP from `1118.jmp` (boulder) to `1103.jmp` in both `team_window.gd` and `map_view.gd`.
+  - [x] 2.2 In `scripts/map/map_view.gd`, hook companion follower movement into `_process(delta)` for smooth continuous movement.
+  - [x] 2.3 Set `_companion_follower.is_moving = true` when distance > 16.0 px so authentic 4-frame walk animation plays, moving toward player with appropriate speed and heading.
+  - [x] 2.4 Set `_companion_follower.is_moving = false` when within 16.0 px, facing player.
+- [x] 3. Authentic NPC Companion Portraits & Avatars:
+  - [x] 3.1 In `scripts/ui/hud/team_window.gd`, replace human player role fallbacks in `_resolve_companion_avatar()`.
+  - [x] 3.2 Fetch authentic portraits from `008.jma` via `ArchiveLoader.get_npc_portrait(talk_image)` (Roca 8090, Kelan Leader 8038, Robinson 8067, etc.).
+  - [x] 3.3 For non-humanoid companions (`talk_image == 0`, e.g. S. Monkey 1103), resolve sprite texture via `ArchiveLoader.get_npc_texture(sprite_id, 0)` or `ArchiveLoader.get_jma_animation("001.jma", model_jmp)`.
+- [x] 4. Automated Testing & Verification:
+  - [x] 4.1 Update `tests/test_team_window_and_companions.gd` with tests for single battle mode, button text/state transitions, and authentic companion avatars.
+  - [x] 4.2 Run headless test suites and confirm 100% pass rate with zero errors.
+- [x] 5. Technical Documentation & Global Updates:
+  - [x] 5.1 Create `docs/companion_battle_mode_and_follower_spec.md`.
+  - [x] 5.2 Update global `readme.md`.
+  - [x] 5.3 Mark tasks completed in `todo.md`.
+
+- [x] 1. Asset Inspection & Slicing:
+  - [x] 1.1 Inspect `D:/GitHub/wlridecode/menu/Skins/` for store bitmaps: `Form_PharmacyStore.bmp`, `Form_ThingStore_1.bmp`, `Form_WeaponStore_1.bmp`, `Form_Shopping_1.bmp`, `ShopTab_1..7.bmp`, `Icon_ShopMark_1.bmp`.
+  - [x] 1.2 Convert to transparent PNG assets in `assets/hud/` with green `[0, 255, 0]` chroma-keying and defringing (`form_store_1.png`, `form_thing_store_1.png`, `form_weapon_store_1.png`, `form_pharmacy_store.png`, `form_shopping_1.png`, `form_equip_store_1.png`, `shop_tab_1..7.png`, `btn_buy_1.png`, `btn_trade_1.png`).
+- [x] 2. Shop Window Implementation (`scripts/ui/shop/shop_window.gd` & scene):
+  - [x] 2.1 Create `scripts/ui/shop/shop_window.gd` with modular Control architecture.
+  - [x] 2.2 Add authentic background texture and 18x18 close button.
+  - [x] 2.3 Implement Mode Tabs ("Buy" and "Sell").
+  - [x] 2.4 Implement Buy Tab: Merchant catalog display, unit price, selection preview, quantity SpinBox (1..99), total cost, "Buy" button (gold check, deduction, inventory add, coin audio).
+  - [x] 2.5 Implement Sell Tab: Player inventory display, 50% sell price calculation, selection preview, quantity SpinBox, "Sell" button (inventory remove, gold award, coin audio).
+  - [x] 2.6 Dynamic gold display updating on transactions and inventory changes.
+  - [x] 2.7 Connect `ShopWindow` into `HUD` floating windows / scene hierarchy.
+- [x] 3. MapView & Merchant Dialogue Integration:
+  - [x] 3.1 Hook merchant NPCs in `scripts/map/map_view.gd` / `scripts/ui/hud/hud_dialogue.gd` / `scripts/map/npc_dialogue_component.gd`.
+  - [x] 3.2 Define merchant catalogs (Grocery, Pharmacy, Weapon Smith).
+  - [x] 3.3 Trigger ShopWindow open with specific merchant catalog upon selecting "Buy / Sell" / "Trade".
+- [x] 4. Headless Automated Testing & Verification:
+  - [x] 4.1 Create `tests/test_shop_window_and_merchant_trading.gd`.
+  - [x] 4.2 Run test suite with `C:\Godot\godot_console.exe --headless` (59/59 passed).
+- [x] 5. Documentation & Reporting:
+  - [x] 5.1 Create technical documentation in `docs/merchant_shop_system_specification.md`.
+  - [x] 5.2 Update global `readme.md`.
+  - [x] 5.3 Report completed actions to caller agent.
+
+# Combat Settings & Auto-Battle Window (FightWindow)
+- [x] 6. Skin & Asset Slicing:
+  - [x] 6.1 Inspect bitmaps (`BattleStatus_1.bmp`, `Btn_PlayerBattleSetting.bmp`, `Btn_AssignFight_1.bmp`, `Btn_PlayerBattleRestore.bmp`, `Btn_TopPK_1.bmp`, `btn_Check_1.bmp`, `btn_UnCheck_1.bmp`).
+  - [x] 6.2 Convert and defringe transparent PNG assets into `assets/hud/` (`form_fight_1.png`, `form_player_battle_setting.png`, `btn_checkbox_checked.png`, `btn_checkbox_unchecked.png`, button slices).
+- [x] 7. Fight Window Controller Implementation (`scripts/ui/hud/fight_window.gd`):
+  - [x] 7.1 Geometry 153x115 with 18x18 close button at Vector2(123, 8).
+  - [x] 7.2 Auto-Battle Toggle CheckBox.
+  - [x] 7.3 PK Safety Lock Toggle CheckBox.
+  - [x] 7.4 Battle Animation Speed selector (1.0x Normal, 1.5x Fast, 2.0x Hyper).
+  - [x] 7.5 Auto-Flee HP Threshold control (0%..30%).
+  - [x] 7.6 Integrate into `scenes/ui/hud.tscn` and `scripts/ui/hud/hud_window_manager.gd`.
+- [x] 8. BattleManager & BattleView Integration:
+  - [x] 8.1 Wire auto-battle state, PK safety, and battle animation speed into `BattleManager` & `BattleView`.
+  - [x] 8.2 Implement auto-flee logic when player/companion HP falls below threshold.
+  - [x] 8.3 Persist settings in `user://system_settings.json` under `"combat"` key.
+- [x] 9. Headless Automated Testing:
+  - [x] 9.1 Create `tests/test_fight_window_and_combat_settings.gd`.
+  - [x] 9.2 Execute test suite with `C:\Godot\godot_console.exe --headless` (8/8 tests passed, 100%).
+- [x] 10. Documentation & Reporting:
+  - [x] 10.1 Write `docs/fight_window_and_combat_settings_spec.md`.
+  - [x] 10.2 Update `README.md`.
+  - [x] 10.3 Send completion message to caller agent.
+
+# Team / Party Window & Companion Management (TeamWindow)
+- [x] 11. Skin & Asset Slicing:
+  - [x] 11.1 Sliced and defringed `Form_Team_2.bmp` into `assets/hud/form_team_2.png` (371x539).
+  - [x] 11.2 Sliced 3-state buttons: `btn_leave_team_*.png`, `btn_dismiss_team_*.png`, `btn_assign_leader_*.png`, `btn_assign_fight_*.png`, `btn_assign_rest_*.png`, `btn_team_tab_*.png`.
+  - [x] 11.3 Sliced authentic leader badge `org_leader_badge.png` from `OrgLeader.bmp`.
+- [x] 12. Team Window UI Implementation:
+  - [x] 12.1 Created `scripts/ui/hud/team_window.gd` & `scenes/ui/hud/team_window.tscn` (371x539, 18x18 close button at (341, 8)).
+  - [x] 12.2 Implemented 4 party member cards (Slot 0 leader bust, name, level, element, HP/SP, leader badge; Slots 1..3 empty states, selection highlight, dismissal, leader promotion).
+  - [x] 12.3 Implemented 3 companion cards (Slot 4 active + 2 reserves) with portrait apertures, level, element, HP/SP, status badges ("Summoned" / "Resting"), and authentic Fight/Rest buttons.
+  - [x] 12.4 Integrated TeamWindow into `scenes/ui/hud.tscn` under `FloatingWindows/TeamWindow` and `scripts/ui/hud/hud_window_manager.gd`.
+- [x] 13. MapView & Overland Follower Integration:
+  - [x] 13.1 Dynamic overland follower spawning behind player (`_companion_follower`) with smooth trailing and heading alignment.
+  - [x] 13.2 Overworld duplicate NPC suppression via `_party_companions` and `NpcStateEvaluator.should_npc_be_visible`.
+  - [x] 13.3 Map transition follower re-instantiation in `_switch_map_entities()`.
+- [x] 14. Headless Automated Testing & Verification:
+  - [x] 14.1 Created `tests/test_team_window_and_companions.gd`.
+  - [x] 14.2 Executed test suite with `C:\Godot\godot_console.exe --headless` (92/92 passed, 0 failures, 100%).
+- [x] 15. Technical Documentation & Global Updates:
+  - [x] 15.1 Created `docs/team_window_and_companion_management_spec.md`.
+  - [x] 15.2 Updated root `README.md`.
+  - [x] 15.3 Reported completion to caller agent via `send_message`.
+
+# Skill Window Interactive Parity & Hotbar Binding (SkillWindow)
+- [x] 16. Asset Slicing & Defringing:
+  - [x] 16.1 Inspected bitmaps `Form_Skill_1.bmp`, `Form_Skill_2.bmp`, `SkillIcon.bmp`, `1x1Grid.bmp`, `1x1Grid_2.bmp`.
+  - [x] 16.2 Extracted and defringed `form_skill_1.png` (290x459), `form_skill_2.png` (290x459), `btn_skill_icon_1..5.png` (38x63) plus normal, hover, pressed states (38x21), and `slot_grid_1x1.png` (32x32) into `assets/hud/`.
+- [x] 17. Skill Window Controller & View Implementation:
+  - [x] 17.1 Created `scripts/ui/hud/skill_window.gd` with 290x459 geometry, 18x18 close button at Vector2(260, 8), and `window_closed` signal.
+  - [x] 17.2 Created `scripts/ui/hud/skill_row_button.gd` with custom icon, name, SP cost, level/rank, selection feedback, and `_get_drag_data` payload.
+  - [x] 17.3 Created standalone scene `scenes/ui/hud/skill_window.tscn` and embedded into `scenes/ui/hud.tscn` under `FloatingWindows/SkillWindow`.
+  - [x] 17.4 Implemented 5 category tabs (Earth, Water, Fire, Wind, Special/Physical) with reactive filtering from `GameDatabase.skills` (or fallback).
+  - [x] 17.5 Implemented Lower Detail Inspection Card at (24, 308) displaying skill icon, name, element, target type, SP cost, description, and damage formula.
+  - [x] 17.6 Implemented 8 quick-bind buttons (F1..F8) for click-to-assign hotbar mapping.
+  - [x] 17.7 Wired hotkey toggle ('S') in `scripts/ui/hud/hud_window_manager.gd` and `hud.gd`.
+- [x] 18. Hotbar Integration & Skill Activation:
+  - [x] 18.1 Extended `scripts/ui/hud/hud_hotbar.gd` with `bind_skill`, `get_slot_data`, `can_drop_on_slot`, and `drop_on_slot`.
+  - [x] 18.2 Extended `scripts/ui/hud.gd` with `use_skill(skill_id)`: validates player SP, deducts SP on success, synchronizes `character_status_ctrl` and player status dock, sends chat message, and displays center toast notifications with sound.
+- [x] 19. Headless Automated Testing & Verification:
+  - [x] 19.1 Created comprehensive test suite `tests/test_skill_window_and_hotbar.gd` covering geometry, tabs, filtering, row data, dragging, hotbar binding, SP deduction, and close button interaction.
+  - [x] 19.2 Executed test suite via `godot_console.exe --headless` (76/76 passed, 0 failures, 100%).
+  - [x] 19.3 Executed floating window regression test `tests/test_floating_windows_and_system_settings.gd` (139/139 passed, 0 failures, 100%).
+- [x] 20. Technical Documentation & Global Updates:
+  - [x] 20.1 Created `docs/skill_window_interactive_parity_and_hotbar_binding_spec.md`.
+  - [x] 20.2 Updated global `readme.md`.
+  - [x] 20.3 Sent completion message to caller agent `bb1ca306-20ed-4c6b-b716-8db2b0f6fa52`.
+
+# Audit 2026-10-28 (full headless run of tests/test_*.gd)
+- [x] Loading screen from aLogin.exe decode (`tests/test_loading_screen.gd`, 23/23).
+- [x] `test_friends_window_and_whisper`: shared on-disk state made the list 4 instead of 5; the test now resets it.
+- [x] ChatDock channel-tab offset and whisper input positions: tests aligned with the code (-21 px / 74 / 163).
+- [x] `test_inspect_stretch`: aligned with the real stretch settings; no longer hangs.
+- [x] Editor tests run through `tests/run_node_test.gd` / `tools/run_all_tests.sh` (`test_item_editor`, `test_quest_editor`, `test_skill_editor`, `test_audio_editor`, `test_battle_editor`, `test_cutscene_editor`, `test_all_world_tools`, `test_battle_view_scene`) do not extend SceneTree, so they cannot run with `--script`; they need a scene-based runner.
+- [ ] Compare aLogin screens (server select, login, character select/create) against original screenshots and rebuild from decoded DFM/skin data.
+- [x] Character select layout fixes (title banner, stray arrows, sprite and EXP bar placement; `tests/test_character_select_layout.gd`, 19/19).
+- [x] Server select and login screens reviewed: layout matches their skins (no defects found by screenshot).
+- [ ] Optional: 'Loading' state on the character select cards (seen in the reference video before character data arrives).
+- [x] Character create wizard rebuilt on the matching skins (`tests/test_character_create_layout.gd`, 30/30).
+- [x] Admin tools first pass: Battle Studio toolbar wraps (was cut off at 1280 px). Still open there: Skill Studio side columns scroll horizontally.
+- [ ] LAST (requested by the user): admin tools (World Editor, Map/NPC/Item/Quest/Skill/Battle/Cutscene/Audio/Tent studios): fix UI, make their tests runnable (scene-based runner) and verify.
+- [x] HUD windows realigned to their baked skins: System, Friends, Skill (new categories), Shop (Buy/Trade toggles), Combat settings (light frame). See README "HUD Windows Realigned".
+- [ ] Apply System window options/colours: chat channel colours into the chat renderer (two chat implementations: `hud_chat.gd` and `chat_dock.gd`), PVP/PK and trading flags into gameplay.
+- [ ] Quest ("mission") and Team ("group") windows: verify against their skins (text slightly clipped in the quest window).
+- [ ] Skill window: no proficiency / weapon requirement data yet (shows "-" / "Any"); learned-skills model instead of listing all element skills.
+- [ ] Character select: "Loading" state while character data arrives (seen in the reference video).
+- [x] Close buttons over the baked x sphere, cursor mapping, chat colours, compound window, sinking cutscene visuals, battle sprites/buttons/gauge, encounters and battle-to-world flow (see README).
+- [ ] Battle: compare with the real game's battle screen (needs screenshots from the user: the real client login cannot be driven by the assistant); real battle background by `bg_id`, 30 s round timer per the protocol notes, enemy grid positions from the server.
+- [ ] Level-up / EXP curve and HP/SP restore rules are approximations; verify against the real game.
+- [ ] Items: audit inventory slots/tooltips/equipment against the real client (not started).
+- [ ] "UI missing elements" reported by the user: list which screens are incomplete.
+- [ ] Cursors: verify the inferred roles (cursor9 mushroom, cursor12-14 hammers, cursor2 alt pointer) against the real game.
+- [x] Top-right action bar added after comparing with the running real client.
+- [ ] Real client comparison still open: ask the user to open the inventory, a shop, the skill window and a battle in the real game, then capture each with `PrintWindow` (see README) and compare layouts.
+- [ ] Item use: consumables only decrement the stack and log "Used X." (no HP/SP restore); the status fields of Item.dat for consumables are not decoded yet (HUDInventory.use_or_equip_inventory_item).
+
+## Real-client fidelity (2026-10-28)
+- [ ] Decode the remaining ~85 dispatcher handlers one by one (`docs/re/dispatch_table.md`), implement them in `network_manager.gd`.
+- [ ] Quest, shop, status, battle and chat windows: capture the real ones with `tools/game_input.ps1` and compare (battle needs a fight started by the user).
+- [ ] Compound window: big cauldron picture in the base slot, items listed in the grid.
+- [ ] Item window: header arrows and shoe arrows switch pages / equipment views (behaviour unknown; observe in the real client).
+- [ ] Group window Instance tab content, pet Battle/Dismiss semantics against the real client.
+- [ ] Verify the remaining code->text mappings of action 0x01 sub codes (6, 7, 0x0C).
+- [ ] Battle: pet command step in the ring, attack camera zoom/step-forward animation, hover info card, forest backdrop by map, victory screen capture.
+- [ ] Decode battle packets (`32 01` command, `33 01` stat updates, `32 xx` round events) and compare with `battle_manager.gd`.
+- [ ] Quest 'Hill Pepper' (Doll/Emilie) as a real quest chain in Godot: quiz choices (tens 2 / units 9), hand-in, Radio Set reward; scripts/tests/test_dialogue_parity_and_layout.gd (not in the suite) has stale Ocean Star expectations.
+
+## Global Gemini MCP Server Setup for Claude
+- [x] 1. Extract and validate Google API keys from `C:\Users\muham\Desktop\google api.txt`
+- [x] 2. Update `gemini_mcp.py` dependency pinning (`mcp>=1.2,<2`) and set active default model (`gemini-3.1-flash-lite`)
+- [x] 3. Deploy script to permanent tools location `C:\Users\muham\tools\gemini-mcp\gemini_mcp.py` and sync with Desktop
+- [x] 4. Register Gemini MCP in Claude Code globally (`user` scope) with multi-account environment variables
+- [x] 5. Configure Claude Desktop (`%APPDATA%\Claude\claude_desktop_config.json`) with identical MCP configuration
+- [x] 6. Verify server health, tools connectivity (`list_accounts`, `ask_gemini`, `list_models`) via Claude CLI
+- [x] 7. Create technical documentation in `docs/gemini_mcp_setup.md` and report results
+
+## Real Game vs Godot Client Fidelity & Discrepancy Audit (Tek Tek Eksik Analizi)
+- [x] 1. Audit HUD, Navigation & Screen Overlays: Compare status dock, top action bar (10 icons), system ticker, chat dock behavior (transparent floating log vs focus frame, face icons, drag resize, channel buttons), auto-heal '+' button, and minimap placement against real game captures.
+- [x] 2. Audit VCL Floating Windows: Compare Item/Inventory (header arrows, paperdoll shoes toggle, stats, potential), Compound (cauldron graphic, 5 ingredients layout), Skill (tabs, learned skills filter, weapon/proficiency reqs), Group/Team (top pet roster vs bottom party teammates), Social/Friends (mail/delete/pager/tabs), System (toggles hookup), and Shop (5 fixed rows, 10 purchase slots, no spinbox) against real game.
+- [x] 3. Audit Battle System: Compare combat presentation (fullscreen environmental backdrops vs frozen map crop, free standing vs grid, thin red HP line under names, 20s center countdown number, 7-icon radial command ring, 2-phase player+pet turn order, attack camera zoom & lunges, enemy collapse) with `battle.md` and real captures.
+- [x] 4. Audit Dialogue, Cutscene & Quest System: Compare NPC dialogue positioning (top centered for NPC with portrait/hand vs bottom for player with full body standee), choices layout, quest completion reward banners, notebook/monster book/star book, and NPC interaction distance gating.
+- [x] 5. Audit Network Protocol & Dispatch Table: Compare Godot network handlers with the ~91 Delphi dispatch table actions (`dispatch_table.md`), live packet captures (battle `32 01`, stat sync `33 01`, keepalive `ba 09`), and missing server packet handling.
+- [x] 6. Audit Core Gameplay Mechanics & Data: Compare Formula.dat multipliers with current hardcoded combat formulas, consumable item status recovery in Item.dat, and leveling/stat allocation rules.
+- [x] 7. Compile Technical Documentation & Detailed Discrepancy Matrix: Write comprehensive itemized gap analysis in `docs/real_game_fidelity_gap_analysis.md`, update root `README.md`, and report all findings.
+
+## Chat Background Cleanup & Input Bar Image Removal (Chat Arkaplan Temizliği)
+- [x] 1. Remove Chat Input Bar Background Image: Removed `chat_input_bg.png` from `ChatInputBackground` to prevent baked screenshot text ("channel") and ghost button graphics from showing under live Godot controls.
+- [x] 2. Procedural Gold Frame & Dark Input Styling: Styled `ChatInput` with clean dark slate background (`Color(0.04, 0.06, 0.09, 0.90)`) and authentic 1px gold border (`Color(0.70, 0.58, 0.35, 0.85)`).
+- [x] 3. Authentic Transparent Overworld Floating: Kept `ChatHistoryPanel` transparent in normal overworld exploration matching real WLO client behavior; subtle highlight frame only while typing.
+- [x] 4. Sender Character Avatar Icons Preserved: Maintained authentic role avatar portraits (`avatar_role_N_0.png`) on player chat lines while keeping system messages clean.
+- [x] 5. Headless Automated Verification: Tested `test_hud_chat_and_status_features.gd` (100% OK, 0 errors), `test_hud_dock_system.gd`, and combat test suites.
+- [x] 6. Documentation & Readme Update: Updated `docs/chat_visual_cleanup_specification.md` and root `README.md`.
+
+
+

@@ -1,0 +1,687 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/tools/skill_editor.gd" id="1_editor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.05, 0.07, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.08, 0.11, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.3, 0.42, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_preview"]
+bg_color = Color(0.03, 0.04, 0.07, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.45, 0.65, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="SkillEditor" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_editor")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TopBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxTop" type="HFlowContainer" parent="MainVBox/TopBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+
+[node name="TitleLabel" type="Label" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.85, 1, 1)
+text = "SKILL & COMBAT VFX STUDIO"
+
+[node name="VSeparator1" type="VSeparator" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+
+[node name="LblPreset" type="Label" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+text = "Preset:"
+
+[node name="PresetOption" type="OptionButton" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+
+[node name="BtnLoadPreset" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load"
+
+[node name="BtnNewSkill" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New"
+
+[node name="BtnLookupDB" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "DB Lookup"
+
+[node name="VSeparator2" type="VSeparator" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+
+[node name="BtnSaveJson" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save JSON"
+
+[node name="BtnLoadJson" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load JSON"
+
+[node name="BtnExportScript" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.3, 1)
+text = "Export Script"
+
+[node name="SkillBrowserBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxBrowser" type="HFlowContainer" parent="MainVBox/SkillBrowserBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+
+[node name="LblBrowse" type="Label" parent="MainVBox/SkillBrowserBar/HBoxBrowser"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.8, 1, 1)
+text = "Browse Database:"
+
+[node name="SkillSearchEdit" type="LineEdit" parent="MainVBox/SkillBrowserBar/HBoxBrowser"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search 953 skills by name, ID, element, or type..."
+clear_button_enabled = true
+
+[node name="SkillBrowserOption" type="OptionButton" parent="MainVBox/SkillBrowserBar/HBoxBrowser"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnSelectSkill" type="Button" parent="MainVBox/SkillBrowserBar/HBoxBrowser"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+text = "Load Skill"
+
+[node name="LblSkillCount" type="Label" parent="MainVBox/SkillBrowserBar/HBoxBrowser"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.85, 1, 1)
+text = "953 Skills"
+horizontal_alignment = 2
+
+[node name="ContentHBox" type="HSplitContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+split_offset = 260
+
+[node name="LeftPanel" type="PanelContainer" parent="MainVBox/ContentHBox"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="LeftScroll" type="ScrollContainer" parent="MainVBox/ContentHBox/LeftPanel"]
+layout_mode = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="LeftVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderIdentity" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.75, 1, 1)
+text = "SKILL IDENTITY & COSTS"
+
+[node name="GridIdentity" type="GridContainer" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+layout_mode = 2
+columns = 2
+
+[node name="LblId" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "Skill ID:"
+
+[node name="SkillIdSpin" type="SpinBox" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 15039.0
+
+[node name="LblName" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "Name:"
+
+[node name="SkillNameEdit" type="LineEdit" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Wine Flame"
+
+[node name="LblDesc" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "Desc:"
+
+[node name="SkillDescEdit" type="TextEdit" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Spits burning wine flame causing fiery physical damage."
+
+[node name="LblElem" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "Element:"
+
+[node name="ElementOption" type="OptionButton" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblType" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "Type:"
+
+[node name="SkillTypeOption" type="OptionButton" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblScope" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "Scope:"
+
+[node name="TargetScopeOption" type="OptionButton" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblSp" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "SP Cost:"
+
+[node name="SpCostSpin" type="SpinBox" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 20.0
+
+[node name="LblHp" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "HP Cost:"
+
+[node name="HpCostSpin" type="SpinBox" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+
+[node name="LblCd" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "Cooldown:"
+
+[node name="CooldownSpin" type="SpinBox" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99.0
+
+[node name="LblReqLvl" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+layout_mode = 2
+text = "Req Level:"
+
+[node name="ReqLevelSpin" type="SpinBox" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 200.0
+value = 1.0
+
+[node name="HSep1" type="HSeparator" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+layout_mode = 2
+
+[node name="HeaderCombat" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.75, 1, 1)
+text = "COMBAT MECHANICS"
+
+[node name="GridCombat" type="GridContainer" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+layout_mode = 2
+columns = 2
+
+[node name="LblBaseDmg" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridCombat"]
+layout_mode = 2
+text = "Base Dmg:"
+
+[node name="BaseDamageSpin" type="SpinBox" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridCombat"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -99999.0
+max_value = 99999.0
+value = 85.0
+
+[node name="LblMult1" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridCombat"]
+layout_mode = 2
+text = "Multiplier 1:"
+
+[node name="Multiplier1Spin" type="SpinBox" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridCombat"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.05
+value = 1.2
+
+[node name="LblMult2" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridCombat"]
+layout_mode = 2
+text = "Multiplier 2:"
+
+[node name="Multiplier2Spin" type="SpinBox" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridCombat"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.05
+
+[node name="RightSplit" type="HSplitContainer" parent="MainVBox/ContentHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+split_offset = 270
+
+[node name="CenterPanel" type="PanelContainer" parent="MainVBox/ContentHBox/RightSplit"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="CenterScroll" type="ScrollContainer" parent="MainVBox/ContentHBox/RightSplit/CenterPanel"]
+layout_mode = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="CenterVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="HeaderFormula" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.25, 1)
+text = "FORMULA SIMULATOR & WHEEL"
+
+[node name="GridSim" type="GridContainer" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox"]
+layout_mode = 2
+columns = 2
+
+[node name="LblSimAtk" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+layout_mode = 2
+text = "Attacker ATK:"
+
+[node name="SimAtkSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 100.0
+
+[node name="LblSimMatk" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+layout_mode = 2
+text = "Attacker MATK:"
+
+[node name="SimMatkSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 80.0
+
+[node name="LblSimAtkElem" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+layout_mode = 2
+text = "Attacker Elem:"
+
+[node name="SimAtkElemOption" type="OptionButton" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblSimDef" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+layout_mode = 2
+text = "Target DEF:"
+
+[node name="SimDefSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 20.0
+
+[node name="LblSimMdef" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+layout_mode = 2
+text = "Target MDEF:"
+
+[node name="SimMdefSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 20.0
+
+[node name="LblSimDefElem" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+layout_mode = 2
+text = "Target Elem:"
+
+[node name="SimDefElemOption" type="OptionButton" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/GridSim"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxSimButtons" type="HBoxContainer" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnSimAdvantage" type="Button" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/HBoxSimButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.3, 0.9, 0.4, 1)
+text = "+25% Win"
+
+[node name="BtnSimDisadvantage" type="Button" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/HBoxSimButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+text = "-25% Loss"
+
+[node name="BtnSimNeutral" type="Button" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/HBoxSimButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0% Neutral"
+
+[node name="BtnSimulate" type="Button" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+text = "Calculate Damage"
+
+[node name="PanelResult" type="PanelContainer" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxResult" type="VBoxContainer" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/PanelResult"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblRawDamage" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/PanelResult/VBoxResult"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Raw Damage: 185"
+
+[node name="LblElemMod" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/PanelResult/VBoxResult"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Element Mod: +25% (Counter Win)"
+
+[node name="LblFinalDamage" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/PanelResult/VBoxResult"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.2, 1)
+theme_override_font_sizes/font_size = 18
+text = "DAMAGE: 231"
+
+[node name="LblBreakdownHeader" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox"]
+layout_mode = 2
+text = "Formula Breakdown:"
+
+[node name="TxtFormulaBreakdown" type="TextEdit" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+editable = false
+
+[node name="RightPanel" type="PanelContainer" parent="MainVBox/ContentHBox/RightSplit"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="RightScroll" type="ScrollContainer" parent="MainVBox/ContentHBox/RightSplit/RightPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="RightVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="HeaderVfx" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.4, 1, 1)
+text = "MOTION TIMELINE & VFX BINDING"
+
+[node name="GridMotion" type="GridContainer" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+columns = 2
+
+[node name="LblMotionId" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+layout_mode = 2
+text = "MBTM Motion:"
+
+[node name="MbtmMotionSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 60010.0
+
+[node name="LblMotionPreset" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+layout_mode = 2
+text = "Preset Motion:"
+
+[node name="MbtmPresetOption" type="OptionButton" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblCastSfx" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+layout_mode = 2
+text = "Cast SFX:"
+
+[node name="CastSfxEdit" type="LineEdit" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wav9911.wav"
+
+[node name="LblHitSfx" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+layout_mode = 2
+text = "Hit SFX:"
+
+[node name="HitSfxEdit" type="LineEdit" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "wav9912.wav"
+
+[node name="LblVfxAnim" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+layout_mode = 2
+text = "VFX Anim ID:"
+
+[node name="VfxAnimSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 60010.0
+
+[node name="LblVfxStyle" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+layout_mode = 2
+text = "VFX Style:"
+
+[node name="VfxStyleOption" type="OptionButton" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/GridMotion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PreviewBox" type="PanelContainer" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox"]
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_preview")
+
+[node name="VfxCanvas" type="Control" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/PreviewBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxTimeline" type="HFlowContainer" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="BtnPlayPause" type="Button" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/HBoxTimeline"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play"
+
+[node name="BtnStepBack" type="Button" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/HBoxTimeline"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<"
+
+[node name="BtnStepForward" type="Button" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/HBoxTimeline"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ">"
+
+[node name="BtnReset" type="Button" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/HBoxTimeline"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset"
+
+[node name="TimelineSlider" type="HSlider" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/HBoxTimeline"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 30.0
+
+[node name="LblFrameInfo" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/HBoxTimeline"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Frame: 0 / 30"
+
+[node name="LblFps" type="Label" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/HBoxTimeline"]
+layout_mode = 2
+text = "FPS:"
+
+[node name="FpsSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll/RightVBox/HBoxTimeline"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 60.0
+value = 15.0
+
+[node name="BottomBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxBottom" type="HFlowContainer" parent="MainVBox/BottomBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+
+[node name="StatusLabel" type="Label" parent="MainVBox/BottomBar/HBoxBottom"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Skill & Combat VFX Studio Ready."
+
+[node name="CodeDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Exported Skill GDScript"
+size = Vector2i(650, 500)
+
+[node name="CodeTextEdit" type="TextEdit" parent="CodeDialog"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(620, 440)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 642.0
+offset_bottom = 451.0
+editable = false

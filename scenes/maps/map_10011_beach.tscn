@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/events/beach_awakening.gd" id="1_beach"]
+[ext_resource type="Script" path="res://scripts/map/map_renderer.gd" id="2_map"]
+[ext_resource type="PackedScene" path="res://scenes/world/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/npc.tscn" id="4_npc"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+
+[node name="Map10011Beach" type="Node2D"]
+script = ExtResource("1_beach")
+shoreline_spawn_pos = Vector2(1040, 2220)
+kelang_spawn_pos = Vector2(1088, 2186)
+ambient_wave_audio_path = NodePath("AmbientWavesAudio")
+beach_bgm_audio_path = NodePath("BeachBGM")
+fade_overlay_path = NodePath("CanvasLayer/FadeOverlay")
+wave_effects_path = NodePath("WaveEffects")
+
+[node name="MapRenderer" type="Node2D" parent="."]
+script = ExtResource("2_map")
+current_map_id = 10011
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1040, 2220)
+zoom = Vector2(1, 1)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+
+[node name="WaveEffects" type="Node2D" parent="."]
+position = Vector2(1040, 2260)
+
+[node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Entities" instance=ExtResource("3_player")]
+world_position = Vector2(1040, 2220)
+is_movement_locked = true
+is_prone = true
+
+[node name="KelangNPC" parent="Entities" instance=ExtResource("4_npc")]
+npc_id = 14062
+npc_name = "Kelang"
+model_jmp = "1131.jmp"
+world_position = Vector2(1088, 2186)
+heading = 3
+dialogue_text = "This is a deserted island. How did you end up here?"
+dialogue_choices = ["I was on a ship...", "Where is this place?"]
+
+[node name="AmbientWavesAudio" type="AudioStreamPlayer" parent="."]
+bus = &"Master"
+
+[node name="BeachBGM" type="AudioStreamPlayer" parent="."]
+bus = &"Master"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("5_hud")]
+
+[node name="FadeOverlay" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

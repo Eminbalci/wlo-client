@@ -1,0 +1,541 @@
+[gd_scene load_steps=32 format=3 uid="uid://b1c2d3e4f5a6b"]
+
+[ext_resource type="Script" path="res://scripts/ui/auth/character_select.gd" id="1_char_select"]
+[ext_resource type="Texture2D" path="res://assets/menu/Skins/white/Form_SelectRole_Empty_R.jpg" id="2_empty_bg"]
+[ext_resource type="Texture2D" path="res://assets/menu/Skins/white/Form_SelectRole_Info_R.jpg" id="3_info_bg"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_leave_normal.png" id="4_leave_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_leave_hover.png" id="5_leave_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_leave_pressed.png" id="6_leave_press"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_login_small_normal.png" id="7_login_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_login_small_hover.png" id="8_login_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_login_small_pressed.png" id="9_login_press"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_del_char_normal.png" id="10_del_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_del_char_hover.png" id="11_del_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_del_char_pressed.png" id="12_del_press"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_create_char_normal.png" id="13_create_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_create_char_hover.png" id="14_create_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_create_char_pressed.png" id="15_create_press"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_left_normal.png" id="16_arr_l_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_left_hover.png" id="17_arr_l_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_left_pressed.png" id="18_arr_l_press"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_right_normal.png" id="19_arr_r_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_right_hover.png" id="20_arr_r_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_right_pressed.png" id="21_arr_r_press"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_slot_0_normal.png" id="22_slot0_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_slot_0_active.png" id="23_slot0_act"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_slot_1_normal.png" id="24_slot1_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_slot_1_active.png" id="25_slot1_act"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_slot_2_normal.png" id="26_slot2_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_slot_2_active.png" id="27_slot2_act"]
+[ext_resource type="Texture2D" path="res://assets/pic/LogPic1.jpg" id="28_bg"]
+[ext_resource type="Texture2D" path="res://assets/auth/title_select_role.png" id="99_title"]
+[ext_resource type="Texture2D" path="res://assets/hud/avatar_role_6_0.png" id="29_bust_dan"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_element_2.png" id="30_elem_water"]
+[ext_resource type="Texture2D" path="res://assets/auth/standees/standee_role_6.png" id="31_standee_dan"]
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_char_select")
+
+[node name="BackgroundRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("28_bg")
+expand_mode = 1
+
+[node name="TitleBanner" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 25.0
+offset_right = 200.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_constants/separation = 4
+
+[node name="TitleLabel" type="Label" parent="TitleBanner"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.25, 0.45, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "Character Select"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="TitleBanner"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.25, 0.45, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "Choose a Character"
+horizontal_alignment = 1
+
+[node name="TitleImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.5
+offset_top = 40.0
+offset_right = 112.5
+offset_bottom = 89.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("99_title")
+
+[node name="CardSlot0" type="Control" parent="."]
+custom_minimum_size = Vector2(337, 352)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -349.0
+offset_top = -196.0
+offset_right = -12.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardBg" type="TextureRect" parent="CardSlot0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_info_bg")
+expand_mode = 1
+
+[node name="SlotTabsBar" type="Control" parent="CardSlot0"]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_top = -24.0
+offset_right = 337.0
+offset_bottom = 0.0
+
+[node name="BtnSlot0" type="TextureButton" parent="CardSlot0/SlotTabsBar"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 0.0
+offset_right = 206.0
+offset_bottom = 24.0
+texture_normal = ExtResource("23_slot0_act")
+
+[node name="BtnCreateChar" type="TextureButton" parent="CardSlot0"]
+visible = false
+layout_mode = 0
+offset_left = 140.0
+offset_top = 310.0
+offset_right = 196.0
+offset_bottom = 330.0
+texture_normal = ExtResource("13_create_norm")
+texture_pressed = ExtResource("15_create_press")
+texture_hover = ExtResource("14_create_hov")
+
+[node name="InfoOverlay" type="Control" parent="CardSlot0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BustRect" type="TextureRect" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 20.0
+offset_right = 118.0
+offset_bottom = 92.0
+texture = ExtResource("29_bust_dan")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ElementIcon" type="TextureRect" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 20.0
+offset_right = 255.0
+offset_bottom = 50.0
+texture = ExtResource("30_elem_water")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ElementLabel" type="Label" parent="CardSlot0/InfoOverlay"]
+visible = false
+layout_mode = 0
+offset_left = 225.0
+offset_top = 22.0
+offset_right = 280.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 12
+text = "Water"
+
+[node name="NameLabel" type="Label" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 97.0
+offset_right = 160.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "Daniel"
+vertical_alignment = 1
+clip_text = true
+
+[node name="LevelLabel" type="Label" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 124.0
+offset_right = 160.0
+offset_bottom = 144.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "1"
+vertical_alignment = 1
+
+[node name="HpLabel" type="Label" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 66.0
+offset_right = 310.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "150 / 150"
+
+[node name="SpLabel" type="Label" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 84.0
+offset_right = 310.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "100 / 100"
+
+[node name="ExpBar" type="ProgressBar" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 104.0
+offset_right = 250.0
+offset_bottom = 112.0
+show_percentage = false
+
+[node name="ExpLabel" type="Label" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 100.0
+offset_right = 310.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "0%"
+
+[node name="GoldLabel" type="Label" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 122.0
+offset_right = 310.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="SpritePreview" type="TextureRect" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 195.0
+offset_right = 232.0
+offset_bottom = 323.0
+texture = ExtResource("31_standee_dan")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnArrowLeft" type="TextureButton" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 245.0
+offset_right = 101.0
+offset_bottom = 264.0
+texture_normal = ExtResource("16_arr_l_norm")
+texture_pressed = ExtResource("18_arr_l_press")
+texture_hover = ExtResource("17_arr_l_hov")
+
+[node name="BtnArrowRight" type="TextureButton" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 245.0
+offset_right = 259.0
+offset_bottom = 264.0
+texture_normal = ExtResource("19_arr_r_norm")
+texture_pressed = ExtResource("21_arr_r_press")
+texture_hover = ExtResource("20_arr_r_hov")
+
+[node name="BtnLogin" type="TextureButton" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 310.0
+offset_right = 136.0
+offset_bottom = 330.0
+texture_normal = ExtResource("7_login_norm")
+texture_pressed = ExtResource("9_login_press")
+texture_hover = ExtResource("8_login_hov")
+
+[node name="BtnDelChar" type="TextureButton" parent="CardSlot0/InfoOverlay"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 310.0
+offset_right = 256.0
+offset_bottom = 330.0
+texture_normal = ExtResource("10_del_norm")
+texture_pressed = ExtResource("12_del_press")
+texture_hover = ExtResource("11_del_hov")
+
+[node name="CardSlot1" type="Control" parent="."]
+custom_minimum_size = Vector2(337, 352)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -196.0
+offset_right = 349.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardBg" type="TextureRect" parent="CardSlot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_empty_bg")
+expand_mode = 1
+
+[node name="SlotTabsBar" type="Control" parent="CardSlot1"]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_top = -24.0
+offset_right = 337.0
+offset_bottom = 0.0
+
+[node name="BtnSlot1" type="TextureButton" parent="CardSlot1/SlotTabsBar"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 0.0
+offset_right = 206.0
+offset_bottom = 24.0
+texture_normal = ExtResource("24_slot1_norm")
+
+[node name="BtnCreateChar" type="TextureButton" parent="CardSlot1"]
+visible = true
+layout_mode = 0
+offset_left = 140.0
+offset_top = 310.0
+offset_right = 196.0
+offset_bottom = 330.0
+texture_normal = ExtResource("13_create_norm")
+texture_pressed = ExtResource("15_create_press")
+texture_hover = ExtResource("14_create_hov")
+
+[node name="InfoOverlay" type="Control" parent="CardSlot1"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BustRect" type="TextureRect" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 20.0
+offset_right = 118.0
+offset_bottom = 92.0
+texture = ExtResource("29_bust_dan")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ElementIcon" type="TextureRect" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 20.0
+offset_right = 255.0
+offset_bottom = 50.0
+texture = ExtResource("30_elem_water")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ElementLabel" type="Label" parent="CardSlot1/InfoOverlay"]
+visible = false
+layout_mode = 0
+offset_left = 225.0
+offset_top = 22.0
+offset_right = 280.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 12
+text = "Water"
+
+[node name="NameLabel" type="Label" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 97.0
+offset_right = 160.0
+offset_bottom = 117.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "Daniel"
+vertical_alignment = 1
+clip_text = true
+
+[node name="LevelLabel" type="Label" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 124.0
+offset_right = 160.0
+offset_bottom = 144.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "1"
+vertical_alignment = 1
+
+[node name="HpLabel" type="Label" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 66.0
+offset_right = 310.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "150 / 150"
+
+[node name="SpLabel" type="Label" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 84.0
+offset_right = 310.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "100 / 100"
+
+[node name="ExpBar" type="ProgressBar" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 104.0
+offset_right = 250.0
+offset_bottom = 112.0
+show_percentage = false
+
+[node name="ExpLabel" type="Label" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 100.0
+offset_right = 310.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "0%"
+
+[node name="GoldLabel" type="Label" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 122.0
+offset_right = 310.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(0.1, 0.2, 0.45, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="SpritePreview" type="TextureRect" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 195.0
+offset_right = 232.0
+offset_bottom = 323.0
+texture = ExtResource("31_standee_dan")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnArrowLeft" type="TextureButton" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 245.0
+offset_right = 101.0
+offset_bottom = 264.0
+texture_normal = ExtResource("16_arr_l_norm")
+texture_pressed = ExtResource("18_arr_l_press")
+texture_hover = ExtResource("17_arr_l_hov")
+
+[node name="BtnArrowRight" type="TextureButton" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 245.0
+offset_right = 259.0
+offset_bottom = 264.0
+texture_normal = ExtResource("19_arr_r_norm")
+texture_pressed = ExtResource("21_arr_r_press")
+texture_hover = ExtResource("20_arr_r_hov")
+
+[node name="BtnLogin" type="TextureButton" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 310.0
+offset_right = 136.0
+offset_bottom = 330.0
+texture_normal = ExtResource("7_login_norm")
+texture_pressed = ExtResource("9_login_press")
+texture_hover = ExtResource("8_login_hov")
+
+[node name="BtnDelChar" type="TextureButton" parent="CardSlot1/InfoOverlay"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 310.0
+offset_right = 256.0
+offset_bottom = 330.0
+texture_normal = ExtResource("10_del_norm")
+texture_pressed = ExtResource("12_del_press")
+texture_hover = ExtResource("11_del_hov")
+
+[node name="BtnBack" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = 172.0
+offset_right = 28.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_leave_norm")
+texture_pressed = ExtResource("6_leave_press")
+texture_hover = ExtResource("5_leave_hov")

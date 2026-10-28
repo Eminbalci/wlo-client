@@ -1,0 +1,314 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud/chat_dock.gd" id="1_chat_dock"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chat_bg"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.03, 0.04, 0.06, 0.72)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.72, 0.58, 0.32, 0.85)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_channel_norm"]
+bg_color = Color(0.04, 0.09, 0.06, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.72, 0.28, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_channel_press"]
+bg_color = Color(0.02, 0.05, 0.03, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.14, 0.55, 0.22, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_channel_hover"]
+bg_color = Color(0.08, 0.16, 0.1, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.9, 0.38, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="ChatDock" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_right = 524.0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_chat_dock")
+
+[node name="ChannelTabs" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = -107.0
+offset_right = 320.0
+offset_bottom = -86.0
+theme_override_constants/separation = 2
+
+[node name="BtnTabAll" type="Button" parent="ChannelTabs"]
+layout_mode = 2
+tooltip_text = "All Channels"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "All"
+
+[node name="BtnTabCurrent" type="Button" parent="ChannelTabs"]
+layout_mode = 2
+tooltip_text = "Current (Local) Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "Current"
+
+[node name="BtnTabTeam" type="Button" parent="ChannelTabs"]
+layout_mode = 2
+tooltip_text = "Team Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "Team"
+
+[node name="BtnTabGuild" type="Button" parent="ChannelTabs"]
+layout_mode = 2
+tooltip_text = "Guild Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "Guild"
+
+[node name="BtnTabWhisper" type="Button" parent="ChannelTabs"]
+layout_mode = 2
+tooltip_text = "Whisper Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "Whisper"
+
+[node name="BtnTabSystem" type="Button" parent="ChannelTabs"]
+layout_mode = 2
+tooltip_text = "System Channel"
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+text = "System"
+
+[node name="ChatHistoryPanel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_top = -86.0
+offset_right = 524.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_chat_bg")
+
+[node name="ChatResizeHandle" type="Control" parent="ChatHistoryPanel"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_default_cursor_shape = 9
+
+[node name="ChatFrameNinePatch" type="NinePatchRect" parent="ChatHistoryPanel"]
+visible = false
+layout_mode = 2
+patch_margin_left = 45
+patch_margin_top = 22
+patch_margin_right = 25
+patch_margin_bottom = 22
+
+[node name="PanelTalkFormLeft" type="TextureRect" parent="ChatHistoryPanel"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="BtnMsgLock" type="TextureButton" parent="ChatHistoryPanel/PanelTalkFormLeft"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 2.0
+offset_right = 32.0
+offset_bottom = 20.0
+tooltip_text = "Lock Chat Scroll"
+
+[node name="BtnChatSwitch" type="TextureButton" parent="ChatHistoryPanel/PanelTalkFormLeft"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 62.0
+offset_right = 42.0
+offset_bottom = 85.0
+tooltip_text = "Chat Box Switch"
+
+[node name="BtnChatSize" type="TextureButton" parent="ChatHistoryPanel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Chat Window Size"
+
+[node name="ChatHistory" type="RichTextLabel" parent="ChatHistoryPanel"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 12
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
+bbcode_enabled = true
+scroll_following = true
+
+[node name="ChatInputBackground" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 524.0
+offset_bottom = 25.0
+mouse_filter = 0
+expand_mode = 1
+
+[node name="BtnMail" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 29.0
+offset_bottom = 23.0
+tooltip_text = "Mailbox [M]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnChannel" type="Button" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 23.0
+tooltip_text = "Chat Channel: Local"
+theme_override_styles/normal = SubResource("StyleBoxFlat_channel_norm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_channel_press")
+theme_override_styles/hover = SubResource("StyleBoxFlat_channel_hover")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_constants/outline_size = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Local"
+
+[node name="WhisperTarget" type="LineEdit" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 74.0
+offset_top = 2.0
+offset_right = 160.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.68, 0.68, 0.64, 0.65)
+placeholder_text = "Target"
+
+[node name="ChatInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 2.0
+offset_right = 494.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.68, 0.6, 0.6)
+placeholder_text = "Press Enter to chat..."
+
+[node name="BtnEmote" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 495.0
+offset_top = 1.0
+offset_right = 520.0
+offset_bottom = 24.0
+tooltip_text = "Chat Emotes"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SendButton" type="Button" parent="."]
+visible = false
+layout_mode = 0
+
+[node name="ChannelDropdown" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 30.0
+offset_top = -118.0
+offset_right = 74.0
+offset_bottom = -2.0
+
+[node name="ChannelList" type="VBoxContainer" parent="ChannelDropdown"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="BtnChanGuild" type="Button" parent="ChannelDropdown/ChannelList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Guild"
+
+[node name="BtnChanTeam" type="Button" parent="ChannelDropdown/ChannelList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Team"
+
+[node name="BtnChanWhisper" type="Button" parent="ChannelDropdown/ChannelList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Whisper"
+
+[node name="BtnChanWorld" type="Button" parent="ChannelDropdown/ChannelList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "World"
+
+[node name="BtnChanLocal" type="Button" parent="ChannelDropdown/ChannelList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Local"
+
+[node name="EmotePopup" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 258.0
+offset_top = -75.0
+offset_right = 521.0
+offset_bottom = -4.0
+
+[node name="EmoteBackground" type="TextureRect" parent="EmotePopup"]
+layout_mode = 0
+offset_right = 263.0
+offset_bottom = 69.0
+
+[node name="EmoteCloseBtn" type="Button" parent="EmotePopup"]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 2.0
+offset_right = 260.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 9
+text = "X"
+
+[node name="EmoteGrid" type="GridContainer" parent="EmotePopup"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 238.0
+offset_bottom = 66.0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 11

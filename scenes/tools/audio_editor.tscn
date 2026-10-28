@@ -1,0 +1,605 @@
+[gd_scene load_steps=6 format=3 uid="uid://audio_editor_tool_001"]
+
+[ext_resource type="Script" path="res://scripts/tools/audio_editor.gd" id="1_editor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.05, 0.07, 0.11, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.08, 0.11, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.3, 0.44, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_canvas"]
+bg_color = Color(0.03, 0.05, 0.08, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.28, 0.44, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="AudioEditor" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_editor")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TopToolbar" type="PanelContainer" parent="MainVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxToolbar" type="HFlowContainer" parent="MainVBox/TopToolbar"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 4
+
+[node name="LblTitle" type="Label" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.82, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "AUDIO JUKEBOX & SOUND STUDIO"
+
+[node name="VSep1" type="VSeparator" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="LblPreset" type="Label" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Preset:"
+
+[node name="OptPreset" type="OptionButton" parent="MainVBox/TopToolbar/HBoxToolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 24)
+layout_mode = 2
+
+[node name="BtnApplyPreset" type="Button" parent="MainVBox/TopToolbar/HBoxToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Apply"
+
+[node name="VSep2" type="VSeparator" parent="MainVBox/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="BtnSaveConfig" type="Button" parent="MainVBox/TopToolbar/HBoxToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save Config"
+
+[node name="BtnLoadConfig" type="Button" parent="MainVBox/TopToolbar/HBoxToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Config"
+
+[node name="BtnExportManifest" type="Button" parent="MainVBox/TopToolbar/HBoxToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export Manifest"
+
+[node name="BodySplit" type="HSplitContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 260
+
+[node name="LeftPane" type="PanelContainer" parent="MainVBox/BodySplit"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxLeft" type="VBoxContainer" parent="MainVBox/BodySplit/LeftPane"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblBrowser" type="Label" parent="MainVBox/BodySplit/LeftPane/VBoxLeft"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "SOUND ASSET BROWSER"
+
+[node name="EditSearch" type="LineEdit" parent="MainVBox/BodySplit/LeftPane/VBoxLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Search file or tag..."
+
+[node name="HBoxFilters" type="HFlowContainer" parent="MainVBox/BodySplit/LeftPane/VBoxLeft"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="OptCategory" type="OptionButton" parent="MainVBox/BodySplit/LeftPane/VBoxLeft/HBoxFilters"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EditTagFilter" type="LineEdit" parent="MainVBox/BodySplit/LeftPane/VBoxLeft/HBoxFilters"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Tag filter..."
+
+[node name="ListSounds" type="ItemList" parent="MainVBox/BodySplit/LeftPane/VBoxLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FooterLeft" type="HBoxContainer" parent="MainVBox/BodySplit/LeftPane/VBoxLeft"]
+layout_mode = 2
+
+[node name="LblAssetCount" type="Label" parent="MainVBox/BodySplit/LeftPane/VBoxLeft/FooterLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6, 0.7, 0.8, 1)
+theme_override_font_sizes/font_size = 11
+text = "Showing 0 assets"
+
+[node name="BtnRescan" type="Button" parent="MainVBox/BodySplit/LeftPane/VBoxLeft/FooterLeft"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Rescan"
+
+[node name="RightPane" type="VBoxContainer" parent="MainVBox/BodySplit"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="PlayerSection" type="PanelContainer" parent="MainVBox/BodySplit/RightPane"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxPlayer" type="VBoxContainer" parent="MainVBox/BodySplit/RightPane/PlayerSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="VisualizerCanvas" type="Control" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+
+[node name="NowPlayingBox" type="HBoxContainer" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer"]
+layout_mode = 2
+
+[node name="LblNowPlaying" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/NowPlayingBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Now Playing: None"
+
+[node name="LblTime" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/NowPlayingBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "00:00 / 00:00"
+
+[node name="SliderScrubber" type="HSlider" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.05
+
+[node name="TransportControls" type="HBoxContainer" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BtnPlay" type="Button" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+text = "Play"
+
+[node name="BtnPause" type="Button" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+text = "Pause"
+
+[node name="BtnStop" type="Button" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+text = "Stop"
+
+[node name="ChkLoop" type="CheckBox" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Loop"
+
+[node name="VSepT1" type="VSeparator" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+layout_mode = 2
+
+[node name="LblVol" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Vol:"
+
+[node name="SliderVolume" type="HSlider" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -40.0
+max_value = 6.0
+step = 0.5
+
+[node name="LblVolumeVal" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "+0.0 dB"
+
+[node name="VSepT2" type="VSeparator" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+layout_mode = 2
+
+[node name="LblPitch" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Pitch:"
+
+[node name="SliderPitch" type="HSlider" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 2.0
+step = 0.05
+value = 1.0
+
+[node name="LblPitchVal" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/TransportControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "1.00x"
+
+[node name="LoopControls" type="HBoxContainer" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblLoopStart" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Loop In:"
+
+[node name="SpinLoopStart" type="SpinBox" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+suffix = "s"
+
+[node name="LblLoopEnd" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Loop Out:"
+
+[node name="SpinLoopEnd" type="SpinBox" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+suffix = "s"
+
+[node name="VSepL1" type="VSeparator" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+layout_mode = 2
+
+[node name="LblFadeIn" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Fade In:"
+
+[node name="SpinFadeIn" type="SpinBox" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+suffix = "s"
+
+[node name="LblFadeOut" type="Label" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Fade Out:"
+
+[node name="SpinFadeOut" type="SpinBox" parent="MainVBox/BodySplit/RightPane/PlayerSection/VBoxPlayer/LoopControls"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+suffix = "s"
+
+[node name="TabContainer" type="TabContainer" parent="MainVBox/BodySplit/RightPane"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TabMapBgm" type="ScrollContainer" parent="MainVBox/BodySplit/RightPane/TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxMap" type="VBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabMapBgm"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="MapInputBar" type="HBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabMapBgm/VBoxMap"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblMapId" type="Label" parent="MainVBox/BodySplit/RightPane/TabContainer/TabMapBgm/VBoxMap/MapInputBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Map ID:"
+
+[node name="SpinMapId" type="SpinBox" parent="MainVBox/BodySplit/RightPane/TabContainer/TabMapBgm/VBoxMap/MapInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 99999.0
+value = 10001.0
+
+[node name="EditMapName" type="LineEdit" parent="MainVBox/BodySplit/RightPane/TabContainer/TabMapBgm/VBoxMap/MapInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Scene/Map Name"
+
+[node name="BtnAssignMapBgm" type="Button" parent="MainVBox/BodySplit/RightPane/TabContainer/TabMapBgm/VBoxMap/MapInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Assign BGM"
+
+[node name="BtnRemoveMapBgm" type="Button" parent="MainVBox/BodySplit/RightPane/TabContainer/TabMapBgm/VBoxMap/MapInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Remove"
+
+[node name="TreeMapBindings" type="Tree" parent="MainVBox/BodySplit/RightPane/TabContainer/TabMapBgm/VBoxMap"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+column_titles_visible = true
+
+[node name="TabCombatSkill" type="ScrollContainer" parent="MainVBox/BodySplit/RightPane/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxSkill" type="VBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="SkillInputBar" type="HBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblSkillId" type="Label" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill/SkillInputBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Skill ID:"
+
+[node name="SpinSkillId" type="SpinBox" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill/SkillInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 99999.0
+value = 10001.0
+
+[node name="OptSfxType" type="OptionButton" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill/SkillInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Cast"
+popup/item_0/id = 0
+popup/item_1/text = "Hit"
+popup/item_1/id = 1
+popup/item_2/text = "Channel"
+popup/item_2/id = 2
+
+[node name="BtnAssignSkillSfx" type="Button" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill/SkillInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Assign Skill SFX"
+
+[node name="EventInputBar" type="HBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblEvent" type="Label" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill/EventInputBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Battle Event:"
+
+[node name="OptBattleEvent" type="OptionButton" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill/EventInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 8
+selected = 0
+popup/item_0/text = "battle_start"
+popup/item_0/id = 0
+popup/item_1/text = "cast"
+popup/item_1/id = 1
+popup/item_2/text = "hit"
+popup/item_2/id = 2
+popup/item_3/text = "miss"
+popup/item_3/id = 3
+popup/item_4/text = "critical"
+popup/item_4/id = 4
+popup/item_5/text = "victory"
+popup/item_5/id = 5
+popup/item_6/text = "defeat"
+popup/item_6/id = 6
+popup/item_7/text = "escape"
+popup/item_7/id = 7
+
+[node name="BtnAssignEventSfx" type="Button" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill/EventInputBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Assign Event SFX"
+
+[node name="TreeSkillBindings" type="Tree" parent="MainVBox/BodySplit/RightPane/TabContainer/TabCombatSkill/VBoxSkill"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+column_titles_visible = true
+
+[node name="TabAmbience" type="ScrollContainer" parent="MainVBox/BodySplit/RightPane/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxAmb" type="VBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="AmbienceConfigBar" type="HBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ChkAmbience" type="CheckBox" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbienceConfigBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enable Ambience"
+
+[node name="OptAmbienceTrack" type="OptionButton" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbienceConfigBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblAmbVol" type="Label" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbienceConfigBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Amb Vol:"
+
+[node name="SliderAmbienceVol" type="HSlider" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbienceConfigBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -40.0
+max_value = 6.0
+step = 0.5
+value = -6.0
+
+[node name="LblAmbienceVolVal" type="Label" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbienceConfigBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "-6.0 dB"
+
+[node name="AmbiencePresetsBar" type="HBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblAmbPresets" type="Label" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbiencePresetsBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Atmospheric Presets:"
+
+[node name="BtnAmbOcean" type="Button" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbiencePresetsBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ocean Waves"
+
+[node name="BtnAmbCave" type="Button" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbiencePresetsBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cave Dripping"
+
+[node name="BtnAmbWind" type="Button" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb/AmbiencePresetsBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Wind Howling"
+
+[node name="LblAmbienceDesc" type="Label" parent="MainVBox/BodySplit/RightPane/TabContainer/TabAmbience/VBoxAmb"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "Secondary ambient channel plays in parallel with primary BGM."
+
+[node name="TabLogSummary" type="ScrollContainer" parent="MainVBox/BodySplit/RightPane/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxLog" type="VBoxContainer" parent="MainVBox/BodySplit/RightPane/TabContainer/TabLogSummary"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="LblSummary" type="Label" parent="MainVBox/BodySplit/RightPane/TabContainer/TabLogSummary/VBoxLog"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "Summary info"
+
+[node name="TextLog" type="TextEdit" parent="MainVBox/BodySplit/RightPane/TabContainer/TabLogSummary/VBoxLog"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+editable = false
+wrap_mode = 1

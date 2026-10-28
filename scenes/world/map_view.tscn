@@ -1,0 +1,170 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/map/map_view.gd" id="1_mapview"]
+[ext_resource type="Script" path="res://scripts/map/map_renderer.gd" id="2_map"]
+[ext_resource type="PackedScene" path="res://scenes/world/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/npc.tscn" id="4_npc"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="Script" path="res://scripts/map/portal.gd" id="6_portal"]
+
+[node name="MapView" type="Node2D"]
+script = ExtResource("1_mapview")
+
+[node name="MapRenderer" type="Node2D" parent="."]
+script = ExtResource("2_map")
+current_map_id = 10001
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1042, 1075)
+zoom = Vector2(1, 1)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+
+[node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Entities" instance=ExtResource("3_player")]
+character_name = "Daniel"
+role_id = 6
+world_position = Vector2(1042, 1075)
+
+[node name="CabinPortal" type="Node2D" parent="Entities"]
+position = Vector2(1814, 904)
+script = ExtResource("6_portal")
+portal_id = 1
+portal_name = "Ship Cabin Entrance"
+target_map_id = 10002
+target_coords = Vector2(674, 1067)
+trigger_radius = 56.0
+portal_color = Color(0.2, 0.75, 1, 0.85)
+
+[node name="IslandPortal" type="Node2D" parent="Entities"]
+position = Vector2(1038, 2235)
+script = ExtResource("6_portal")
+portal_id = 2
+portal_name = "Gangway to Island"
+target_map_id = 10003
+target_coords = Vector2(1038, 2235)
+trigger_radius = 56.0
+portal_color = Color(0.3, 0.9, 0.4, 0.85)
+
+[node name="JackNPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 1
+npc_id = 14091
+npc_name = "Jack"
+model_jmp = "1010.jmp"
+world_position = Vector2(117, 1303)
+heading = 3
+dialogue_text = "When the sea wind is blowing, it feels great."
+dialogue_choices = ["The ocean is vast.", "Enjoy the breeze!"]
+
+[node name="RossNPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 2
+npc_id = 14152
+npc_name = "Ross"
+model_jmp = "1207.jmp"
+world_position = Vector2(102, 1312)
+heading = 3
+dialogue_text = "I'm flying, Jack! It's wonderful..."
+dialogue_choices = ["Hold on tight!", "Watch out!"]
+
+[node name="Crew1NPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 3
+npc_id = 14002
+npc_name = "Crew"
+model_jmp = "1037.jmp"
+world_position = Vector2(343, 940)
+heading = 5
+dialogue_text = "The sea is the real hometown for men."
+dialogue_choices = ["Aye aye, sailor!"]
+
+[node name="CrewDeck1NPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 4
+npc_id = 14001
+npc_name = "Crew on Deck"
+model_jmp = "1037.jmp"
+world_position = Vector2(1461, 315)
+heading = 3
+walksteps = [Vector2(1462, 316), Vector2(1982, 601)]
+walkstep_delays = [1.5, 1.5]
+move_speed = 65.0
+dialogue_text = "I enjoy my work."
+dialogue_choices = ["Keep up the good work!"]
+
+[node name="Visitor1NPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 5
+npc_id = 14080
+npc_name = "Visitor"
+model_jmp = "1012.jmp"
+world_position = Vector2(855, 1302)
+heading = 5
+dialogue_text = "I'll bring my dream to you."
+dialogue_choices = ["Have a wonderful journey!"]
+
+[node name="Visitor2NPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 6
+npc_id = 14087
+npc_name = "Visitor"
+model_jmp = "1013.jmp"
+world_position = Vector2(814, 1313)
+heading = 5
+dialogue_text = "I did not expect to be able to travel around the world."
+dialogue_choices = ["It is truly amazing."]
+
+[node name="GirlNPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 7
+npc_id = 14065
+npc_name = "Girl"
+model_jmp = "1009.jmp"
+world_position = Vector2(1013, 902)
+heading = 3
+dialogue_text = "I've been looking forward to this journey. What about Kedi?"
+dialogue_choices = ["Such a cute kitty!", "Where did you find her?"]
+
+[node name="CatNPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 8
+npc_id = 11000
+npc_name = "Persian Cat"
+model_jmp = "1035.jmp"
+world_position = Vector2(1027, 957)
+heading = 3
+walksteps = [Vector2(936, 942), Vector2(1126, 943)]
+walkstep_delays = [3.0, 3.0]
+move_speed = 50.0
+dialogue_text = "Meow~ *purrs softly*"
+dialogue_choices = ["*Pet the cat*", "Give a treat"]
+
+[node name="Crew2NPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 9
+npc_id = 14002
+npc_name = "Crew"
+model_jmp = "1037.jmp"
+world_position = Vector2(1393, 578)
+heading = 3
+dialogue_text = "I enjoy my work."
+dialogue_choices = ["Smooth sailing!"]
+
+[node name="CaptainNPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 10
+npc_id = 14003
+npc_name = "Captain Robinson"
+talk_id = 30124
+model_jmp = "1038.jmp"
+world_position = Vector2(1421, 632)
+heading = 3
+dialogue_text = "Hello, I'm captain here. Welcome to Ocean Star. We are to pass by South Ocean islands."
+dialogue_choices = ["Thank you Captain!", "Where are we heading?"]
+
+[node name="CrewDeck2NPC" parent="Entities" instance=ExtResource("4_npc")]
+click_id = 11
+npc_id = 14001
+npc_name = "Crew on Deck"
+model_jmp = "1037.jmp"
+world_position = Vector2(405, 925)
+heading = 3
+dialogue_text = "I'm sailor here. Please inform us if you are not satisfied with our service."
+dialogue_choices = ["Everything is great!"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("5_hud")]

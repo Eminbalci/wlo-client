@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://b1c2d3e4f5a6"]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue.gd" id="1_dialogue"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_box_bg.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/hud/portraits/default_portrait.png" id="3_portrait"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_arrow_next.png" id="4_arrow"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_btn_ok.png" id="5_ok_n"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_btn_ok_pressed.png" id="6_ok_p"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_btn_ok_hover.png" id="7_ok_h"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_btn_close.png" id="8_cls_n"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_btn_close_hover.png" id="9_cls_h"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_btn_close_pressed.png" id="10_cls_p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frame"]
+bg_color = Color(0.08, 0.1, 0.14, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.35, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="DialogueWindow" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -185.0
+offset_right = -30.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_dialogue")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+patch_margin_left = 45
+patch_margin_top = 38
+patch_margin_right = 45
+patch_margin_bottom = 38
+
+[node name="PortraitFrame" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 20.0
+offset_right = 106.0
+offset_bottom = 146.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_frame")
+
+[node name="PortraitRect" type="TextureRect" parent="PortraitFrame"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 82.0
+offset_bottom = 82.0
+texture = ExtResource("3_portrait")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RoleBadge" type="Label" parent="PortraitFrame"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 92.0
+offset_right = 82.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 10
+text = "NPC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeakerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 18.0
+offset_right = 420.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 14
+text = "Captain"
+vertical_alignment = 1
+
+[node name="TextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 44.0
+offset_right = 455.0
+offset_bottom = 148.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Welcome brave traveler to Wonderland Online!"
+scroll_active = false
+autowrap_mode = 2
+
+[node name="NextIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 115.0
+offset_right = 480.0
+offset_bottom = 145.0
+texture = ExtResource("4_arrow")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ChoicesPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 460.0
+offset_top = 20.0
+offset_right = 718.0
+offset_bottom = 148.0
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="ChoicesPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="ContinueBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 618.0
+offset_top = 115.0
+offset_right = 707.0
+offset_bottom = 145.0
+texture_normal = ExtResource("5_ok_n")
+texture_pressed = ExtResource("6_ok_p")
+texture_hover = ExtResource("7_ok_h")
+
+[node name="CloseBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 14.0
+offset_right = 716.0
+offset_bottom = 38.0
+texture_normal = ExtResource("8_cls_n")
+texture_hover = ExtResource("9_cls_h")
+texture_pressed = ExtResource("10_cls_p")
+ignore_texture_size = true
+stretch_mode = 5

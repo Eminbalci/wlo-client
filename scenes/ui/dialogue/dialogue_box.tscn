@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://wlo_dialogue_box_flex_ui"]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue/dialogue_box.gd" id="1_dlgbox"]
+[ext_resource type="Texture2D" path="res://assets/menu/Skins/white/Form_Talk_2.bmp" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/hud/portraits/default_portrait.png" id="3_portrait"]
+[ext_resource type="Texture2D" path="res://assets/hud/dialogue_arrow_next.png" id="4_arrow"]
+[ext_resource type="Texture2D" path="res://assets/menu/Skins/white/Form_Talk_3.bmp" id="5_choice_bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_portrait"]
+bg_color = Color(0.06, 0.08, 0.12, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.35, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+content_margin_left = 8.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 2.0
+bg_color = Color(0.12, 0.1, 0.08, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.72, 0.35, 0.9)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="DialogueBox" type="Control"]
+visible = false
+custom_minimum_size = Vector2(768, 170)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -190.0
+offset_right = 384.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_dlgbox")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+
+[node name="PortraitFrameLeft" type="Panel" parent="."]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 37.0
+offset_right = 128.0
+offset_bottom = 133.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_portrait")
+
+[node name="PortraitLeft" type="TextureRect" parent="PortraitFrameLeft"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_portrait")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PortraitFrameRight" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 640.0
+offset_top = 37.0
+offset_right = 736.0
+offset_bottom = 133.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_portrait")
+
+[node name="PortraitRight" type="TextureRect" parent="PortraitFrameRight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_portrait")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContentContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 148.0
+offset_top = 18.0
+offset_right = 728.0
+offset_bottom = 152.0
+
+[node name="SpeakerBadge" type="PanelContainer" parent="ContentContainer"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 140.0
+offset_bottom = 24.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="SpeakerLabel" type="Label" parent="ContentContainer/SpeakerBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "Captain Robinson"
+vertical_alignment = 1
+
+[node name="TextLabel" type="RichTextLabel" parent="ContentContainer"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 28.0
+offset_right = 560.0
+offset_bottom = 126.0
+theme_override_colors/default_color = Color(0.96, 0.96, 0.94, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 13
+bbcode_enabled = true
+text = "Welcome aboard the Ocean Star! We will set sail shortly."
+scroll_active = true
+autowrap_mode = 2
+
+[node name="PageLabel" type="Label" parent="ContentContainer"]
+visible = false
+layout_mode = 0
+offset_left = 510.0
+offset_top = 2.0
+offset_right = 565.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 0.8)
+theme_override_font_sizes/font_size = 11
+text = "1 / 1"
+horizontal_alignment = 2
+
+[node name="NextIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 730.0
+offset_top = 120.0
+offset_right = 755.0
+offset_bottom = 151.0
+texture = ExtResource("4_arrow")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ChoicesPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -180.0
+offset_right = 374.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ChoiceBackground" type="TextureRect" parent="ChoicesPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_choice_bg")
+expand_mode = 1
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="ChoicesPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 32.0
+offset_right = -20.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Master"

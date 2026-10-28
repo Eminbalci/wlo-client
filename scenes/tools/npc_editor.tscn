@@ -1,0 +1,749 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/tools/npc_editor.gd" id="1_editor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.05, 0.07, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.08, 0.11, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.3, 0.42, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_preview"]
+bg_color = Color(0.04, 0.05, 0.08, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.5, 0.7, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="NpcEditor" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_editor")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TopBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="TopHBox" type="HFlowContainer" parent="MainVBox/TopBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+
+[node name="Title" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_font_sizes/font_size = 14
+text = "NPC CREATOR & EDITOR"
+
+[node name="VSep1" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="PresetLabel" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Preset:"
+
+[node name="PresetOption" type="OptionButton" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 26)
+layout_mode = 2
+
+[node name="BtnSavePreset" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save Preset"
+
+[node name="BtnLoadPresets" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Presets"
+
+[node name="BtnNewNpc" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New / Reset"
+
+[node name="BodyHBox" type="HSplitContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+split_offset = 360
+
+[node name="LeftScroll" type="ScrollContainer" parent="MainVBox/BodyHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="LeftColumn" type="VBoxContainer" parent="MainVBox/BodyHBox/LeftScroll"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="AppearancePanel" type="PanelContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="AppearanceVBox" type="VBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SectionTitle" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "VISUAL APPEARANCE & SPRITE PREVIEW"
+
+[node name="JmpHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="JmpLabel" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/JmpHBox"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "JMP:"
+
+[node name="ModelJmpOption" type="OptionButton" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/JmpHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ModelJmpEdit" type="LineEdit" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/JmpHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 24)
+layout_mode = 2
+text = "1038.jmp"
+placeholder_text = "1038.jmp"
+
+[node name="JmaHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="JmaLabel" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/JmaHBox"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "JMA:"
+
+[node name="ModelJmaEdit" type="LineEdit" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/JmaHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "001.jma"
+placeholder_text = "001.jma"
+
+[node name="PreviewSplitHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SpriteContainer" type="PanelContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox"]
+custom_minimum_size = Vector2(160, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_preview")
+
+[node name="Center" type="CenterContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/SpriteContainer"]
+layout_mode = 2
+
+[node name="SpritePreviewRect" type="TextureRect" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/SpriteContainer/Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CrosshairOverlay" type="Control" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/SpriteContainer/Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 150)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PortraitContainer" type="PanelContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox"]
+custom_minimum_size = Vector2(140, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_preview")
+
+[node name="PortraitVBox" type="VBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/PortraitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PortraitTitle" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/PortraitContainer/PortraitVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Portrait Bust"
+horizontal_alignment = 1
+
+[node name="PortraitCenter" type="CenterContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/PortraitContainer/PortraitVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitPreviewRect" type="TextureRect" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/PortraitContainer/PortraitVBox/PortraitCenter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TalkImageHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/PortraitContainer/PortraitVBox"]
+layout_mode = 2
+
+[node name="TidLabel" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/PortraitContainer/PortraitVBox/TalkImageHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "TID:"
+
+[node name="TalkImageSpin" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/PortraitContainer/PortraitVBox/TalkImageHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 8025.0
+
+[node name="TalkImageOption" type="OptionButton" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/PreviewSplitHBox/PortraitContainer/PortraitVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AnimControlsHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnTurnLeft" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/AnimControlsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "< Turn"
+
+[node name="HeadingOption" type="OptionButton" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/AnimControlsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnTurnRight" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/AnimControlsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Turn >"
+
+[node name="BtnPlayPause" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/AnimControlsHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Pause"
+
+[node name="StanceHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="StanceLabel" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/StanceHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Stance:"
+
+[node name="StanceOption" type="OptionButton" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/StanceHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnPrevStance" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/StanceHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<"
+
+[node name="BtnNextStance" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/StanceHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ">"
+
+[node name="FrameScrubberHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnPrevFrame" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/FrameScrubberHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "< Frm"
+
+[node name="FrameSlider" type="HSlider" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/FrameScrubberHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 31.0
+
+[node name="BtnNextFrame" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/FrameScrubberHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Frm >"
+
+[node name="AnimOptionsHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CheckCrosshair" type="CheckBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/AnimOptionsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Ground Crosshair"
+
+[node name="SpdLabel" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/AnimOptionsHBox"]
+layout_mode = 2
+text = "Spd:"
+
+[node name="AnimSpeedSpin" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox/AnimOptionsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 0.2
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="FrameInfoLabel" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/AppearancePanel/AppearanceVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 11
+text = "Frame: 0 / 32 | Heading: SOUTH"
+horizontal_alignment = 1
+
+[node name="WaypointsPanel" type="PanelContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="WaypointsVBox" type="VBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="WaypointsTitle" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "PATROL WAYPOINTS (WALKSTEPS)"
+
+[node name="WaypointsList" type="ItemList" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WaypointInputsHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LabelX" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointInputsHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "X:"
+
+[node name="WaypointXSpin" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointInputsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 1720.0
+
+[node name="LabelY" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointInputsHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Y:"
+
+[node name="WaypointYSpin" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointInputsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 906.0
+
+[node name="LabelWait" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointInputsHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Wait:"
+
+[node name="WaypointDelaySpin" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointInputsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 60.0
+step = 0.5
+value = 2.0
+
+[node name="WaypointButtonsHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnAddWaypoint" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+ Add Pt"
+
+[node name="BtnAddSpawnPos" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+ Spawn"
+
+[node name="BtnRemoveWaypoint" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "- Remove"
+
+[node name="BtnClearWaypoints" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/WaypointsPanel/WaypointsVBox/WaypointButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear"
+
+[node name="RightColumn" type="VBoxContainer" parent="MainVBox/BodyHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="TabContainer" type="TabContainer" parent="MainVBox/BodyHBox/RightColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="ParametersTab" type="ScrollContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+metadata/_tab_index = 0
+
+[node name="ParamsMargin" type="MarginContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ParamsGrid" type="GridContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="NpcIdLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+text = "NPC ID:"
+
+[node name="NpcIdHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="NpcIdSpin" type="SpinBox" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/NpcIdHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 99999.0
+value = 14003.0
+
+[node name="BtnLookupNpcDb" type="Button" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/NpcIdHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lookup Npc.dat"
+
+[node name="NpcNameLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+text = "NPC Name:"
+
+[node name="NpcNameEdit" type="LineEdit" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Captain Robinson"
+placeholder_text = "Enter NPC name..."
+
+[node name="MapIdLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+text = "Map / Scene ID:"
+
+[node name="MapIdHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="MapIdSpin" type="SpinBox" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/MapIdHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 99999.0
+value = 10001.0
+
+[node name="MapQuickOption" type="OptionButton" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/MapIdHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpawnPosLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+text = "Spawn Pos (X, Y):"
+
+[node name="SpawnPosHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="SpawnXLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/SpawnPosHBox"]
+layout_mode = 2
+text = "X:"
+
+[node name="SpawnXSpin" type="SpinBox" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/SpawnPosHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 1720.0
+
+[node name="SpawnYLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/SpawnPosHBox"]
+layout_mode = 2
+text = "Y:"
+
+[node name="SpawnYSpin" type="SpinBox" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/SpawnPosHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 9999.0
+value = 906.0
+
+[node name="MoveSpeedLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+text = "Move Speed:"
+
+[node name="MoveSpeedSpin" type="SpinBox" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 500.0
+step = 5.0
+value = 60.0
+
+[node name="TalkIdLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+text = "Talk ID:"
+
+[node name="TalkIdHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="TalkIdSpin" type="SpinBox" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/TalkIdHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 10001.0
+
+[node name="BtnLookupTalkDb" type="Button" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ParametersTab/ParamsMargin/ParamsGrid/TalkIdHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lookup Talk.dat"
+
+[node name="DialogueTab" type="ScrollContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer"]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+metadata/_tab_index = 1
+
+[node name="DialogueMargin" type="MarginContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DialogueVBox" type="VBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="DialogueLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox"]
+layout_mode = 2
+text = "Dialogue Text / Greeting:"
+
+[node name="DialogueTextEdit" type="TextEdit" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+text = "Welcome aboard the ship! I am the Captain. We are setting sail for North Island soon. Make sure you are prepared!"
+wrap_mode = 1
+
+[node name="ChoicesLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox"]
+layout_mode = 2
+text = "Branching Dialogue Choices:"
+
+[node name="ChoicesList" type="ItemList" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChoicesInputHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ChoiceInput" type="LineEdit" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox/ChoicesInputHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter new branching choice option..."
+
+[node name="BtnAddChoice" type="Button" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox/ChoicesInputHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+ Add"
+
+[node name="BtnRemoveChoice" type="Button" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox/ChoicesInputHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "- Remove"
+
+[node name="BtnClearChoices" type="Button" parent="MainVBox/BodyHBox/RightColumn/TabContainer/DialogueTab/DialogueMargin/DialogueVBox/ChoicesInputHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear"
+
+[node name="ExportTab" type="ScrollContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer"]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+metadata/_tab_index = 2
+
+[node name="ExportMargin" type="MarginContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ExportVBox" type="VBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="ExportRowHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ExportPathLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox/ExportRowHBox"]
+layout_mode = 2
+text = "Target .tscn:"
+
+[node name="ExportPathEdit" type="LineEdit" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox/ExportRowHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "res://scenes/world/npc_captain_robinson.tscn"
+
+[node name="BtnExportScene" type="Button" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox/ExportRowHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export .tscn Scene"
+
+[node name="ActionsHBox" type="HBoxContainer" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BtnTestEntity" type="Button" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox/ActionsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Instantiate & Verify NpcEntity"
+
+[node name="BtnCopySnippet" type="Button" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox/ActionsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Copy GDScript Code Snippet"
+
+[node name="SnippetLabel" type="Label" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox"]
+layout_mode = 2
+text = "GDScript Code Snippet Preview:"
+
+[node name="CodePreviewEdit" type="TextEdit" parent="MainVBox/BodyHBox/RightColumn/TabContainer/ExportTab/ExportMargin/ExportVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+
+[node name="BottomBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="BottomHBox" type="HFlowContainer" parent="MainVBox/BottomBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+
+[node name="StatusPrefix" type="Label" parent="MainVBox/BottomBar/BottomHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "Status:"
+
+[node name="StatusLabel" type="Label" parent="MainVBox/BottomBar/BottomHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.35, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 11
+text = "Ready."

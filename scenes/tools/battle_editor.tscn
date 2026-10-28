@@ -1,0 +1,591 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/tools/battle_editor.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.05, 0.07, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.08, 0.11, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.3, 0.42, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_canvas"]
+bg_color = Color(0.04, 0.05, 0.08, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.45, 0.65, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="BattleEditor" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_script")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TopBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="TopHBox" type="HFlowContainer" parent="MainVBox/TopBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 2
+
+[node name="Title" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_font_sizes/font_size = 13
+text = "BATTLE & ENCOUNTER STUDIO"
+
+[node name="VSep1" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="LblMap" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Map:"
+
+[node name="OptMap" type="OptionButton" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+
+[node name="SpinMapId" type="SpinBox" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+max_value = 99999.0
+value = 10003.0
+
+[node name="EditMapName" type="LineEdit" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 2
+text = "Newbie Beach"
+
+[node name="VSep2" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="LblEncRate" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Enc Rate:"
+
+[node name="SpinEncRate" type="SpinBox" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+step = 0.5
+value = 15.0
+suffix = "%"
+
+[node name="SliderEncRate" type="HSlider" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 4
+step = 0.5
+value = 15.0
+
+[node name="VSep3" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="LblPreset" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Preset:"
+
+[node name="OptPreset" type="OptionButton" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+
+[node name="BtnApplyPreset" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Apply"
+
+[node name="BtnClearArena" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear"
+
+[node name="VSep4" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="BtnNewTable" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New"
+
+[node name="BtnLoadTable" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load"
+
+[node name="BtnSaveTable" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"
+
+[node name="BtnExportScene" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 1, 1)
+text = "Export Scene"
+
+[node name="ContentHBox" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="LeftArea" type="VBoxContainer" parent="MainVBox/ContentHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.6
+theme_override_constants/separation = 4
+
+[node name="CanvasHeader" type="PanelContainer" parent="MainVBox/ContentHBox/LeftArea"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HeaderHBox" type="HBoxContainer" parent="MainVBox/ContentHBox/LeftArea/CanvasHeader"]
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="MainVBox/ContentHBox/LeftArea/CanvasHeader/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 12
+text = "2:1 Axonometric Battle Arena (8 Player Slots vs 8 Enemy Slots)"
+
+[node name="CanvasPanel" type="PanelContainer" parent="MainVBox/ContentHBox/LeftArea"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_canvas")
+
+[node name="BattleCanvas" type="Control" parent="MainVBox/ContentHBox/LeftArea/CanvasPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(580, 380)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+
+[node name="CanvasFooter" type="PanelContainer" parent="MainVBox/ContentHBox/LeftArea"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="FooterHBox" type="HBoxContainer" parent="MainVBox/ContentHBox/LeftArea/CanvasFooter"]
+layout_mode = 2
+
+[node name="FooterLabel" type="Label" parent="MainVBox/ContentHBox/LeftArea/CanvasFooter/FooterHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6, 0.7, 0.8, 1)
+theme_override_font_sizes/font_size = 11
+text = "Controls: Left-Click to select slot | Right-Click to clear | Colors: Ochre=Earth, Blue=Water, Red=Fire, Green=Wind"
+
+[node name="RightPanel" type="VBoxContainer" parent="MainVBox/ContentHBox"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="InspectorTabs" type="TabContainer" parent="MainVBox/ContentHBox/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Slot Inspector" type="ScrollContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="SlotVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="SlotHeaderHBox" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox"]
+layout_mode = 2
+
+[node name="ChkInspectorIsEnemy" type="CheckBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/SlotHeaderHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Enemy Slot"
+
+[node name="LblSlotIdx" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/SlotHeaderHBox"]
+layout_mode = 2
+text = "Slot #:"
+
+[node name="SpinSlotIdx" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/SlotHeaderHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 7.0
+
+[node name="GridAttrs" type="GridContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+
+[node name="LblMId" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+layout_mode = 2
+text = "Monster ID:"
+
+[node name="SpinMonsterId" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 101.0
+
+[node name="LblMName" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+layout_mode = 2
+text = "Monster Name:"
+
+[node name="EditMonsterName" type="LineEdit" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blue Jelly"
+
+[node name="LblLvl" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+layout_mode = 2
+text = "Level:"
+
+[node name="SpinLevel" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 200.0
+value = 1.0
+
+[node name="LblSpd" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+layout_mode = 2
+text = "SPD / Agility:"
+
+[node name="SpinSpd" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 999.0
+value = 10.0
+
+[node name="LblHp" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+layout_mode = 2
+text = "Max HP:"
+
+[node name="SpinHp" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 999999.0
+value = 100.0
+
+[node name="LblSp" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+layout_mode = 2
+text = "Max SP:"
+
+[node name="SpinSp" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 50.0
+
+[node name="LblElem" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+layout_mode = 2
+text = "Element:"
+
+[node name="OptElement" type="OptionButton" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblJmp" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+layout_mode = 2
+text = "JMP Model:"
+
+[node name="EditJmp" type="LineEdit" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/GridAttrs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "slime_blue.jmp"
+
+[node name="ChkIsBoss" type="CheckBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+text = "Is Boss Monster (Star Badge)"
+
+[node name="SlotActionHBox" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BtnSaveSlot" type="Button" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/SlotActionHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save / Apply Slot"
+
+[node name="BtnDeleteSlot" type="Button" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Slot Inspector/SlotVBox/SlotActionHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear Slot"
+
+[node name="Turn Order" type="VBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblTurnTitle" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Turn Order"]
+layout_mode = 2
+text = "Action Queue (Sorted by SPD Descending):"
+
+[node name="ListTurnOrder" type="ItemList" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Turn Order"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Encounter Groups" type="VBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ListGroups" type="ItemList" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GroupInputHBox" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="EditGroupName" type="LineEdit" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups/GroupInputHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Group Name"
+
+[node name="SpinGroupWeight" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups/GroupInputHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 1000.0
+value = 20.0
+prefix = "W:"
+
+[node name="GroupBtnHBox" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnAddGroup" type="Button" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups/GroupBtnHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Active Troop"
+
+[node name="BtnRemoveGroup" type="Button" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups/GroupBtnHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove Group"
+
+[node name="HSep1" type="HSeparator" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups"]
+layout_mode = 2
+
+[node name="BtnRollEncounter" type="Button" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Simulate Step Random Roll"
+
+[node name="LblEncounterResult" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Encounter Groups"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Click 'Simulate Step Random Roll' to test encounter rates."
+autowrap_mode = 2
+
+[node name="Loot Drops" type="VBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ListLoot" type="ItemList" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LootInputGrid" type="GridContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 2
+
+[node name="LblDId" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid"]
+layout_mode = 2
+text = "Item ID:"
+
+[node name="SpinDropItemId" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 11001.0
+
+[node name="LblDName" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid"]
+layout_mode = 2
+text = "Item Name:"
+
+[node name="EditDropItemName" type="LineEdit" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Jelly Mucus"
+
+[node name="LblDRate" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid"]
+layout_mode = 2
+text = "Drop Rate %:"
+
+[node name="SpinDropRate" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.5
+value = 50.0
+
+[node name="LblDQty" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid"]
+layout_mode = 2
+text = "Min / Max Qty:"
+
+[node name="QtyHBox" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid"]
+layout_mode = 2
+
+[node name="SpinDropMinQty" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid/QtyHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
+
+[node name="SpinDropMaxQty" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootInputGrid/QtyHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+value = 2.0
+
+[node name="LootBtnHBox" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnAddDrop" type="Button" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootBtnHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Drop Item"
+
+[node name="BtnRemoveDrop" type="Button" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops/LootBtnHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove Drop"
+
+[node name="HSep2" type="HSeparator" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops"]
+layout_mode = 2
+
+[node name="BtnRollLoot" type="Button" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Simulate Loot Drops"
+
+[node name="LblLootResult" type="Label" parent="MainVBox/ContentHBox/RightPanel/InspectorTabs/Loot Drops"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Click 'Simulate Loot Drops' to preview drops."
+autowrap_mode = 2
+
+[node name="StatusBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="StatusHBox" type="HBoxContainer" parent="MainVBox/StatusBar"]
+layout_mode = 2
+
+[node name="StatusReadout" type="Label" parent="MainVBox/StatusBar/StatusHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 11
+text = "Battle Studio Initialized."
+
+[node name="MapReadout" type="Label" parent="MainVBox/StatusBar/StatusHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.5, 1)
+theme_override_font_sizes/font_size = 11
+text = "Map: 10003 (Newbie Beach)"
+
+[node name="ParticipantReadout" type="Label" parent="MainVBox/StatusBar/StatusHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 11
+text = "Party: 2/8 | Enemies: 3/8"

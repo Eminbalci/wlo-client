@@ -1,0 +1,9378 @@
+{
+  "59999": {
+    "record_index": 0,
+    "map_id": 59999,
+    "raw_id": 4,
+    "name": "",
+    "bgm_name": "",
+    "bgm_id": 0
+  },
+  "10000": {
+    "record_index": 1,
+    "map_id": 10000,
+    "raw_id": 52597,
+    "name": "Residence",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10001": {
+    "record_index": 2,
+    "map_id": 10001,
+    "raw_id": 52598,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10002": {
+    "record_index": 3,
+    "map_id": 10002,
+    "raw_id": 52599,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10003": {
+    "record_index": 4,
+    "map_id": 10003,
+    "raw_id": 52592,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10004": {
+    "record_index": 5,
+    "map_id": 10004,
+    "raw_id": 52593,
+    "name": "Player Prison",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10005": {
+    "record_index": 6,
+    "map_id": 10005,
+    "raw_id": 52594,
+    "name": "Test",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "10009": {
+    "record_index": 7,
+    "map_id": 10009,
+    "raw_id": 52558,
+    "name": "Spiral Maze",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "10007": {
+    "record_index": 8,
+    "map_id": 10007,
+    "raw_id": 52556,
+    "name": "Test",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "10008": {
+    "record_index": 9,
+    "map_id": 10008,
+    "raw_id": 52557,
+    "name": "Test",
+    "bgm_name": "BGM0028",
+    "bgm_id": 28
+  },
+  "10006": {
+    "record_index": 10,
+    "map_id": 10006,
+    "raw_id": 52595,
+    "name": "Test",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "10011": {
+    "record_index": 11,
+    "map_id": 10011,
+    "raw_id": 52552,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10012": {
+    "record_index": 12,
+    "map_id": 10012,
+    "raw_id": 52553,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10013": {
+    "record_index": 13,
+    "map_id": 10013,
+    "raw_id": 52554,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10014": {
+    "record_index": 14,
+    "map_id": 10014,
+    "raw_id": 52555,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10015": {
+    "record_index": 15,
+    "map_id": 10015,
+    "raw_id": 52548,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10016": {
+    "record_index": 16,
+    "map_id": 10016,
+    "raw_id": 52549,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10017": {
+    "record_index": 17,
+    "map_id": 10017,
+    "raw_id": 52550,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10018": {
+    "record_index": 18,
+    "map_id": 10018,
+    "raw_id": 52551,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10019": {
+    "record_index": 19,
+    "map_id": 10019,
+    "raw_id": 52544,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10020": {
+    "record_index": 20,
+    "map_id": 10020,
+    "raw_id": 52545,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10021": {
+    "record_index": 21,
+    "map_id": 10021,
+    "raw_id": 52546,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10022": {
+    "record_index": 22,
+    "map_id": 10022,
+    "raw_id": 52547,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10023": {
+    "record_index": 23,
+    "map_id": 10023,
+    "raw_id": 52572,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10024": {
+    "record_index": 24,
+    "map_id": 10024,
+    "raw_id": 52573,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10025": {
+    "record_index": 25,
+    "map_id": 10025,
+    "raw_id": 52574,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10026": {
+    "record_index": 26,
+    "map_id": 10026,
+    "raw_id": 52575,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10027": {
+    "record_index": 27,
+    "map_id": 10027,
+    "raw_id": 52568,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10028": {
+    "record_index": 28,
+    "map_id": 10028,
+    "raw_id": 52569,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10029": {
+    "record_index": 29,
+    "map_id": 10029,
+    "raw_id": 52570,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10030": {
+    "record_index": 30,
+    "map_id": 10030,
+    "raw_id": 52571,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10031": {
+    "record_index": 31,
+    "map_id": 10031,
+    "raw_id": 52564,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10032": {
+    "record_index": 32,
+    "map_id": 10032,
+    "raw_id": 52565,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10033": {
+    "record_index": 33,
+    "map_id": 10033,
+    "raw_id": 52566,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10034": {
+    "record_index": 34,
+    "map_id": 10034,
+    "raw_id": 52567,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10035": {
+    "record_index": 35,
+    "map_id": 10035,
+    "raw_id": 52560,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10036": {
+    "record_index": 36,
+    "map_id": 10036,
+    "raw_id": 52561,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10037": {
+    "record_index": 37,
+    "map_id": 10037,
+    "raw_id": 52562,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10038": {
+    "record_index": 38,
+    "map_id": 10038,
+    "raw_id": 52563,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10039": {
+    "record_index": 39,
+    "map_id": 10039,
+    "raw_id": 52524,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10040": {
+    "record_index": 40,
+    "map_id": 10040,
+    "raw_id": 52525,
+    "name": "Newbie Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10041": {
+    "record_index": 41,
+    "map_id": 10041,
+    "raw_id": 52526,
+    "name": "Challenge Round 1",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10042": {
+    "record_index": 42,
+    "map_id": 10042,
+    "raw_id": 52527,
+    "name": "Challenge Round 2",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10043": {
+    "record_index": 43,
+    "map_id": 10043,
+    "raw_id": 52520,
+    "name": "Challenge Round 3",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10044": {
+    "record_index": 44,
+    "map_id": 10044,
+    "raw_id": 52521,
+    "name": "Challenge Round 4",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10045": {
+    "record_index": 45,
+    "map_id": 10045,
+    "raw_id": 52522,
+    "name": "Challenge Round 5",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10046": {
+    "record_index": 46,
+    "map_id": 10046,
+    "raw_id": 52523,
+    "name": "Challenge Round 6",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10047": {
+    "record_index": 47,
+    "map_id": 10047,
+    "raw_id": 52516,
+    "name": "Challenge Round 7",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10048": {
+    "record_index": 48,
+    "map_id": 10048,
+    "raw_id": 52517,
+    "name": "Challenge Round 8",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10049": {
+    "record_index": 49,
+    "map_id": 10049,
+    "raw_id": 52518,
+    "name": "Challenge Round 11",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10050": {
+    "record_index": 50,
+    "map_id": 10050,
+    "raw_id": 52519,
+    "name": "Challenge Round 9",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10051": {
+    "record_index": 51,
+    "map_id": 10051,
+    "raw_id": 52512,
+    "name": "Challenge Round 10",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10052": {
+    "record_index": 52,
+    "map_id": 10052,
+    "raw_id": 52513,
+    "name": "Challenge Round 12",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10053": {
+    "record_index": 53,
+    "map_id": 10053,
+    "raw_id": 52514,
+    "name": "Tgs",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10054": {
+    "record_index": 54,
+    "map_id": 10054,
+    "raw_id": 52515,
+    "name": "Challenge Round 13",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10055": {
+    "record_index": 55,
+    "map_id": 10055,
+    "raw_id": 52540,
+    "name": "Challenge Round 14",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10056": {
+    "record_index": 56,
+    "map_id": 10056,
+    "raw_id": 52541,
+    "name": "Challenge Round 15",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10057": {
+    "record_index": 57,
+    "map_id": 10057,
+    "raw_id": 52542,
+    "name": "Round 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10058": {
+    "record_index": 58,
+    "map_id": 10058,
+    "raw_id": 52543,
+    "name": "Round 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10059": {
+    "record_index": 59,
+    "map_id": 10059,
+    "raw_id": 52536,
+    "name": "Round 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10060": {
+    "record_index": 60,
+    "map_id": 10060,
+    "raw_id": 52537,
+    "name": "Round 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10061": {
+    "record_index": 61,
+    "map_id": 10061,
+    "raw_id": 52538,
+    "name": "Round 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10062": {
+    "record_index": 62,
+    "map_id": 10062,
+    "raw_id": 52539,
+    "name": "Round 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10063": {
+    "record_index": 63,
+    "map_id": 10063,
+    "raw_id": 52532,
+    "name": "Round 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10064": {
+    "record_index": 64,
+    "map_id": 10064,
+    "raw_id": 52533,
+    "name": "Round 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10065": {
+    "record_index": 65,
+    "map_id": 10065,
+    "raw_id": 52534,
+    "name": "Trojan Round 1",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "10066": {
+    "record_index": 66,
+    "map_id": 10066,
+    "raw_id": 52535,
+    "name": "Trojan Round 2",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "10067": {
+    "record_index": 67,
+    "map_id": 10067,
+    "raw_id": 52528,
+    "name": "Trojan Lobby",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "10068": {
+    "record_index": 68,
+    "map_id": 10068,
+    "raw_id": 52529,
+    "name": "Trojan Round 3",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "10069": {
+    "record_index": 69,
+    "map_id": 10069,
+    "raw_id": 52530,
+    "name": "Polo Island",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "10070": {
+    "record_index": 70,
+    "map_id": 10070,
+    "raw_id": 52531,
+    "name": "Hezrou Island",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "10071": {
+    "record_index": 71,
+    "map_id": 10071,
+    "raw_id": 52492,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "10072": {
+    "record_index": 72,
+    "map_id": 10072,
+    "raw_id": 52493,
+    "name": "Survival Isle",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "10073": {
+    "record_index": 73,
+    "map_id": 10073,
+    "raw_id": 52494,
+    "name": "Treasure Room 1",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "10074": {
+    "record_index": 74,
+    "map_id": 10074,
+    "raw_id": 52495,
+    "name": "Treasure Room 2",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "10075": {
+    "record_index": 75,
+    "map_id": 10075,
+    "raw_id": 52488,
+    "name": "Treasure Room 3",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "10076": {
+    "record_index": 76,
+    "map_id": 10076,
+    "raw_id": 52489,
+    "name": "Treasure Room 4",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "10077": {
+    "record_index": 77,
+    "map_id": 10077,
+    "raw_id": 52490,
+    "name": "Treasure Room 5",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "10078": {
+    "record_index": 78,
+    "map_id": 10078,
+    "raw_id": 52491,
+    "name": "Treasure Room 6",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "10079": {
+    "record_index": 79,
+    "map_id": 10079,
+    "raw_id": 52484,
+    "name": "Quiz Zone",
+    "bgm_name": "BGM0019",
+    "bgm_id": 19
+  },
+  "10080": {
+    "record_index": 80,
+    "map_id": 10080,
+    "raw_id": 52485,
+    "name": "Store",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10081": {
+    "record_index": 81,
+    "map_id": 10081,
+    "raw_id": 52486,
+    "name": "Cherry Grassplot",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "10082": {
+    "record_index": 82,
+    "map_id": 10082,
+    "raw_id": 52487,
+    "name": "Seabed",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "10083": {
+    "record_index": 83,
+    "map_id": 10083,
+    "raw_id": 52480,
+    "name": "Summer Beach",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "10084": {
+    "record_index": 84,
+    "map_id": 10084,
+    "raw_id": 52481,
+    "name": "Happy House",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "10085": {
+    "record_index": 85,
+    "map_id": 10085,
+    "raw_id": 52482,
+    "name": "Wedding Hall",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "10086": {
+    "record_index": 86,
+    "map_id": 10086,
+    "raw_id": 52483,
+    "name": "Wedding Hall",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "10087": {
+    "record_index": 87,
+    "map_id": 10087,
+    "raw_id": 52508,
+    "name": "Greek Labyrinth",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "10088": {
+    "record_index": 88,
+    "map_id": 10088,
+    "raw_id": 52509,
+    "name": "Store",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "10095": {
+    "record_index": 89,
+    "map_id": 10095,
+    "raw_id": 52500,
+    "name": "Quiz Zone",
+    "bgm_name": "BGM0019",
+    "bgm_id": 19
+  },
+  "10096": {
+    "record_index": 90,
+    "map_id": 10096,
+    "raw_id": 52501,
+    "name": "PVP Hall 1",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10097": {
+    "record_index": 91,
+    "map_id": 10097,
+    "raw_id": 52502,
+    "name": "PVP Arena",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10098": {
+    "record_index": 92,
+    "map_id": 10098,
+    "raw_id": 52503,
+    "name": "PVP Server",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10099": {
+    "record_index": 93,
+    "map_id": 10099,
+    "raw_id": 52496,
+    "name": "PVP Arena",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10100": {
+    "record_index": 94,
+    "map_id": 10100,
+    "raw_id": 52497,
+    "name": "PVP Arena",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10101": {
+    "record_index": 95,
+    "map_id": 10101,
+    "raw_id": 52498,
+    "name": "PVP Hall 2",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10102": {
+    "record_index": 96,
+    "map_id": 10102,
+    "raw_id": 52499,
+    "name": "PVP Hall 3",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10103": {
+    "record_index": 97,
+    "map_id": 10103,
+    "raw_id": 52716,
+    "name": "PVP Hall 4",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "10104": {
+    "record_index": 98,
+    "map_id": 10104,
+    "raw_id": 52717,
+    "name": "Challenge Round 16",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10105": {
+    "record_index": 99,
+    "map_id": 10105,
+    "raw_id": 52718,
+    "name": "Challenge Round 17",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10106": {
+    "record_index": 100,
+    "map_id": 10106,
+    "raw_id": 52719,
+    "name": "Challenge Round 18",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10107": {
+    "record_index": 101,
+    "map_id": 10107,
+    "raw_id": 52712,
+    "name": "Challenge Round 19",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10108": {
+    "record_index": 102,
+    "map_id": 10108,
+    "raw_id": 52713,
+    "name": "Challenge Round 20",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10109": {
+    "record_index": 103,
+    "map_id": 10109,
+    "raw_id": 52714,
+    "name": "Challenge Round 21",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10110": {
+    "record_index": 104,
+    "map_id": 10110,
+    "raw_id": 52715,
+    "name": "Challenge Round 22",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10111": {
+    "record_index": 105,
+    "map_id": 10111,
+    "raw_id": 52708,
+    "name": "Challenge Round 23",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10112": {
+    "record_index": 106,
+    "map_id": 10112,
+    "raw_id": 52709,
+    "name": "Challenge Round 24",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10113": {
+    "record_index": 107,
+    "map_id": 10113,
+    "raw_id": 52710,
+    "name": "Challenge Round 25",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10114": {
+    "record_index": 108,
+    "map_id": 10114,
+    "raw_id": 52711,
+    "name": "Challenge Round 26",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10115": {
+    "record_index": 109,
+    "map_id": 10115,
+    "raw_id": 52704,
+    "name": "Challenge Round 27",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10116": {
+    "record_index": 110,
+    "map_id": 10116,
+    "raw_id": 52705,
+    "name": "Challenge Round 28",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10150": {
+    "record_index": 111,
+    "map_id": 10150,
+    "raw_id": 52675,
+    "name": "Dark Forces 1",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10151": {
+    "record_index": 112,
+    "map_id": 10151,
+    "raw_id": 52700,
+    "name": "Dark Forces 2",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10152": {
+    "record_index": 113,
+    "map_id": 10152,
+    "raw_id": 52701,
+    "name": "Dark Forces 3",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10153": {
+    "record_index": 114,
+    "map_id": 10153,
+    "raw_id": 52702,
+    "name": "Dark Forces 4",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10154": {
+    "record_index": 115,
+    "map_id": 10154,
+    "raw_id": 52703,
+    "name": "Dark Forces 5",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10155": {
+    "record_index": 116,
+    "map_id": 10155,
+    "raw_id": 52696,
+    "name": "Dark Forces 6",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10180": {
+    "record_index": 117,
+    "map_id": 10180,
+    "raw_id": 52641,
+    "name": "Bravery Test 1",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10181": {
+    "record_index": 118,
+    "map_id": 10181,
+    "raw_id": 52642,
+    "name": "Bravery Test 2",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10182": {
+    "record_index": 119,
+    "map_id": 10182,
+    "raw_id": 52643,
+    "name": "Bravery Test 3",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10183": {
+    "record_index": 120,
+    "map_id": 10183,
+    "raw_id": 52668,
+    "name": "Bravery Test 4",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10184": {
+    "record_index": 121,
+    "map_id": 10184,
+    "raw_id": 52669,
+    "name": "Bravery Test 5",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10185": {
+    "record_index": 122,
+    "map_id": 10185,
+    "raw_id": 52670,
+    "name": "Bravery Test 6",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10186": {
+    "record_index": 123,
+    "map_id": 10186,
+    "raw_id": 52671,
+    "name": "Bravery Test 7",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10187": {
+    "record_index": 124,
+    "map_id": 10187,
+    "raw_id": 52664,
+    "name": "Bravery Test 8",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10188": {
+    "record_index": 125,
+    "map_id": 10188,
+    "raw_id": 52665,
+    "name": "Bravery Test 9",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10189": {
+    "record_index": 126,
+    "map_id": 10189,
+    "raw_id": 52666,
+    "name": "Bravery Test 10",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10190": {
+    "record_index": 127,
+    "map_id": 10190,
+    "raw_id": 52667,
+    "name": "Bravery Test 11",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10191": {
+    "record_index": 128,
+    "map_id": 10191,
+    "raw_id": 52660,
+    "name": "Bravery Test 12",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10192": {
+    "record_index": 129,
+    "map_id": 10192,
+    "raw_id": 52661,
+    "name": "Bravery Test 13",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10193": {
+    "record_index": 130,
+    "map_id": 10193,
+    "raw_id": 52662,
+    "name": "Bravery Test 14",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10194": {
+    "record_index": 131,
+    "map_id": 10194,
+    "raw_id": 52663,
+    "name": "Bravery Test 15",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10195": {
+    "record_index": 132,
+    "map_id": 10195,
+    "raw_id": 52656,
+    "name": "Bravery Test 16",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10196": {
+    "record_index": 133,
+    "map_id": 10196,
+    "raw_id": 52657,
+    "name": "Bravery Test 17",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10197": {
+    "record_index": 134,
+    "map_id": 10197,
+    "raw_id": 52658,
+    "name": "Bravery Test 18",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10198": {
+    "record_index": 135,
+    "map_id": 10198,
+    "raw_id": 52659,
+    "name": "Bravery Test 19",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "10199": {
+    "record_index": 136,
+    "map_id": 10199,
+    "raw_id": 52620,
+    "name": "Bravery Test 20",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "11002": {
+    "record_index": 137,
+    "map_id": 11002,
+    "raw_id": 49519,
+    "name": "Ghost Ship Deck",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11003": {
+    "record_index": 138,
+    "map_id": 11003,
+    "raw_id": 49512,
+    "name": "Holy Village",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11004": {
+    "record_index": 139,
+    "map_id": 11004,
+    "raw_id": 49513,
+    "name": "Holy Village",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11005": {
+    "record_index": 140,
+    "map_id": 11005,
+    "raw_id": 49514,
+    "name": "Holy Village",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11006": {
+    "record_index": 141,
+    "map_id": 11006,
+    "raw_id": 49515,
+    "name": "Weaponry",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11007": {
+    "record_index": 142,
+    "map_id": 11007,
+    "raw_id": 49508,
+    "name": "Grocery",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11008": {
+    "record_index": 143,
+    "map_id": 11008,
+    "raw_id": 49509,
+    "name": "Fisherman's Home",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11009": {
+    "record_index": 144,
+    "map_id": 11009,
+    "raw_id": 49510,
+    "name": "1F, Village Leader's",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11010": {
+    "record_index": 145,
+    "map_id": 11010,
+    "raw_id": 49511,
+    "name": "2F, Village Leader's",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11011": {
+    "record_index": 146,
+    "map_id": 11011,
+    "raw_id": 49504,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11012": {
+    "record_index": 147,
+    "map_id": 11012,
+    "raw_id": 49505,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11013": {
+    "record_index": 148,
+    "map_id": 11013,
+    "raw_id": 49506,
+    "name": "1F, Inn",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11014": {
+    "record_index": 149,
+    "map_id": 11014,
+    "raw_id": 49507,
+    "name": "2F, Inn",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11015": {
+    "record_index": 150,
+    "map_id": 11015,
+    "raw_id": 49532,
+    "name": "Cathedral",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11016": {
+    "record_index": 151,
+    "map_id": 11016,
+    "raw_id": 49533,
+    "name": "Beach",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "11017": {
+    "record_index": 152,
+    "map_id": 11017,
+    "raw_id": 49534,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11018": {
+    "record_index": 153,
+    "map_id": 11018,
+    "raw_id": 49535,
+    "name": "Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11019": {
+    "record_index": 154,
+    "map_id": 11019,
+    "raw_id": 49528,
+    "name": "Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11020": {
+    "record_index": 155,
+    "map_id": 11020,
+    "raw_id": 49529,
+    "name": "Prison",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11021": {
+    "record_index": 156,
+    "map_id": 11021,
+    "raw_id": 49530,
+    "name": "Kama Peak",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11022": {
+    "record_index": 157,
+    "map_id": 11022,
+    "raw_id": 49531,
+    "name": "Jungle",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "11023": {
+    "record_index": 158,
+    "map_id": 11023,
+    "raw_id": 49524,
+    "name": "Underground Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11024": {
+    "record_index": 159,
+    "map_id": 11024,
+    "raw_id": 49525,
+    "name": "Underground Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11026": {
+    "record_index": 160,
+    "map_id": 11026,
+    "raw_id": 49527,
+    "name": "1F, Kama Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11027": {
+    "record_index": 161,
+    "map_id": 11027,
+    "raw_id": 49520,
+    "name": "2F, Kama Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11028": {
+    "record_index": 162,
+    "map_id": 11028,
+    "raw_id": 49521,
+    "name": "3F, Kama Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11029": {
+    "record_index": 163,
+    "map_id": 11029,
+    "raw_id": 49522,
+    "name": "Kama Mountain Path",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11030": {
+    "record_index": 164,
+    "map_id": 11030,
+    "raw_id": 49523,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11031": {
+    "record_index": 165,
+    "map_id": 11031,
+    "raw_id": 49484,
+    "name": "Residence",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11032": {
+    "record_index": 166,
+    "map_id": 11032,
+    "raw_id": 49485,
+    "name": "Water Maze",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11034": {
+    "record_index": 167,
+    "map_id": 11034,
+    "raw_id": 49487,
+    "name": "Subway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11035": {
+    "record_index": 168,
+    "map_id": 11035,
+    "raw_id": 49480,
+    "name": "Subway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11036": {
+    "record_index": 169,
+    "map_id": 11036,
+    "raw_id": 49481,
+    "name": "Subterranean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11037": {
+    "record_index": 170,
+    "map_id": 11037,
+    "raw_id": 49482,
+    "name": "Subterranean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11038": {
+    "record_index": 171,
+    "map_id": 11038,
+    "raw_id": 49483,
+    "name": "Spirit Building",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11039": {
+    "record_index": 172,
+    "map_id": 11039,
+    "raw_id": 49476,
+    "name": "Subway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11040": {
+    "record_index": 173,
+    "map_id": 11040,
+    "raw_id": 49477,
+    "name": "Subway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11041": {
+    "record_index": 174,
+    "map_id": 11041,
+    "raw_id": 49478,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11042": {
+    "record_index": 175,
+    "map_id": 11042,
+    "raw_id": 49479,
+    "name": "1F, Maka Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11043": {
+    "record_index": 176,
+    "map_id": 11043,
+    "raw_id": 49472,
+    "name": "2F, Maka Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11044": {
+    "record_index": 177,
+    "map_id": 11044,
+    "raw_id": 49473,
+    "name": "Jungle",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11045": {
+    "record_index": 178,
+    "map_id": 11045,
+    "raw_id": 49474,
+    "name": "Maka Peak",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11046": {
+    "record_index": 179,
+    "map_id": 11046,
+    "raw_id": 49475,
+    "name": "3F, Maka Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11047": {
+    "record_index": 180,
+    "map_id": 11047,
+    "raw_id": 49500,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11048": {
+    "record_index": 181,
+    "map_id": 11048,
+    "raw_id": 49501,
+    "name": "Bear's Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11049": {
+    "record_index": 182,
+    "map_id": 11049,
+    "raw_id": 49502,
+    "name": "Deck Of Western Ship",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11050": {
+    "record_index": 183,
+    "map_id": 11050,
+    "raw_id": 49503,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11051": {
+    "record_index": 184,
+    "map_id": 11051,
+    "raw_id": 49496,
+    "name": "Walkway In Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11052": {
+    "record_index": 185,
+    "map_id": 11052,
+    "raw_id": 49497,
+    "name": "Deck Of Western Ship",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11053": {
+    "record_index": 186,
+    "map_id": 11053,
+    "raw_id": 49498,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11054": {
+    "record_index": 187,
+    "map_id": 11054,
+    "raw_id": 49499,
+    "name": "Walkway In Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11055": {
+    "record_index": 188,
+    "map_id": 11055,
+    "raw_id": 49492,
+    "name": "East Ship Deck",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11056": {
+    "record_index": 189,
+    "map_id": 11056,
+    "raw_id": 49493,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11057": {
+    "record_index": 190,
+    "map_id": 11057,
+    "raw_id": 49494,
+    "name": "Walkway In Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11058": {
+    "record_index": 191,
+    "map_id": 11058,
+    "raw_id": 49495,
+    "name": "East Ship Deck",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11059": {
+    "record_index": 192,
+    "map_id": 11059,
+    "raw_id": 49488,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11060": {
+    "record_index": 193,
+    "map_id": 11060,
+    "raw_id": 49489,
+    "name": "Walkway In Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11061": {
+    "record_index": 194,
+    "map_id": 11061,
+    "raw_id": 49490,
+    "name": "Bodega Hidden Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11062": {
+    "record_index": 195,
+    "map_id": 11062,
+    "raw_id": 49491,
+    "name": "Farmhouse",
+    "bgm_name": "BGM0027",
+    "bgm_id": 27
+  },
+  "11063": {
+    "record_index": 196,
+    "map_id": 11063,
+    "raw_id": 49452,
+    "name": "Twilight Overlook",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11064": {
+    "record_index": 197,
+    "map_id": 11064,
+    "raw_id": 49453,
+    "name": "Twilight Overlook",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11065": {
+    "record_index": 198,
+    "map_id": 11065,
+    "raw_id": 49454,
+    "name": "Overlook",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11066": {
+    "record_index": 199,
+    "map_id": 11066,
+    "raw_id": 49455,
+    "name": "Overlook",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11067": {
+    "record_index": 200,
+    "map_id": 11067,
+    "raw_id": 49448,
+    "name": "Hanging Bridge View",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11068": {
+    "record_index": 201,
+    "map_id": 11068,
+    "raw_id": 49449,
+    "name": "Broken Bridge View",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11069": {
+    "record_index": 202,
+    "map_id": 11069,
+    "raw_id": 49450,
+    "name": "Hawaiian Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11070": {
+    "record_index": 203,
+    "map_id": 11070,
+    "raw_id": 49451,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11071": {
+    "record_index": 204,
+    "map_id": 11071,
+    "raw_id": 49444,
+    "name": "Hollow Tree",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11072": {
+    "record_index": 205,
+    "map_id": 11072,
+    "raw_id": 49445,
+    "name": "1F, Activity Centre",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11073": {
+    "record_index": 206,
+    "map_id": 11073,
+    "raw_id": 49446,
+    "name": "2F, Activity Centre",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "11074": {
+    "record_index": 207,
+    "map_id": 11074,
+    "raw_id": 49447,
+    "name": "Highland",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11075": {
+    "record_index": 208,
+    "map_id": 11075,
+    "raw_id": 49440,
+    "name": "Hilltop",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11076": {
+    "record_index": 209,
+    "map_id": 11076,
+    "raw_id": 49441,
+    "name": "Prison",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11077": {
+    "record_index": 210,
+    "map_id": 11077,
+    "raw_id": 49442,
+    "name": "Mystic Subway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11078": {
+    "record_index": 211,
+    "map_id": 11078,
+    "raw_id": 49443,
+    "name": "Fiery Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11079": {
+    "record_index": 212,
+    "map_id": 11079,
+    "raw_id": 49468,
+    "name": "Doctor's Lab",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11080": {
+    "record_index": 213,
+    "map_id": 11080,
+    "raw_id": 49469,
+    "name": "Fiery Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11081": {
+    "record_index": 214,
+    "map_id": 11081,
+    "raw_id": 49470,
+    "name": "1F, Beetle Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11082": {
+    "record_index": 215,
+    "map_id": 11082,
+    "raw_id": 49471,
+    "name": "2F, Beetle Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11083": {
+    "record_index": 216,
+    "map_id": 11083,
+    "raw_id": 49464,
+    "name": "Chicken Farm",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11084": {
+    "record_index": 217,
+    "map_id": 11084,
+    "raw_id": 49465,
+    "name": "Pine Forest",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11085": {
+    "record_index": 218,
+    "map_id": 11085,
+    "raw_id": 49466,
+    "name": "Hollow Tree",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11086": {
+    "record_index": 219,
+    "map_id": 11086,
+    "raw_id": 49467,
+    "name": "Hollow Tree",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11087": {
+    "record_index": 220,
+    "map_id": 11087,
+    "raw_id": 49460,
+    "name": "Hollow Tree",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11088": {
+    "record_index": 221,
+    "map_id": 11088,
+    "raw_id": 49461,
+    "name": "Hilltop",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11089": {
+    "record_index": 222,
+    "map_id": 11089,
+    "raw_id": 49462,
+    "name": "Hilltop Hot Spring",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11090": {
+    "record_index": 223,
+    "map_id": 11090,
+    "raw_id": 49463,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11091": {
+    "record_index": 224,
+    "map_id": 11091,
+    "raw_id": 49456,
+    "name": "Aqueduct",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11092": {
+    "record_index": 225,
+    "map_id": 11092,
+    "raw_id": 49457,
+    "name": "Valley Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11093": {
+    "record_index": 226,
+    "map_id": 11093,
+    "raw_id": 49458,
+    "name": "Witch's home",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11094": {
+    "record_index": 227,
+    "map_id": 11094,
+    "raw_id": 49459,
+    "name": "Carnie",
+    "bgm_name": "BGM0019",
+    "bgm_id": 19
+  },
+  "11095": {
+    "record_index": 228,
+    "map_id": 11095,
+    "raw_id": 49420,
+    "name": "Underground Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11096": {
+    "record_index": 229,
+    "map_id": 11096,
+    "raw_id": 49421,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11097": {
+    "record_index": 230,
+    "map_id": 11097,
+    "raw_id": 49422,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11098": {
+    "record_index": 231,
+    "map_id": 11098,
+    "raw_id": 49423,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "11099": {
+    "record_index": 232,
+    "map_id": 11099,
+    "raw_id": 49416,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11100": {
+    "record_index": 233,
+    "map_id": 11100,
+    "raw_id": 49417,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11101": {
+    "record_index": 234,
+    "map_id": 11101,
+    "raw_id": 49418,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11102": {
+    "record_index": 235,
+    "map_id": 11102,
+    "raw_id": 49419,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11103": {
+    "record_index": 236,
+    "map_id": 11103,
+    "raw_id": 49412,
+    "name": "Backroom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11104": {
+    "record_index": 237,
+    "map_id": 11104,
+    "raw_id": 49413,
+    "name": "Backroom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11105": {
+    "record_index": 238,
+    "map_id": 11105,
+    "raw_id": 49414,
+    "name": "Dragon Palace",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11106": {
+    "record_index": 239,
+    "map_id": 11106,
+    "raw_id": 49415,
+    "name": "Inside Dragon Palace",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11109": {
+    "record_index": 240,
+    "map_id": 11109,
+    "raw_id": 49410,
+    "name": "Cave Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11110": {
+    "record_index": 241,
+    "map_id": 11110,
+    "raw_id": 49411,
+    "name": "Cave Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11111": {
+    "record_index": 242,
+    "map_id": 11111,
+    "raw_id": 49436,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "11112": {
+    "record_index": 243,
+    "map_id": 11112,
+    "raw_id": 49437,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11113": {
+    "record_index": 244,
+    "map_id": 11113,
+    "raw_id": 49438,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11114": {
+    "record_index": 245,
+    "map_id": 11114,
+    "raw_id": 49439,
+    "name": "Walkway In Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11115": {
+    "record_index": 246,
+    "map_id": 11115,
+    "raw_id": 49432,
+    "name": "Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11116": {
+    "record_index": 247,
+    "map_id": 11116,
+    "raw_id": 49433,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11117": {
+    "record_index": 248,
+    "map_id": 11117,
+    "raw_id": 49434,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11118": {
+    "record_index": 249,
+    "map_id": 11118,
+    "raw_id": 49435,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11119": {
+    "record_index": 250,
+    "map_id": 11119,
+    "raw_id": 49428,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11120": {
+    "record_index": 251,
+    "map_id": 11120,
+    "raw_id": 49429,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11121": {
+    "record_index": 252,
+    "map_id": 11121,
+    "raw_id": 49430,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11122": {
+    "record_index": 253,
+    "map_id": 11122,
+    "raw_id": 49431,
+    "name": "Ghost Ship Cabin",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11123": {
+    "record_index": 254,
+    "map_id": 11123,
+    "raw_id": 49424,
+    "name": "Ghost Ship Cabin",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11124": {
+    "record_index": 255,
+    "map_id": 11124,
+    "raw_id": 49425,
+    "name": "Ghost Ship Cabin",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11125": {
+    "record_index": 256,
+    "map_id": 11125,
+    "raw_id": 49426,
+    "name": "Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11126": {
+    "record_index": 257,
+    "map_id": 11126,
+    "raw_id": 49427,
+    "name": "Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11127": {
+    "record_index": 258,
+    "map_id": 11127,
+    "raw_id": 49644,
+    "name": "Madagascar",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "11128": {
+    "record_index": 259,
+    "map_id": 11128,
+    "raw_id": 49645,
+    "name": "Abyss Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11129": {
+    "record_index": 260,
+    "map_id": 11129,
+    "raw_id": 49646,
+    "name": "Castle Subway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11130": {
+    "record_index": 261,
+    "map_id": 11130,
+    "raw_id": 49647,
+    "name": "Castle Subway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11131": {
+    "record_index": 262,
+    "map_id": 11131,
+    "raw_id": 49640,
+    "name": "Fleet Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11132": {
+    "record_index": 263,
+    "map_id": 11132,
+    "raw_id": 49641,
+    "name": "Fleet Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11133": {
+    "record_index": 264,
+    "map_id": 11133,
+    "raw_id": 49642,
+    "name": "Demon Icehouse",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11134": {
+    "record_index": 265,
+    "map_id": 11134,
+    "raw_id": 49643,
+    "name": "Demon Icehouse",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11135": {
+    "record_index": 266,
+    "map_id": 11135,
+    "raw_id": 49636,
+    "name": "Centaur Island",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "11136": {
+    "record_index": 267,
+    "map_id": 11136,
+    "raw_id": 49637,
+    "name": "Centaur Residence",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "11137": {
+    "record_index": 268,
+    "map_id": 11137,
+    "raw_id": 49638,
+    "name": "Centaur Residence",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "11138": {
+    "record_index": 269,
+    "map_id": 11138,
+    "raw_id": 49639,
+    "name": "Centaur Residence",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "11139": {
+    "record_index": 270,
+    "map_id": 11139,
+    "raw_id": 49632,
+    "name": "3F, Kama Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11140": {
+    "record_index": 271,
+    "map_id": 11140,
+    "raw_id": 49633,
+    "name": "Kama Peak",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11141": {
+    "record_index": 272,
+    "map_id": 11141,
+    "raw_id": 49634,
+    "name": "Ghost Ship Pathway",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11142": {
+    "record_index": 273,
+    "map_id": 11142,
+    "raw_id": 49635,
+    "name": "Ghost Ship Jail",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11143": {
+    "record_index": 274,
+    "map_id": 11143,
+    "raw_id": 49660,
+    "name": "Ghost Ship Backroom",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11144": {
+    "record_index": 275,
+    "map_id": 11144,
+    "raw_id": 49661,
+    "name": "Ghost Ship Backroom",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11145": {
+    "record_index": 276,
+    "map_id": 11145,
+    "raw_id": 49662,
+    "name": "Lion Isle",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "11146": {
+    "record_index": 277,
+    "map_id": 11146,
+    "raw_id": 49663,
+    "name": "Cellarage",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11147": {
+    "record_index": 278,
+    "map_id": 11147,
+    "raw_id": 49656,
+    "name": "Pirates Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11148": {
+    "record_index": 279,
+    "map_id": 11148,
+    "raw_id": 49657,
+    "name": "Ghostdom",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "11149": {
+    "record_index": 280,
+    "map_id": 11149,
+    "raw_id": 49658,
+    "name": "Ghostdom",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "11150": {
+    "record_index": 281,
+    "map_id": 11150,
+    "raw_id": 49659,
+    "name": "Barnya Sky City",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11151": {
+    "record_index": 282,
+    "map_id": 11151,
+    "raw_id": 49652,
+    "name": "Refining Room",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11152": {
+    "record_index": 283,
+    "map_id": 11152,
+    "raw_id": 49653,
+    "name": "Barnya Sky City",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11153": {
+    "record_index": 284,
+    "map_id": 11153,
+    "raw_id": 49654,
+    "name": "Ghostdom",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "11154": {
+    "record_index": 285,
+    "map_id": 11154,
+    "raw_id": 49655,
+    "name": "Backroom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11155": {
+    "record_index": 286,
+    "map_id": 11155,
+    "raw_id": 49648,
+    "name": "Backroom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11156": {
+    "record_index": 287,
+    "map_id": 11156,
+    "raw_id": 49649,
+    "name": "Backroom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11157": {
+    "record_index": 288,
+    "map_id": 11157,
+    "raw_id": 49650,
+    "name": "Adytum Path",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11158": {
+    "record_index": 289,
+    "map_id": 11158,
+    "raw_id": 49651,
+    "name": "Adytum Path",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11159": {
+    "record_index": 290,
+    "map_id": 11159,
+    "raw_id": 49612,
+    "name": "Adytum Path",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11160": {
+    "record_index": 291,
+    "map_id": 11160,
+    "raw_id": 49613,
+    "name": "Adytum Path",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11161": {
+    "record_index": 292,
+    "map_id": 11161,
+    "raw_id": 49614,
+    "name": "Backroom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11162": {
+    "record_index": 293,
+    "map_id": 11162,
+    "raw_id": 49615,
+    "name": "Adytum Path",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11163": {
+    "record_index": 294,
+    "map_id": 11163,
+    "raw_id": 49608,
+    "name": "The Moon",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "11164": {
+    "record_index": 295,
+    "map_id": 11164,
+    "raw_id": 49609,
+    "name": "The Mars",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "11165": {
+    "record_index": 296,
+    "map_id": 11165,
+    "raw_id": 49610,
+    "name": "Adytum Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11166": {
+    "record_index": 297,
+    "map_id": 11166,
+    "raw_id": 49611,
+    "name": "Volcano Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11167": {
+    "record_index": 298,
+    "map_id": 11167,
+    "raw_id": 49604,
+    "name": "Adytum Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11168": {
+    "record_index": 299,
+    "map_id": 11168,
+    "raw_id": 49605,
+    "name": "Sea Channel",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11169": {
+    "record_index": 300,
+    "map_id": 11169,
+    "raw_id": 49606,
+    "name": "Sea Channel",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11170": {
+    "record_index": 301,
+    "map_id": 11170,
+    "raw_id": 49607,
+    "name": "Sea Channel",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11171": {
+    "record_index": 302,
+    "map_id": 11171,
+    "raw_id": 49600,
+    "name": "Sea Channel",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11172": {
+    "record_index": 303,
+    "map_id": 11172,
+    "raw_id": 49601,
+    "name": "Sea Channel",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11173": {
+    "record_index": 304,
+    "map_id": 11173,
+    "raw_id": 49602,
+    "name": "Sea Channel",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11174": {
+    "record_index": 305,
+    "map_id": 11174,
+    "raw_id": 49603,
+    "name": "Sea Channel",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11175": {
+    "record_index": 306,
+    "map_id": 11175,
+    "raw_id": 49628,
+    "name": "Sea Channel",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "11176": {
+    "record_index": 307,
+    "map_id": 11176,
+    "raw_id": 49629,
+    "name": "Wrecked Ship Deck",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11177": {
+    "record_index": 308,
+    "map_id": 11177,
+    "raw_id": 49630,
+    "name": "Wrecked Ship Deck",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11178": {
+    "record_index": 309,
+    "map_id": 11178,
+    "raw_id": 49631,
+    "name": "Wrecked Ship Deck",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11179": {
+    "record_index": 310,
+    "map_id": 11179,
+    "raw_id": 49624,
+    "name": "Wrecked Ship Deck",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11180": {
+    "record_index": 311,
+    "map_id": 11180,
+    "raw_id": 49625,
+    "name": "Cursed Arena",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11181": {
+    "record_index": 312,
+    "map_id": 11181,
+    "raw_id": 49626,
+    "name": "Hotspring Cave",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11182": {
+    "record_index": 313,
+    "map_id": 11182,
+    "raw_id": 49627,
+    "name": "Luna's Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11183": {
+    "record_index": 314,
+    "map_id": 11183,
+    "raw_id": 49620,
+    "name": "Luna's Palace",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11184": {
+    "record_index": 315,
+    "map_id": 11184,
+    "raw_id": 49621,
+    "name": "Ghostdom",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "11185": {
+    "record_index": 316,
+    "map_id": 11185,
+    "raw_id": 49622,
+    "name": "Ghostdom",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "11186": {
+    "record_index": 317,
+    "map_id": 11186,
+    "raw_id": 49623,
+    "name": "Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11187": {
+    "record_index": 318,
+    "map_id": 11187,
+    "raw_id": 49616,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11188": {
+    "record_index": 319,
+    "map_id": 11188,
+    "raw_id": 49617,
+    "name": "Evil Boundary",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11189": {
+    "record_index": 320,
+    "map_id": 11189,
+    "raw_id": 49618,
+    "name": "Inside Of Pine",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11190": {
+    "record_index": 321,
+    "map_id": 11190,
+    "raw_id": 49619,
+    "name": "Robber's Base",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11191": {
+    "record_index": 322,
+    "map_id": 11191,
+    "raw_id": 49580,
+    "name": "Robber's Treasure",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11192": {
+    "record_index": 323,
+    "map_id": 11192,
+    "raw_id": 49581,
+    "name": "Heavy Deck",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "11193": {
+    "record_index": 324,
+    "map_id": 11193,
+    "raw_id": 49582,
+    "name": "Wrecked Ship Deck",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11194": {
+    "record_index": 325,
+    "map_id": 11194,
+    "raw_id": 49583,
+    "name": "Wish Forest",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11195": {
+    "record_index": 326,
+    "map_id": 11195,
+    "raw_id": 49576,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "11196": {
+    "record_index": 327,
+    "map_id": 11196,
+    "raw_id": 49577,
+    "name": "Bypath",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11197": {
+    "record_index": 328,
+    "map_id": 11197,
+    "raw_id": 49578,
+    "name": "Cliff",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "11198": {
+    "record_index": 329,
+    "map_id": 11198,
+    "raw_id": 49579,
+    "name": "West Of Maka",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11199": {
+    "record_index": 330,
+    "map_id": 11199,
+    "raw_id": 49572,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11200": {
+    "record_index": 331,
+    "map_id": 11200,
+    "raw_id": 49573,
+    "name": "Benthal Tunnel",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11201": {
+    "record_index": 332,
+    "map_id": 11201,
+    "raw_id": 49574,
+    "name": "Laboratory",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11202": {
+    "record_index": 333,
+    "map_id": 11202,
+    "raw_id": 49575,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11203": {
+    "record_index": 334,
+    "map_id": 11203,
+    "raw_id": 49568,
+    "name": "Walkway In Cabin",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "11204": {
+    "record_index": 335,
+    "map_id": 11204,
+    "raw_id": 49569,
+    "name": "Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11205": {
+    "record_index": 336,
+    "map_id": 11205,
+    "raw_id": 49570,
+    "name": "Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11206": {
+    "record_index": 337,
+    "map_id": 11206,
+    "raw_id": 49571,
+    "name": "Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11207": {
+    "record_index": 338,
+    "map_id": 11207,
+    "raw_id": 49596,
+    "name": "Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11208": {
+    "record_index": 339,
+    "map_id": 11208,
+    "raw_id": 49597,
+    "name": "Cabin",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11209": {
+    "record_index": 340,
+    "map_id": 11209,
+    "raw_id": 49598,
+    "name": "1F, Secret Tunnel",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11210": {
+    "record_index": 341,
+    "map_id": 11210,
+    "raw_id": 49599,
+    "name": "Ming Dynasty Naval V",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "11211": {
+    "record_index": 342,
+    "map_id": 11211,
+    "raw_id": 49592,
+    "name": "2F, Secret Tunnel",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12000": {
+    "record_index": 343,
+    "map_id": 12000,
+    "raw_id": 50309,
+    "name": "Kelan Village",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12001": {
+    "record_index": 344,
+    "map_id": 12001,
+    "raw_id": 50310,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12002": {
+    "record_index": 345,
+    "map_id": 12002,
+    "raw_id": 50311,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12003": {
+    "record_index": 346,
+    "map_id": 12003,
+    "raw_id": 50304,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12004": {
+    "record_index": 347,
+    "map_id": 12004,
+    "raw_id": 50305,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12005": {
+    "record_index": 348,
+    "map_id": 12005,
+    "raw_id": 50306,
+    "name": "1F, Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12006": {
+    "record_index": 349,
+    "map_id": 12006,
+    "raw_id": 50307,
+    "name": "2F, Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12007": {
+    "record_index": 350,
+    "map_id": 12007,
+    "raw_id": 50332,
+    "name": "3F, Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12008": {
+    "record_index": 351,
+    "map_id": 12008,
+    "raw_id": 50333,
+    "name": "Woods",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12009": {
+    "record_index": 352,
+    "map_id": 12009,
+    "raw_id": 50334,
+    "name": "Woods",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12050": {
+    "record_index": 353,
+    "map_id": 12050,
+    "raw_id": 50551,
+    "name": "Welling Village",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12051": {
+    "record_index": 354,
+    "map_id": 12051,
+    "raw_id": 50544,
+    "name": "Inn",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12052": {
+    "record_index": 355,
+    "map_id": 12052,
+    "raw_id": 50545,
+    "name": "2F, Inn",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12053": {
+    "record_index": 356,
+    "map_id": 12053,
+    "raw_id": 50546,
+    "name": "Weaponry",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12054": {
+    "record_index": 357,
+    "map_id": 12054,
+    "raw_id": 50547,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12055": {
+    "record_index": 358,
+    "map_id": 12055,
+    "raw_id": 50508,
+    "name": "The Villageleader's",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12056": {
+    "record_index": 359,
+    "map_id": 12056,
+    "raw_id": 50509,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12057": {
+    "record_index": 360,
+    "map_id": 12057,
+    "raw_id": 50510,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12058": {
+    "record_index": 361,
+    "map_id": 12058,
+    "raw_id": 50511,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12059": {
+    "record_index": 362,
+    "map_id": 12059,
+    "raw_id": 50504,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12060": {
+    "record_index": 363,
+    "map_id": 12060,
+    "raw_id": 50505,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12061": {
+    "record_index": 364,
+    "map_id": 12061,
+    "raw_id": 50506,
+    "name": "Brewer's Home",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12062": {
+    "record_index": 365,
+    "map_id": 12062,
+    "raw_id": 50507,
+    "name": "1F, The Capitol",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12063": {
+    "record_index": 366,
+    "map_id": 12063,
+    "raw_id": 50500,
+    "name": "3F, The Capitol",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12064": {
+    "record_index": 367,
+    "map_id": 12064,
+    "raw_id": 50501,
+    "name": "2F, The Capitol",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12065": {
+    "record_index": 368,
+    "map_id": 12065,
+    "raw_id": 50502,
+    "name": "4F, The Capitol",
+    "bgm_name": "BGM0009",
+    "bgm_id": 9
+  },
+  "12066": {
+    "record_index": 369,
+    "map_id": 12066,
+    "raw_id": 50503,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12067": {
+    "record_index": 370,
+    "map_id": 12067,
+    "raw_id": 50496,
+    "name": "Benthal Tunnel",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12100": {
+    "record_index": 371,
+    "map_id": 12100,
+    "raw_id": 50465,
+    "name": "Fishing Village",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12101": {
+    "record_index": 372,
+    "map_id": 12101,
+    "raw_id": 50466,
+    "name": "Spring House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12102": {
+    "record_index": 373,
+    "map_id": 12102,
+    "raw_id": 50467,
+    "name": "Weaponry",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12103": {
+    "record_index": 374,
+    "map_id": 12103,
+    "raw_id": 50492,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12104": {
+    "record_index": 375,
+    "map_id": 12104,
+    "raw_id": 50493,
+    "name": "Chinese Forests",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12105": {
+    "record_index": 376,
+    "map_id": 12105,
+    "raw_id": 50494,
+    "name": "Ancient Yazhou City",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12106": {
+    "record_index": 377,
+    "map_id": 12106,
+    "raw_id": 50495,
+    "name": "Underground Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12107": {
+    "record_index": 378,
+    "map_id": 12107,
+    "raw_id": 50488,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12108": {
+    "record_index": 379,
+    "map_id": 12108,
+    "raw_id": 50489,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12109": {
+    "record_index": 380,
+    "map_id": 12109,
+    "raw_id": 50490,
+    "name": "Jinjan Hummock",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12110": {
+    "record_index": 381,
+    "map_id": 12110,
+    "raw_id": 50491,
+    "name": "Chang'an",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12111": {
+    "record_index": 382,
+    "map_id": 12111,
+    "raw_id": 50484,
+    "name": "Armory",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12112": {
+    "record_index": 383,
+    "map_id": 12112,
+    "raw_id": 50485,
+    "name": "Longai Hotel",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12113": {
+    "record_index": 384,
+    "map_id": 12113,
+    "raw_id": 50486,
+    "name": "2F, Hotel",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12114": {
+    "record_index": 385,
+    "map_id": 12114,
+    "raw_id": 50487,
+    "name": "Tavern",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12115": {
+    "record_index": 386,
+    "map_id": 12115,
+    "raw_id": 50480,
+    "name": "Drugstore",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12116": {
+    "record_index": 387,
+    "map_id": 12116,
+    "raw_id": 50481,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12117": {
+    "record_index": 388,
+    "map_id": 12117,
+    "raw_id": 50482,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12118": {
+    "record_index": 389,
+    "map_id": 12118,
+    "raw_id": 50483,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12119": {
+    "record_index": 390,
+    "map_id": 12119,
+    "raw_id": 50444,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12120": {
+    "record_index": 391,
+    "map_id": 12120,
+    "raw_id": 50445,
+    "name": "Great Wall",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12121": {
+    "record_index": 392,
+    "map_id": 12121,
+    "raw_id": 50446,
+    "name": "Great Wall",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12122": {
+    "record_index": 393,
+    "map_id": 12122,
+    "raw_id": 50447,
+    "name": "Bypath",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12123": {
+    "record_index": 394,
+    "map_id": 12123,
+    "raw_id": 50440,
+    "name": "Bypath",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12124": {
+    "record_index": 395,
+    "map_id": 12124,
+    "raw_id": 50441,
+    "name": "Great Wall Routeway",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12125": {
+    "record_index": 396,
+    "map_id": 12125,
+    "raw_id": 50442,
+    "name": "Great Wall Routeway",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "12126": {
+    "record_index": 397,
+    "map_id": 12126,
+    "raw_id": 50443,
+    "name": "Great Wall Passage",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12127": {
+    "record_index": 398,
+    "map_id": 12127,
+    "raw_id": 50436,
+    "name": "Great Wall Passage",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12128": {
+    "record_index": 399,
+    "map_id": 12128,
+    "raw_id": 50437,
+    "name": "Great Wall Tunnel",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12129": {
+    "record_index": 400,
+    "map_id": 12129,
+    "raw_id": 50438,
+    "name": "Great Wall Tunnel",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12130": {
+    "record_index": 401,
+    "map_id": 12130,
+    "raw_id": 50439,
+    "name": "Underground Tumulus",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12131": {
+    "record_index": 402,
+    "map_id": 12131,
+    "raw_id": 50432,
+    "name": "Underground Tumulus",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12132": {
+    "record_index": 403,
+    "map_id": 12132,
+    "raw_id": 50433,
+    "name": "Underground Tumulus",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12133": {
+    "record_index": 404,
+    "map_id": 12133,
+    "raw_id": 50434,
+    "name": "Demon Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12134": {
+    "record_index": 405,
+    "map_id": 12134,
+    "raw_id": 50435,
+    "name": "Demon Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12135": {
+    "record_index": 406,
+    "map_id": 12135,
+    "raw_id": 50460,
+    "name": "Demon Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12136": {
+    "record_index": 407,
+    "map_id": 12136,
+    "raw_id": 50461,
+    "name": "Demon Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12137": {
+    "record_index": 408,
+    "map_id": 12137,
+    "raw_id": 50462,
+    "name": "Demon Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12138": {
+    "record_index": 409,
+    "map_id": 12138,
+    "raw_id": 50463,
+    "name": "Demon Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12139": {
+    "record_index": 410,
+    "map_id": 12139,
+    "raw_id": 50456,
+    "name": "Hotspring House",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12140": {
+    "record_index": 411,
+    "map_id": 12140,
+    "raw_id": 50457,
+    "name": "Wind Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12141": {
+    "record_index": 412,
+    "map_id": 12141,
+    "raw_id": 50458,
+    "name": "Mystic Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12142": {
+    "record_index": 413,
+    "map_id": 12142,
+    "raw_id": 50459,
+    "name": "Mystic Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12143": {
+    "record_index": 414,
+    "map_id": 12143,
+    "raw_id": 50452,
+    "name": "Dragon Palace",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12144": {
+    "record_index": 415,
+    "map_id": 12144,
+    "raw_id": 50453,
+    "name": "Qin Emperor Tomb",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "12145": {
+    "record_index": 416,
+    "map_id": 12145,
+    "raw_id": 50454,
+    "name": "Xu Fu's Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12146": {
+    "record_index": 417,
+    "map_id": 12146,
+    "raw_id": 50455,
+    "name": "Vale Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12147": {
+    "record_index": 418,
+    "map_id": 12147,
+    "raw_id": 50448,
+    "name": "Vale Lake",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12148": {
+    "record_index": 419,
+    "map_id": 12148,
+    "raw_id": 50449,
+    "name": "Tomb Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12149": {
+    "record_index": 420,
+    "map_id": 12149,
+    "raw_id": 50450,
+    "name": "Tomb Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12150": {
+    "record_index": 421,
+    "map_id": 12150,
+    "raw_id": 50451,
+    "name": "Mayan Tribe",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12151": {
+    "record_index": 422,
+    "map_id": 12151,
+    "raw_id": 50668,
+    "name": "Sacerdotal's Home",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12152": {
+    "record_index": 423,
+    "map_id": 12152,
+    "raw_id": 50669,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12153": {
+    "record_index": 424,
+    "map_id": 12153,
+    "raw_id": 50670,
+    "name": "Weaponry",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12154": {
+    "record_index": 425,
+    "map_id": 12154,
+    "raw_id": 50671,
+    "name": "Inn",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12155": {
+    "record_index": 426,
+    "map_id": 12155,
+    "raw_id": 50664,
+    "name": "North Temple",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12156": {
+    "record_index": 427,
+    "map_id": 12156,
+    "raw_id": 50665,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12157": {
+    "record_index": 428,
+    "map_id": 12157,
+    "raw_id": 50666,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12158": {
+    "record_index": 429,
+    "map_id": 12158,
+    "raw_id": 50667,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12159": {
+    "record_index": 430,
+    "map_id": 12159,
+    "raw_id": 50660,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12160": {
+    "record_index": 431,
+    "map_id": 12160,
+    "raw_id": 50661,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12161": {
+    "record_index": 432,
+    "map_id": 12161,
+    "raw_id": 50662,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12162": {
+    "record_index": 433,
+    "map_id": 12162,
+    "raw_id": 50663,
+    "name": "Cellar",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12163": {
+    "record_index": 434,
+    "map_id": 12163,
+    "raw_id": 50656,
+    "name": "Altar Secret Path",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12164": {
+    "record_index": 435,
+    "map_id": 12164,
+    "raw_id": 50657,
+    "name": "Cellar",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12165": {
+    "record_index": 436,
+    "map_id": 12165,
+    "raw_id": 50658,
+    "name": "Altar Secret Path",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12166": {
+    "record_index": 437,
+    "map_id": 12166,
+    "raw_id": 50659,
+    "name": "Altar Secret Path",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12167": {
+    "record_index": 438,
+    "map_id": 12167,
+    "raw_id": 50684,
+    "name": "Mayan Grotto",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12168": {
+    "record_index": 439,
+    "map_id": 12168,
+    "raw_id": 50685,
+    "name": "Control Center",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12169": {
+    "record_index": 440,
+    "map_id": 12169,
+    "raw_id": 50686,
+    "name": "Forestry",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12170": {
+    "record_index": 441,
+    "map_id": 12170,
+    "raw_id": 50687,
+    "name": "Forestry",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12171": {
+    "record_index": 442,
+    "map_id": 12171,
+    "raw_id": 50680,
+    "name": "Altar Secret Path",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12172": {
+    "record_index": 443,
+    "map_id": 12172,
+    "raw_id": 50681,
+    "name": "Illusion Room",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12173": {
+    "record_index": 444,
+    "map_id": 12173,
+    "raw_id": 50682,
+    "name": "1F, Mayan Pyramid",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12174": {
+    "record_index": 445,
+    "map_id": 12174,
+    "raw_id": 50683,
+    "name": "2F, Mayan Pyramid",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12175": {
+    "record_index": 446,
+    "map_id": 12175,
+    "raw_id": 50676,
+    "name": "Underground Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12176": {
+    "record_index": 447,
+    "map_id": 12176,
+    "raw_id": 50677,
+    "name": "Underground Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12177": {
+    "record_index": 448,
+    "map_id": 12177,
+    "raw_id": 50678,
+    "name": "Forbidden Chamber",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12178": {
+    "record_index": 449,
+    "map_id": 12178,
+    "raw_id": 50679,
+    "name": "Boar's Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12179": {
+    "record_index": 450,
+    "map_id": 12179,
+    "raw_id": 50672,
+    "name": "Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12200": {
+    "record_index": 451,
+    "map_id": 12200,
+    "raw_id": 50653,
+    "name": "Long-Eared Tribe",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12201": {
+    "record_index": 452,
+    "map_id": 12201,
+    "raw_id": 50654,
+    "name": "The Villageleader's",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12202": {
+    "record_index": 453,
+    "map_id": 12202,
+    "raw_id": 50655,
+    "name": "Weaponry",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12203": {
+    "record_index": 454,
+    "map_id": 12203,
+    "raw_id": 50648,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12204": {
+    "record_index": 455,
+    "map_id": 12204,
+    "raw_id": 50649,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12205": {
+    "record_index": 456,
+    "map_id": 12205,
+    "raw_id": 50650,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12206": {
+    "record_index": 457,
+    "map_id": 12206,
+    "raw_id": 50651,
+    "name": "Volcano Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12207": {
+    "record_index": 458,
+    "map_id": 12207,
+    "raw_id": 50644,
+    "name": "Volcano Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12208": {
+    "record_index": 459,
+    "map_id": 12208,
+    "raw_id": 50645,
+    "name": "Isle Control Center",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12209": {
+    "record_index": 460,
+    "map_id": 12209,
+    "raw_id": 50646,
+    "name": "Passage To Colossus",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12210": {
+    "record_index": 461,
+    "map_id": 12210,
+    "raw_id": 50647,
+    "name": "Passage To Colossus",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12211": {
+    "record_index": 462,
+    "map_id": 12211,
+    "raw_id": 50640,
+    "name": "Volcano Maze",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "12212": {
+    "record_index": 463,
+    "map_id": 12212,
+    "raw_id": 50641,
+    "name": "Purgatory",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "12213": {
+    "record_index": 464,
+    "map_id": 12213,
+    "raw_id": 50642,
+    "name": "Secret Chamber",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12250": {
+    "record_index": 465,
+    "map_id": 12250,
+    "raw_id": 50575,
+    "name": "Kyoto",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12251": {
+    "record_index": 466,
+    "map_id": 12251,
+    "raw_id": 50568,
+    "name": "1F, Lord Pass",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12252": {
+    "record_index": 467,
+    "map_id": 12252,
+    "raw_id": 50569,
+    "name": "2F, Lord Pass",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12253": {
+    "record_index": 468,
+    "map_id": 12253,
+    "raw_id": 50570,
+    "name": "3F, Lord Pass",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12254": {
+    "record_index": 469,
+    "map_id": 12254,
+    "raw_id": 50571,
+    "name": "1F, Inn",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12255": {
+    "record_index": 470,
+    "map_id": 12255,
+    "raw_id": 50564,
+    "name": "2F, Inn",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12256": {
+    "record_index": 471,
+    "map_id": 12256,
+    "raw_id": 50565,
+    "name": "Pursue House",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12257": {
+    "record_index": 472,
+    "map_id": 12257,
+    "raw_id": 50566,
+    "name": "Soldier Room",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12258": {
+    "record_index": 473,
+    "map_id": 12258,
+    "raw_id": 50567,
+    "name": "Geisha House",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12259": {
+    "record_index": 474,
+    "map_id": 12259,
+    "raw_id": 50560,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12260": {
+    "record_index": 475,
+    "map_id": 12260,
+    "raw_id": 50561,
+    "name": "Casino",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12261": {
+    "record_index": 476,
+    "map_id": 12261,
+    "raw_id": 50562,
+    "name": "Weaponry",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12262": {
+    "record_index": 477,
+    "map_id": 12262,
+    "raw_id": 50563,
+    "name": "Cloth Store",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12263": {
+    "record_index": 478,
+    "map_id": 12263,
+    "raw_id": 50588,
+    "name": "Bathhouse",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12264": {
+    "record_index": 479,
+    "map_id": 12264,
+    "raw_id": 50589,
+    "name": "Civilian's House 1",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12265": {
+    "record_index": 480,
+    "map_id": 12265,
+    "raw_id": 50590,
+    "name": "Civilian's House 2",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12266": {
+    "record_index": 481,
+    "map_id": 12266,
+    "raw_id": 50591,
+    "name": "Civilian's House 3",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12267": {
+    "record_index": 482,
+    "map_id": 12267,
+    "raw_id": 50584,
+    "name": "Cavern",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12268": {
+    "record_index": 483,
+    "map_id": 12268,
+    "raw_id": 50585,
+    "name": "Cavern",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12269": {
+    "record_index": 484,
+    "map_id": 12269,
+    "raw_id": 50586,
+    "name": "Cavern",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12270": {
+    "record_index": 485,
+    "map_id": 12270,
+    "raw_id": 50587,
+    "name": "Cavern",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12271": {
+    "record_index": 486,
+    "map_id": 12271,
+    "raw_id": 50580,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12272": {
+    "record_index": 487,
+    "map_id": 12272,
+    "raw_id": 50581,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12273": {
+    "record_index": 488,
+    "map_id": 12273,
+    "raw_id": 50582,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12274": {
+    "record_index": 489,
+    "map_id": 12274,
+    "raw_id": 50583,
+    "name": "1F, Golden Temple",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12275": {
+    "record_index": 490,
+    "map_id": 12275,
+    "raw_id": 50576,
+    "name": "2F, Golden Temple",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12276": {
+    "record_index": 491,
+    "map_id": 12276,
+    "raw_id": 50577,
+    "name": "3F, Golden Temple",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12277": {
+    "record_index": 492,
+    "map_id": 12277,
+    "raw_id": 50578,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12278": {
+    "record_index": 493,
+    "map_id": 12278,
+    "raw_id": 50579,
+    "name": "Hill Road",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12279": {
+    "record_index": 494,
+    "map_id": 12279,
+    "raw_id": 55916,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12280": {
+    "record_index": 495,
+    "map_id": 12280,
+    "raw_id": 55917,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12281": {
+    "record_index": 496,
+    "map_id": 12281,
+    "raw_id": 55918,
+    "name": "Shayii Hill",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12282": {
+    "record_index": 497,
+    "map_id": 12282,
+    "raw_id": 55919,
+    "name": "1F, Shayii Hill",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12283": {
+    "record_index": 498,
+    "map_id": 12283,
+    "raw_id": 55912,
+    "name": "2F, Shayii Hill",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12284": {
+    "record_index": 499,
+    "map_id": 12284,
+    "raw_id": 55913,
+    "name": "Shayii Peak",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12285": {
+    "record_index": 500,
+    "map_id": 12285,
+    "raw_id": 55914,
+    "name": "Shayii Peak",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12286": {
+    "record_index": 501,
+    "map_id": 12286,
+    "raw_id": 55915,
+    "name": "Ghost Isle Cave",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12287": {
+    "record_index": 502,
+    "map_id": 12287,
+    "raw_id": 55908,
+    "name": "Ghost Isle Cave",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12288": {
+    "record_index": 503,
+    "map_id": 12288,
+    "raw_id": 55909,
+    "name": "Ghost Isle Cave",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12289": {
+    "record_index": 504,
+    "map_id": 12289,
+    "raw_id": 55910,
+    "name": "Ready for use",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12290": {
+    "record_index": 505,
+    "map_id": 12290,
+    "raw_id": 55911,
+    "name": "4F, Golden Temple",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12291": {
+    "record_index": 506,
+    "map_id": 12291,
+    "raw_id": 55904,
+    "name": "5F, Golden Temple",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12292": {
+    "record_index": 507,
+    "map_id": 12292,
+    "raw_id": 55905,
+    "name": "5F, Golden Temple",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12293": {
+    "record_index": 508,
+    "map_id": 12293,
+    "raw_id": 55906,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12294": {
+    "record_index": 509,
+    "map_id": 12294,
+    "raw_id": 55907,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12295": {
+    "record_index": 510,
+    "map_id": 12295,
+    "raw_id": 55932,
+    "name": "Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12296": {
+    "record_index": 511,
+    "map_id": 12296,
+    "raw_id": 55933,
+    "name": "Hilltop",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12297": {
+    "record_index": 512,
+    "map_id": 12297,
+    "raw_id": 55934,
+    "name": "Eastern Forest",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12298": {
+    "record_index": 513,
+    "map_id": 12298,
+    "raw_id": 55935,
+    "name": "Cliff",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12299": {
+    "record_index": 514,
+    "map_id": 12299,
+    "raw_id": 55928,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12300": {
+    "record_index": 515,
+    "map_id": 12300,
+    "raw_id": 55929,
+    "name": "Calcutta",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12301": {
+    "record_index": 516,
+    "map_id": 12301,
+    "raw_id": 55930,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12302": {
+    "record_index": 517,
+    "map_id": 12302,
+    "raw_id": 55931,
+    "name": "Inn",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12303": {
+    "record_index": 518,
+    "map_id": 12303,
+    "raw_id": 55924,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12304": {
+    "record_index": 519,
+    "map_id": 12304,
+    "raw_id": 55925,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12305": {
+    "record_index": 520,
+    "map_id": 12305,
+    "raw_id": 55926,
+    "name": "Bypath",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12306": {
+    "record_index": 521,
+    "map_id": 12306,
+    "raw_id": 55927,
+    "name": "Snake Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12307": {
+    "record_index": 522,
+    "map_id": 12307,
+    "raw_id": 55920,
+    "name": "Snake Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12312": {
+    "record_index": 523,
+    "map_id": 12312,
+    "raw_id": 55885,
+    "name": "Bypath",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12313": {
+    "record_index": 524,
+    "map_id": 12313,
+    "raw_id": 55886,
+    "name": "Underground Pathway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12314": {
+    "record_index": 525,
+    "map_id": 12314,
+    "raw_id": 55887,
+    "name": "Pasture",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12315": {
+    "record_index": 526,
+    "map_id": 12315,
+    "raw_id": 55880,
+    "name": "Ghostdom Secret Hall",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12350": {
+    "record_index": 527,
+    "map_id": 12350,
+    "raw_id": 55851,
+    "name": "Penguin Village",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12351": {
+    "record_index": 528,
+    "map_id": 12351,
+    "raw_id": 55844,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12352": {
+    "record_index": 529,
+    "map_id": 12352,
+    "raw_id": 55845,
+    "name": "Weaponry",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12353": {
+    "record_index": 530,
+    "map_id": 12353,
+    "raw_id": 55846,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12354": {
+    "record_index": 531,
+    "map_id": 12354,
+    "raw_id": 55847,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12358": {
+    "record_index": 532,
+    "map_id": 12358,
+    "raw_id": 55843,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12359": {
+    "record_index": 533,
+    "map_id": 12359,
+    "raw_id": 55868,
+    "name": "Ice House",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12360": {
+    "record_index": 534,
+    "map_id": 12360,
+    "raw_id": 55869,
+    "name": "Ice Maze",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12361": {
+    "record_index": 535,
+    "map_id": 12361,
+    "raw_id": 55870,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12355": {
+    "record_index": 536,
+    "map_id": 12355,
+    "raw_id": 55840,
+    "name": "South Pole",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12356": {
+    "record_index": 537,
+    "map_id": 12356,
+    "raw_id": 55841,
+    "name": "Iceberg",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12357": {
+    "record_index": 538,
+    "map_id": 12357,
+    "raw_id": 55842,
+    "name": "Ice Maze",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12362": {
+    "record_index": 539,
+    "map_id": 12362,
+    "raw_id": 55871,
+    "name": "2F, Ice House",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12363": {
+    "record_index": 540,
+    "map_id": 12363,
+    "raw_id": 55864,
+    "name": "3F, Ice House",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12364": {
+    "record_index": 541,
+    "map_id": 12364,
+    "raw_id": 55865,
+    "name": "4F, Ice House",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12365": {
+    "record_index": 542,
+    "map_id": 12365,
+    "raw_id": 55866,
+    "name": "Ice Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12366": {
+    "record_index": 543,
+    "map_id": 12366,
+    "raw_id": 55867,
+    "name": "2F, Ice House",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12367": {
+    "record_index": 544,
+    "map_id": 12367,
+    "raw_id": 55860,
+    "name": "1F, Snow Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12368": {
+    "record_index": 545,
+    "map_id": 12368,
+    "raw_id": 55861,
+    "name": "2F, Snow Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12369": {
+    "record_index": 546,
+    "map_id": 12369,
+    "raw_id": 55862,
+    "name": "3F, Snow Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12370": {
+    "record_index": 547,
+    "map_id": 12370,
+    "raw_id": 55863,
+    "name": "4F, Snow Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12371": {
+    "record_index": 548,
+    "map_id": 12371,
+    "raw_id": 55856,
+    "name": "5F, Snow Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12372": {
+    "record_index": 549,
+    "map_id": 12372,
+    "raw_id": 55857,
+    "name": "6F, Snow Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12373": {
+    "record_index": 550,
+    "map_id": 12373,
+    "raw_id": 55858,
+    "name": "7F, Snow Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12374": {
+    "record_index": 551,
+    "map_id": 12374,
+    "raw_id": 55859,
+    "name": "Underground Ice Cave",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12375": {
+    "record_index": 552,
+    "map_id": 12375,
+    "raw_id": 55820,
+    "name": "1F, Forbidden Region",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12376": {
+    "record_index": 553,
+    "map_id": 12376,
+    "raw_id": 55821,
+    "name": "2F, Forbidden Region",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12377": {
+    "record_index": 554,
+    "map_id": 12377,
+    "raw_id": 55822,
+    "name": "Snow House Backroom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12378": {
+    "record_index": 555,
+    "map_id": 12378,
+    "raw_id": 55823,
+    "name": "Ice House",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12379": {
+    "record_index": 556,
+    "map_id": 12379,
+    "raw_id": 55816,
+    "name": "Ice House",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12380": {
+    "record_index": 557,
+    "map_id": 12380,
+    "raw_id": 55817,
+    "name": "Laboratory",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12381": {
+    "record_index": 558,
+    "map_id": 12381,
+    "raw_id": 55818,
+    "name": "Forbidden Ice Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12400": {
+    "record_index": 559,
+    "map_id": 12400,
+    "raw_id": 55829,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12401": {
+    "record_index": 560,
+    "map_id": 12401,
+    "raw_id": 55830,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12402": {
+    "record_index": 561,
+    "map_id": 12402,
+    "raw_id": 55831,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12403": {
+    "record_index": 562,
+    "map_id": 12403,
+    "raw_id": 55824,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12404": {
+    "record_index": 563,
+    "map_id": 12404,
+    "raw_id": 55825,
+    "name": "Aus. Hilltop Passage",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12405": {
+    "record_index": 564,
+    "map_id": 12405,
+    "raw_id": 55826,
+    "name": "Aus. Hilltop",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12406": {
+    "record_index": 565,
+    "map_id": 12406,
+    "raw_id": 55827,
+    "name": "Dragon Arena",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12407": {
+    "record_index": 566,
+    "map_id": 12407,
+    "raw_id": 56044,
+    "name": "Dead Vale",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12408": {
+    "record_index": 567,
+    "map_id": 12408,
+    "raw_id": 56045,
+    "name": "Dead Vale",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12450": {
+    "record_index": 568,
+    "map_id": 12450,
+    "raw_id": 56007,
+    "name": "Inchon",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12451": {
+    "record_index": 569,
+    "map_id": 12451,
+    "raw_id": 56000,
+    "name": "The Villageleader's",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12452": {
+    "record_index": 570,
+    "map_id": 12452,
+    "raw_id": 56001,
+    "name": "Drugstore",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12453": {
+    "record_index": 571,
+    "map_id": 12453,
+    "raw_id": 56002,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12454": {
+    "record_index": 572,
+    "map_id": 12454,
+    "raw_id": 56003,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12455": {
+    "record_index": 573,
+    "map_id": 12455,
+    "raw_id": 56028,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12456": {
+    "record_index": 574,
+    "map_id": 12456,
+    "raw_id": 56029,
+    "name": "Korean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12457": {
+    "record_index": 575,
+    "map_id": 12457,
+    "raw_id": 56030,
+    "name": "Korean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12458": {
+    "record_index": 576,
+    "map_id": 12458,
+    "raw_id": 56031,
+    "name": "Korean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12459": {
+    "record_index": 577,
+    "map_id": 12459,
+    "raw_id": 56024,
+    "name": "Korean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12460": {
+    "record_index": 578,
+    "map_id": 12460,
+    "raw_id": 56025,
+    "name": "Korean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12461": {
+    "record_index": 579,
+    "map_id": 12461,
+    "raw_id": 56026,
+    "name": "Korean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12462": {
+    "record_index": 580,
+    "map_id": 12462,
+    "raw_id": 56027,
+    "name": "Korean Hotspring",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12463": {
+    "record_index": 581,
+    "map_id": 12463,
+    "raw_id": 56020,
+    "name": "Waterfall Grotto",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12464": {
+    "record_index": 582,
+    "map_id": 12464,
+    "raw_id": 56021,
+    "name": "Waterfall Grotto",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12465": {
+    "record_index": 583,
+    "map_id": 12465,
+    "raw_id": 56022,
+    "name": "Fairy Altar",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12466": {
+    "record_index": 584,
+    "map_id": 12466,
+    "raw_id": 56023,
+    "name": "Inchon Suburb",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12467": {
+    "record_index": 585,
+    "map_id": 12467,
+    "raw_id": 56016,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0025",
+    "bgm_id": 25
+  },
+  "12468": {
+    "record_index": 586,
+    "map_id": 12468,
+    "raw_id": 56017,
+    "name": "Korean Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12469": {
+    "record_index": 587,
+    "map_id": 12469,
+    "raw_id": 56018,
+    "name": "Frost Peak",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12500": {
+    "record_index": 588,
+    "map_id": 12500,
+    "raw_id": 55985,
+    "name": "Cairo",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12501": {
+    "record_index": 589,
+    "map_id": 12501,
+    "raw_id": 55986,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12502": {
+    "record_index": 590,
+    "map_id": 12502,
+    "raw_id": 55987,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12503": {
+    "record_index": 591,
+    "map_id": 12503,
+    "raw_id": 55948,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12504": {
+    "record_index": 592,
+    "map_id": 12504,
+    "raw_id": 55949,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12505": {
+    "record_index": 593,
+    "map_id": 12505,
+    "raw_id": 55950,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12506": {
+    "record_index": 594,
+    "map_id": 12506,
+    "raw_id": 55951,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12507": {
+    "record_index": 595,
+    "map_id": 12507,
+    "raw_id": 55944,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12508": {
+    "record_index": 596,
+    "map_id": 12508,
+    "raw_id": 55945,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12509": {
+    "record_index": 597,
+    "map_id": 12509,
+    "raw_id": 55946,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12510": {
+    "record_index": 598,
+    "map_id": 12510,
+    "raw_id": 55947,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12511": {
+    "record_index": 599,
+    "map_id": 12511,
+    "raw_id": 55940,
+    "name": "Grassland",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12512": {
+    "record_index": 600,
+    "map_id": 12512,
+    "raw_id": 55941,
+    "name": "Grassland",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12513": {
+    "record_index": 601,
+    "map_id": 12513,
+    "raw_id": 55942,
+    "name": "Treasure Warehouse",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "12514": {
+    "record_index": 602,
+    "map_id": 12514,
+    "raw_id": 55943,
+    "name": "Bat Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12515": {
+    "record_index": 603,
+    "map_id": 12515,
+    "raw_id": 55936,
+    "name": "Cactus Llano",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12516": {
+    "record_index": 604,
+    "map_id": 12516,
+    "raw_id": 55937,
+    "name": "Egyptian Great Llano",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12517": {
+    "record_index": 605,
+    "map_id": 12517,
+    "raw_id": 55938,
+    "name": "Mystic Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12518": {
+    "record_index": 606,
+    "map_id": 12518,
+    "raw_id": 55939,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12519": {
+    "record_index": 607,
+    "map_id": 12519,
+    "raw_id": 55964,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12520": {
+    "record_index": 608,
+    "map_id": 12520,
+    "raw_id": 55965,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12521": {
+    "record_index": 609,
+    "map_id": 12521,
+    "raw_id": 55966,
+    "name": "Adytum Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12522": {
+    "record_index": 610,
+    "map_id": 12522,
+    "raw_id": 55967,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12523": {
+    "record_index": 611,
+    "map_id": 12523,
+    "raw_id": 55960,
+    "name": "Way Of Truth",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12524": {
+    "record_index": 612,
+    "map_id": 12524,
+    "raw_id": 55961,
+    "name": "Mystic Passage",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12525": {
+    "record_index": 613,
+    "map_id": 12525,
+    "raw_id": 55962,
+    "name": "Illusion Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12526": {
+    "record_index": 614,
+    "map_id": 12526,
+    "raw_id": 55963,
+    "name": "Illusion Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12527": {
+    "record_index": 615,
+    "map_id": 12527,
+    "raw_id": 55956,
+    "name": "Illusion Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12528": {
+    "record_index": 616,
+    "map_id": 12528,
+    "raw_id": 55957,
+    "name": "Illusion Cellar",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12529": {
+    "record_index": 617,
+    "map_id": 12529,
+    "raw_id": 55958,
+    "name": "Illusion Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12530": {
+    "record_index": 618,
+    "map_id": 12530,
+    "raw_id": 55959,
+    "name": "Pyramid Secret Path",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12531": {
+    "record_index": 619,
+    "map_id": 12531,
+    "raw_id": 55952,
+    "name": "Boundary",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12532": {
+    "record_index": 620,
+    "map_id": 12532,
+    "raw_id": 55953,
+    "name": "Egyptian Palace",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "12533": {
+    "record_index": 621,
+    "map_id": 12533,
+    "raw_id": 55954,
+    "name": "Lost Desert",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12534": {
+    "record_index": 622,
+    "map_id": 12534,
+    "raw_id": 55955,
+    "name": "Tut's Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12535": {
+    "record_index": 623,
+    "map_id": 12535,
+    "raw_id": 56172,
+    "name": "Pathway Of Burial",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12536": {
+    "record_index": 624,
+    "map_id": 12536,
+    "raw_id": 56173,
+    "name": "Tut's Burial",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12537": {
+    "record_index": 625,
+    "map_id": 12537,
+    "raw_id": 56174,
+    "name": "Dreamland",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12538": {
+    "record_index": 626,
+    "map_id": 12538,
+    "raw_id": 56175,
+    "name": "Dreamland",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12539": {
+    "record_index": 627,
+    "map_id": 12539,
+    "raw_id": 56168,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12540": {
+    "record_index": 628,
+    "map_id": 12540,
+    "raw_id": 56169,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12541": {
+    "record_index": 629,
+    "map_id": 12541,
+    "raw_id": 56170,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12542": {
+    "record_index": 630,
+    "map_id": 12542,
+    "raw_id": 56171,
+    "name": "Pyramid Secret Room",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12543": {
+    "record_index": 631,
+    "map_id": 12543,
+    "raw_id": 56164,
+    "name": "40 Thieves' Treasure",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12544": {
+    "record_index": 632,
+    "map_id": 12544,
+    "raw_id": 56165,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12545": {
+    "record_index": 633,
+    "map_id": 12545,
+    "raw_id": 56166,
+    "name": "Cave Behind Cairo",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12546": {
+    "record_index": 634,
+    "map_id": 12546,
+    "raw_id": 56167,
+    "name": "Cave Behind Cairo",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12547": {
+    "record_index": 635,
+    "map_id": 12547,
+    "raw_id": 56160,
+    "name": "Cave Behind Cairo",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12548": {
+    "record_index": 636,
+    "map_id": 12548,
+    "raw_id": 56161,
+    "name": "Cave Behind Cairo",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12549": {
+    "record_index": 637,
+    "map_id": 12549,
+    "raw_id": 56162,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12551": {
+    "record_index": 638,
+    "map_id": 12551,
+    "raw_id": 56188,
+    "name": "Hawaii Residence",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "12552": {
+    "record_index": 639,
+    "map_id": 12552,
+    "raw_id": 56189,
+    "name": "Hawaii Residence",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "12553": {
+    "record_index": 640,
+    "map_id": 12553,
+    "raw_id": 56190,
+    "name": "2F, Hawaii Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12554": {
+    "record_index": 641,
+    "map_id": 12554,
+    "raw_id": 56191,
+    "name": "3F, Hawaii Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12555": {
+    "record_index": 642,
+    "map_id": 12555,
+    "raw_id": 56184,
+    "name": "Hawaii Hilltop",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12556": {
+    "record_index": 643,
+    "map_id": 12556,
+    "raw_id": 56185,
+    "name": "Hawaiian Hotsprings",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12600": {
+    "record_index": 644,
+    "map_id": 12600,
+    "raw_id": 56109,
+    "name": "Bangkok",
+    "bgm_name": "BGM0035",
+    "bgm_id": 35
+  },
+  "12601": {
+    "record_index": 645,
+    "map_id": 12601,
+    "raw_id": 56110,
+    "name": "Harbor",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "12602": {
+    "record_index": 646,
+    "map_id": 12602,
+    "raw_id": 56111,
+    "name": "Angkor Wat",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12603": {
+    "record_index": 647,
+    "map_id": 12603,
+    "raw_id": 56104,
+    "name": "Royal Palace",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12604": {
+    "record_index": 648,
+    "map_id": 12604,
+    "raw_id": 56105,
+    "name": "Weaponry",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12605": {
+    "record_index": 649,
+    "map_id": 12605,
+    "raw_id": 56106,
+    "name": "Inn",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12606": {
+    "record_index": 650,
+    "map_id": 12606,
+    "raw_id": 56107,
+    "name": "2F, Inn",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12607": {
+    "record_index": 651,
+    "map_id": 12607,
+    "raw_id": 56100,
+    "name": "Grocery",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12608": {
+    "record_index": 652,
+    "map_id": 12608,
+    "raw_id": 56101,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12609": {
+    "record_index": 653,
+    "map_id": 12609,
+    "raw_id": 56102,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12610": {
+    "record_index": 654,
+    "map_id": 12610,
+    "raw_id": 56103,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12611": {
+    "record_index": 655,
+    "map_id": 12611,
+    "raw_id": 56096,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12612": {
+    "record_index": 656,
+    "map_id": 12612,
+    "raw_id": 56097,
+    "name": "Budda's Chamber",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12613": {
+    "record_index": 657,
+    "map_id": 12613,
+    "raw_id": 56098,
+    "name": "Thailand Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12614": {
+    "record_index": 658,
+    "map_id": 12614,
+    "raw_id": 56099,
+    "name": "Thai Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12615": {
+    "record_index": 659,
+    "map_id": 12615,
+    "raw_id": 56124,
+    "name": "Mystic Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12616": {
+    "record_index": 660,
+    "map_id": 12616,
+    "raw_id": 56125,
+    "name": "Thai Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12617": {
+    "record_index": 661,
+    "map_id": 12617,
+    "raw_id": 56126,
+    "name": "Buddha's Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12618": {
+    "record_index": 662,
+    "map_id": 12618,
+    "raw_id": 56127,
+    "name": "Buddha's Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12619": {
+    "record_index": 663,
+    "map_id": 12619,
+    "raw_id": 56120,
+    "name": "Buddha's Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12620": {
+    "record_index": 664,
+    "map_id": 12620,
+    "raw_id": 56121,
+    "name": "Buddha's Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12621": {
+    "record_index": 665,
+    "map_id": 12621,
+    "raw_id": 56122,
+    "name": "Angkor Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12622": {
+    "record_index": 666,
+    "map_id": 12622,
+    "raw_id": 56123,
+    "name": "Angkor Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12623": {
+    "record_index": 667,
+    "map_id": 12623,
+    "raw_id": 56116,
+    "name": "Angkor Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12624": {
+    "record_index": 668,
+    "map_id": 12624,
+    "raw_id": 56117,
+    "name": "Angkor Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12625": {
+    "record_index": 669,
+    "map_id": 12625,
+    "raw_id": 56118,
+    "name": "Job Palace",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12626": {
+    "record_index": 670,
+    "map_id": 12626,
+    "raw_id": 56119,
+    "name": "1F, Training Region",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12627": {
+    "record_index": 671,
+    "map_id": 12627,
+    "raw_id": 56112,
+    "name": "2F, Training Region",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12628": {
+    "record_index": 672,
+    "map_id": 12628,
+    "raw_id": 56113,
+    "name": "3F, Training Region",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12629": {
+    "record_index": 673,
+    "map_id": 12629,
+    "raw_id": 56114,
+    "name": "4F, Training Region",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12630": {
+    "record_index": 674,
+    "map_id": 12630,
+    "raw_id": 56115,
+    "name": "5F, Training Region",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12631": {
+    "record_index": 675,
+    "map_id": 12631,
+    "raw_id": 56076,
+    "name": "Thai Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12632": {
+    "record_index": 676,
+    "map_id": 12632,
+    "raw_id": 56077,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12633": {
+    "record_index": 677,
+    "map_id": 12633,
+    "raw_id": 56078,
+    "name": "Hilltop",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12634": {
+    "record_index": 678,
+    "map_id": 12634,
+    "raw_id": 56079,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12635": {
+    "record_index": 679,
+    "map_id": 12635,
+    "raw_id": 56072,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12636": {
+    "record_index": 680,
+    "map_id": 12636,
+    "raw_id": 56073,
+    "name": "Back Jungle",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12637": {
+    "record_index": 681,
+    "map_id": 12637,
+    "raw_id": 56074,
+    "name": "Angkor Aisle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12638": {
+    "record_index": 682,
+    "map_id": 12638,
+    "raw_id": 56075,
+    "name": "Angkor Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12639": {
+    "record_index": 683,
+    "map_id": 12639,
+    "raw_id": 56068,
+    "name": "Main Town Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12640": {
+    "record_index": 684,
+    "map_id": 12640,
+    "raw_id": 56069,
+    "name": "Main Town Of Angkor",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12641": {
+    "record_index": 685,
+    "map_id": 12641,
+    "raw_id": 56070,
+    "name": "Main Town Of Angkor",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12642": {
+    "record_index": 686,
+    "map_id": 12642,
+    "raw_id": 56071,
+    "name": "Main Town Of Angkor",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12643": {
+    "record_index": 687,
+    "map_id": 12643,
+    "raw_id": 56064,
+    "name": "Main Town Of Angkor",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12644": {
+    "record_index": 688,
+    "map_id": 12644,
+    "raw_id": 56065,
+    "name": "Main Town Of Angkor",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12645": {
+    "record_index": 689,
+    "map_id": 12645,
+    "raw_id": 56066,
+    "name": "Alfer Gorge",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12646": {
+    "record_index": 690,
+    "map_id": 12646,
+    "raw_id": 56067,
+    "name": "Secret Path Of Gorge",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12647": {
+    "record_index": 691,
+    "map_id": 12647,
+    "raw_id": 56092,
+    "name": "Alfer Village",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12648": {
+    "record_index": 692,
+    "map_id": 12648,
+    "raw_id": 56093,
+    "name": "Alfer Gorge",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "12649": {
+    "record_index": 693,
+    "map_id": 12649,
+    "raw_id": 56094,
+    "name": "Holy Land In Angkor",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12650": {
+    "record_index": 694,
+    "map_id": 12650,
+    "raw_id": 56095,
+    "name": "Machu Picchu",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12651": {
+    "record_index": 695,
+    "map_id": 12651,
+    "raw_id": 56088,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12652": {
+    "record_index": 696,
+    "map_id": 12652,
+    "raw_id": 56089,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12653": {
+    "record_index": 697,
+    "map_id": 12653,
+    "raw_id": 56090,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12654": {
+    "record_index": 698,
+    "map_id": 12654,
+    "raw_id": 56091,
+    "name": "Weaponry",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12655": {
+    "record_index": 699,
+    "map_id": 12655,
+    "raw_id": 56084,
+    "name": "Main Hall Of Temple",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12656": {
+    "record_index": 700,
+    "map_id": 12656,
+    "raw_id": 56085,
+    "name": "Side Hall Of Temple",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12657": {
+    "record_index": 701,
+    "map_id": 12657,
+    "raw_id": 56086,
+    "name": "Grocery",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12658": {
+    "record_index": 702,
+    "map_id": 12658,
+    "raw_id": 56087,
+    "name": "Cafeteria",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "12659": {
+    "record_index": 703,
+    "map_id": 12659,
+    "raw_id": 56080,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12660": {
+    "record_index": 704,
+    "map_id": 12660,
+    "raw_id": 56081,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12661": {
+    "record_index": 705,
+    "map_id": 12661,
+    "raw_id": 56082,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12662": {
+    "record_index": 706,
+    "map_id": 12662,
+    "raw_id": 56083,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12663": {
+    "record_index": 707,
+    "map_id": 12663,
+    "raw_id": 56300,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "12664": {
+    "record_index": 708,
+    "map_id": 12664,
+    "raw_id": 56301,
+    "name": "Underground Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12665": {
+    "record_index": 709,
+    "map_id": 12665,
+    "raw_id": 56302,
+    "name": "1F, Mainhall Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12666": {
+    "record_index": 710,
+    "map_id": 12666,
+    "raw_id": 56303,
+    "name": "2F, Mainhall Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12667": {
+    "record_index": 711,
+    "map_id": 12667,
+    "raw_id": 56296,
+    "name": "3F, Mainhall Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12668": {
+    "record_index": 712,
+    "map_id": 12668,
+    "raw_id": 56297,
+    "name": "Underground Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12669": {
+    "record_index": 713,
+    "map_id": 12669,
+    "raw_id": 56298,
+    "name": "Evil Altar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12670": {
+    "record_index": 714,
+    "map_id": 12670,
+    "raw_id": 56299,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12671": {
+    "record_index": 715,
+    "map_id": 12671,
+    "raw_id": 56292,
+    "name": "Underground Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12672": {
+    "record_index": 716,
+    "map_id": 12672,
+    "raw_id": 56293,
+    "name": "Underground Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12673": {
+    "record_index": 717,
+    "map_id": 12673,
+    "raw_id": 56294,
+    "name": "Secret Aisle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12674": {
+    "record_index": 718,
+    "map_id": 12674,
+    "raw_id": 56295,
+    "name": "Jail Of Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12675": {
+    "record_index": 719,
+    "map_id": 12675,
+    "raw_id": 56288,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12676": {
+    "record_index": 720,
+    "map_id": 12676,
+    "raw_id": 56289,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12677": {
+    "record_index": 721,
+    "map_id": 12677,
+    "raw_id": 56290,
+    "name": "Spirit Forbidden Gro",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12700": {
+    "record_index": 722,
+    "map_id": 12700,
+    "raw_id": 56265,
+    "name": "African Villages",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12701": {
+    "record_index": 723,
+    "map_id": 12701,
+    "raw_id": 56266,
+    "name": "African Residence",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12702": {
+    "record_index": 724,
+    "map_id": 12702,
+    "raw_id": 56267,
+    "name": "African Residence",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12703": {
+    "record_index": 725,
+    "map_id": 12703,
+    "raw_id": 56260,
+    "name": "Africa Plain",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12704": {
+    "record_index": 726,
+    "map_id": 12704,
+    "raw_id": 56261,
+    "name": "African Residence",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12705": {
+    "record_index": 727,
+    "map_id": 12705,
+    "raw_id": 56262,
+    "name": "Slave Ship Deck",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "12706": {
+    "record_index": 728,
+    "map_id": 12706,
+    "raw_id": 56263,
+    "name": "Slave Ship Walkway",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "12707": {
+    "record_index": 729,
+    "map_id": 12707,
+    "raw_id": 56256,
+    "name": "Slave Ship Prison",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "12750": {
+    "record_index": 730,
+    "map_id": 12750,
+    "raw_id": 56251,
+    "name": "Hanging Garden",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12751": {
+    "record_index": 731,
+    "map_id": 12751,
+    "raw_id": 56244,
+    "name": "Hanging Adytum",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12752": {
+    "record_index": 732,
+    "map_id": 12752,
+    "raw_id": 56245,
+    "name": "Hanging Adytum",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12753": {
+    "record_index": 733,
+    "map_id": 12753,
+    "raw_id": 56246,
+    "name": "Back Jungle",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12754": {
+    "record_index": 734,
+    "map_id": 12754,
+    "raw_id": 56247,
+    "name": "Hanging Adytum",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12755": {
+    "record_index": 735,
+    "map_id": 12755,
+    "raw_id": 56240,
+    "name": "Hanging Adytum",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12756": {
+    "record_index": 736,
+    "map_id": 12756,
+    "raw_id": 56241,
+    "name": "Hanging Adytum",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12757": {
+    "record_index": 737,
+    "map_id": 12757,
+    "raw_id": 56242,
+    "name": "Statue Chamber",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12758": {
+    "record_index": 738,
+    "map_id": 12758,
+    "raw_id": 56243,
+    "name": "Unkown Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12759": {
+    "record_index": 739,
+    "map_id": 12759,
+    "raw_id": 56204,
+    "name": "Ant Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12760": {
+    "record_index": 740,
+    "map_id": 12760,
+    "raw_id": 56205,
+    "name": "Ant-Egg Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12761": {
+    "record_index": 741,
+    "map_id": 12761,
+    "raw_id": 56206,
+    "name": "Hanging Adytum",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12762": {
+    "record_index": 742,
+    "map_id": 12762,
+    "raw_id": 56207,
+    "name": "Hanging Extension",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12763": {
+    "record_index": 743,
+    "map_id": 12763,
+    "raw_id": 56200,
+    "name": "Mystic Garden",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "12764": {
+    "record_index": 744,
+    "map_id": 12764,
+    "raw_id": 56201,
+    "name": "1F, Prison",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12765": {
+    "record_index": 745,
+    "map_id": 12765,
+    "raw_id": 56202,
+    "name": "2F, Prison",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12766": {
+    "record_index": 746,
+    "map_id": 12766,
+    "raw_id": 56203,
+    "name": "Altar",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12767": {
+    "record_index": 747,
+    "map_id": 12767,
+    "raw_id": 56196,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12768": {
+    "record_index": 748,
+    "map_id": 12768,
+    "raw_id": 56197,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12800": {
+    "record_index": 749,
+    "map_id": 12800,
+    "raw_id": 55397,
+    "name": "Athens",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12801": {
+    "record_index": 750,
+    "map_id": 12801,
+    "raw_id": 55398,
+    "name": "Large Hall",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12802": {
+    "record_index": 751,
+    "map_id": 12802,
+    "raw_id": 55399,
+    "name": "Small Hall",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12803": {
+    "record_index": 752,
+    "map_id": 12803,
+    "raw_id": 55392,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12804": {
+    "record_index": 753,
+    "map_id": 12804,
+    "raw_id": 55393,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12805": {
+    "record_index": 754,
+    "map_id": 12805,
+    "raw_id": 55394,
+    "name": "Executive House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12806": {
+    "record_index": 755,
+    "map_id": 12806,
+    "raw_id": 55395,
+    "name": "2F, Executive House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12807": {
+    "record_index": 756,
+    "map_id": 12807,
+    "raw_id": 55420,
+    "name": "Weaponry",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12808": {
+    "record_index": 757,
+    "map_id": 12808,
+    "raw_id": 55421,
+    "name": "Inn",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12809": {
+    "record_index": 758,
+    "map_id": 12809,
+    "raw_id": 55422,
+    "name": "2F, Inn",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12810": {
+    "record_index": 759,
+    "map_id": 12810,
+    "raw_id": 55423,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12811": {
+    "record_index": 760,
+    "map_id": 12811,
+    "raw_id": 55416,
+    "name": "Opera House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12812": {
+    "record_index": 761,
+    "map_id": 12812,
+    "raw_id": 55417,
+    "name": "Fisherman's Home",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12813": {
+    "record_index": 762,
+    "map_id": 12813,
+    "raw_id": 55418,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12814": {
+    "record_index": 763,
+    "map_id": 12814,
+    "raw_id": 55419,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12815": {
+    "record_index": 764,
+    "map_id": 12815,
+    "raw_id": 55412,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12816": {
+    "record_index": 765,
+    "map_id": 12816,
+    "raw_id": 55413,
+    "name": "2nd Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12817": {
+    "record_index": 766,
+    "map_id": 12817,
+    "raw_id": 55414,
+    "name": "1st Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12818": {
+    "record_index": 767,
+    "map_id": 12818,
+    "raw_id": 55415,
+    "name": "3rd Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12819": {
+    "record_index": 768,
+    "map_id": 12819,
+    "raw_id": 55408,
+    "name": "4th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12820": {
+    "record_index": 769,
+    "map_id": 12820,
+    "raw_id": 55409,
+    "name": "5th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12821": {
+    "record_index": 770,
+    "map_id": 12821,
+    "raw_id": 55410,
+    "name": "6th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12822": {
+    "record_index": 771,
+    "map_id": 12822,
+    "raw_id": 55411,
+    "name": "7th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12823": {
+    "record_index": 772,
+    "map_id": 12823,
+    "raw_id": 55372,
+    "name": "8th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12824": {
+    "record_index": 773,
+    "map_id": 12824,
+    "raw_id": 55373,
+    "name": "9th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12825": {
+    "record_index": 774,
+    "map_id": 12825,
+    "raw_id": 55374,
+    "name": "10th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12826": {
+    "record_index": 775,
+    "map_id": 12826,
+    "raw_id": 55375,
+    "name": "11th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12827": {
+    "record_index": 776,
+    "map_id": 12827,
+    "raw_id": 55368,
+    "name": "12th Palace",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12828": {
+    "record_index": 777,
+    "map_id": 12828,
+    "raw_id": 55369,
+    "name": "Operahouse Backway",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12829": {
+    "record_index": 778,
+    "map_id": 12829,
+    "raw_id": 55370,
+    "name": "Leopard Feedlot",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12830": {
+    "record_index": 779,
+    "map_id": 12830,
+    "raw_id": 55371,
+    "name": "Executive Chamber",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12831": {
+    "record_index": 780,
+    "map_id": 12831,
+    "raw_id": 55364,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12832": {
+    "record_index": 781,
+    "map_id": 12832,
+    "raw_id": 55365,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "12833": {
+    "record_index": 782,
+    "map_id": 12833,
+    "raw_id": 55366,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12834": {
+    "record_index": 783,
+    "map_id": 12834,
+    "raw_id": 55367,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12835": {
+    "record_index": 784,
+    "map_id": 12835,
+    "raw_id": 55360,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12836": {
+    "record_index": 785,
+    "map_id": 12836,
+    "raw_id": 55361,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12837": {
+    "record_index": 786,
+    "map_id": 12837,
+    "raw_id": 55362,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12838": {
+    "record_index": 787,
+    "map_id": 12838,
+    "raw_id": 55363,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12839": {
+    "record_index": 788,
+    "map_id": 12839,
+    "raw_id": 55388,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12840": {
+    "record_index": 789,
+    "map_id": 12840,
+    "raw_id": 55389,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12841": {
+    "record_index": 790,
+    "map_id": 12841,
+    "raw_id": 55390,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12842": {
+    "record_index": 791,
+    "map_id": 12842,
+    "raw_id": 55391,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12843": {
+    "record_index": 792,
+    "map_id": 12843,
+    "raw_id": 55384,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12844": {
+    "record_index": 793,
+    "map_id": 12844,
+    "raw_id": 55385,
+    "name": "Cursed Palace Path",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "12845": {
+    "record_index": 794,
+    "map_id": 12845,
+    "raw_id": 55386,
+    "name": "Civilian's Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12846": {
+    "record_index": 795,
+    "map_id": 12846,
+    "raw_id": 55387,
+    "name": "Mystic Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12847": {
+    "record_index": 796,
+    "map_id": 12847,
+    "raw_id": 55380,
+    "name": "Flaming Caldera",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12848": {
+    "record_index": 797,
+    "map_id": 12848,
+    "raw_id": 55381,
+    "name": "Forbidden Spot",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12849": {
+    "record_index": 798,
+    "map_id": 12849,
+    "raw_id": 55382,
+    "name": "Inside Pyramid",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12850": {
+    "record_index": 799,
+    "map_id": 12850,
+    "raw_id": 55383,
+    "name": "Yamataikoku",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12851": {
+    "record_index": 800,
+    "map_id": 12851,
+    "raw_id": 55376,
+    "name": "1F, Officiant Palace",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12852": {
+    "record_index": 801,
+    "map_id": 12852,
+    "raw_id": 55377,
+    "name": "2F, Officiant Palace",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12853": {
+    "record_index": 802,
+    "map_id": 12853,
+    "raw_id": 55378,
+    "name": "Inn",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12854": {
+    "record_index": 803,
+    "map_id": 12854,
+    "raw_id": 55379,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12855": {
+    "record_index": 804,
+    "map_id": 12855,
+    "raw_id": 55340,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12856": {
+    "record_index": 805,
+    "map_id": 12856,
+    "raw_id": 55341,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12857": {
+    "record_index": 806,
+    "map_id": 12857,
+    "raw_id": 55342,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12858": {
+    "record_index": 807,
+    "map_id": 12858,
+    "raw_id": 55343,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0036",
+    "bgm_id": 36
+  },
+  "12859": {
+    "record_index": 808,
+    "map_id": 12859,
+    "raw_id": 55336,
+    "name": "Sky Land",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12860": {
+    "record_index": 809,
+    "map_id": 12860,
+    "raw_id": 55337,
+    "name": "Sky Land",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "12861": {
+    "record_index": 810,
+    "map_id": 12861,
+    "raw_id": 55338,
+    "name": "Yamataikoku Suburb",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12862": {
+    "record_index": 811,
+    "map_id": 12862,
+    "raw_id": 55339,
+    "name": "Forbidden Area",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12863": {
+    "record_index": 812,
+    "map_id": 12863,
+    "raw_id": 55332,
+    "name": "Cherry Forest",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12864": {
+    "record_index": 813,
+    "map_id": 12864,
+    "raw_id": 55333,
+    "name": "Secret Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12865": {
+    "record_index": 814,
+    "map_id": 12865,
+    "raw_id": 55334,
+    "name": "Secret Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12866": {
+    "record_index": 815,
+    "map_id": 12866,
+    "raw_id": 55335,
+    "name": "Secret Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12867": {
+    "record_index": 816,
+    "map_id": 12867,
+    "raw_id": 55328,
+    "name": "Secret Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12868": {
+    "record_index": 817,
+    "map_id": 12868,
+    "raw_id": 55329,
+    "name": "Eastern Valley",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12869": {
+    "record_index": 818,
+    "map_id": 12869,
+    "raw_id": 55330,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12870": {
+    "record_index": 819,
+    "map_id": 12870,
+    "raw_id": 55331,
+    "name": "Shayi Forbidden Area",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12871": {
+    "record_index": 820,
+    "map_id": 12871,
+    "raw_id": 55356,
+    "name": "Shayi Forbidden Area",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12872": {
+    "record_index": 821,
+    "map_id": 12872,
+    "raw_id": 55357,
+    "name": "Shayi Forbidden Area",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12873": {
+    "record_index": 822,
+    "map_id": 12873,
+    "raw_id": 55358,
+    "name": "Cavern",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12874": {
+    "record_index": 823,
+    "map_id": 12874,
+    "raw_id": 55359,
+    "name": "Cavern",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12875": {
+    "record_index": 824,
+    "map_id": 12875,
+    "raw_id": 55352,
+    "name": "Fire Maple Forest",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12876": {
+    "record_index": 825,
+    "map_id": 12876,
+    "raw_id": 55353,
+    "name": "Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12877": {
+    "record_index": 826,
+    "map_id": 12877,
+    "raw_id": 55354,
+    "name": "Secret Room",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12878": {
+    "record_index": 827,
+    "map_id": 12878,
+    "raw_id": 55355,
+    "name": "Ice Cave",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12879": {
+    "record_index": 828,
+    "map_id": 12879,
+    "raw_id": 55348,
+    "name": "Ice Cave",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12880": {
+    "record_index": 829,
+    "map_id": 12880,
+    "raw_id": 55349,
+    "name": "Well Bottom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12881": {
+    "record_index": 830,
+    "map_id": 12881,
+    "raw_id": 55350,
+    "name": "Dark Cave",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12882": {
+    "record_index": 831,
+    "map_id": 12882,
+    "raw_id": 55351,
+    "name": "Underground Corridor",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12883": {
+    "record_index": 832,
+    "map_id": 12883,
+    "raw_id": 55344,
+    "name": "Throne Hall",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "12900": {
+    "record_index": 833,
+    "map_id": 12900,
+    "raw_id": 55297,
+    "name": "Turtle Isle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12901": {
+    "record_index": 834,
+    "map_id": 12901,
+    "raw_id": 55298,
+    "name": "Turtle Isle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12902": {
+    "record_index": 835,
+    "map_id": 12902,
+    "raw_id": 55299,
+    "name": "Relic Island",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12903": {
+    "record_index": 836,
+    "map_id": 12903,
+    "raw_id": 55324,
+    "name": "Water Passage",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12904": {
+    "record_index": 837,
+    "map_id": 12904,
+    "raw_id": 55325,
+    "name": "Seabed Palace",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12905": {
+    "record_index": 838,
+    "map_id": 12905,
+    "raw_id": 55326,
+    "name": "Deep Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12906": {
+    "record_index": 839,
+    "map_id": 12906,
+    "raw_id": 55327,
+    "name": "Seabed Palace",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12907": {
+    "record_index": 840,
+    "map_id": 12907,
+    "raw_id": 55320,
+    "name": "Hidden Waterway",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12908": {
+    "record_index": 841,
+    "map_id": 12908,
+    "raw_id": 55321,
+    "name": "Stomach",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12909": {
+    "record_index": 842,
+    "map_id": 12909,
+    "raw_id": 55322,
+    "name": "Smal-Intestine",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12910": {
+    "record_index": 843,
+    "map_id": 12910,
+    "raw_id": 55323,
+    "name": "Large-Intestine",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12911": {
+    "record_index": 844,
+    "map_id": 12911,
+    "raw_id": 55316,
+    "name": "Sealord Warehouse",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12912": {
+    "record_index": 845,
+    "map_id": 12912,
+    "raw_id": 55317,
+    "name": "Pirate Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12913": {
+    "record_index": 846,
+    "map_id": 12913,
+    "raw_id": 55318,
+    "name": "Pirate Treasury",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12914": {
+    "record_index": 847,
+    "map_id": 12914,
+    "raw_id": 55319,
+    "name": "Dark Island",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12915": {
+    "record_index": 848,
+    "map_id": 12915,
+    "raw_id": 55312,
+    "name": "Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12916": {
+    "record_index": 849,
+    "map_id": 12916,
+    "raw_id": 55313,
+    "name": "Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12917": {
+    "record_index": 850,
+    "map_id": 12917,
+    "raw_id": 55314,
+    "name": "Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12918": {
+    "record_index": 851,
+    "map_id": 12918,
+    "raw_id": 55315,
+    "name": "Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12919": {
+    "record_index": 852,
+    "map_id": 12919,
+    "raw_id": 55532,
+    "name": "Water Maze",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "12920": {
+    "record_index": 853,
+    "map_id": 12920,
+    "raw_id": 55533,
+    "name": "Dungeon",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "12921": {
+    "record_index": 854,
+    "map_id": 12921,
+    "raw_id": 55534,
+    "name": "Crete",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12922": {
+    "record_index": 855,
+    "map_id": 12922,
+    "raw_id": 55535,
+    "name": "Crete Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12923": {
+    "record_index": 856,
+    "map_id": 12923,
+    "raw_id": 55528,
+    "name": "Crete Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12924": {
+    "record_index": 857,
+    "map_id": 12924,
+    "raw_id": 55529,
+    "name": "Crete Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12925": {
+    "record_index": 858,
+    "map_id": 12925,
+    "raw_id": 55530,
+    "name": "Crete Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12926": {
+    "record_index": 859,
+    "map_id": 12926,
+    "raw_id": 55531,
+    "name": "Crete Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12950": {
+    "record_index": 860,
+    "map_id": 12950,
+    "raw_id": 55539,
+    "name": "Philippine",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12951": {
+    "record_index": 861,
+    "map_id": 12951,
+    "raw_id": 55500,
+    "name": "Philippine",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12952": {
+    "record_index": 862,
+    "map_id": 12952,
+    "raw_id": 55501,
+    "name": "Philippine",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12953": {
+    "record_index": 863,
+    "map_id": 12953,
+    "raw_id": 55502,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12954": {
+    "record_index": 864,
+    "map_id": 12954,
+    "raw_id": 55503,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12955": {
+    "record_index": 865,
+    "map_id": 12955,
+    "raw_id": 55496,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12956": {
+    "record_index": 866,
+    "map_id": 12956,
+    "raw_id": 55497,
+    "name": "Dungeon",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12957": {
+    "record_index": 867,
+    "map_id": 12957,
+    "raw_id": 55498,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12958": {
+    "record_index": 868,
+    "map_id": 12958,
+    "raw_id": 55499,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12959": {
+    "record_index": 869,
+    "map_id": 12959,
+    "raw_id": 55492,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0002",
+    "bgm_id": 2
+  },
+  "12960": {
+    "record_index": 870,
+    "map_id": 12960,
+    "raw_id": 55493,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12961": {
+    "record_index": 871,
+    "map_id": 12961,
+    "raw_id": 55494,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "12962": {
+    "record_index": 872,
+    "map_id": 12962,
+    "raw_id": 55495,
+    "name": "Deck Of Western Ship",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
+  },
+  "12963": {
+    "record_index": 873,
+    "map_id": 12963,
+    "raw_id": 55488,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13000": {
+    "record_index": 874,
+    "map_id": 13000,
+    "raw_id": 55485,
+    "name": "Kylin Temple",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13001": {
+    "record_index": 875,
+    "map_id": 13001,
+    "raw_id": 55486,
+    "name": "Rehearsal Ground",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13002": {
+    "record_index": 876,
+    "map_id": 13002,
+    "raw_id": 55487,
+    "name": "Path",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13003": {
+    "record_index": 877,
+    "map_id": 13003,
+    "raw_id": 55480,
+    "name": "Dragon Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13004": {
+    "record_index": 878,
+    "map_id": 13004,
+    "raw_id": 55481,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13005": {
+    "record_index": 879,
+    "map_id": 13005,
+    "raw_id": 55482,
+    "name": "Curved Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13006": {
+    "record_index": 880,
+    "map_id": 13006,
+    "raw_id": 55483,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13007": {
+    "record_index": 881,
+    "map_id": 13007,
+    "raw_id": 55476,
+    "name": "Fishing Mountain",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13008": {
+    "record_index": 882,
+    "map_id": 13008,
+    "raw_id": 55477,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13009": {
+    "record_index": 883,
+    "map_id": 13009,
+    "raw_id": 55478,
+    "name": "White Tiger Hall",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13010": {
+    "record_index": 884,
+    "map_id": 13010,
+    "raw_id": 55479,
+    "name": "Iron Dino Hall",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13011": {
+    "record_index": 885,
+    "map_id": 13011,
+    "raw_id": 55472,
+    "name": "Phenix Hall",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13012": {
+    "record_index": 886,
+    "map_id": 13012,
+    "raw_id": 55473,
+    "name": "Black Dragon Hall",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13013": {
+    "record_index": 887,
+    "map_id": 13013,
+    "raw_id": 55474,
+    "name": "Kirin Hall",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13014": {
+    "record_index": 888,
+    "map_id": 13014,
+    "raw_id": 55475,
+    "name": "Western Forest",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13015": {
+    "record_index": 889,
+    "map_id": 13015,
+    "raw_id": 55436,
+    "name": "Deep Forest",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13016": {
+    "record_index": 890,
+    "map_id": 13016,
+    "raw_id": 55437,
+    "name": "Bypath",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13017": {
+    "record_index": 891,
+    "map_id": 13017,
+    "raw_id": 55438,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13018": {
+    "record_index": 892,
+    "map_id": 13018,
+    "raw_id": 55439,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13019": {
+    "record_index": 893,
+    "map_id": 13019,
+    "raw_id": 55432,
+    "name": "Western Woodland",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13020": {
+    "record_index": 894,
+    "map_id": 13020,
+    "raw_id": 55433,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13021": {
+    "record_index": 895,
+    "map_id": 13021,
+    "raw_id": 55434,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13022": {
+    "record_index": 896,
+    "map_id": 13022,
+    "raw_id": 55435,
+    "name": "Great Wall Passage",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13023": {
+    "record_index": 897,
+    "map_id": 13023,
+    "raw_id": 55428,
+    "name": "Typhoon Shelter",
+    "bgm_name": "BGM0008",
+    "bgm_id": 8
+  },
+  "13024": {
+    "record_index": 898,
+    "map_id": 13024,
+    "raw_id": 55429,
+    "name": "For Testing",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "13025": {
+    "record_index": 899,
+    "map_id": 13025,
+    "raw_id": 55430,
+    "name": "For Testing",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "13026": {
+    "record_index": 900,
+    "map_id": 13026,
+    "raw_id": 55431,
+    "name": "For Testing",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13027": {
+    "record_index": 901,
+    "map_id": 13027,
+    "raw_id": 55424,
+    "name": "For Testing",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13028": {
+    "record_index": 902,
+    "map_id": 13028,
+    "raw_id": 55425,
+    "name": "For Testing",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13029": {
+    "record_index": 903,
+    "map_id": 13029,
+    "raw_id": 55426,
+    "name": "For Testing",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13030": {
+    "record_index": 904,
+    "map_id": 13030,
+    "raw_id": 55427,
+    "name": "For Testing",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13031": {
+    "record_index": 905,
+    "map_id": 13031,
+    "raw_id": 55452,
+    "name": "Dragon Hall",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13050": {
+    "record_index": 906,
+    "map_id": 13050,
+    "raw_id": 55663,
+    "name": "Training Island",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13051": {
+    "record_index": 907,
+    "map_id": 13051,
+    "raw_id": 55656,
+    "name": "Beach Area",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13052": {
+    "record_index": 908,
+    "map_id": 13052,
+    "raw_id": 55657,
+    "name": "Cave Area 1",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13053": {
+    "record_index": 909,
+    "map_id": 13053,
+    "raw_id": 55658,
+    "name": "Cave Area 2",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13054": {
+    "record_index": 910,
+    "map_id": 13054,
+    "raw_id": 55659,
+    "name": "Ocean Area 1",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13055": {
+    "record_index": 911,
+    "map_id": 13055,
+    "raw_id": 55652,
+    "name": "Ocean Area 2",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13056": {
+    "record_index": 912,
+    "map_id": 13056,
+    "raw_id": 55653,
+    "name": "Forest Area 1",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13057": {
+    "record_index": 913,
+    "map_id": 13057,
+    "raw_id": 55654,
+    "name": "Forest Area 2",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13059": {
+    "record_index": 914,
+    "map_id": 13059,
+    "raw_id": 55648,
+    "name": "Practice Area",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13100": {
+    "record_index": 915,
+    "map_id": 13100,
+    "raw_id": 55641,
+    "name": "Persia",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13101": {
+    "record_index": 916,
+    "map_id": 13101,
+    "raw_id": 55642,
+    "name": "Palace Hall",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13102": {
+    "record_index": 917,
+    "map_id": 13102,
+    "raw_id": 55643,
+    "name": "Fete Hall",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13103": {
+    "record_index": 918,
+    "map_id": 13103,
+    "raw_id": 55636,
+    "name": "Inn",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13104": {
+    "record_index": 919,
+    "map_id": 13104,
+    "raw_id": 55637,
+    "name": "Equipment Shop",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13105": {
+    "record_index": 920,
+    "map_id": 13105,
+    "raw_id": 55638,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13106": {
+    "record_index": 921,
+    "map_id": 13106,
+    "raw_id": 55639,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13107": {
+    "record_index": 922,
+    "map_id": 13107,
+    "raw_id": 55632,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13108": {
+    "record_index": 923,
+    "map_id": 13108,
+    "raw_id": 55633,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13109": {
+    "record_index": 924,
+    "map_id": 13109,
+    "raw_id": 55634,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13110": {
+    "record_index": 925,
+    "map_id": 13110,
+    "raw_id": 55635,
+    "name": "Ancient Path",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13111": {
+    "record_index": 926,
+    "map_id": 13111,
+    "raw_id": 55596,
+    "name": "Mountain Path",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13112": {
+    "record_index": 927,
+    "map_id": 13112,
+    "raw_id": 55597,
+    "name": "Sand Valley",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13113": {
+    "record_index": 928,
+    "map_id": 13113,
+    "raw_id": 55598,
+    "name": "Cuniculus",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13114": {
+    "record_index": 929,
+    "map_id": 13114,
+    "raw_id": 55599,
+    "name": "Water Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13115": {
+    "record_index": 930,
+    "map_id": 13115,
+    "raw_id": 55592,
+    "name": "Palace",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13116": {
+    "record_index": 931,
+    "map_id": 13116,
+    "raw_id": 55593,
+    "name": "Palace",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13117": {
+    "record_index": 932,
+    "map_id": 13117,
+    "raw_id": 55594,
+    "name": "Death Dune",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13118": {
+    "record_index": 933,
+    "map_id": 13118,
+    "raw_id": 55595,
+    "name": "Deep Of Water Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13119": {
+    "record_index": 934,
+    "map_id": 13119,
+    "raw_id": 55588,
+    "name": "Dune Path",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "13120": {
+    "record_index": 935,
+    "map_id": 13120,
+    "raw_id": 55589,
+    "name": "Snake Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13121": {
+    "record_index": 936,
+    "map_id": 13121,
+    "raw_id": 55590,
+    "name": "Dungeon Of Palace",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13122": {
+    "record_index": 937,
+    "map_id": 13122,
+    "raw_id": 55591,
+    "name": "Dungeon Of Palace",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13123": {
+    "record_index": 938,
+    "map_id": 13123,
+    "raw_id": 55584,
+    "name": "Dungeon Of Palace",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13124": {
+    "record_index": 939,
+    "map_id": 13124,
+    "raw_id": 55585,
+    "name": "Dungeon Of Palace",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13125": {
+    "record_index": 940,
+    "map_id": 13125,
+    "raw_id": 55586,
+    "name": "Palace Interior",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13126": {
+    "record_index": 941,
+    "map_id": 13126,
+    "raw_id": 55587,
+    "name": "Royal Palace",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13150": {
+    "record_index": 942,
+    "map_id": 13150,
+    "raw_id": 55563,
+    "name": "Cornwall",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13151": {
+    "record_index": 943,
+    "map_id": 13151,
+    "raw_id": 55556,
+    "name": "Capital Hall",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13152": {
+    "record_index": 944,
+    "map_id": 13152,
+    "raw_id": 55557,
+    "name": "Capital Shrine",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13153": {
+    "record_index": 945,
+    "map_id": 13153,
+    "raw_id": 55558,
+    "name": "Inn",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13154": {
+    "record_index": 946,
+    "map_id": 13154,
+    "raw_id": 55559,
+    "name": "2F, Inn",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13155": {
+    "record_index": 947,
+    "map_id": 13155,
+    "raw_id": 55552,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13156": {
+    "record_index": 948,
+    "map_id": 13156,
+    "raw_id": 55553,
+    "name": "The Villageleader's",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13157": {
+    "record_index": 949,
+    "map_id": 13157,
+    "raw_id": 55554,
+    "name": "Warehouse",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13158": {
+    "record_index": 950,
+    "map_id": 13158,
+    "raw_id": 55555,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13159": {
+    "record_index": 951,
+    "map_id": 13159,
+    "raw_id": 55580,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13160": {
+    "record_index": 952,
+    "map_id": 13160,
+    "raw_id": 55581,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13161": {
+    "record_index": 953,
+    "map_id": 13161,
+    "raw_id": 55582,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13162": {
+    "record_index": 954,
+    "map_id": 13162,
+    "raw_id": 55583,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13163": {
+    "record_index": 955,
+    "map_id": 13163,
+    "raw_id": 55576,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13164": {
+    "record_index": 956,
+    "map_id": 13164,
+    "raw_id": 55577,
+    "name": "Fog Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13165": {
+    "record_index": 957,
+    "map_id": 13165,
+    "raw_id": 55578,
+    "name": "Fog Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13166": {
+    "record_index": 958,
+    "map_id": 13166,
+    "raw_id": 55579,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13167": {
+    "record_index": 959,
+    "map_id": 13167,
+    "raw_id": 55572,
+    "name": "Cornwall Peak",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "13168": {
+    "record_index": 960,
+    "map_id": 13168,
+    "raw_id": 55573,
+    "name": "Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13169": {
+    "record_index": 961,
+    "map_id": 13169,
+    "raw_id": 55574,
+    "name": "Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13170": {
+    "record_index": 962,
+    "map_id": 13170,
+    "raw_id": 55575,
+    "name": "Fog Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13171": {
+    "record_index": 963,
+    "map_id": 13171,
+    "raw_id": 55568,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13172": {
+    "record_index": 964,
+    "map_id": 13172,
+    "raw_id": 55569,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13173": {
+    "record_index": 965,
+    "map_id": 13173,
+    "raw_id": 55570,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13174": {
+    "record_index": 966,
+    "map_id": 13174,
+    "raw_id": 55571,
+    "name": "Fog Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13175": {
+    "record_index": 967,
+    "map_id": 13175,
+    "raw_id": 55788,
+    "name": "Cornwall Forest",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13176": {
+    "record_index": 968,
+    "map_id": 13176,
+    "raw_id": 55789,
+    "name": "Cornwall Plain",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13177": {
+    "record_index": 969,
+    "map_id": 13177,
+    "raw_id": 55790,
+    "name": "Megalith Attack Area",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13178": {
+    "record_index": 970,
+    "map_id": 13178,
+    "raw_id": 55791,
+    "name": "Mysterious Forest",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13179": {
+    "record_index": 971,
+    "map_id": 13179,
+    "raw_id": 55784,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13180": {
+    "record_index": 972,
+    "map_id": 13180,
+    "raw_id": 55785,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13181": {
+    "record_index": 973,
+    "map_id": 13181,
+    "raw_id": 55786,
+    "name": "Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13182": {
+    "record_index": 974,
+    "map_id": 13182,
+    "raw_id": 55787,
+    "name": "Abyss Cavern",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13183": {
+    "record_index": 975,
+    "map_id": 13183,
+    "raw_id": 55780,
+    "name": "Fog Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13184": {
+    "record_index": 976,
+    "map_id": 13184,
+    "raw_id": 55781,
+    "name": "Enigmatic Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13185": {
+    "record_index": 977,
+    "map_id": 13185,
+    "raw_id": 55782,
+    "name": "Interior Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13200": {
+    "record_index": 978,
+    "map_id": 13200,
+    "raw_id": 55797,
+    "name": "Rome",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13201": {
+    "record_index": 979,
+    "map_id": 13201,
+    "raw_id": 55798,
+    "name": "God Temple",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "13202": {
+    "record_index": 980,
+    "map_id": 13202,
+    "raw_id": 55799,
+    "name": "Senate",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13203": {
+    "record_index": 981,
+    "map_id": 13203,
+    "raw_id": 55792,
+    "name": "Colosseum",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13204": {
+    "record_index": 982,
+    "map_id": 13204,
+    "raw_id": 55793,
+    "name": "Inn",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13205": {
+    "record_index": 983,
+    "map_id": 13205,
+    "raw_id": 55794,
+    "name": "2F, Inn",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13206": {
+    "record_index": 984,
+    "map_id": 13206,
+    "raw_id": 55795,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13207": {
+    "record_index": 985,
+    "map_id": 13207,
+    "raw_id": 55756,
+    "name": "Public Bathhouse",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13208": {
+    "record_index": 986,
+    "map_id": 13208,
+    "raw_id": 55757,
+    "name": "Ghost Hall",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13209": {
+    "record_index": 987,
+    "map_id": 13209,
+    "raw_id": 55758,
+    "name": "Ghost Inner Hall",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13210": {
+    "record_index": 988,
+    "map_id": 13210,
+    "raw_id": 55759,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13211": {
+    "record_index": 989,
+    "map_id": 13211,
+    "raw_id": 55752,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13212": {
+    "record_index": 990,
+    "map_id": 13212,
+    "raw_id": 55753,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13213": {
+    "record_index": 991,
+    "map_id": 13213,
+    "raw_id": 55754,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13214": {
+    "record_index": 992,
+    "map_id": 13214,
+    "raw_id": 55755,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13215": {
+    "record_index": 993,
+    "map_id": 13215,
+    "raw_id": 55748,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0039",
+    "bgm_id": 39
+  },
+  "13216": {
+    "record_index": 994,
+    "map_id": 13216,
+    "raw_id": 55749,
+    "name": "Colosseum Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13217": {
+    "record_index": 995,
+    "map_id": 13217,
+    "raw_id": 55750,
+    "name": "Colosseum Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13218": {
+    "record_index": 996,
+    "map_id": 13218,
+    "raw_id": 55751,
+    "name": "Colosseum Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13219": {
+    "record_index": 997,
+    "map_id": 13219,
+    "raw_id": 55744,
+    "name": "Hunting Ground",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13220": {
+    "record_index": 998,
+    "map_id": 13220,
+    "raw_id": 55745,
+    "name": "Dungeon",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13221": {
+    "record_index": 999,
+    "map_id": 13221,
+    "raw_id": 55746,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13222": {
+    "record_index": 1000,
+    "map_id": 13222,
+    "raw_id": 55747,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13223": {
+    "record_index": 1001,
+    "map_id": 13223,
+    "raw_id": 55772,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13224": {
+    "record_index": 1002,
+    "map_id": 13224,
+    "raw_id": 55773,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13225": {
+    "record_index": 1003,
+    "map_id": 13225,
+    "raw_id": 55774,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13226": {
+    "record_index": 1004,
+    "map_id": 13226,
+    "raw_id": 55775,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13227": {
+    "record_index": 1005,
+    "map_id": 13227,
+    "raw_id": 55768,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13228": {
+    "record_index": 1006,
+    "map_id": 13228,
+    "raw_id": 55769,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13229": {
+    "record_index": 1007,
+    "map_id": 13229,
+    "raw_id": 55770,
+    "name": "Maze In Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13230": {
+    "record_index": 1008,
+    "map_id": 13230,
+    "raw_id": 55771,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13231": {
+    "record_index": 1009,
+    "map_id": 13231,
+    "raw_id": 55764,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13232": {
+    "record_index": 1010,
+    "map_id": 13232,
+    "raw_id": 55765,
+    "name": "Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13233": {
+    "record_index": 1011,
+    "map_id": 13233,
+    "raw_id": 55766,
+    "name": "Hilltop",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "13234": {
+    "record_index": 1012,
+    "map_id": 13234,
+    "raw_id": 55767,
+    "name": "Cellar",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13235": {
+    "record_index": 1013,
+    "map_id": 13235,
+    "raw_id": 55760,
+    "name": "Sewer",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13236": {
+    "record_index": 1014,
+    "map_id": 13236,
+    "raw_id": 55761,
+    "name": "Sewer",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13237": {
+    "record_index": 1015,
+    "map_id": 13237,
+    "raw_id": 55762,
+    "name": "Sewer",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13238": {
+    "record_index": 1016,
+    "map_id": 13238,
+    "raw_id": 55763,
+    "name": "Sewer",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13239": {
+    "record_index": 1017,
+    "map_id": 13239,
+    "raw_id": 55724,
+    "name": "Army Jail",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13240": {
+    "record_index": 1018,
+    "map_id": 13240,
+    "raw_id": 55725,
+    "name": "Official Basement",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13241": {
+    "record_index": 1019,
+    "map_id": 13241,
+    "raw_id": 55726,
+    "name": "Apenni Forest",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13250": {
+    "record_index": 1020,
+    "map_id": 13250,
+    "raw_id": 55719,
+    "name": "Domremy",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13251": {
+    "record_index": 1021,
+    "map_id": 13251,
+    "raw_id": 55712,
+    "name": "Inn",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13252": {
+    "record_index": 1022,
+    "map_id": 13252,
+    "raw_id": 55713,
+    "name": "Stuff Shop",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13253": {
+    "record_index": 1023,
+    "map_id": 13253,
+    "raw_id": 55714,
+    "name": "Church",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13254": {
+    "record_index": 1024,
+    "map_id": 13254,
+    "raw_id": 55715,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13255": {
+    "record_index": 1025,
+    "map_id": 13255,
+    "raw_id": 55740,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13256": {
+    "record_index": 1026,
+    "map_id": 13256,
+    "raw_id": 55741,
+    "name": "House, 2F",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13257": {
+    "record_index": 1027,
+    "map_id": 13257,
+    "raw_id": 55742,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13258": {
+    "record_index": 1028,
+    "map_id": 13258,
+    "raw_id": 55743,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0001",
+    "bgm_id": 1
+  },
+  "13259": {
+    "record_index": 1029,
+    "map_id": 13259,
+    "raw_id": 55736,
+    "name": "Avignon Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13260": {
+    "record_index": 1030,
+    "map_id": 13260,
+    "raw_id": 55737,
+    "name": "Gorge",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13261": {
+    "record_index": 1031,
+    "map_id": 13261,
+    "raw_id": 55738,
+    "name": "Lost Jun",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13262": {
+    "record_index": 1032,
+    "map_id": 13262,
+    "raw_id": 55739,
+    "name": "Gorge",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13263": {
+    "record_index": 1033,
+    "map_id": 13263,
+    "raw_id": 55732,
+    "name": "Bordeaux Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13264": {
+    "record_index": 1034,
+    "map_id": 13264,
+    "raw_id": 55733,
+    "name": "Lost Jun",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13265": {
+    "record_index": 1035,
+    "map_id": 13265,
+    "raw_id": 55734,
+    "name": "Lost Jun",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13266": {
+    "record_index": 1036,
+    "map_id": 13266,
+    "raw_id": 55735,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13267": {
+    "record_index": 1037,
+    "map_id": 13267,
+    "raw_id": 55728,
+    "name": "Submarine Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13268": {
+    "record_index": 1038,
+    "map_id": 13268,
+    "raw_id": 55729,
+    "name": "Submarine Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13269": {
+    "record_index": 1039,
+    "map_id": 13269,
+    "raw_id": 55730,
+    "name": "Submarine Maze",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13270": {
+    "record_index": 1040,
+    "map_id": 13270,
+    "raw_id": 55731,
+    "name": "Liams' Land",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13271": {
+    "record_index": 1041,
+    "map_id": 13271,
+    "raw_id": 55692,
+    "name": "Dungeon",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13272": {
+    "record_index": 1042,
+    "map_id": 13272,
+    "raw_id": 55693,
+    "name": "Dorjas Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13273": {
+    "record_index": 1043,
+    "map_id": 13273,
+    "raw_id": 55694,
+    "name": "Evil Elf Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13274": {
+    "record_index": 1044,
+    "map_id": 13274,
+    "raw_id": 55695,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13275": {
+    "record_index": 1045,
+    "map_id": 13275,
+    "raw_id": 55688,
+    "name": "Cave",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13276": {
+    "record_index": 1046,
+    "map_id": 13276,
+    "raw_id": 55689,
+    "name": "Sunset Summit",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "13300": {
+    "record_index": 1047,
+    "map_id": 13300,
+    "raw_id": 55697,
+    "name": "Thai Secret Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13301": {
+    "record_index": 1048,
+    "map_id": 13301,
+    "raw_id": 55698,
+    "name": "Secret Jungle",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13400": {
+    "record_index": 1049,
+    "map_id": 13400,
+    "raw_id": 56845,
+    "name": "Pettora's House",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "13401": {
+    "record_index": 1050,
+    "map_id": 13401,
+    "raw_id": 56846,
+    "name": "Device Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13402": {
+    "record_index": 1051,
+    "map_id": 13402,
+    "raw_id": 56847,
+    "name": "Device Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13403": {
+    "record_index": 1052,
+    "map_id": 13403,
+    "raw_id": 56840,
+    "name": "Device Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13404": {
+    "record_index": 1053,
+    "map_id": 13404,
+    "raw_id": 56841,
+    "name": "Device Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13405": {
+    "record_index": 1054,
+    "map_id": 13405,
+    "raw_id": 56842,
+    "name": "Device Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13406": {
+    "record_index": 1055,
+    "map_id": 13406,
+    "raw_id": 56843,
+    "name": "Device Path",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "13450": {
+    "record_index": 1056,
+    "map_id": 13450,
+    "raw_id": 57087,
+    "name": "Rhode Island",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13451": {
+    "record_index": 1057,
+    "map_id": 13451,
+    "raw_id": 57080,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13452": {
+    "record_index": 1058,
+    "map_id": 13452,
+    "raw_id": 57081,
+    "name": "Civillian's House",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13453": {
+    "record_index": 1059,
+    "map_id": 13453,
+    "raw_id": 57082,
+    "name": "The Villageleader's",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13454": {
+    "record_index": 1060,
+    "map_id": 13454,
+    "raw_id": 57083,
+    "name": "Weaponry",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13455": {
+    "record_index": 1061,
+    "map_id": 13455,
+    "raw_id": 57076,
+    "name": "1F, Inn",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13456": {
+    "record_index": 1062,
+    "map_id": 13456,
+    "raw_id": 57077,
+    "name": "2F, Inn",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13457": {
+    "record_index": 1063,
+    "map_id": 13457,
+    "raw_id": 57078,
+    "name": "Grocery",
+    "bgm_name": "BGM0037",
+    "bgm_id": 37
+  },
+  "13458": {
+    "record_index": 1064,
+    "map_id": 13458,
+    "raw_id": 57079,
+    "name": "Mountains Of Rhodes",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "13500": {
+    "record_index": 1065,
+    "map_id": 13500,
+    "raw_id": 57001,
+    "name": "Zeus' Challenge 3",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "13501": {
+    "record_index": 1066,
+    "map_id": 13501,
+    "raw_id": 57002,
+    "name": "Zeus' Final Stage",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "13502": {
+    "record_index": 1067,
+    "map_id": 13502,
+    "raw_id": 57003,
+    "name": "Zeus' Challenge 1",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "13503": {
+    "record_index": 1068,
+    "map_id": 13503,
+    "raw_id": 56996,
+    "name": "Zeus' Challenge 2",
+    "bgm_name": "BGM0007",
+    "bgm_id": 7
+  },
+  "13504": {
+    "record_index": 1069,
+    "map_id": 13504,
+    "raw_id": 56997,
+    "name": "Summer Tale",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "13505": {
+    "record_index": 1070,
+    "map_id": 13505,
+    "raw_id": 56998,
+    "name": "Summer Rest Area",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "13506": {
+    "record_index": 1071,
+    "map_id": 13506,
+    "raw_id": 56999,
+    "name": "Summer Exchanger",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "13507": {
+    "record_index": 1072,
+    "map_id": 13507,
+    "raw_id": 56992,
+    "name": "Chatham Isle Cave 1F",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13508": {
+    "record_index": 1073,
+    "map_id": 13508,
+    "raw_id": 56993,
+    "name": "Chatham Isle Cave 2F",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13509": {
+    "record_index": 1074,
+    "map_id": 13509,
+    "raw_id": 56994,
+    "name": "Chatham Isle Cave 3F",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "13510": {
+    "record_index": 1075,
+    "map_id": 13510,
+    "raw_id": 56995,
+    "name": "Chatham Isle Peak",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "13511": {
+    "record_index": 1076,
+    "map_id": 13511,
+    "raw_id": 57020,
+    "name": "Isolated Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "15005": {
+    "record_index": 1077,
+    "map_id": 15005,
+    "raw_id": 53450,
+    "name": "Const. Corridor",
+    "bgm_name": "BGM0017",
+    "bgm_id": 17
+  },
+  "30000": {
+    "record_index": 1078,
+    "map_id": 30000,
+    "raw_id": 40789,
+    "name": "Slame's Residence",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "30002": {
+    "record_index": 1079,
+    "map_id": 30002,
+    "raw_id": 40791,
+    "name": "Ghostdom",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30004": {
+    "record_index": 1080,
+    "map_id": 30004,
+    "raw_id": 40785,
+    "name": "Dark Priest Den",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30006": {
+    "record_index": 1081,
+    "map_id": 30006,
+    "raw_id": 40787,
+    "name": "Surppress Thief",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "30007": {
+    "record_index": 1082,
+    "map_id": 30007,
+    "raw_id": 40748,
+    "name": "Yiar And Jiar",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "30008": {
+    "record_index": 1083,
+    "map_id": 30008,
+    "raw_id": 40749,
+    "name": "Alexandria",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "30009": {
+    "record_index": 1084,
+    "map_id": 30009,
+    "raw_id": 40750,
+    "name": "Eighteen Coppermen",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30010": {
+    "record_index": 1085,
+    "map_id": 30010,
+    "raw_id": 40751,
+    "name": "Instinct Temple",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "30011": {
+    "record_index": 1086,
+    "map_id": 30011,
+    "raw_id": 40744,
+    "name": "Jurassic Pasture",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "30012": {
+    "record_index": 1087,
+    "map_id": 30012,
+    "raw_id": 40745,
+    "name": "Yoyo Family",
+    "bgm_name": "BGM0004",
+    "bgm_id": 4
+  },
+  "30013": {
+    "record_index": 1088,
+    "map_id": 30013,
+    "raw_id": 40746,
+    "name": "Eight Warriors",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "30014": {
+    "record_index": 1089,
+    "map_id": 30014,
+    "raw_id": 40747,
+    "name": "Save Bluestarnese",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30015": {
+    "record_index": 1090,
+    "map_id": 30015,
+    "raw_id": 40740,
+    "name": "Sea Animals",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30016": {
+    "record_index": 1091,
+    "map_id": 30016,
+    "raw_id": 40741,
+    "name": "12 Mascots",
+    "bgm_name": "BGM0019",
+    "bgm_id": 19
+  },
+  "30018": {
+    "record_index": 1092,
+    "map_id": 30018,
+    "raw_id": 40743,
+    "name": "Mali's Attack",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30019": {
+    "record_index": 1093,
+    "map_id": 30019,
+    "raw_id": 40736,
+    "name": "Egypt Fete Palace",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "30020": {
+    "record_index": 1094,
+    "map_id": 30020,
+    "raw_id": 40737,
+    "name": "Fiery Challenge",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30021": {
+    "record_index": 1095,
+    "map_id": 30021,
+    "raw_id": 40738,
+    "name": "Mahabrahman Challeng",
+    "bgm_name": "BGM0038",
+    "bgm_id": 38
+  },
+  "30023": {
+    "record_index": 1096,
+    "map_id": 30023,
+    "raw_id": 40764,
+    "name": "Sealing Space",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30024": {
+    "record_index": 1097,
+    "map_id": 30024,
+    "raw_id": 40765,
+    "name": "Emp's Conspiracy",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30025": {
+    "record_index": 1098,
+    "map_id": 30025,
+    "raw_id": 40766,
+    "name": "Sealed Space",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30027": {
+    "record_index": 1099,
+    "map_id": 30027,
+    "raw_id": 40760,
+    "name": "Nantianmen Grassland",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30028": {
+    "record_index": 1100,
+    "map_id": 30028,
+    "raw_id": 40761,
+    "name": "Plague Array",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30029": {
+    "record_index": 1101,
+    "map_id": 30029,
+    "raw_id": 40762,
+    "name": "Polar Region",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30030": {
+    "record_index": 1102,
+    "map_id": 30030,
+    "raw_id": 40763,
+    "name": "Forbidden Land",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30031": {
+    "record_index": 1103,
+    "map_id": 30031,
+    "raw_id": 40756,
+    "name": "Christmas Prairie",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30032": {
+    "record_index": 1104,
+    "map_id": 30032,
+    "raw_id": 40757,
+    "name": "Holy Dragon Space",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "30033": {
+    "record_index": 1105,
+    "map_id": 30033,
+    "raw_id": 40758,
+    "name": "Chang'an City Border",
+    "bgm_name": "BGM0031",
+    "bgm_id": 31
+  },
+  "30034": {
+    "record_index": 1106,
+    "map_id": 30034,
+    "raw_id": 40759,
+    "name": "Roman Dungeon",
+    "bgm_name": "BGM0026",
+    "bgm_id": 26
+  },
+  "30035": {
+    "record_index": 1107,
+    "map_id": 30035,
+    "raw_id": 40752,
+    "name": "Ancient Tomb",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30036": {
+    "record_index": 1108,
+    "map_id": 30036,
+    "raw_id": 40753,
+    "name": "Evil Space",
+    "bgm_name": "BGM0030",
+    "bgm_id": 30
+  },
+  "30037": {
+    "record_index": 1109,
+    "map_id": 30037,
+    "raw_id": 40754,
+    "name": "South Tianmen Border",
+    "bgm_name": "BGM0012",
+    "bgm_id": 12
+  },
+  "30038": {
+    "record_index": 1110,
+    "map_id": 30038,
+    "raw_id": 40755,
+    "name": "Haters Hq",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "30039": {
+    "record_index": 1111,
+    "map_id": 30039,
+    "raw_id": 40716,
+    "name": "Hidden Weaponarsenal",
+    "bgm_name": "BGM0005",
+    "bgm_id": 5
+  },
+  "58000": {
+    "record_index": 1112,
+    "map_id": 58000,
+    "raw_id": 2293,
+    "name": "Nautical Map",
+    "bgm_name": "BGM0018",
+    "bgm_id": 18
+  },
+  "58001": {
+    "record_index": 1113,
+    "map_id": 58001,
+    "raw_id": 2294,
+    "name": "Nautical Map",
+    "bgm_name": "BGM0018",
+    "bgm_id": 18
+  },
+  "58002": {
+    "record_index": 1114,
+    "map_id": 58002,
+    "raw_id": 2295,
+    "name": "Mediterranean",
+    "bgm_name": "BGM0018",
+    "bgm_id": 18
+  },
+  "59010": {
+    "record_index": 1115,
+    "map_id": 59010,
+    "raw_id": 3303,
+    "name": "Cavern",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59011": {
+    "record_index": 1116,
+    "map_id": 59011,
+    "raw_id": 3296,
+    "name": "There Are Caves",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59012": {
+    "record_index": 1117,
+    "map_id": 59012,
+    "raw_id": 3297,
+    "name": "Ice House",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59013": {
+    "record_index": 1118,
+    "map_id": 59013,
+    "raw_id": 3298,
+    "name": "Street View",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59014": {
+    "record_index": 1119,
+    "map_id": 59014,
+    "raw_id": 3299,
+    "name": "Bush Woods",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59015": {
+    "record_index": 1120,
+    "map_id": 59015,
+    "raw_id": 3324,
+    "name": "Underground Magma",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59016": {
+    "record_index": 1121,
+    "map_id": 59016,
+    "raw_id": 3325,
+    "name": "Terrestrial Magma",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59017": {
+    "record_index": 1122,
+    "map_id": 59017,
+    "raw_id": 3326,
+    "name": "Cypress Main Road",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59018": {
+    "record_index": 1123,
+    "map_id": 59018,
+    "raw_id": 3327,
+    "name": "Cypress View",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59019": {
+    "record_index": 1124,
+    "map_id": 59019,
+    "raw_id": 3320,
+    "name": "New Cypress View",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59020": {
+    "record_index": 1125,
+    "map_id": 59020,
+    "raw_id": 3321,
+    "name": "Alpine",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59021": {
+    "record_index": 1126,
+    "map_id": 59021,
+    "raw_id": 3322,
+    "name": "The Moon",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59022": {
+    "record_index": 1127,
+    "map_id": 59022,
+    "raw_id": 3323,
+    "name": "The Mars",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59023": {
+    "record_index": 1128,
+    "map_id": 59023,
+    "raw_id": 3316,
+    "name": "Great Wall",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59024": {
+    "record_index": 1129,
+    "map_id": 59024,
+    "raw_id": 3317,
+    "name": "Suspended Water",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59025": {
+    "record_index": 1130,
+    "map_id": 59025,
+    "raw_id": 3318,
+    "name": "Floating Cave",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59026": {
+    "record_index": 1131,
+    "map_id": 59026,
+    "raw_id": 3319,
+    "name": "Cabin Interior",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59027": {
+    "record_index": 1132,
+    "map_id": 59027,
+    "raw_id": 3312,
+    "name": "Undersea View",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59028": {
+    "record_index": 1133,
+    "map_id": 59028,
+    "raw_id": 3313,
+    "name": "Space Capsule Room",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59029": {
+    "record_index": 1134,
+    "map_id": 59029,
+    "raw_id": 3314,
+    "name": "Sky Garden Indoor",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59030": {
+    "record_index": 1135,
+    "map_id": 59030,
+    "raw_id": 3315,
+    "name": "Highland",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59031": {
+    "record_index": 1136,
+    "map_id": 59031,
+    "raw_id": 3276,
+    "name": "Intestinal Maze",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59032": {
+    "record_index": 1137,
+    "map_id": 59032,
+    "raw_id": 3277,
+    "name": "White Brick Maze",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59040": {
+    "record_index": 1138,
+    "map_id": 59040,
+    "raw_id": 3269,
+    "name": "Mine",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59050": {
+    "record_index": 1139,
+    "map_id": 59050,
+    "raw_id": 3295,
+    "name": "Beach",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59070": {
+    "record_index": 1140,
+    "map_id": 59070,
+    "raw_id": 3243,
+    "name": "Desert",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59080": {
+    "record_index": 1141,
+    "map_id": 59080,
+    "raw_id": 3261,
+    "name": "Oasis Grassland",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59081": {
+    "record_index": 1142,
+    "map_id": 59081,
+    "raw_id": 3262,
+    "name": "Desert Grassland",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59082": {
+    "record_index": 1143,
+    "map_id": 59082,
+    "raw_id": 3263,
+    "name": "Hillfoot Grassland",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59090": {
+    "record_index": 1144,
+    "map_id": 59090,
+    "raw_id": 3255,
+    "name": "Jungle",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59091": {
+    "record_index": 1145,
+    "map_id": 59091,
+    "raw_id": 3248,
+    "name": "Lakeside Jungle",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59100": {
+    "record_index": 1146,
+    "map_id": 59100,
+    "raw_id": 3209,
+    "name": "Snow View",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59110": {
+    "record_index": 1147,
+    "map_id": 59110,
+    "raw_id": 3203,
+    "name": "Gorge",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59120": {
+    "record_index": 1148,
+    "map_id": 59120,
+    "raw_id": 3221,
+    "name": "Cellar",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59130": {
+    "record_index": 1149,
+    "map_id": 59130,
+    "raw_id": 3439,
+    "name": "Welling Street",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59131": {
+    "record_index": 1150,
+    "map_id": 59131,
+    "raw_id": 3432,
+    "name": "Holy Village Street",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59132": {
+    "record_index": 1151,
+    "map_id": 59132,
+    "raw_id": 3433,
+    "name": "Welling Street",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59133": {
+    "record_index": 1152,
+    "map_id": 59133,
+    "raw_id": 3434,
+    "name": "Holy Village Street",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59139": {
+    "record_index": 1153,
+    "map_id": 59139,
+    "raw_id": 3424,
+    "name": "Room Scape",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59140": {
+    "record_index": 1154,
+    "map_id": 59140,
+    "raw_id": 3425,
+    "name": "Room Scape",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "59141": {
+    "record_index": 1155,
+    "map_id": 59141,
+    "raw_id": 3426,
+    "name": "Ship Deck",
+    "bgm_name": "BGM0014",
+    "bgm_id": 14
+  },
+  "60000": {
+    "record_index": 1156,
+    "map_id": 60000,
+    "raw_id": 5,
+    "name": "North Island",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "60001": {
+    "record_index": 1157,
+    "map_id": 60001,
+    "raw_id": 6,
+    "name": "North Island",
+    "bgm_name": "BGM0027",
+    "bgm_id": 27
+  },
+  "60002": {
+    "record_index": 1158,
+    "map_id": 60002,
+    "raw_id": 7,
+    "name": "South Island",
+    "bgm_name": "BGM0027",
+    "bgm_id": 27
+  },
+  "60003": {
+    "record_index": 1159,
+    "map_id": 60003,
+    "raw_id": 0,
+    "name": "South Island",
+    "bgm_name": "BGM0027",
+    "bgm_id": 27
+  },
+  "60004": {
+    "record_index": 1160,
+    "map_id": 60004,
+    "raw_id": 1,
+    "name": "Revival Isle",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "60005": {
+    "record_index": 1161,
+    "map_id": 60005,
+    "raw_id": 2,
+    "name": "Mayan Forest",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "60006": {
+    "record_index": 1162,
+    "map_id": 60006,
+    "raw_id": 3,
+    "name": "Oslya",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "60007": {
+    "record_index": 1163,
+    "map_id": 60007,
+    "raw_id": 28,
+    "name": "Universal",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "60008": {
+    "record_index": 1164,
+    "map_id": 60008,
+    "raw_id": 29,
+    "name": "Large Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "60009": {
+    "record_index": 1165,
+    "map_id": 60009,
+    "raw_id": 30,
+    "name": "Small Island",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "60010": {
+    "record_index": 1166,
+    "map_id": 60010,
+    "raw_id": 31,
+    "name": "China",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "60011": {
+    "record_index": 1167,
+    "map_id": 60011,
+    "raw_id": 24,
+    "name": "Koyota",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "60012": {
+    "record_index": 1168,
+    "map_id": 60012,
+    "raw_id": 25,
+    "name": "",
+    "bgm_name": "BGM0024",
+    "bgm_id": 24
+  },
+  "60013": {
+    "record_index": 1169,
+    "map_id": 60013,
+    "raw_id": 26,
+    "name": "Korea",
+    "bgm_name": "BGM0010",
+    "bgm_id": 10
+  },
+  "60014": {
+    "record_index": 1170,
+    "map_id": 60014,
+    "raw_id": 27,
+    "name": "Egypt",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  },
+  "60015": {
+    "record_index": 1171,
+    "map_id": 60015,
+    "raw_id": 20,
+    "name": "Inca",
+    "bgm_name": "BGM0023",
+    "bgm_id": 23
+  }
+}

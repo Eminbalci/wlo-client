@@ -1,0 +1,35 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+*.bak
+*.swp
+*~
+
+# Claude & AI local session state
+.claude/
+
+# Temporary dumps and scratch folders
+dump_*/
+scratch/
+screenshots_*/
+test_screenshots/
+
+# Proprietary / oversized binary game ROM archives (>100MB exceeds GitHub push limits)
+# These raw asset packages are placed in assets/ locally from the original game installation.
+assets/jma/
+assets/sound/
+assets/voice/
+assets/pic/*.BMg
+assets/pic/*.bmg
+assets/pic/*.JMG
+assets/pic/*.jmg
+assets/pic/*.JMg
+assets/data/*.MMG
+assets/data/*.emg
+assets/data/odd.dat

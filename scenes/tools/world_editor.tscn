@@ -1,0 +1,577 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/tools/world_editor.gd" id="1_world_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/map_editor.tscn" id="2_map_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/npc_editor.tscn" id="3_npc_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/quest_editor.tscn" id="4_quest_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/skill_editor.tscn" id="5_skill_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/item_editor.tscn" id="6_item_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/battle_editor.tscn" id="7_battle_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/cutscene_editor.tscn" id="8_cutscene_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/tent_editor.tscn" id="9_tent_editor"]
+[ext_resource type="PackedScene" path="res://scenes/tools/audio_editor.tscn" id="10_audio_editor"]
+
+[node name="WorldEditor" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_world_editor")
+
+[node name="VBoxMain" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopToolbar" type="PanelContainer" parent="VBoxMain"]
+layout_mode = 2
+
+[node name="HBoxToolbar" type="HFlowContainer" parent="VBoxMain/TopToolbar"]
+layout_mode = 2
+
+[node name="LblTitle" type="Label" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "  Wonderland Online - World Editor Suite  "
+
+[node name="VSeparator1" type="VSeparator" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="BtnNewMap" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New Map"
+
+[node name="BtnNewNPC" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New NPC"
+
+[node name="BtnNewQuest" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New Quest"
+
+[node name="BtnNewSkill" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New Skill"
+
+[node name="BtnNewItem" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New Item"
+
+[node name="BtnNewBattle" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New Battle"
+
+[node name="BtnNewCutscene" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New Cutscene"
+
+[node name="BtnNewTent" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "New Tent"
+
+[node name="BtnAudioStudio" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Audio Studio"
+
+[node name="VSepTools" type="VSeparator" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="BtnOpenMapData" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Open MapData"
+
+[node name="BtnSaveAll" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Save All"
+
+[node name="BtnRefreshDB" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Refresh DB"
+
+[node name="VSepHistory" type="VSeparator" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="BtnUndo" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Undo (Ctrl+Z)"
+
+[node name="BtnRedo" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Redo (Ctrl+Y)"
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="LblQuickMap" type="Label" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Map Browser:"
+
+[node name="EditQuickMapSearch" type="LineEdit" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+placeholder_text = "Search map..."
+
+[node name="OptQuickMap" type="OptionButton" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VSeparatorReturn" type="VSeparator" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+
+[node name="BtnReturnToGame" type="Button" parent="VBoxMain/TopToolbar/HBoxToolbar"]
+layout_mode = 2
+text = "Return to Game"
+
+[node name="MainTabContainer" type="TabContainer" parent="VBoxMain"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+clip_tabs = true
+
+[node name="MapStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+layout_mode = 2
+metadata/_tab_title = "Map Studio"
+
+[node name="MapEditor" parent="VBoxMain/MainTabContainer/MapStudio" instance=ExtResource("2_map_editor")]
+layout_mode = 2
+
+[node name="NPCStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "NPC Studio"
+
+[node name="NpcEditor" parent="VBoxMain/MainTabContainer/NPCStudio" instance=ExtResource("3_npc_editor")]
+layout_mode = 2
+
+[node name="QuestStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Quest Studio"
+
+[node name="QuestEditor" parent="VBoxMain/MainTabContainer/QuestStudio" instance=ExtResource("4_quest_editor")]
+layout_mode = 2
+
+[node name="SkillStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Skill Studio"
+
+[node name="SkillEditor" parent="VBoxMain/MainTabContainer/SkillStudio" instance=ExtResource("5_skill_editor")]
+layout_mode = 2
+
+[node name="ItemStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Item Studio"
+
+[node name="ItemEditor" parent="VBoxMain/MainTabContainer/ItemStudio" instance=ExtResource("6_item_editor")]
+layout_mode = 2
+
+[node name="BattleStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Battle Studio"
+
+[node name="BattleEditor" parent="VBoxMain/MainTabContainer/BattleStudio" instance=ExtResource("7_battle_editor")]
+layout_mode = 2
+
+[node name="CutsceneStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Cutscene Studio"
+
+[node name="CutsceneEditor" parent="VBoxMain/MainTabContainer/CutsceneStudio" instance=ExtResource("8_cutscene_editor")]
+layout_mode = 2
+
+[node name="TentStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Tent Studio"
+
+[node name="TentEditor" parent="VBoxMain/MainTabContainer/TentStudio" instance=ExtResource("9_tent_editor")]
+layout_mode = 2
+
+[node name="AudioStudio" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Audio Studio"
+
+[node name="AudioEditor" parent="VBoxMain/MainTabContainer/AudioStudio" instance=ExtResource("10_audio_editor")]
+layout_mode = 2
+
+[node name="DatabaseInspector" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Database Inspector"
+
+[node name="VBoxDB" type="VBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxSearch" type="HBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB"]
+layout_mode = 2
+
+[node name="LblDBCat" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HBoxSearch"]
+layout_mode = 2
+text = "Category:"
+
+[node name="OptDBCategory" type="OptionButton" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HBoxSearch"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="VSepDB1" type="VSeparator" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HBoxSearch"]
+layout_mode = 2
+
+[node name="LblDBSearch" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HBoxSearch"]
+layout_mode = 2
+text = "Search:"
+
+[node name="EditDBSearch" type="LineEdit" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HBoxSearch"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Type ID, name, or keyword to filter in real-time..."
+
+[node name="LblDBCount" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HBoxSearch"]
+layout_mode = 2
+text = "Results: 0 found"
+
+[node name="HSplitDB" type="HSplitContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LeftList" type="PanelContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+
+[node name="VBoxLeftList" type="VBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/LeftList"]
+layout_mode = 2
+
+[node name="ListDBResults" type="ItemList" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/LeftList/VBoxLeftList"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxPagination" type="HBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/LeftList/VBoxLeftList"]
+layout_mode = 2
+
+[node name="BtnPagePrev" type="Button" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/LeftList/VBoxLeftList/HBoxPagination"]
+layout_mode = 2
+text = "< Prev"
+
+[node name="LblPageInfo" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/LeftList/VBoxLeftList/HBoxPagination"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Page 1 of 1"
+horizontal_alignment = 1
+
+[node name="BtnPageNext" type="Button" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/LeftList/VBoxLeftList/HBoxPagination"]
+layout_mode = 2
+text = "Next >"
+
+[node name="RightScroll" type="ScrollContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+
+[node name="RightDetails" type="PanelContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelItemDetails" type="VBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails"]
+layout_mode = 2
+
+[node name="HBoxHeader" type="HBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelItemDetails"]
+layout_mode = 2
+
+[node name="RectItemIcon" type="TextureRect" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelItemDetails/HBoxHeader"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxName" type="VBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelItemDetails/HBoxHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblItemName" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelItemDetails/HBoxHeader/VBoxName"]
+layout_mode = 2
+text = "Item Name"
+
+[node name="LblItemMeta" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelItemDetails/HBoxHeader/VBoxName"]
+layout_mode = 2
+text = "Item Meta"
+
+[node name="HSeparatorItem" type="HSeparator" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelItemDetails"]
+layout_mode = 2
+
+[node name="LblItemStats" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelItemDetails"]
+layout_mode = 2
+text = "Stat Modifiers"
+
+[node name="RichItemDesc" type="RichTextLabel" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelItemDetails"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Item Description"
+
+[node name="PanelNPCDetails" type="VBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxHeader" type="HBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelNPCDetails"]
+layout_mode = 2
+
+[node name="RectNPCPortrait" type="TextureRect" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelNPCDetails/HBoxHeader"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxName" type="VBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelNPCDetails/HBoxHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblNPCName" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelNPCDetails/HBoxHeader/VBoxName"]
+layout_mode = 2
+text = "NPC Name"
+
+[node name="LblNPCMeta" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelNPCDetails/HBoxHeader/VBoxName"]
+layout_mode = 2
+text = "NPC Meta"
+
+[node name="HSeparatorNPC" type="HSeparator" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelNPCDetails"]
+layout_mode = 2
+
+[node name="LblNPCStats" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelNPCDetails"]
+layout_mode = 2
+text = "Base Stats"
+
+[node name="BtnSendToStudio" type="Button" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelNPCDetails"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+text = "Load into NPC Studio for Placement"
+
+[node name="PanelTalkDetails" type="VBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails"]
+visible = false
+layout_mode = 2
+
+[node name="LblTalkMeta" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelTalkDetails"]
+layout_mode = 2
+text = "Talk Meta"
+
+[node name="HSeparatorTalk" type="HSeparator" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelTalkDetails"]
+layout_mode = 2
+
+[node name="RichTalkFormatted" type="RichTextLabel" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelTalkDetails"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+bbcode_enabled = true
+text = "Formatted Text"
+
+[node name="LblRawTitle" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelTalkDetails"]
+layout_mode = 2
+text = "Raw Script Data:"
+
+[node name="EditTalkRaw" type="TextEdit" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelTalkDetails"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+editable = false
+
+[node name="LblTalkChoices" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelTalkDetails"]
+layout_mode = 2
+text = "Branching Choices"
+
+[node name="BtnFollowTalkChain" type="Button" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelTalkDetails"]
+layout_mode = 2
+text = "Follow Next Talk Chain"
+
+[node name="PanelSceneDetails" type="VBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails"]
+visible = false
+layout_mode = 2
+
+[node name="LblSceneMeta" type="Label" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelSceneDetails"]
+layout_mode = 2
+text = "Scene Meta"
+
+[node name="HSeparatorScene" type="HSeparator" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelSceneDetails"]
+layout_mode = 2
+
+[node name="HBoxThumbs" type="HBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelSceneDetails"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RectSceneBGThumb" type="TextureRect" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelSceneDetails/HBoxThumbs"]
+custom_minimum_size = Vector2(240, 180)
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RectSceneMMThumb" type="TextureRect" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelSceneDetails/HBoxThumbs"]
+custom_minimum_size = Vector2(212, 131)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxActions" type="HBoxContainer" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelSceneDetails"]
+layout_mode = 2
+
+[node name="BtnSceneOpenStudio" type="Button" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelSceneDetails/HBoxActions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open Scene in Map Studio"
+
+[node name="BtnScenePlaytest" type="Button" parent="VBoxMain/MainTabContainer/DatabaseInspector/VBoxDB/HSplitDB/RightScroll/RightDetails/PanelSceneDetails/HBoxActions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Playtest Scene in Simulator"
+
+[node name="Simulator" type="MarginContainer" parent="VBoxMain/MainTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Live Playtest & Simulator"
+
+[node name="VBoxSim" type="VBoxContainer" parent="VBoxMain/MainTabContainer/Simulator"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SimToolbar" type="HFlowContainer" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 4
+
+[node name="BtnLaunchPlaytest" type="Button" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "▶ Test Current Map & NPCs in In-Engine MapView"
+
+[node name="BtnStopPlaytest" type="Button" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+disabled = true
+text = "⏹ Stop Playtest"
+
+[node name="VSepSim1" type="VSeparator" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+
+[node name="LblSimMap" type="Label" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "Map:"
+
+[node name="OptSimMap" type="OptionButton" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+
+[node name="LblSimRole" type="Label" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "Role:"
+
+[node name="OptSimRole" type="OptionButton" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="LblSimCoord" type="Label" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "Spawn (X,Y):"
+
+[node name="SpinSimX" type="SpinBox" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+max_value = 10000.0
+value = 1042.0
+
+[node name="SpinSimY" type="SpinBox" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+max_value = 10000.0
+value = 1075.0
+
+[node name="BtnSimTeleport" type="Button" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "Teleport"
+
+[node name="ChkSimInjectNPCs" type="CheckBox" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+button_pressed = true
+text = "Inject Studio NPCs"
+
+[node name="VSepSim2" type="VSeparator" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+
+[node name="LblSimStatus" type="Label" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ready to Launch."
+
+[node name="VSepSim3" type="VSeparator" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+
+[node name="LblSimItem" type="Label" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "Give Item ID:"
+
+[node name="SpinSimItemId" type="SpinBox" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 99999.0
+value = 46001.0
+
+[node name="LblSimCount" type="Label" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "Qty:"
+
+[node name="SpinSimItemCount" type="SpinBox" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 999.0
+value = 1.0
+
+[node name="BtnSimGiveItem" type="Button" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "Give Item"
+
+[node name="BtnSimGiveGold" type="Button" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "+10,000 Gold"
+
+[node name="BtnSimClearInventory" type="Button" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimToolbar"]
+layout_mode = 2
+text = "Clear Bag"
+
+[node name="SimViewportContainer" type="SubViewportContainer" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SimViewport" type="SubViewport" parent="VBoxMain/MainTabContainer/Simulator/VBoxSim/SimViewportContainer"]
+physics_object_picking = true
+size = Vector2i(800, 600)
+render_target_update_mode = 4
+
+[node name="StatusBar" type="PanelContainer" parent="VBoxMain"]
+layout_mode = 2
+
+[node name="HBoxStatus" type="HFlowContainer" parent="VBoxMain/StatusBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 4
+
+[node name="StatusReadoutLabel" type="Label" parent="VBoxMain/StatusBar/HBoxStatus"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Database Loaded: 7,569 items | 4,929 NPCs | 17,493 dialogues | 86 scenes | 953 skills"
+
+[node name="VSepStatus" type="VSeparator" parent="VBoxMain/StatusBar/HBoxStatus"]
+layout_mode = 2
+
+[node name="MapStatusLabel" type="Label" parent="VBoxMain/StatusBar/HBoxStatus"]
+layout_mode = 2
+text = "Active Map: 10001 (Ship Deck) | Zoom: 100%"

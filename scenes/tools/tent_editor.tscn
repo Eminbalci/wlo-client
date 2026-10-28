@@ -1,0 +1,489 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/tools/tent_editor.gd" id="1_editor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.05, 0.07, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.08, 0.11, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.3, 0.42, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_preview"]
+bg_color = Color(0.03, 0.04, 0.07, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.45, 0.65, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="TentEditor" type="Control"]
+custom_minimum_size = Vector2(800, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_editor")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TopBar" type="PanelContainer" parent="MainVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxTop" type="HFlowContainer" parent="MainVBox/TopBar"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 4
+
+[node name="TitleLabel" type="Label" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.85, 1, 1)
+text = "TENT & FURNITURE STUDIO"
+
+[node name="VSep1" type="VSeparator" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+
+[node name="LblPreset" type="Label" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+text = "Preset:"
+
+[node name="PresetOption" type="OptionButton" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+
+[node name="BtnApplyPreset" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Apply"
+
+[node name="VSep2" type="VSeparator" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+
+[node name="LblWallpaper" type="Label" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+text = "Wallpaper:"
+
+[node name="WallpaperOption" type="OptionButton" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="LblFlooring" type="Label" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+text = "Flooring:"
+
+[node name="FlooringOption" type="OptionButton" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 2
+
+[node name="VSep3" type="VSeparator" parent="MainVBox/TopBar/HBoxTop"]
+layout_mode = 2
+
+[node name="BtnClear" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear"
+
+[node name="BtnSave" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save JSON"
+
+[node name="BtnLoad" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load JSON"
+
+[node name="BtnExportScene" type="Button" parent="MainVBox/TopBar/HBoxTop"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export .tscn"
+
+[node name="ContentHBox" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="LeftPanel" type="PanelContainer" parent="MainVBox/ContentHBox"]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="LeftScroll" type="ScrollContainer" parent="MainVBox/ContentHBox/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="LeftVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="LblPaletteHeader" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+text = "FURNITURE PALETTE"
+
+[node name="CategoryOption" type="OptionButton" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SearchEdit" type="LineEdit" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Search furniture..."
+
+[node name="FurnitureList" type="ItemList" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSepPal" type="HSeparator" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+layout_mode = 2
+
+[node name="LblPaletteName" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.85, 1, 1)
+text = "Alchemy Apparatus"
+
+[node name="LblPaletteItemId" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Item ID: 38001"
+
+[node name="LblPaletteCategory" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Category: Crafting Workbenches"
+
+[node name="LblPaletteFootprint" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Size: 2x2"
+
+[node name="LblPaletteWorkbench" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Workbench: Alchemy"
+
+[node name="LblPaletteDesc" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "High-tier alchemical apparatus."
+autowrap_mode = 3
+
+[node name="BtnQuickPlace" type="Button" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Place in Center"
+
+[node name="CenterPanel" type="PanelContainer" parent="MainVBox/ContentHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="CenterVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/CenterPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CanvasToolbar" type="HFlowContainer" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="BtnModePlace" type="Button" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "Place [P]"
+
+[node name="BtnModeSelect" type="Button" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Select/Move [S]"
+
+[node name="BtnModeRotate" type="Button" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Rotate [R]"
+
+[node name="BtnModeDelete" type="Button" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Delete [Del]"
+
+[node name="BtnModePaintCollision" type="Button" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Paint Col [C]"
+
+[node name="VSepCanvas" type="VSeparator" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+layout_mode = 2
+
+[node name="CheckGrid" type="CheckBox" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Grid"
+
+[node name="CheckCollision" type="CheckBox" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Collision"
+
+[node name="BtnCenterView" type="Button" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasToolbar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Center"
+
+[node name="CanvasWrapper" type="PanelContainer" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_preview")
+
+[node name="TentCanvas" type="Control" parent="MainVBox/ContentHBox/CenterPanel/CenterVBox/CanvasWrapper"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RightPanel" type="PanelContainer" parent="MainVBox/ContentHBox"]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="RightScroll" type="ScrollContainer" parent="MainVBox/ContentHBox/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="RightVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/RightPanel/RightScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="LblTentHeader" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+text = "TENT CONFIGURATION"
+
+[node name="HBoxTentName" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+
+[node name="LblName" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxTentName"]
+layout_mode = 2
+text = "Name:"
+
+[node name="TentNameEdit" type="LineEdit" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxTentName"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player Tent"
+
+[node name="HBoxDimensions" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+
+[node name="LblW" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxDimensions"]
+layout_mode = 2
+text = "W:"
+
+[node name="WidthSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxDimensions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 8.0
+max_value = 32.0
+value = 16.0
+
+[node name="LblH" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxDimensions"]
+layout_mode = 2
+text = "H:"
+
+[node name="HeightSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxDimensions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 8.0
+max_value = 32.0
+value = 16.0
+
+[node name="BtnResizeTent" type="Button" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resize Tent"
+
+[node name="HSepR1" type="HSeparator" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+
+[node name="LblInspectorHeader" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+text = "SELECTED FURNITURE"
+
+[node name="SelectedInstanceLabel" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "No furniture selected"
+
+[node name="SelectedNameLabel" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.85, 1, 1)
+text = "-"
+
+[node name="HBoxPos" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+
+[node name="LblPos" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxPos"]
+layout_mode = 2
+text = "Pos X/Y:"
+
+[node name="PosXSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxPos"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 32.0
+
+[node name="PosYSpin" type="SpinBox" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxPos"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 32.0
+
+[node name="HBoxHeading" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+
+[node name="LblHeading" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxHeading"]
+layout_mode = 2
+text = "Facing:"
+
+[node name="HeadingOption" type="OptionButton" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxHeading"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxSelActions" type="HBoxContainer" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+
+[node name="BtnRotateSelected" type="Button" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxSelActions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rotate 90°"
+
+[node name="BtnDeleteSelected" type="Button" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox/HBoxSelActions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Delete"
+
+[node name="HSepR2" type="HSeparator" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+
+[node name="LblMetricsHeader" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+text = "TENT METRICS"
+
+[node name="TotalFurnitureLabel" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Placed Furniture: 0"
+
+[node name="WorkbenchesLabel" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Workbenches: 0"
+
+[node name="WalkableTilesLabel" type="Label" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Walkable: 256 / 256 (100.0%)"
+
+[node name="WalkableProgressBar" type="ProgressBar" parent="MainVBox/ContentHBox/RightPanel/RightScroll/RightVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+
+[node name="BottomBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxBottom" type="HBoxContainer" parent="MainVBox/BottomBar"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MainVBox/BottomBar/HBoxBottom"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tent & Furniture Interior Studio Ready."
+
+[node name="ExportDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Exported Standalone Tent Map Scene (.tscn)"
+size = Vector2i(650, 500)
+
+[node name="ExportTextEdit" type="TextEdit" parent="ExportDialog"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(620, 440)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 642.0
+offset_bottom = 451.0
+editable = false

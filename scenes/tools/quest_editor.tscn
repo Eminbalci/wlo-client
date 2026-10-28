@@ -1,0 +1,741 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/tools/quest_editor.gd" id="1_editor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.05, 0.07, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.08, 0.11, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.3, 0.42, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue_bg"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.04, 0.06, 0.09, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.45, 0.6, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="QuestEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_editor")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TopBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="TopHBox" type="HBoxContainer" parent="MainVBox/TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StudioTitle" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_font_sizes/font_size = 14
+text = "QUEST & DIALOGUE STUDIO"
+
+[node name="VSep1" type="VSeparator" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+
+[node name="PresetLabel" type="Label" parent="MainVBox/TopBar/TopHBox"]
+layout_mode = 2
+text = "Preset:"
+
+[node name="OptPresets" type="OptionButton" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 26)
+layout_mode = 2
+
+[node name="BtnNewQuest" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Quest"
+
+[node name="BtnSaveJson" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save JSON"
+
+[node name="BtnLoadJson" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load JSON"
+
+[node name="BtnExportScript" type="Button" parent="MainVBox/TopBar/TopHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export GDScript"
+
+[node name="BodyHBox" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="LeftScroll" type="ScrollContainer" parent="MainVBox/BodyHBox"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="LeftColumn" type="VBoxContainer" parent="MainVBox/BodyHBox/LeftScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="HeaderPanel" type="PanelContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxHeader" type="VBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblHeaderSec" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "QUEST HEADER"
+
+[node name="GridHeader" type="GridContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader"]
+layout_mode = 2
+columns = 2
+
+[node name="LblQId" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+layout_mode = 2
+text = "Quest ID:"
+
+[node name="SpinQuestId" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 999999.0
+value = 1001.0
+
+[node name="LblQTitle" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+layout_mode = 2
+text = "Title:"
+
+[node name="EditQuestTitle" type="LineEdit" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Prologue Ship Quest"
+
+[node name="LblQCat" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+layout_mode = 2
+text = "Category:"
+
+[node name="OptQuestCategory" type="OptionButton" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LblQMinLvl" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+layout_mode = 2
+text = "Min Level:"
+
+[node name="SpinMinLevel" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 200.0
+value = 1.0
+
+[node name="LblQPrereq" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+layout_mode = 2
+text = "Prereq ID:"
+
+[node name="SpinPrereqId" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 999999.0
+
+[node name="LblQRepeat" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+layout_mode = 2
+text = "Repeatable:"
+
+[node name="ChkRepeatable" type="CheckBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader/GridHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LblQDesc" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader"]
+layout_mode = 2
+text = "Description:"
+
+[node name="EditQuestDesc" type="TextEdit" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/HeaderPanel/VBoxHeader"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+wrap_mode = 1
+
+[node name="RewardsPanel" type="PanelContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxRewards" type="VBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblRewardsSec" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "REWARDS CONFIGURATION"
+
+[node name="GridRewards" type="GridContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards"]
+layout_mode = 2
+columns = 2
+
+[node name="LblExp" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridRewards"]
+layout_mode = 2
+text = "EXP:"
+
+[node name="SpinRewardExp" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridRewards"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10000000.0
+value = 100.0
+
+[node name="LblGold" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridRewards"]
+layout_mode = 2
+text = "Gold:"
+
+[node name="SpinRewardGold" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridRewards"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10000000.0
+value = 50.0
+
+[node name="LblSkill" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridRewards"]
+layout_mode = 2
+text = "Skill ID:"
+
+[node name="HBoxSkill" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridRewards"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinRewardSkillId" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridRewards/HBoxSkill"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+
+[node name="LblRewardSkillName" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridRewards/HBoxSkill"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "(None)"
+
+[node name="LblItems" type="Label" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards"]
+layout_mode = 2
+text = "Reward Items:"
+
+[node name="ListRewardItems" type="ItemList" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="GridAddItem" type="GridContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards"]
+layout_mode = 2
+columns = 3
+
+[node name="SpinAddItemId" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridAddItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 23001.0
+
+[node name="EditAddItemName" type="LineEdit" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridAddItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Small Knife"
+
+[node name="SpinAddItemCount" type="SpinBox" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/GridAddItem"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 999.0
+value = 1.0
+
+[node name="HBoxItemBtns" type="HBoxContainer" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards"]
+layout_mode = 2
+
+[node name="BtnAddRewardItem" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/HBoxItemBtns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+ Add Item"
+
+[node name="BtnRemoveRewardItem" type="Button" parent="MainVBox/BodyHBox/LeftScroll/LeftColumn/RewardsPanel/VBoxRewards/HBoxItemBtns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "- Remove Selected"
+
+[node name="CenterScroll" type="ScrollContainer" parent="MainVBox/BodyHBox"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+horizontal_scroll_mode = 0
+
+[node name="CenterColumn" type="VBoxContainer" parent="MainVBox/BodyHBox/CenterScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="SequencerPanel" type="PanelContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxSequencer" type="VBoxContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="LblSeqSec" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "MULTI-STEP OBJECTIVE SEQUENCER"
+
+[node name="ListObjectives" type="ItemList" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxSeqTools" type="HBoxContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BtnMoveUpStep" type="Button" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/HBoxSeqTools"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "▲ Up"
+
+[node name="BtnMoveDownStep" type="Button" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/HBoxSeqTools"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "▼ Down"
+
+[node name="BtnRemoveStep" type="Button" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/HBoxSeqTools"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove"
+
+[node name="BtnClearSteps" type="Button" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/HBoxSeqTools"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear All"
+
+[node name="HSepSeq" type="HSeparator" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+layout_mode = 2
+
+[node name="LblEditStep" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+layout_mode = 2
+text = "Objective Step Parameters:"
+
+[node name="HBoxTypeSel" type="HBoxContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+layout_mode = 2
+
+[node name="LblObjType" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/HBoxTypeSel"]
+layout_mode = 2
+text = "Type:"
+
+[node name="OptStepType" type="OptionButton" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/HBoxTypeSel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelStepTalk" type="VBoxContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="GridTalk" type="GridContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk"]
+layout_mode = 2
+columns = 2
+
+[node name="LblTNpcId" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk/GridTalk"]
+layout_mode = 2
+text = "NPC ID:"
+
+[node name="SpinTalkNpcId" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk/GridTalk"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 14003.0
+
+[node name="LblTNpcName" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk/GridTalk"]
+layout_mode = 2
+text = "NPC Name:"
+
+[node name="EditTalkNpcName" type="LineEdit" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk/GridTalk"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Captain Robinson"
+
+[node name="LblTTalkId" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk/GridTalk"]
+layout_mode = 2
+text = "Talk ID:"
+
+[node name="SpinTalkId" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk/GridTalk"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 14003.0
+
+[node name="LblTPrev" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk/GridTalk"]
+layout_mode = 2
+text = "Preview Text:"
+
+[node name="EditTalkPreview" type="LineEdit" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk/GridTalk"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Welcome aboard the ship!"
+
+[node name="BtnFetchDialogue" type="Button" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepTalk"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fetch Talk Text & Speaker From DB"
+
+[node name="PanelStepItem" type="VBoxContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="GridItem" type="GridContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepItem"]
+layout_mode = 2
+columns = 2
+
+[node name="LblIId" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepItem/GridItem"]
+layout_mode = 2
+text = "Item ID:"
+
+[node name="SpinItemId" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepItem/GridItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 32001.0
+
+[node name="LblIName" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepItem/GridItem"]
+layout_mode = 2
+text = "Item Name:"
+
+[node name="EditItemName" type="LineEdit" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepItem/GridItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Coconut"
+
+[node name="LblICnt" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepItem/GridItem"]
+layout_mode = 2
+text = "Count Required:"
+
+[node name="SpinItemCount" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepItem/GridItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 999.0
+value = 3.0
+
+[node name="PanelStepMonster" type="VBoxContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="GridMonster" type="GridContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepMonster"]
+layout_mode = 2
+columns = 2
+
+[node name="LblMId" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepMonster/GridMonster"]
+layout_mode = 2
+text = "Monster ID:"
+
+[node name="SpinMonsterId" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepMonster/GridMonster"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 1001.0
+
+[node name="LblMName" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepMonster/GridMonster"]
+layout_mode = 2
+text = "Monster Name:"
+
+[node name="EditMonsterName" type="LineEdit" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepMonster/GridMonster"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gel Monster"
+
+[node name="LblMCnt" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepMonster/GridMonster"]
+layout_mode = 2
+text = "Defeat Count:"
+
+[node name="SpinMonsterCount" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepMonster/GridMonster"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 999.0
+value = 3.0
+
+[node name="PanelStepArea" type="VBoxContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="GridArea" type="GridContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea"]
+layout_mode = 2
+columns = 2
+
+[node name="LblAMapId" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+layout_mode = 2
+text = "Map ID:"
+
+[node name="SpinAreaMapId" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 10001.0
+
+[node name="LblAMapName" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+layout_mode = 2
+text = "Map Name:"
+
+[node name="EditAreaMapName" type="LineEdit" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ship Deck"
+
+[node name="LblAPosX" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+layout_mode = 2
+text = "Target Pos X:"
+
+[node name="SpinAreaPosX" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100000.0
+value = 1720.0
+
+[node name="LblAPosY" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+layout_mode = 2
+text = "Target Pos Y:"
+
+[node name="SpinAreaPosY" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100000.0
+value = 906.0
+
+[node name="LblARadius" type="Label" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+layout_mode = 2
+text = "Radius:"
+
+[node name="SpinAreaRadius" type="SpinBox" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/PanelStepArea/GridArea"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 5000.0
+value = 64.0
+
+[node name="HBoxStepActionBtns" type="HBoxContainer" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BtnAddStep" type="Button" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/HBoxStepActionBtns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+ Add As New Step"
+
+[node name="BtnCommitStep" type="Button" parent="MainVBox/BodyHBox/CenterScroll/CenterColumn/SequencerPanel/VBoxSequencer/HBoxStepActionBtns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Apply To Selected"
+
+[node name="RightScroll" type="ScrollContainer" parent="MainVBox/BodyHBox"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="RightColumn" type="VBoxContainer" parent="MainVBox/BodyHBox/RightScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="DialoguePanel" type="PanelContainer" parent="MainVBox/BodyHBox/RightScroll/RightColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxDialogue" type="VBoxContainer" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="LblDlgSec" type="Label" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+text = "DIALOGUE TREE PREVIEWER"
+
+[node name="HBoxTalkLookup" type="HBoxContainer" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+layout_mode = 2
+
+[node name="LblTalkId" type="Label" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue/HBoxTalkLookup"]
+layout_mode = 2
+text = "Talk ID:"
+
+[node name="SpinPreviewTalkId" type="SpinBox" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue/HBoxTalkLookup"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 99999.0
+value = 14003.0
+
+[node name="BtnPreviewTalk" type="Button" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue/HBoxTalkLookup"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Preview"
+
+[node name="LblPreviewSpeaker" type="Label" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
+text = "Speaker: Captain Robinson"
+
+[node name="LblPreviewMeta" type="Label" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.75, 0.85, 1)
+text = "Portrait Face: 8025 | Sound SFX: s1402"
+
+[node name="LblBBCode" type="Label" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+layout_mode = 2
+text = "Formatted BBCode Dialogue:"
+
+[node name="PanelRichDlg" type="PanelContainer" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+custom_minimum_size = Vector2(0, 85)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue_bg")
+
+[node name="RichPreviewDialogue" type="RichTextLabel" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue/PanelRichDlg"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Welcome aboard the ship! I am Captain Robinson. We are setting sail for North Island soon."
+
+[node name="LblRaw" type="Label" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+layout_mode = 2
+text = "Raw ShortString Tokens:"
+
+[node name="EditPreviewRaw" type="TextEdit" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "#s1402#f8025Welcome aboard the ship! I am #RCaptain Robinson#W."
+wrap_mode = 1
+
+[node name="LblChoices" type="Label" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+layout_mode = 2
+text = "Branching Dialogue Choices:"
+
+[node name="ListPreviewChoices" type="ItemList" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="BtnFollowChoice" type="Button" parent="MainVBox/BodyHBox/RightScroll/RightColumn/DialoguePanel/VBoxDialogue"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Traverse Selected Branch"
+
+[node name="StatusBar" type="PanelContainer" parent="MainVBox"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="StatusLabel" type="Label" parent="MainVBox/StatusBar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
+text = "Quest & Dialogue Studio ready."

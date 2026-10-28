@@ -1,0 +1,118 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud/radar_minimap.gd" id="1_radar_minimap"]
+[ext_resource type="Script" path="res://scripts/ui/minimap_marker.gd" id="2_minimap_marker"]
+[ext_resource type="Script" path="res://scripts/ui/minimap_waypoint.gd" id="3_minimap_waypoint"]
+
+[node name="RadarMinimapDock" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -226.0
+offset_bottom = 144.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("1_radar_minimap")
+
+[node name="MinimapView" type="TextureRect" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 218.0
+offset_bottom = 137.0
+mouse_filter = 0
+expand_mode = 1
+
+[node name="PlayerMarker" type="Control" parent="MinimapView"]
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("2_minimap_marker")
+
+[node name="WaypointMarker" type="Control" parent="MinimapView"]
+visible = false
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("3_minimap_waypoint")
+
+[node name="PortalsContainer" type="Control" parent="MinimapView"]
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="MinimapFrame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 226.0
+offset_bottom = 144.0
+mouse_filter = 2
+
+[node name="MapNameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 6.0
+offset_right = 112.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Ship Deck"
+vertical_alignment = 1
+
+[node name="CoordinatesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 6.0
+offset_right = 210.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.85, 0.95, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "(1542, 675)"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BtnZoomOut" type="Button" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 114.0
+offset_right = 184.0
+offset_bottom = 132.0
+tooltip_text = "Zoom Out"
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 9
+theme_override_constants/outline_size = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "-"
+
+[node name="BtnZoomIn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 114.0
+offset_right = 204.0
+offset_bottom = 132.0
+tooltip_text = "Zoom In"
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 9
+theme_override_constants/outline_size = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "+"
+
+[node name="BtnMinimapToggle" type="Button" parent="."]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 114.0
+offset_right = 224.0
+offset_bottom = 132.0
+tooltip_text = "Toggle Minimap Style / Collapse"
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 9
+theme_override_constants/outline_size = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "M"

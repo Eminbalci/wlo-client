@@ -1,0 +1,217 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud/status_dock.gd" id="1_status_dock"]
+[ext_resource type="Texture2D" uid="uid://4hff8w7tnac5" path="res://assets/hud/avatar_role_6_0.png" id="2_avatar"]
+[ext_resource type="Texture2D" uid="uid://dhoq4og41yatp" path="res://assets/hud/icon_element_3.png" id="3_element"]
+
+[node name="PlayerStatusDock" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 241.0
+offset_bottom = 185.0
+mouse_filter = 2
+script = ExtResource("1_status_dock")
+
+[node name="AvatarBg" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 82.0
+offset_bottom = 82.0
+mouse_filter = 2
+color = Color(0.160784, 0.160784, 0.160784, 1)
+
+[node name="AvatarRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -4.0
+offset_right = 102.0
+offset_bottom = 68.0
+mouse_filter = 2
+texture = ExtResource("2_avatar")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusBackground" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 241.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="HpChannelUnder" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 37.0
+offset_right = 125.0
+offset_bottom = 75.0
+mouse_filter = 2
+
+[node name="SpChannelUnder" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 38.0
+offset_right = 131.0
+offset_bottom = 85.0
+mouse_filter = 2
+
+[node name="HpBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 37.0
+offset_right = 125.0
+offset_bottom = 75.0
+mouse_filter = 2
+max_value = 245.0
+value = 245.0
+
+[node name="SpBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 38.0
+offset_right = 131.0
+offset_bottom = 85.0
+mouse_filter = 2
+max_value = 180.0
+value = 180.0
+
+[node name="ElementIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 7.0
+offset_right = 133.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource("3_element")
+expand_mode = 1
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 7.0
+offset_right = 210.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Daniel"
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 60.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "LV 10"
+vertical_alignment = 1
+
+[node name="HpLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 112.0
+offset_right = 120.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "HP   245/245"
+vertical_alignment = 1
+
+[node name="SpLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 120.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "SP   180/180"
+vertical_alignment = 1
+
+[node name="ExpTitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 144.0
+offset_right = 36.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "EXP"
+vertical_alignment = 1
+
+[node name="ExpBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 148.0
+offset_right = 85.0
+offset_bottom = 156.0
+mouse_filter = 2
+value = 45.0
+
+[node name="ExpLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 144.0
+offset_right = 130.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "45%"
+vertical_alignment = 1
+
+[node name="GoldLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 160.0
+offset_right = 120.0
+offset_bottom = 176.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Gold 500"
+vertical_alignment = 1
+
+[node name="BuffContainer" type="HFlowContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 185.0
+offset_right = 238.0
+offset_bottom = 233.0
+mouse_filter = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4

@@ -1,0 +1,1414 @@
+[gd_scene load_steps=37 format=3 uid="uid://c3d4e5f6a7b8c"]
+
+[ext_resource type="Script" path="res://scripts/ui/auth/character_create.gd" id="1_create"]
+[ext_resource type="Script" path="res://scripts/ui/auth/radar_chart.gd" id="2_radar"]
+[ext_resource type="Texture2D" path="res://assets/pic/LogPic1.jpg" id="3_logpic"]
+[ext_resource type="Texture2D" path="res://assets/menu/Skins/white/Form_CreateRole_1.jpg" id="4_form1"]
+[ext_resource type="Texture2D" path="res://assets/menu/Skins/white/Form_CreateRole_2.jpg" id="5_form2"]
+[ext_resource type="Texture2D" path="res://assets/menu/Skins/white/Form_CreateRole_3.jpg" id="6_form3"]
+[ext_resource type="Texture2D" path="res://assets/menu/Skins/white/Form_CreateRole_4.jpg" id="7_form4"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_left_normal.png" id="8_arr_l_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_left_hover.png" id="8_arr_l_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_left_pressed.png" id="8_arr_l_prs"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_right_normal.png" id="9_arr_r_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_right_hover.png" id="9_arr_r_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_arrow_right_pressed.png" id="9_arr_r_prs"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_element_1.png" id="10_elem1"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_element_2.png" id="11_elem2"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_element_3.png" id="12_elem3"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_element_4.png" id="13_elem4"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_cancel_normal.png" id="14_btn_cancel_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_cancel_hover.png" id="15_btn_cancel_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_cancel_pressed.png" id="16_btn_cancel_prs"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_next_normal.png" id="17_btn_next_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_next_hover.png" id="18_btn_next_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_next_pressed.png" id="19_btn_next_prs"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_prev_small_normal.png" id="20_btn_prev_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_prev_small_hover.png" id="21_btn_prev_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_prev_small_pressed.png" id="22_btn_prev_prs"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_ok_normal.png" id="23_btn_ok_norm"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_ok_hover.png" id="24_btn_ok_hov"]
+[ext_resource type="Texture2D" path="res://assets/auth/btn_ok_pressed.png" id="25_btn_ok_prs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+content_margin_left = 6.0
+content_margin_right = 6.0
+bg_color = Color(0.98, 0.96, 0.92, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.45, 0.35, 0.8)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grass_shadow"]
+bg_color = Color(0.38, 0.46, 0.30, 0.45)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_small_btn"]
+bg_color = Color(0.93, 0.90, 0.84, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.48, 0.40, 0.32, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_small_btn_hover"]
+bg_color = Color(0.99, 0.96, 0.90, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.68, 0.52, 0.32, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_small_btn_pressed"]
+bg_color = Color(0.84, 0.79, 0.71, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.28, 0.20, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.92, 0.88, 0.82, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.45, 0.35, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal_panel"]
+bg_color = Color(0.94, 0.91, 0.84, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.42, 0.32, 0.22, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 6
+
+[node name="CharacterCreate" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_create")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_logpic")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="WindowRoot" type="Control" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 124.0
+offset_right = 770.0
+offset_bottom = 476.0
+
+[node name="Step1" type="Control" parent="WindowRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FormBg" type="TextureRect" parent="WindowRoot/Step1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_form1")
+expand_mode = 1
+
+[node name="LeftCard" type="Control" parent="WindowRoot/Step1"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 370.0
+offset_bottom = 342.0
+
+[node name="BtnArrowLeft" type="TextureButton" parent="WindowRoot/Step1/LeftCard"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 36.0
+offset_bottom = 33.0
+texture_normal = ExtResource("8_arr_l_norm")
+texture_hover = ExtResource("8_arr_l_hov")
+texture_pressed = ExtResource("8_arr_l_prs")
+stretch_mode = 3
+
+[node name="RoleNameLabel" type="Label" parent="WindowRoot/Step1/LeftCard"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 14.0
+offset_right = 176.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(0.22, 0.15, 0.08, 1)
+theme_override_font_sizes/font_size = 13
+text = "Daniel (丹尼爾)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnArrowRight" type="TextureButton" parent="WindowRoot/Step1/LeftCard"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 16.0
+offset_right = 196.0
+offset_bottom = 33.0
+texture_normal = ExtResource("9_arr_r_norm")
+texture_hover = ExtResource("9_arr_r_hov")
+texture_pressed = ExtResource("9_arr_r_prs")
+stretch_mode = 3
+
+[node name="RadarChart" type="Control" parent="WindowRoot/Step1/LeftCard"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 176.0
+offset_bottom = 206.0
+script = ExtResource("2_radar")
+
+[node name="RoleStandee" type="TextureRect" parent="WindowRoot/Step1/LeftCard"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 36.0
+offset_right = 340.0
+offset_bottom = 252.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RoleLoreLabel" type="Label" parent="WindowRoot/Step1/LeftCard"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 262.0
+offset_right = 340.0
+offset_bottom = 330.0
+theme_override_colors/font_color = Color(0.22, 0.16, 0.11, 1)
+theme_override_font_sizes/font_size = 10
+text = "A bold, passionate adventurer with a fierce sense of justice."
+autowrap_mode = 3
+
+[node name="RightArea" type="Control" parent="WindowRoot/Step1"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 0.0
+offset_right = 740.0
+offset_bottom = 352.0
+
+[node name="NameContainer" type="Control" parent="WindowRoot/Step1/RightArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 370.0
+offset_bottom = 140.0
+
+[node name="FirstNameInput" type="LineEdit" parent="WindowRoot/Step1/RightArea/NameContainer"]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 74.0
+offset_right = 302.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.08, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+placeholder_text = "First"
+max_length = 10
+
+[node name="FamilyNameInput" type="LineEdit" parent="WindowRoot/Step1/RightArea/NameContainer"]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 93.0
+offset_right = 302.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.08, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+placeholder_text = "Last"
+max_length = 10
+
+[node name="PreviewBox" type="Control" parent="WindowRoot/Step1/RightArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 370.0
+offset_bottom = 300.0
+
+[node name="FaceBust" type="TextureRect" parent="WindowRoot/Step1/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 155.0
+offset_right = 225.0
+offset_bottom = 225.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnR" type="Button" parent="WindowRoot/Step1/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 229.0
+offset_right = 171.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "R"
+
+[node name="BtnH" type="Button" parent="WindowRoot/Step1/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 229.0
+offset_right = 191.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "H"
+
+[node name="GrassPatch" type="Panel" parent="WindowRoot/Step1/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 228.0
+offset_right = 304.0
+offset_bottom = 242.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_grass_shadow")
+
+[node name="WalkingSprite" type="TextureRect" parent="WindowRoot/Step1/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 148.0
+offset_right = 311.0
+offset_bottom = 236.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnTurnLeft" type="Button" parent="WindowRoot/Step1/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 201.0
+offset_right = 252.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "<"
+
+[node name="BtnTurnRight" type="Button" parent="WindowRoot/Step1/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 201.0
+offset_right = 319.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = ">"
+
+[node name="BtnReturn" type="TextureButton" parent="WindowRoot/Step1"]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 306.0
+offset_right = 603.0
+offset_bottom = 328.0
+texture_normal = ExtResource("14_btn_cancel_norm")
+texture_hover = ExtResource("15_btn_cancel_hov")
+texture_pressed = ExtResource("16_btn_cancel_prs")
+
+[node name="BtnContinue" type="TextureButton" parent="WindowRoot/Step1"]
+layout_mode = 0
+offset_left = 621.0
+offset_top = 306.0
+offset_right = 723.0
+offset_bottom = 328.0
+texture_normal = ExtResource("17_btn_next_norm")
+texture_hover = ExtResource("18_btn_next_hov")
+texture_pressed = ExtResource("19_btn_next_prs")
+
+[node name="Step2" type="Control" parent="WindowRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FormBg" type="TextureRect" parent="WindowRoot/Step2"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 0.0
+offset_right = 638.0
+offset_bottom = 352.0
+texture = ExtResource("7_form4")
+[node name="LeftArea" type="Control" parent="WindowRoot/Step2"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 370.0
+offset_bottom = 342.0
+
+[node name="TabsHBox" type="HBoxContainer" parent="WindowRoot/Step2/LeftArea"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 78.0
+offset_right = 372.0
+offset_bottom = 102.0
+theme_override_constants/separation = 6
+
+[node name="TabHair" type="Button" parent="WindowRoot/Step2/LeftArea/TabsHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
+text = "Hair"
+
+[node name="TabBody" type="Button" parent="WindowRoot/Step2/LeftArea/TabsHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
+text = "Body"
+
+[node name="TabEyes" type="Button" parent="WindowRoot/Step2/LeftArea/TabsHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
+text = "Eyes"
+
+[node name="TabWear" type="Button" parent="WindowRoot/Step2/LeftArea/TabsHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
+text = "Wear"
+
+[node name="StyleArea" type="Control" parent="WindowRoot/Step2/LeftArea"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 112.0
+offset_right = 332.0
+offset_bottom = 138.0
+
+[node name="StyleValLabel" type="Label" parent="WindowRoot/Step2/LeftArea/StyleArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 4.0
+offset_right = 75.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "Style 1"
+vertical_alignment = 1
+
+[node name="BtnStylePrev" type="Button" parent="WindowRoot/Step2/LeftArea/StyleArea"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 4.0
+offset_right = 99.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "v"
+
+[node name="BtnStyleNext" type="Button" parent="WindowRoot/Step2/LeftArea/StyleArea"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 4.0
+offset_right = 123.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "^"
+
+[node name="BtnDefaultColor" type="Button" parent="WindowRoot/Step2/LeftArea"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 146.0
+offset_right = 214.0
+offset_bottom = 166.0
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "Default"
+
+[node name="SlidersArea" type="Control" parent="WindowRoot/Step2/LeftArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 740.0
+offset_bottom = 352.0
+
+[node name="RedRow" type="Control" parent="WindowRoot/Step2/LeftArea/SlidersArea"]
+layout_mode = 0
+offset_top = 207.0
+offset_right = 740.0
+offset_bottom = 229.0
+
+offset_left = 0.0
+[node name="LabelR" type="Label" parent="WindowRoot/Step2/LeftArea/SlidersArea/RedRow"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.65, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "R"
+
+visible = false
+[node name="ValR" type="Label" parent="WindowRoot/Step2/LeftArea/SlidersArea/RedRow"]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 3.0
+offset_right = 366.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 10
+text = "230"
+horizontal_alignment = 1
+
+[node name="BtnMinusR" type="Button" parent="WindowRoot/Step2/LeftArea/SlidersArea/RedRow"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 1.0
+offset_right = 193.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "-"
+
+[node name="SliderR" type="HSlider" parent="WindowRoot/Step2/LeftArea/SlidersArea/RedRow"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 2.0
+offset_right = 310.0
+offset_bottom = 18.0
+max_value = 255.0
+step = 1.0
+value = 230.0
+
+[node name="BtnPlusR" type="Button" parent="WindowRoot/Step2/LeftArea/SlidersArea/RedRow"]
+layout_mode = 0
+offset_left = 313.0
+offset_top = 1.0
+offset_right = 330.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "+"
+
+[node name="GreenRow" type="Control" parent="WindowRoot/Step2/LeftArea/SlidersArea"]
+layout_mode = 0
+offset_top = 238.0
+offset_right = 740.0
+offset_bottom = 260.0
+
+offset_left = 0.0
+[node name="LabelG" type="Label" parent="WindowRoot/Step2/LeftArea/SlidersArea/GreenRow"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.15, 0.55, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "G"
+
+visible = false
+[node name="ValG" type="Label" parent="WindowRoot/Step2/LeftArea/SlidersArea/GreenRow"]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 3.0
+offset_right = 366.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 10
+text = "230"
+horizontal_alignment = 1
+
+[node name="BtnMinusG" type="Button" parent="WindowRoot/Step2/LeftArea/SlidersArea/GreenRow"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 1.0
+offset_right = 193.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "-"
+
+[node name="SliderG" type="HSlider" parent="WindowRoot/Step2/LeftArea/SlidersArea/GreenRow"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 2.0
+offset_right = 310.0
+offset_bottom = 18.0
+max_value = 255.0
+step = 1.0
+value = 230.0
+
+[node name="BtnPlusG" type="Button" parent="WindowRoot/Step2/LeftArea/SlidersArea/GreenRow"]
+layout_mode = 0
+offset_left = 313.0
+offset_top = 1.0
+offset_right = 330.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "+"
+
+[node name="BlueRow" type="Control" parent="WindowRoot/Step2/LeftArea/SlidersArea"]
+layout_mode = 0
+offset_top = 270.0
+offset_right = 740.0
+offset_bottom = 292.0
+
+offset_left = 0.0
+[node name="LabelB" type="Label" parent="WindowRoot/Step2/LeftArea/SlidersArea/BlueRow"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.15, 0.25, 0.7, 1)
+theme_override_font_sizes/font_size = 11
+text = "B"
+
+visible = false
+[node name="ValB" type="Label" parent="WindowRoot/Step2/LeftArea/SlidersArea/BlueRow"]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 3.0
+offset_right = 366.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 10
+text = "230"
+horizontal_alignment = 1
+
+[node name="BtnMinusB" type="Button" parent="WindowRoot/Step2/LeftArea/SlidersArea/BlueRow"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 1.0
+offset_right = 193.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "-"
+
+[node name="SliderB" type="HSlider" parent="WindowRoot/Step2/LeftArea/SlidersArea/BlueRow"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 2.0
+offset_right = 310.0
+offset_bottom = 18.0
+max_value = 255.0
+step = 1.0
+value = 230.0
+
+[node name="BtnPlusB" type="Button" parent="WindowRoot/Step2/LeftArea/SlidersArea/BlueRow"]
+layout_mode = 0
+offset_left = 313.0
+offset_top = 1.0
+offset_right = 330.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "+"
+
+[node name="RightArea" type="Control" parent="WindowRoot/Step2"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 0.0
+offset_right = 618.0
+offset_bottom = 352.0
+
+[node name="FullNameLabel" type="Label" parent="WindowRoot/Step2/RightArea"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 97.0
+offset_right = 340.0
+offset_bottom = 119.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.08, 1)
+theme_override_font_sizes/font_size = 12
+text = "Daniel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PreviewBox" type="Control" parent="WindowRoot/Step2/RightArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 370.0
+offset_bottom = 300.0
+
+[node name="FaceBust" type="TextureRect" parent="WindowRoot/Step2/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 155.0
+offset_right = 225.0
+offset_bottom = 225.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnR" type="Button" parent="WindowRoot/Step2/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 229.0
+offset_right = 171.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "R"
+
+[node name="BtnH" type="Button" parent="WindowRoot/Step2/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 229.0
+offset_right = 191.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "H"
+
+[node name="GrassPatch" type="Panel" parent="WindowRoot/Step2/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 228.0
+offset_right = 304.0
+offset_bottom = 242.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_grass_shadow")
+
+[node name="WalkingSprite" type="TextureRect" parent="WindowRoot/Step2/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 148.0
+offset_right = 311.0
+offset_bottom = 236.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnTurnLeft" type="Button" parent="WindowRoot/Step2/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 201.0
+offset_right = 252.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "<"
+
+[node name="BtnTurnRight" type="Button" parent="WindowRoot/Step2/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 201.0
+offset_right = 319.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = ">"
+
+[node name="BtnReturn" type="TextureButton" parent="WindowRoot/Step2"]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 306.0
+offset_right = 484.0
+offset_bottom = 328.0
+texture_normal = ExtResource("20_btn_prev_norm")
+texture_hover = ExtResource("21_btn_prev_hov")
+texture_pressed = ExtResource("22_btn_prev_prs")
+
+[node name="BtnContinue" type="TextureButton" parent="WindowRoot/Step2"]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 306.0
+offset_right = 598.0
+offset_bottom = 328.0
+texture_normal = ExtResource("17_btn_next_norm")
+texture_hover = ExtResource("18_btn_next_hov")
+texture_pressed = ExtResource("19_btn_next_prs")
+
+[node name="Step3" type="Control" parent="WindowRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FormBg" type="TextureRect" parent="WindowRoot/Step3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_form3")
+expand_mode = 1
+
+[node name="LeftArea" type="Control" parent="WindowRoot/Step3"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 370.0
+offset_bottom = 342.0
+
+[node name="ElementHBox" type="HBoxContainer" parent="WindowRoot/Step3/LeftArea"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 96.0
+offset_right = 320.0
+offset_bottom = 136.0
+theme_override_constants/separation = 16
+
+[node name="BtnElemEarth" type="TextureButton" parent="WindowRoot/Step3/LeftArea/ElementHBox"]
+layout_mode = 2
+texture_normal = ExtResource("10_elem1")
+
+[node name="BtnElemWater" type="TextureButton" parent="WindowRoot/Step3/LeftArea/ElementHBox"]
+layout_mode = 2
+texture_normal = ExtResource("11_elem2")
+
+[node name="BtnElemFire" type="TextureButton" parent="WindowRoot/Step3/LeftArea/ElementHBox"]
+layout_mode = 2
+texture_normal = ExtResource("12_elem3")
+
+[node name="BtnElemWind" type="TextureButton" parent="WindowRoot/Step3/LeftArea/ElementHBox"]
+layout_mode = 2
+texture_normal = ExtResource("13_elem4")
+
+[node name="ElementDescLabel" type="Label" parent="WindowRoot/Step3/LeftArea"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 150.0
+offset_right = 340.0
+offset_bottom = 280.0
+theme_override_colors/font_color = Color(0.22, 0.15, 0.09, 1)
+theme_override_font_sizes/font_size = 11
+text = "Fire channels pure destructive might."
+autowrap_mode = 3
+
+[node name="RightArea" type="Control" parent="WindowRoot/Step3"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 0.0
+offset_right = 740.0
+offset_bottom = 352.0
+
+[node name="FullNameLabel" type="Label" parent="WindowRoot/Step3/RightArea"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 97.0
+offset_right = 340.0
+offset_bottom = 119.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.08, 1)
+theme_override_font_sizes/font_size = 12
+text = "Daniel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PreviewBox" type="Control" parent="WindowRoot/Step3/RightArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 370.0
+offset_bottom = 300.0
+
+[node name="FaceBust" type="TextureRect" parent="WindowRoot/Step3/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 155.0
+offset_right = 225.0
+offset_bottom = 225.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnR" type="Button" parent="WindowRoot/Step3/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 229.0
+offset_right = 171.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "R"
+
+[node name="BtnH" type="Button" parent="WindowRoot/Step3/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 229.0
+offset_right = 191.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "H"
+
+[node name="ElementCoinBadge" type="TextureRect" parent="WindowRoot/Step3/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 227.0
+offset_right = 218.0
+offset_bottom = 251.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GrassPatch" type="Panel" parent="WindowRoot/Step3/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 228.0
+offset_right = 304.0
+offset_bottom = 242.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_grass_shadow")
+
+[node name="WalkingSprite" type="TextureRect" parent="WindowRoot/Step3/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 148.0
+offset_right = 311.0
+offset_bottom = 236.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnTurnLeft" type="Button" parent="WindowRoot/Step3/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 201.0
+offset_right = 252.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "<"
+
+[node name="BtnTurnRight" type="Button" parent="WindowRoot/Step3/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 201.0
+offset_right = 319.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = ">"
+
+[node name="BtnReturn" type="TextureButton" parent="WindowRoot/Step3"]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 306.0
+offset_right = 603.0
+offset_bottom = 328.0
+texture_normal = ExtResource("20_btn_prev_norm")
+texture_hover = ExtResource("21_btn_prev_hov")
+texture_pressed = ExtResource("22_btn_prev_prs")
+
+[node name="BtnFinish" type="TextureButton" parent="WindowRoot/Step3"]
+layout_mode = 0
+offset_left = 621.0
+offset_top = 306.0
+offset_right = 723.0
+offset_bottom = 328.0
+texture_normal = ExtResource("23_btn_ok_norm")
+texture_hover = ExtResource("24_btn_ok_hov")
+texture_pressed = ExtResource("25_btn_ok_prs")
+
+[node name="Step4" type="Control" parent="WindowRoot"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FormBg" type="TextureRect" parent="WindowRoot/Step4"]
+layout_mode = 0
+offset_right = 740.0
+offset_bottom = 352.0
+texture = ExtResource("5_form2")
+[node name="ErrorLabel" type="Label" parent="WindowRoot/Step4"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 306.0
+offset_right = 480.0
+offset_bottom = 326.0
+theme_override_colors/font_color = Color(0.8, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+
+[node name="BtnPrev" type="TextureButton" parent="WindowRoot/Step4"]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 306.0
+offset_right = 603.0
+offset_bottom = 328.0
+texture_normal = ExtResource("20_btn_prev_norm")
+texture_hover = ExtResource("21_btn_prev_hov")
+texture_pressed = ExtResource("22_btn_prev_prs")
+
+[node name="BtnOk" type="TextureButton" parent="WindowRoot/Step4"]
+layout_mode = 0
+offset_left = 621.0
+offset_top = 306.0
+offset_right = 723.0
+offset_bottom = 328.0
+texture_normal = ExtResource("23_btn_ok_norm")
+texture_hover = ExtResource("24_btn_ok_hov")
+texture_pressed = ExtResource("25_btn_ok_prs")
+
+[node name="LeftCard" type="Control" parent="WindowRoot/Step4"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 280.0
+offset_bottom = 342.0
+[node name="RoleNameLabel" type="Label" parent="WindowRoot/Step4/LeftCard"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 66.0
+offset_right = 260.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(0.22, 0.15, 0.08, 1)
+theme_override_font_sizes/font_size = 13
+text = "Daniel"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="RadarChart" type="Control" parent="WindowRoot/Step4/LeftCard"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 98.0
+offset_right = 205.0
+offset_bottom = 238.0
+script = ExtResource("2_radar")
+[node name="RoleLoreLabel" type="Label" parent="WindowRoot/Step4/LeftCard"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 244.0
+offset_right = 260.0
+offset_bottom = 320.0
+theme_override_colors/font_color = Color(0.22, 0.16, 0.11, 1)
+theme_override_font_sizes/font_size = 10
+text = ""
+autowrap_mode = 3
+[node name="StatsArea" type="Control" parent="WindowRoot/Step4"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 740.0
+offset_bottom = 352.0
+mouse_filter = 2
+[node name="ValPoints" type="Label" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 119.0
+offset_right = 450.0
+offset_bottom = 139.0
+theme_override_colors/font_color = Color(0.17, 0.30, 0.42, 1)
+theme_override_font_sizes/font_size = 13
+text = "0"
+vertical_alignment = 1
+[node name="ValSTR" type="Label" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 164.0
+offset_right = 428.0
+offset_bottom = 182.0
+theme_override_colors/font_color = Color(0.17, 0.30, 0.42, 1)
+theme_override_font_sizes/font_size = 13
+text = "0"
+vertical_alignment = 1
+[node name="BtnMinusSTR" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 164.0
+offset_right = 449.0
+offset_bottom = 181.0
+texture_normal = ExtResource("8_arr_l_norm")
+texture_hover = ExtResource("8_arr_l_hov")
+texture_pressed = ExtResource("8_arr_l_prs")
+[node name="BtnPlusSTR" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 164.0
+offset_right = 471.0
+offset_bottom = 181.0
+texture_normal = ExtResource("9_arr_r_norm")
+texture_hover = ExtResource("9_arr_r_hov")
+texture_pressed = ExtResource("9_arr_r_prs")
+[node name="ValCON" type="Label" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 189.0
+offset_right = 428.0
+offset_bottom = 207.0
+theme_override_colors/font_color = Color(0.17, 0.30, 0.42, 1)
+theme_override_font_sizes/font_size = 13
+text = "0"
+vertical_alignment = 1
+[node name="BtnMinusCON" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 189.0
+offset_right = 449.0
+offset_bottom = 206.0
+texture_normal = ExtResource("8_arr_l_norm")
+texture_hover = ExtResource("8_arr_l_hov")
+texture_pressed = ExtResource("8_arr_l_prs")
+[node name="BtnPlusCON" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 189.0
+offset_right = 471.0
+offset_bottom = 206.0
+texture_normal = ExtResource("9_arr_r_norm")
+texture_hover = ExtResource("9_arr_r_hov")
+texture_pressed = ExtResource("9_arr_r_prs")
+[node name="ValINT" type="Label" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 213.0
+offset_right = 428.0
+offset_bottom = 231.0
+theme_override_colors/font_color = Color(0.17, 0.30, 0.42, 1)
+theme_override_font_sizes/font_size = 13
+text = "0"
+vertical_alignment = 1
+[node name="BtnMinusINT" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 213.0
+offset_right = 449.0
+offset_bottom = 230.0
+texture_normal = ExtResource("8_arr_l_norm")
+texture_hover = ExtResource("8_arr_l_hov")
+texture_pressed = ExtResource("8_arr_l_prs")
+[node name="BtnPlusINT" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 213.0
+offset_right = 471.0
+offset_bottom = 230.0
+texture_normal = ExtResource("9_arr_r_norm")
+texture_hover = ExtResource("9_arr_r_hov")
+texture_pressed = ExtResource("9_arr_r_prs")
+[node name="ValWIS" type="Label" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 237.0
+offset_right = 428.0
+offset_bottom = 255.0
+theme_override_colors/font_color = Color(0.17, 0.30, 0.42, 1)
+theme_override_font_sizes/font_size = 13
+text = "0"
+vertical_alignment = 1
+[node name="BtnMinusWIS" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 237.0
+offset_right = 449.0
+offset_bottom = 254.0
+texture_normal = ExtResource("8_arr_l_norm")
+texture_hover = ExtResource("8_arr_l_hov")
+texture_pressed = ExtResource("8_arr_l_prs")
+[node name="BtnPlusWIS" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 237.0
+offset_right = 471.0
+offset_bottom = 254.0
+texture_normal = ExtResource("9_arr_r_norm")
+texture_hover = ExtResource("9_arr_r_hov")
+texture_pressed = ExtResource("9_arr_r_prs")
+[node name="ValAGI" type="Label" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 260.0
+offset_right = 428.0
+offset_bottom = 278.0
+theme_override_colors/font_color = Color(0.17, 0.30, 0.42, 1)
+theme_override_font_sizes/font_size = 13
+text = "0"
+vertical_alignment = 1
+[node name="BtnMinusAGI" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 260.0
+offset_right = 449.0
+offset_bottom = 277.0
+texture_normal = ExtResource("8_arr_l_norm")
+texture_hover = ExtResource("8_arr_l_hov")
+texture_pressed = ExtResource("8_arr_l_prs")
+[node name="BtnPlusAGI" type="TextureButton" parent="WindowRoot/Step4/StatsArea"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 260.0
+offset_right = 471.0
+offset_bottom = 277.0
+texture_normal = ExtResource("9_arr_r_norm")
+texture_hover = ExtResource("9_arr_r_hov")
+texture_pressed = ExtResource("9_arr_r_prs")
+[node name="RightArea" type="Control" parent="WindowRoot/Step4"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 0.0
+offset_right = 740.0
+offset_bottom = 352.0
+
+[node name="FullNameLabel" type="Label" parent="WindowRoot/Step4/RightArea"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 97.0
+offset_right = 340.0
+offset_bottom = 119.0
+theme_override_colors/font_color = Color(0.18, 0.12, 0.08, 1)
+theme_override_font_sizes/font_size = 12
+text = "Daniel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PreviewBox" type="Control" parent="WindowRoot/Step4/RightArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 370.0
+offset_bottom = 300.0
+
+[node name="FaceBust" type="TextureRect" parent="WindowRoot/Step4/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 155.0
+offset_right = 225.0
+offset_bottom = 225.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnR" type="Button" parent="WindowRoot/Step4/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 229.0
+offset_right = 171.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "R"
+
+[node name="BtnH" type="Button" parent="WindowRoot/Step4/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 229.0
+offset_right = 191.0
+offset_bottom = 246.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "H"
+
+[node name="ElementCoinBadge" type="TextureRect" parent="WindowRoot/Step4/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 227.0
+offset_right = 218.0
+offset_bottom = 251.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GrassPatch" type="Panel" parent="WindowRoot/Step4/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 228.0
+offset_right = 304.0
+offset_bottom = 242.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_grass_shadow")
+
+[node name="WalkingSprite" type="TextureRect" parent="WindowRoot/Step4/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 148.0
+offset_right = 311.0
+offset_bottom = 236.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnTurnLeft" type="Button" parent="WindowRoot/Step4/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 201.0
+offset_right = 252.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "<"
+
+[node name="BtnTurnRight" type="Button" parent="WindowRoot/Step4/RightArea/PreviewBox"]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 201.0
+offset_right = 319.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = ">"
+
+[node name="ModalErrorPopup" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backdrop" type="ColorRect" parent="ModalErrorPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="DialogCard" type="Panel" parent="ModalErrorPopup"]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 220.0
+offset_right = 530.0
+offset_bottom = 380.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal_panel")
+
+[node name="TitleLabel" type="Label" parent="ModalErrorPopup/DialogCard"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 248.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.25, 0.18, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Notice / 注意"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="ModalErrorPopup/DialogCard"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 40.0
+offset_right = 242.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "Please enter character name and family name!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BtnModalOk" type="Button" parent="ModalErrorPopup/DialogCard"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 115.0
+offset_right = 165.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_small_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_small_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_small_btn_pressed")
+text = "OK"
+
+[node name="AudioSFX" type="AudioStreamPlayer" parent="."]

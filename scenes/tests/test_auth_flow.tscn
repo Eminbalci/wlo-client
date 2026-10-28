@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7c8d9e0f1a23"]
+
+[ext_resource type="Script" path="res://scripts/tests/test_auth_flow.gd" id="1_test"]
+
+[node name="TestAuthFlow" type="Node"]
+script = ExtResource("1_test")

@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud/bottom_action_dock.gd" id="1_bottom_action_dock"]
+
+[node name="BottomActionDock" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -282.0
+offset_top = -78.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_bottom_action_dock")
+
+[node name="LocationLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 278.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.95)
+theme_override_constants/outline_size = 2
+text = "Ship Deck  X: 899  Y: 1102"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ActionBackground" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 34.0
+offset_right = 275.0
+offset_bottom = 71.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 22.0
+offset_right = 280.0
+offset_bottom = 66.0
+theme_override_constants/separation = 4
+
+[node name="BtnStatus" type="TextureButton" parent="ButtonContainer"]
+custom_minimum_size = Vector2(41, 51)
+layout_mode = 2
+tooltip_text = "Character Status & Inventory [C / I]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnSkill" type="TextureButton" parent="ButtonContainer"]
+custom_minimum_size = Vector2(46, 51)
+layout_mode = 2
+tooltip_text = "Skills [S]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnQuest" type="TextureButton" parent="ButtonContainer"]
+custom_minimum_size = Vector2(42, 52)
+layout_mode = 2
+tooltip_text = "Compound [V]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnTeam" type="TextureButton" parent="ButtonContainer"]
+custom_minimum_size = Vector2(46, 49)
+layout_mode = 2
+tooltip_text = "Team & Party [T]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnFriends" type="TextureButton" parent="ButtonContainer"]
+custom_minimum_size = Vector2(46, 54)
+layout_mode = 2
+tooltip_text = "Friends & Community [F]"
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnSystem" type="TextureButton" parent="ButtonContainer"]
+custom_minimum_size = Vector2(47, 51)
+layout_mode = 2
+tooltip_text = "System Settings [Esc]"
+ignore_texture_size = true
+stretch_mode = 5

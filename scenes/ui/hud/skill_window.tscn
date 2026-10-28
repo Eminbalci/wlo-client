@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud/skill_window.gd" id="1_skill_window"]
+[ext_resource type="Texture2D" path="res://assets/hud/form_skill_1.png" id="2_form_skill_1"]
+
+[node name="SkillWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 290.0
+offset_bottom = 459.0
+script = ExtResource("1_skill_window")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 290.0
+offset_bottom = 459.0
+mouse_filter = 0
+texture = ExtResource("2_form_skill_1")
+
+[node name="TitleLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = 140.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Skills [S]"
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 8.0
+offset_right = 278.0
+offset_bottom = 26.0
+mouse_default_cursor_shape = 2
+text = ""
+flat = true

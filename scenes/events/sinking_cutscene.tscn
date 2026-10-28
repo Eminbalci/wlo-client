@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/events/sinking_cutscene.gd" id="1_sinking"]
+
+[node name="SinkingCutscene" type="Node2D"]
+script = ExtResource("1_sinking")
+camera_path = NodePath("Camera2D")
+red_overlay_path = NodePath("CanvasLayer/RedOverlay")
+audio_player_path = NodePath("AlarmAudio")
+sfx_player_path = NodePath("SinkingSFX")
+fade_overlay_path = NodePath("CanvasLayer/FadeOverlay")
+beach_scene_path = "res://scenes/maps/map_10011_beach.tscn"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(400, 300)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 50
+
+[node name="RedOverlay" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 0)
+
+[node name="FadeOverlay" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AlarmAudio" type="AudioStreamPlayer" parent="."]
+bus = &"Master"
+
+[node name="SinkingSFX" type="AudioStreamPlayer" parent="."]
+bus = &"Master"
