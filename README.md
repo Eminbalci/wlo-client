@@ -9,6 +9,15 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Quest 'Hill Pepper' (Doll & Emilie) Authentic Implementation (2026-10)
+
+- [Hill Pepper Quest Chain Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/hill_pepper_quest_chain_spec.md):
+  - **Authentic Quest Flow Decoded:** Decoded Kelan Village Quest 1003 ("Hill Pepper") directly from `Talk.dat` and `Item.dat` / `itemDat.wpdat`.
+  - **Doll's Supper Seasoning (Step 0):** Linked Talk 20222 -> 20223 -> 20225 -> 20227 with interactive Yes/No choice prompt. Selecting "Yes." routes to 20228 ("a villager named Emilie, who is nearby the cave entrance, has some Hill Pepper") and initiates the quest.
+  - **Emilie's Math Quiz (Step 1):** Linked Talk 20336 ("age gap is 2 and the total age 69...") -> 20337 (tens digit prompt: choices 1, 2, 3) -> 20338 (units digit prompt: choices 1, 3, 5, 7, 9). Selecting 2 and 9 (answer 29) routes to 20340 granting Item 30028 (`Hill Pepper`).
+  - **Hand-in & Reward Banner (Step 2):** Returning to Doll triggers 20233 -> 20234 -> 20235 -> 20236 -> 20237, delivering 200 Gold, 500 EXP, Item 34076 (`Radio Set`), centered reward banner ("Obtain 1 pcs Radio Set"), and authentic `wav9911.wav` fanfare audio.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_hill_pepper_quest_chain.gd` (9/9 passed), `tests/test_talk_database.gd` (10/10 passed), and `tests/test_quest_dialogue_connection.gd` (100% passed).
+
 ### Session: Character & Item Window Navigation (2026-10)
 
 - [Character & Item Window Navigation Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/character_item_window_navigation_spec.md):

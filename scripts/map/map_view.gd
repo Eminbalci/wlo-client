@@ -360,6 +360,57 @@ func _init_starter_quests() -> void:
 			}
 		})
 
+		# Quest 1003: "Hill Pepper" (Authentic Kelan Village Quest: Doll & Emilie)
+		quest_component.register_quest({
+			"quest_id": 1003,
+			"quest_title": "Hill Pepper",
+			"current_step": 0,
+			"objectives": [
+				{
+					"step_index": 0,
+					"type": "TalkToNPC",
+					"npc_id": 14141,
+					"npc_name": "Doll",
+					"map_id": 10002,
+					"talk_id": 20222,
+					"description": "Talk to Doll (NPC 14141) cooking supper in Kelan Village.",
+					"dialogue_preview": "The flavor is not quite right, it needs more seasoning... can you get some Hill Pepper for me?"
+				},
+				{
+					"step_index": 1,
+					"type": "TalkToNPC",
+					"npc_id": 14140,
+					"npc_name": "Emilie",
+					"map_id": 10002,
+					"talk_id": 20336,
+					"description": "Find Emilie (NPC 14140) by north stairs and solve her math riddle (Answer: 29).",
+					"dialogue_preview": "Answer my age riddle correctly to receive the Hill Pepper."
+				},
+				{
+					"step_index": 2,
+					"type": "TalkToNPC",
+					"npc_id": 14141,
+					"npc_name": "Doll",
+					"map_id": 10002,
+					"talk_id": 20233,
+					"description": "Deliver the Hill Pepper back to Doll in Kelan Village.",
+					"dialogue_preview": "Doll, I have the Hill Pepper now. The supper is saved!"
+				}
+			],
+			"rewards": {
+				"reward_gold": 200,
+				"reward_exp": 500,
+				"reward_items": [
+					{
+						"item_id": 34076,
+						"item_name": "Radio Set",
+						"count": 1,
+						"icon_id": 6
+					}
+				]
+			}
+		})
+
 	_sync_hud_quest_log()
 
 func _sync_hud_quest_log() -> void:
@@ -1775,7 +1826,10 @@ func start_battle(enemies: Array) -> void:
 
 	# Dynamic environment & battle backdrop resolution
 	var cur_map_id: int = map_renderer.current_map_id if (map_renderer and "current_map_id" in map_renderer) else 10001
-	var scene_rec = GameDatabase.scenes.get_scene(cur_map_id) if GameDatabase and GameDatabase.scenes else null
+	var gdb = Engine.get_singleton("GameDatabase") if Engine.has_singleton("GameDatabase") else null
+	if not gdb:
+		gdb = get_node_or_null("/root/GameDatabase")
+	var scene_rec = gdb.scenes.get_scene(cur_map_id) if gdb and "scenes" in gdb and gdb.scenes else null
 	var s_name: String = scene_rec.name if scene_rec else ""
 	var env_type: String = BattleView.resolve_environment_for_map(cur_map_id, s_name)
 	_battle_view.set_environment(env_type)

@@ -705,10 +705,70 @@ func _apply_kelan_village_defaults() -> void:
 		_talks[20227].speaker_id = 14141
 		_talks[20227].next_talk_id = 0
 		_talks[20227].choices = [
-			{"text": "Yes.", "next_talk_id": 0, "branch": 1},
+			{"text": "Yes.", "next_talk_id": 20228, "branch": 1},
 			{"text": "No.", "next_talk_id": 0, "branch": 2},
 		]
-	if _talks.has(30552):
+	if _talks.has(20228):
+		_talks[20228].speaker = "Doll"
+		_talks[20228].speaker_id = 14141
+		_talks[20228].next_talk_id = 0
+	if _talks.has(20233):
+		_talks[20233].speaker = "Player"
+		_talks[20233].speaker_id = 0
+		_talks[20233].next_talk_id = 20234
+	if _talks.has(20234):
+		_talks[20234].speaker = "Doll"
+		_talks[20234].speaker_id = 14141
+		_talks[20234].next_talk_id = 20235
+	if _talks.has(20235):
+		_talks[20235].speaker = "Doll"
+		_talks[20235].speaker_id = 14141
+		_talks[20235].next_talk_id = 20236
+	if _talks.has(20236):
+		_talks[20236].speaker = "Player"
+		_talks[20236].speaker_id = 0
+		_talks[20236].next_talk_id = 20237
+	if _talks.has(20237):
+		_talks[20237].speaker = "Doll"
+		_talks[20237].speaker_id = 14141
+		_talks[20237].next_talk_id = 0
+
+	# Emilie math quiz chaining: 20336 -> 20337 (tens quiz: 1/2/3) -> 20338 (units quiz: 1/3/5/7/9) -> 20340
+	if _talks.has(20336):
+		_bind_npc_talk(14140, 20336, "Emilie")
+		_talks[20336].speaker = "Emilie"
+		_talks[20336].speaker_id = 14140
+		_talks[20336].next_talk_id = 20337
+	if _talks.has(20337):
+		_talks[20337].speaker = "Emilie"
+		_talks[20337].speaker_id = 14140
+		_talks[20337].next_talk_id = 0
+		_talks[20337].choices = [
+			{"text": "1", "next_talk_id": 20339, "branch": 1},
+			{"text": "2", "next_talk_id": 20338, "branch": 2},
+			{"text": "3", "next_talk_id": 20339, "branch": 3},
+		]
+	if _talks.has(20338):
+		_talks[20338].speaker = "Emilie"
+		_talks[20338].speaker_id = 14140
+		_talks[20338].next_talk_id = 0
+		_talks[20338].choices = [
+			{"text": "1", "next_talk_id": 20339, "branch": 1},
+			{"text": "3", "next_talk_id": 20339, "branch": 2},
+			{"text": "5", "next_talk_id": 20339, "branch": 3},
+			{"text": "7", "next_talk_id": 20339, "branch": 4},
+			{"text": "9", "next_talk_id": 20340, "branch": 5},
+		]
+	if _talks.has(20339):
+		_talks[20339].speaker = "Emilie"
+		_talks[20339].speaker_id = 14140
+		_talks[20339].next_talk_id = 0
+	if _talks.has(20340):
+		_talks[20340].speaker = "Emilie"
+		_talks[20340].speaker_id = 14140
+		_talks[20340].next_talk_id = 0
+
+	if _talks.has(30552) and not _talks.has(20336):
 		_bind_npc_talk(14140, 30552, "Emilie")
 	if _talks.has(30037):
 		_bind_npc_talk(14118, 30037, "Guard")

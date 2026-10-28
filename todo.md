@@ -288,7 +288,7 @@
 - [ ] Verify the remaining code->text mappings of action 0x01 sub codes (6, 7, 0x0C).
 - [x] Battle: pet command step in the ring, attack camera zoom/step-forward animation, hover info card, forest/beach/cave/deck backdrops by map (`tests/test_battle_round_timer_and_backdrop_parity.gd`).
 - [ ] Decode battle packets (`32 01` command, `33 01` stat updates, `32 xx` round events) and compare with `battle_manager.gd`.
-- [ ] Quest 'Hill Pepper' (Doll/Emilie) as a real quest chain in Godot: quiz choices (tens 2 / units 9), hand-in, Radio Set reward; scripts/tests/test_dialogue_parity_and_layout.gd (not in the suite) has stale Ocean Star expectations.
+- [x] Quest 'Hill Pepper' (Doll/Emilie) as a real quest chain in Godot: quiz choices (tens 2 / units 9), hand-in, Radio Set reward, centered reward banner ("Obtain 1 pcs Radio Set") and fanfare audio (`tests/test_hill_pepper_quest_chain.gd`).
 
 ## Global Gemini MCP Server Setup for Claude
 - [x] 1. Extract and validate Google API keys from `C:\Users\muham\Desktop\google api.txt`
