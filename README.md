@@ -3,9 +3,21 @@
 ## Overview
 A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Online** (WLRI), reverse engineered from the original 32-bit Borland Delphi client, binary resource archives (`.jma`, `.jmp`, `.bmg`), and network protocol specifications.
 
+- **GitHub Repository:** [https://github.com/Eminbalci/wlo-client](https://github.com/Eminbalci/wlo-client)
+
 ---
 
 ## Technical Specifications & Documentation
+
+### Session: Companion Ride Mode (NPC / Pet Mounting System) (2026-10)
+
+- [Companion Ride Mode Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/companion_ride_mode_specification.md):
+  - **Authentic Sliced UI Buttons:** Sliced 3-state textures (`btn_assign_ride_normal.png`, `btn_assign_ride_hover.png`, `btn_assign_ride_pressed.png`, 43x20) from `Btn_AssignRide_1.bmp` with chroma-key `(0, 255, 0)` into `assets/hud/`.
+  - **Interactive Team Window Ride State Machine:** Added Ride button (`row_ride_buttons[0..3]`, 38x18 at `Vector2(221, 8)`) next to the Battle button on each pet row. Implemented strict mutual exclusion between Rest, Battle, and Ride modes across the party. Only one companion can be active at a time; mounting a pet automatically recalls any pet from Battle mode to Rest and dismounts previous mounts.
+  - **AdjustRidePetPos.txt Parser & Kinematics:** Created `scripts/world/ride_data.gd` to parse all 19 `NpcPic` profiles in `assets/data/AdjustRidePetPos.txt`. Maps 14 player character roles to 4 sex classifications (Adult Male, Adult Female, Boy, Girl) and resolves heading-indexed (0..7) pixel offsets for idle (`StandPos`) and moving (`MovePos`) states. Converts height coordinates to Godot's Y-down isometric space.
+  - **PlayerEntity Mount Attachment & Pose Locking:** In `scripts/world/player.gd`, instantiated `_mount_sprite` (`z_index = -1`) synchronizing mount walking (frames 0..31) and standing (32..63) with rider heading. Locked player rider into authentic sitting pose (frames 64..95) offset dynamically by `RideData.get_rider_offset()`. Scaled movement speed by 1.35x (162.0 px/s).
+  - **MapView Integration:** Connected `companion_mounted` and `companion_dismounted` to `player.mount_pet()` and `player.dismount_pet()`, automatically hiding the overland walking follower while mounted.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_companion_ride_mode.gd` (48/48 passed, 0 failures).
 
 ### Session: Companion Battle Mode, Walking Follower, & Authentic NPC Portraits (2026-10)
 

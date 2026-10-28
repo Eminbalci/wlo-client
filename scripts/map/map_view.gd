@@ -733,6 +733,9 @@ func update_companion_follower_position(player_world_pos: Vector2, delta: float 
 ## Callback when companion is summoned or rested in TeamWindow
 func _on_team_companion_toggled(companion_id: int, summoned: bool) -> void:
 	if summoned:
+		# If player was riding, dismount
+		if player and player.has_method("is_riding") and player.is_riding():
+			player.dismount_pet()
 		var comp_data: Dictionary = {}
 		if hud:
 			var tw: Node = hud.get_node_or_null("FloatingWindows/TeamWindow")
@@ -744,14 +747,29 @@ func _on_team_companion_toggled(companion_id: int, summoned: bool) -> void:
 	else:
 		despawn_companion_follower()
 
+## Callback when companion is mounted in Ride mode
+func _on_team_companion_mounted(companion_data: Dictionary) -> void:
+	despawn_companion_follower()
+	if player and player.has_method("mount_pet"):
+		player.mount_pet(companion_data)
+
+## Callback when companion is dismounted from Ride mode
+func _on_team_companion_dismounted(_companion_data: Dictionary) -> void:
+	if player and player.has_method("dismount_pet"):
+		player.dismount_pet()
+
 ## Connects TeamWindow companion signals
 func _connect_team_window() -> void:
 	if not hud:
 		return
 	var tw = hud.get_node_or_null("FloatingWindows/TeamWindow")
-	if tw and tw.has_signal("companion_toggled"):
-		if not tw.companion_toggled.is_connected(_on_team_companion_toggled):
+	if tw:
+		if tw.has_signal("companion_toggled") and not tw.companion_toggled.is_connected(_on_team_companion_toggled):
 			tw.companion_toggled.connect(_on_team_companion_toggled)
+		if tw.has_signal("companion_mounted") and not tw.companion_mounted.is_connected(_on_team_companion_mounted):
+			tw.companion_mounted.connect(_on_team_companion_mounted)
+		if tw.has_signal("companion_dismounted") and not tw.companion_dismounted.is_connected(_on_team_companion_dismounted):
+			tw.companion_dismounted.connect(_on_team_companion_dismounted)
 
 func _init_map_entity_tracking() -> void:
 	_deck_entities.clear()

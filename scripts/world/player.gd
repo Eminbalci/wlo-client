@@ -94,6 +94,13 @@ var _is_animating_wakeup: bool = false:
 		current_vehicle = val
 		_pathfinder = null
 		queue_redraw()
+
+@export var is_riding_pet: bool = false
+var ridden_pet: Dictionary = {}
+var _mount_sprite: Sprite2D = null
+var _mount_anim_data = null
+var _cached_mount_frames: Dictionary = {}
+var _base_unmounted_speed: float = 120.0
 var map_data: MapData = null:
 	set(val):
 		map_data = val
@@ -405,7 +412,7 @@ func play_stand_animation() -> void:
 func toggle_sit_stand() -> void:
 	if is_movement_locked or is_prone or _is_animating_wakeup or motion_state == MotionState.PRONE:
 		return
-	if motion_state == MotionState.SIT:
+	if motion_state == MotionState.SIT and not is_riding_pet:
 		play_stand_animation()
 	else:
 		play_sit_animation()
@@ -475,7 +482,7 @@ func _handle_input(_delta: float) -> void:
 		walk_dy += 1.0
 	
 	if walk_dx != 0.0 or walk_dy != 0.0:
-		if motion_state == MotionState.SIT:
+		if motion_state == MotionState.SIT and not is_riding_pet:
 			play_stand_animation()
 		var dir := Vector2(walk_dx, walk_dy).normalized()
 		set_target_world_position(world_position + dir * step_size)
@@ -491,13 +498,73 @@ func dismount_vehicle() -> void:
 func is_mounted() -> bool:
 	return current_vehicle != VehicleType.NONE
 
+## Mounts a pet companion, attaching its animation beneath player and applying mount speed bonus
+func mount_pet(pet_data: Dictionary) -> void:
+	if pet_data.is_empty():
+		return
+	dismount_pet()
+	is_riding_pet = true
+	ridden_pet = pet_data.duplicate(true)
+
+	var loader := _get_archive_loader()
+	var jma: String = str(pet_data.get("model_jma", "001.jma"))
+	var jmp: String = str(pet_data.get("model_jmp", ""))
+	if jmp.is_empty():
+		var sid: int = int(pet_data.get("sprite_id", 1103))
+		jmp = "%d.jmp" % sid
+		jma = "%03d.jma" % int(sid / 1000)
+
+	if loader and loader.has_method("get_jma_animation"):
+		_mount_anim_data = loader.get_jma_animation(jma, jmp)
+
+	if not _mount_sprite:
+		_mount_sprite = Sprite2D.new()
+		_mount_sprite.name = "MountSprite"
+		_mount_sprite.z_index = -1
+		add_child(_mount_sprite)
+		move_child(_mount_sprite, 0)
+	_mount_sprite.visible = true
+
+	_base_unmounted_speed = move_speed
+	move_speed = RideData.get_mount_speed(_base_unmounted_speed)
+	_update_riding_animation(0.0)
+	pet_mounted.emit(ridden_pet)
+
+## Dismounts the pet, restoring standard player walking speed and offsets
+func dismount_pet() -> void:
+	if not is_riding_pet:
+		return
+	is_riding_pet = false
+	ridden_pet.clear()
+	_mount_anim_data = null
+	_cached_mount_frames.clear()
+	if _mount_sprite:
+		_mount_sprite.visible = false
+	move_speed = _base_unmounted_speed
+	if sprite:
+		sprite.position = Vector2.ZERO
+		sprite.offset = Vector2(0, -41.0)
+	if nameplate:
+		nameplate.position = Vector2.ZERO
+		nameplate.offset_bottom = -88.0
+		nameplate.offset_top = -108.0
+	if motion_state == MotionState.SIT and not is_riding_pet:
+		play_stand_animation()
+	else:
+		_update_animation(0.0)
+	pet_dismounted.emit()
+
+## Returns true if player is currently riding a pet
+func is_riding() -> bool:
+	return is_riding_pet
+
 func set_target_world_position(new_target: Vector2, allow_fallback: bool = true) -> bool:
 	if is_movement_locked or is_prone or _is_animating_wakeup or motion_state in [MotionState.PRONE, MotionState.ATTACK, MotionState.DEFEND, MotionState.VICTORY]:
 		is_moving = false
 		_current_waypoints.clear()
 		movement_blocked.emit("Movement is locked during action animation...", new_target)
 		return false
-	if motion_state == MotionState.SIT:
+	if motion_state == MotionState.SIT and not is_riding_pet:
 		play_stand_animation()
 	if map_data:
 		var grid_pos: Vector2i = MapData.world_to_grid(new_target)
@@ -596,7 +663,11 @@ func _update_animation(delta: float) -> void:
 				motion_state = MotionState.IDLE
 	
 	_anim_frame_timer += delta
-	
+
+	if is_riding_pet:
+		_update_riding_animation(delta)
+		return
+
 	var frame_idx: int = 0
 	var h: int = current_heading % 8
 	
@@ -655,6 +726,45 @@ func _update_animation(delta: float) -> void:
 		var tex: ImageTexture = _anim_data.decode_frame(frame_idx)
 		if tex:
 			_apply_texture(tex)
+
+func _update_riding_animation(_delta: float) -> void:
+	var h: int = current_heading % 8
+	var speed_factor: float = 8.0 if is_moving else 2.5
+	var sub_idx: int = int(_anim_frame_timer * speed_factor) % 4
+
+	# 1. Update mount sprite frame
+	var mount_frame_idx: int = (h * 4 + sub_idx) if is_moving else (32 + h * 4 + sub_idx)
+	if _mount_anim_data and _mount_sprite:
+		var mount_tex: ImageTexture = null
+		if _cached_mount_frames.has(mount_frame_idx):
+			mount_tex = _cached_mount_frames[mount_frame_idx]
+		elif _mount_anim_data.has_method("decode_frame"):
+			mount_tex = _mount_anim_data.decode_frame(mount_frame_idx)
+			if mount_tex:
+				_cached_mount_frames[mount_frame_idx] = mount_tex
+		if mount_tex:
+			_mount_sprite.texture = mount_tex
+			_mount_sprite.offset = Vector2(0, -roundf(mount_tex.get_height() * 0.35))
+			_mount_sprite.visible = true
+
+	# 2. Update player rider frame (sitting/riding pose frames 64..95)
+	var sit_frame_idx: int = 64 + h * 4 + (sub_idx if is_moving else 0)
+	if not _composite_frames.is_empty():
+		var valid_idx: int = sit_frame_idx % _composite_frames.size()
+		_apply_texture(_composite_frames[valid_idx])
+
+	# 3. Calculate authentic rider offset from RideData
+	var pic_id: int = int(ridden_pet.get("sprite_id", ridden_pet.get("id", 1103)))
+	if ridden_pet.has("model_jmp"):
+		var m_str: String = str(ridden_pet["model_jmp"]).replace(".jmp", "")
+		if m_str.is_valid_int():
+			pic_id = m_str.to_int()
+
+	var rider_offset: Vector2 = RideData.get_rider_offset(pic_id, role_id, h, is_moving)
+	if sprite:
+		sprite.position = rider_offset
+	if nameplate:
+		nameplate.position = rider_offset
 
 ## Sets the player in or out of prone state
 func set_prone(prone: bool) -> void:

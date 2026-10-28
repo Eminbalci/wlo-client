@@ -1,45 +1,45 @@
 # Wonderland Online Client - Task Tracker
 
 # Clean Workspace & Repository Deployment (Eminbalci/wlo-client)
-- [ ] 1. Clean Unnecessary Temporary Files & Dumps:
-  - [ ] 1.1 Remove loose screenshot, debug render, and crop PNGs + .import files from root folder.
-  - [ ] 1.2 Remove temporary reverse-engineering dump folders: `dump_008`, `dump_bmg`, `dump_btn_rolepic`, `dump_heads_test`, `dump_jrole`, `dump_roleinfo`, `dump_rolepic_clean`, `scratch`, `screenshots_auth`, `test_screenshots`.
-  - [ ] 1.3 Remove 1.4 GB unused dead file `assets/data/odd.dat` and `assets/pic/Thumbs.db`.
-- [ ] 2. Configure Git & .gitignore:
-  - [ ] 2.1 Write production Godot 4 `.gitignore` excluding `.godot/`, temporary dumps, and oversized binary archives (>100MB) that exceed GitHub file limits.
-  - [ ] 2.2 Initialize git repository and set remote to `https://github.com/Eminbalci/wlo-client.git`.
-  - [ ] 2.3 Verify repository status with `git status`.
-- [ ] 3. Commit & Push to GitHub:
-  - [ ] 3.1 Stage all clean source code, scenes, shaders, assets, docs, and tests.
-  - [ ] 3.2 Commit with descriptive commit message.
-  - [ ] 3.3 Push to `main` branch on `https://github.com/Eminbalci/wlo-client`.
-- [ ] 4. Documentation & Verification:
-  - [ ] 4.1 Update `README.md` with repository link and clean project setup instructions.
-  - [ ] 4.2 Document workspace cleanup and repository structure in `docs/workspace_cleanup_and_git_setup.md`.
-  - [ ] 4.3 Update `todo.md` marking completed tasks.
+- [x] 1. Clean Unnecessary Temporary Files & Dumps:
+  - [x] 1.1 Remove loose screenshot, debug render, and crop PNGs + .import files from root folder.
+  - [x] 1.2 Remove temporary reverse-engineering dump folders: `dump_008`, `dump_bmg`, `dump_btn_rolepic`, `dump_heads_test`, `dump_jrole`, `dump_roleinfo`, `dump_rolepic_clean`, `scratch`, `screenshots_auth`, `test_screenshots`.
+  - [x] 1.3 Remove 1.4 GB unused dead file `assets/data/odd.dat` and `assets/pic/Thumbs.db`.
+- [x] 2. Configure Git & .gitignore:
+  - [x] 2.1 Write production Godot 4 `.gitignore` excluding `.godot/`, temporary dumps, and oversized binary archives (>100MB) that exceed GitHub file limits.
+  - [x] 2.2 Initialize git repository and set remote to `https://github.com/Eminbalci/wlo-client.git`.
+  - [x] 2.3 Verify repository status with `git status`.
+- [x] 3. Commit & Push to GitHub:
+  - [x] 3.1 Stage all clean source code, scenes, shaders, assets, docs, and tests.
+  - [x] 3.2 Commit with descriptive commit message.
+  - [x] 3.3 Push to `main` branch on `https://github.com/Eminbalci/wlo-client`.
+- [x] 4. Documentation & Verification:
+  - [x] 4.1 Update `README.md` with repository link and clean project setup instructions.
+  - [x] 4.2 Document workspace cleanup and repository structure in `docs/workspace_cleanup_and_git_setup.md`.
+  - [x] 4.3 Update `todo.md` marking completed tasks.
 
 # Companion Ride Mode (NPC / Pet Mounting System)
-- [ ] 1. Asset Slicing & UI Controls (`team_window.gd`):
-  - [ ] 1.1 Slice `Btn_AssignRide_1.bmp` into authentic 3-state transparent textures: `btn_assign_ride_normal.png`, `btn_assign_ride_hover.png`, `btn_assign_ride_pressed.png` in `assets/hud/`.
-  - [ ] 1.2 In `scripts/ui/hud/team_window.gd`, add "Ride" button alongside "Battle" / "Dismiss" on each pet row (`row_ride_buttons`).
-  - [ ] 1.3 Implement Ride state machine: a pet can be Rest, Battle, or Ride (mutually exclusive across all pets).
-  - [ ] 1.4 Wire `companion_ride_toggled(pet_id, is_riding)` and `companion_mounted(pet_dict)` signals.
-- [ ] 2. AdjustRidePetPos Data Parser & Offset Calculations:
-  - [ ] 2.1 Create parser in `scripts/world/ride_data.gd` to load and parse `assets/data/AdjustRidePetPos.txt`.
-  - [ ] 2.2 Provide heading-indexed (0..7) offset resolution for `StandPos` and `MovePos` per character sex/role and NPC model.
-  - [ ] 2.3 Provide graceful defaults for pets not explicitly listed in `AdjustRidePetPos.txt` (e.g. S. Monkey 1103).
-- [ ] 3. Player Entity & MapView Mount Kinematics:
-  - [ ] 3.1 In `scripts/world/player.gd`, implement `mount_pet(pet_data: Dictionary)` and `dismount_pet()`.
-  - [ ] 3.2 In `PlayerEntity`, manage mount display under player: mount plays walk (0..31) / stand (32..63) matching player heading, while player assumes sitting/riding pose (frames 64..95) offset by `AdjustRidePetPos`.
-  - [ ] 3.3 Apply authentic mounted speed bonus (e.g. 1.35x, 160 px/s).
-  - [ ] 3.4 In `scripts/map/map_view.gd`, connect `team_window` ride signals to `player.mount_pet()` / `player.dismount_pet()`, hiding overland follower while mounted.
-- [ ] 4. Automated Testing & Verification:
-  - [ ] 4.1 Create test suite in `tests/test_companion_ride_mode.gd` verifying Ride button toggling, mutual exclusion with Battle mode, offset math, mount attachment, speed bonus, and dismount.
-  - [ ] 4.2 Run tests via headless Godot runner and confirm 100% zero-error pass rate.
-- [ ] 5. Technical Documentation & Global Updates:
-  - [ ] 5.1 Create `docs/companion_ride_mode_specification.md`.
-  - [ ] 5.2 Update global `readme.md`.
-  - [ ] 5.3 Mark completed tasks in `todo.md`.
+- [x] 1. Asset Slicing & UI Controls (`team_window.gd`):
+  - [x] 1.1 Slice `Btn_AssignRide_1.bmp` into authentic 3-state transparent textures: `btn_assign_ride_normal.png`, `btn_assign_ride_hover.png`, `btn_assign_ride_pressed.png` in `assets/hud/`.
+  - [x] 1.2 In `scripts/ui/hud/team_window.gd`, add "Ride" button alongside "Battle" / "Dismiss" on each pet row (`row_ride_buttons`).
+  - [x] 1.3 Implement Ride state machine: a pet can be Rest, Battle, or Ride (mutually exclusive across all pets).
+  - [x] 1.4 Wire `companion_ride_toggled(pet_id, is_riding)` and `companion_mounted(pet_dict)` signals.
+- [x] 2. AdjustRidePetPos Data Parser & Offset Calculations:
+  - [x] 2.1 Create parser in `scripts/world/ride_data.gd` to load and parse `assets/data/AdjustRidePetPos.txt`.
+  - [x] 2.2 Provide heading-indexed (0..7) offset resolution for `StandPos` and `MovePos` per character sex/role and NPC model.
+  - [x] 2.3 Provide graceful defaults for pets not explicitly listed in `AdjustRidePetPos.txt` (e.g. S. Monkey 1103).
+- [x] 3. Player Entity & MapView Mount Kinematics:
+  - [x] 3.1 In `scripts/world/player.gd`, implement `mount_pet(pet_data: Dictionary)` and `dismount_pet()`.
+  - [x] 3.2 In `PlayerEntity`, manage mount display under player: mount plays walk (0..31) / stand (32..63) matching player heading, while player assumes sitting/riding pose (frames 64..95) offset by `AdjustRidePetPos`.
+  - [x] 3.3 Apply authentic mounted speed bonus (e.g. 1.35x, 160 px/s).
+  - [x] 3.4 In `scripts/map/map_view.gd`, connect `team_window` ride signals to `player.mount_pet()` / `player.dismount_pet()`, hiding overland follower while mounted.
+- [x] 4. Automated Testing & Verification:
+  - [x] 4.1 Create test suite in `tests/test_companion_ride_mode.gd` verifying Ride button toggling, mutual exclusion with Battle mode, offset math, mount attachment, speed bonus, and dismount.
+  - [x] 4.2 Run tests via headless Godot runner and confirm 100% zero-error pass rate.
+- [x] 5. Technical Documentation & Global Updates:
+  - [x] 5.1 Create `docs/companion_ride_mode_specification.md`.
+  - [x] 5.2 Update global `readme.md`.
+  - [x] 5.3 Mark completed tasks in `todo.md`.
 
 # Companion Follower Breadcrumb Walking & Path Kinematics (No-Teleport Fix)
 - [x] 1. Follower Breadcrumb Trail & Smooth Walking Kinematics:
