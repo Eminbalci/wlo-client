@@ -33,6 +33,7 @@ const TOTAL_SLOTS: int = 8
 const FRONT_ROW_COUNT: int = 4
 const BACK_ROW_COUNT: int = 4
 const TURN_TIME_LIMIT: float = 20.0 # Authentic WLO 20-second turn limit
+var turn_time_limit: float = TURN_TIME_LIMIT
 
 enum Element {
 	NONE = 0,
@@ -288,10 +289,14 @@ func start_battle() -> void:
 	battle_started.emit()
 	start_turn()
 
+func set_turn_time_limit(limit_sec: float) -> void:
+	turn_time_limit = maxf(5.0, limit_sec)
+	turn_timer = turn_time_limit
+
 func start_turn() -> void:
 	current_turn += 1
 	current_state = BattleState.INPUT_WAIT
-	turn_timer = TURN_TIME_LIMIT
+	turn_timer = turn_time_limit
 	timer_active = true
 	queued_actions.clear()
 	
@@ -1117,7 +1122,7 @@ func reset() -> void:
 	battle_log.clear()
 	current_state = BattleState.IDLE
 	current_turn = 0
-	turn_timer = TURN_TIME_LIMIT
+	turn_timer = turn_time_limit
 	timer_active = false
 	is_auto_battle = false
 	rewards = {"exp": 0, "gold": 0, "items": []}

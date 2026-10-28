@@ -269,7 +269,8 @@
 - [x] Skill window: no proficiency / weapon requirement data yet (shows "-" / "Any"); learned-skills model instead of listing all element skills.
 - [ ] Character select: "Loading" state while character data arrives (seen in the reference video).
 - [x] Close buttons over the baked x sphere, cursor mapping, chat colours, compound window, sinking cutscene visuals, battle sprites/buttons/gauge, encounters and battle-to-world flow (see README).
-- [ ] Battle: compare with the real game's battle screen (needs screenshots from the user: the real client login cannot be driven by the assistant); real battle background by `bg_id`, 30 s round timer per the protocol notes, enemy grid positions from the server.
+- [x] Battle: real battle backgrounds by environment/bg_id (Forest, Beach, Cave, Deck), 20-30s centered cyan digital countdown timer with warning red color below 5s, configurable turn limit in BattleManager.
+- [x] Battle: 2-phase player-to-pet command radial ring handoff, permission gating (Catch/Item disabled for pet), dynamic combat camera attack zoom, and caster lunges.
 - [ ] Level-up / EXP curve and HP/SP restore rules are approximations; verify against the real game.
 - [ ] Items: audit inventory slots/tooltips/equipment against the real client (not started).
 - [ ] "UI missing elements" reported by the user: list which screens are incomplete.
@@ -285,7 +286,7 @@
 - [ ] Item window: header arrows and shoe arrows switch pages / equipment views (behaviour unknown; observe in the real client).
 - [ ] Group window Instance tab content, pet Battle/Dismiss semantics against the real client.
 - [ ] Verify the remaining code->text mappings of action 0x01 sub codes (6, 7, 0x0C).
-- [ ] Battle: pet command step in the ring, attack camera zoom/step-forward animation, hover info card, forest backdrop by map, victory screen capture.
+- [x] Battle: pet command step in the ring, attack camera zoom/step-forward animation, hover info card, forest/beach/cave/deck backdrops by map (`tests/test_battle_round_timer_and_backdrop_parity.gd`).
 - [ ] Decode battle packets (`32 01` command, `33 01` stat updates, `32 xx` round events) and compare with `battle_manager.gd`.
 - [ ] Quest 'Hill Pepper' (Doll/Emilie) as a real quest chain in Godot: quiz choices (tens 2 / units 9), hand-in, Radio Set reward; scripts/tests/test_dialogue_parity_and_layout.gd (not in the suite) has stale Ocean Star expectations.
 

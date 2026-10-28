@@ -433,14 +433,15 @@ func _apply_field_look() -> void:
 		countdown_label.anchor_right = 0.5
 		countdown_label.offset_left = -60.0
 		countdown_label.offset_right = 60.0
-		countdown_label.offset_top = get_field_offset().y + 300.0
+		countdown_label.offset_top = get_field_offset().y + 240.0
 		countdown_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		countdown_label.mouse_filter = MOUSE_FILTER_IGNORE
-		countdown_label.add_theme_font_size_override("font_size", 34)
-		countdown_label.add_theme_color_override("font_color", Color(0.25, 0.9, 1.0, 1.0))
+		countdown_label.add_theme_font_size_override("font_size", 42)
+		countdown_label.add_theme_color_override("font_color", Color(0.25, 0.92, 1.0, 1.0))
 		countdown_label.add_theme_color_override("font_outline_color", Color(0.02, 0.2, 0.3, 1.0))
 		countdown_label.add_theme_constant_override("outline_size", 4)
 		add_child(countdown_label)
+	_update_action_bar_position()
 	if hover_info_label == null:
 		hover_info_label = Label.new()
 		hover_info_label.name = "HoverInfoLabel"
@@ -567,6 +568,22 @@ func _build_status_panel() -> void:
 
 var map_backdrop: TextureRect = null
 
+const ENVIRONMENT_BACKDROPS: Dictionary = {
+	"forest": "res://assets/battle/forest_battle_bg.png",
+	"beach": "res://assets/battle/beach_battle_bg.png",
+	"cave": "res://assets/battle/cave_battle_bg.png",
+	"deck": "res://assets/battle/deck_battle_bg.png",
+}
+
+const ENVIRONMENT_GROUND_COLORS: Dictionary = {
+	"forest": Color(0.18, 0.38, 0.12, 1.0),
+	"beach": Color(0.82, 0.76, 0.58, 1.0),
+	"cave": Color(0.24, 0.22, 0.26, 1.0),
+	"deck": Color(0.44, 0.30, 0.18, 1.0),
+}
+
+var current_environment: String = "forest"
+
 ## Shows `texture` (authentic battle stage) behind the arena.
 func set_backdrop(texture: Texture2D) -> void:
 	if map_backdrop == null:
@@ -574,11 +591,40 @@ func set_backdrop(texture: Texture2D) -> void:
 	if texture != null:
 		map_backdrop.texture = texture
 		map_backdrop.visible = true
-	elif ResourceLoader.exists("res://assets/battle/forest_battle_bg.png"):
-		map_backdrop.texture = load("res://assets/battle/forest_battle_bg.png") as Texture2D
-		map_backdrop.visible = true
 	else:
-		map_backdrop.visible = false
+		var def_path: String = String(ENVIRONMENT_BACKDROPS.get(current_environment, "res://assets/battle/forest_battle_bg.png"))
+		if ResourceLoader.exists(def_path):
+			map_backdrop.texture = load(def_path) as Texture2D
+			map_backdrop.visible = true
+		else:
+			map_backdrop.visible = false
+
+## Sets environment backdrop and matching arena ground tint.
+func set_environment(env_type: String) -> void:
+	var clean_type: String = env_type.to_lower().strip_edges()
+	if not ENVIRONMENT_BACKDROPS.has(clean_type):
+		clean_type = "forest"
+	current_environment = clean_type
+	var path: String = String(ENVIRONMENT_BACKDROPS.get(clean_type, ""))
+	if ResourceLoader.exists(path):
+		var tex := load(path) as Texture2D
+		if tex:
+			set_backdrop(tex)
+	var bg := get_node_or_null("ArenaBackground") as ColorRect
+	if bg and ENVIRONMENT_GROUND_COLORS.has(clean_type):
+		bg.color = ENVIRONMENT_GROUND_COLORS[clean_type]
+
+static func resolve_environment_for_map(map_id: int, map_name: String = "") -> String:
+	var lower_name: String = map_name.to_lower()
+	if "forest" in lower_name or "wood" in lower_name or "tree" in lower_name or "grass" in lower_name or "plain" in lower_name or map_id in [10002, 10004]:
+		return "forest"
+	elif "cave" in lower_name or "cavern" in lower_name or "mine" in lower_name or "dungeon" in lower_name or map_id in [10003, 10005, 12001]:
+		return "cave"
+	elif "beach" in lower_name or "shore" in lower_name or "coast" in lower_name or map_id in [10001, 10011]:
+		return "beach"
+	elif "ship" in lower_name or "deck" in lower_name or "cabin" in lower_name or "boat" in lower_name or map_id in [10000, 10006]:
+		return "deck"
+	return "forest"
 
 ## Loads a skin bitmap and turns its pure green (0, 255, 0) chroma key transparent.
 func _chroma_keyed_texture(path: String) -> Texture2D:
@@ -743,6 +789,18 @@ func _update_action_bar_position() -> void:
 		var action_type: int = int(BTN_PATHS[i].get("action", 0))
 		var offset: Vector2 = RING_OFFSET.get(action_type, Vector2.ZERO)
 		action_buttons[i].position = feet + offset - Vector2(14.0, 14.0)
+
+func _update_action_bar_permissions() -> void:
+	var is_pet: bool = (current_player_slot > 0)
+	for i in range(action_buttons.size()):
+		var btn: TextureButton = action_buttons[i]
+		var act_type: int = int(BTN_PATHS[i].get("action", 0))
+		if is_pet and (act_type == BattleManager.ActionType.CATCH or act_type == BattleManager.ActionType.ITEM):
+			btn.disabled = true
+			btn.mouse_filter = MOUSE_FILTER_IGNORE
+		else:
+			btn.disabled = false
+			btn.mouse_filter = MOUSE_FILTER_STOP
 
 func set_action_bar_contextual(enable: bool) -> void:
 	is_contextual_menu = enable
@@ -1617,10 +1675,13 @@ func _commit_pending_action() -> void:
 		current_player_slot = next_slot
 		action_bar.visible = true
 		_update_action_bar_position()
+		_update_action_bar_permissions()
 		var p_name: String = str(battle_manager.get_participant(false, next_slot).get("name", "Companion"))
 		_log("%s's command phase." % p_name)
 	else:
 		action_bar.visible = false
+		if countdown_label:
+			countdown_label.visible = false
 
 func _show_floating_action_icon(slot: int, action_type: int) -> void:
 	var ring_art: int = int(RING_ART.get(action_type, 1))
@@ -1721,10 +1782,13 @@ func _on_bm_battle_started() -> void:
 
 func _on_bm_turn_started(turn: int) -> void:
 	turn_label.text = "Turn %d" % turn
-	timer_label.text = "20"
+	var initial_secs: int = int(battle_manager.turn_time_limit if (battle_manager and "turn_time_limit" in battle_manager) else 20)
+	timer_label.text = str(initial_secs)
 	if countdown_label:
-		countdown_label.text = "20"
+		countdown_label.text = str(initial_secs)
 		countdown_label.visible = true
+		countdown_label.add_theme_color_override("font_color", Color(0.25, 0.92, 1.0, 1.0))
+		countdown_label.add_theme_color_override("font_outline_color", Color(0.02, 0.2, 0.3, 1.0))
 	timer_label.remove_theme_color_override("font_color")
 	timer_label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2, 1.0))
 	
@@ -1739,6 +1803,7 @@ func _on_bm_turn_started(turn: int) -> void:
 
 	action_bar.visible = true
 	_update_action_bar_position()
+	_update_action_bar_permissions()
 	_clear_floating_action_icons()
 	is_targeting = false
 	_update_target_reticle_position()
@@ -1756,6 +1821,12 @@ func _on_bm_timer_tick(time_remaining: float) -> void:
 	timer_label.text = str(secs)
 	if countdown_label:
 		countdown_label.text = str(secs)
+		if secs <= 5:
+			countdown_label.add_theme_color_override("font_color", Color(1.0, 0.25, 0.25, 1.0))
+			countdown_label.add_theme_color_override("font_outline_color", Color(0.4, 0.05, 0.05, 1.0))
+		else:
+			countdown_label.add_theme_color_override("font_color", Color(0.25, 0.92, 1.0, 1.0))
+			countdown_label.add_theme_color_override("font_outline_color", Color(0.02, 0.2, 0.3, 1.0))
 	if secs <= 5:
 		timer_label.add_theme_color_override("font_color", Color(1.0, 0.2, 0.2, 1.0))
 
@@ -1903,6 +1974,17 @@ func play_skill_vfx(anim_id: int, target_pos: Vector2, sfx_name: String = "", fp
 		skill_vfx_completed.emit(anim_id)
 		vfx_node.queue_free()
 
+## Dynamic camera zoom focused on action impact point
+func play_camera_attack_zoom(focus_point: Vector2) -> void:
+	if not actors_layer:
+		return
+	actors_layer.pivot_offset = focus_point
+	var zoom_tween := create_tween()
+	if zoom_tween:
+		zoom_tween.set_speed_scale(battle_speed_multiplier)
+		zoom_tween.tween_property(actors_layer, "scale", Vector2(1.06, 1.06), 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		zoom_tween.tween_property(actors_layer, "scale", Vector2(1.0, 1.0), 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+
 func _on_bm_action_executed(result: Dictionary) -> void:
 	var msg: String = String(result.get("message", ""))
 	if not msg.is_empty():
@@ -1927,6 +2009,11 @@ func _on_bm_action_executed(result: Dictionary) -> void:
 			c_tween.set_speed_scale(battle_speed_multiplier)
 			c_tween.tween_property(caster_standee, "position", orig_pos + lunge_offset, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 			c_tween.tween_property(caster_standee, "position", orig_pos, 0.14).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+
+	# Dynamic combat camera zoom
+	if action_type == BattleManager.ActionType.ATTACK or action_type == BattleManager.ActionType.SKILL:
+		var target_fpos: Vector2 = get_slot_screen_position(target_is_enemy, target_slot)
+		play_camera_attack_zoom(target_fpos)
 
 	# 2. Extract skill or animation_id
 	var anim_id: int = int(result.get("animation_id", 0))

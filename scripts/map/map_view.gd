@@ -1773,11 +1773,12 @@ func start_battle(enemies: Array) -> void:
 	_battle_view = BattleViewScene.instantiate()
 	_battle_layer.add_child(_battle_view)
 
-	# Use authentic forest battle backdrop
-	if ResourceLoader.exists("res://assets/battle/forest_battle_bg.png"):
-		var battle_bg_tex: Texture2D = load("res://assets/battle/forest_battle_bg.png") as Texture2D
-		if battle_bg_tex:
-			_battle_view.set_backdrop(battle_bg_tex)
+	# Dynamic environment & battle backdrop resolution
+	var cur_map_id: int = map_renderer.current_map_id if (map_renderer and "current_map_id" in map_renderer) else 10001
+	var scene_rec = GameDatabase.scenes.get_scene(cur_map_id) if GameDatabase and GameDatabase.scenes else null
+	var s_name: String = scene_rec.name if scene_rec else ""
+	var env_type: String = BattleView.resolve_environment_for_map(cur_map_id, s_name)
+	_battle_view.set_environment(env_type)
 
 	# Hide radar minimap during battle per authentic client behavior
 	if hud:

@@ -9,6 +9,15 @@ A high-fidelity Godot 4 client recreation of the classic MMORPG **Wonderland Onl
 
 ## Technical Specifications & Documentation
 
+### Session: Battle Round Timer, Dynamic Backdrop, & Pet Ring (2026-10)
+
+- [Battle Round Timer, Dynamic Backdrop, & Pet Ring Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/battle_round_timer_and_backdrop_spec.md):
+  - **Dynamic Environmental Backdrops:** Added authentic 800x600 battle arenas for Forest (`forest_battle_bg.png`), Beach (`beach_battle_bg.png`), Cave (`cave_battle_bg.png`), and Ship Deck (`deck_battle_bg.png`). Implemented `BattleView.resolve_environment_for_map()` and dynamic arena ground color tinting (`Color(0.18, 0.38, 0.12)` for grass, `Color(0.82, 0.76, 0.58)` for sand, `Color(0.24, 0.22, 0.26)` for slate, `Color(0.44, 0.30, 0.18)` for planks).
+  - **Centered Digital Cyan Countdown Timer:** Replaced bottom-left status timer with a centered 42pt digital cyan countdown (`Color(0.25, 0.92, 1.0, 1.0)`) with dark cyan outline, turning warning red when <= 5s. Added configurable turn limit (`set_turn_time_limit(limit_sec)` in `BattleManager` for 20s or 30s limits).
+  - **2-Phase Player-to-Pet Radial Ring Step:** When player commits an action, floating action icon spawns over player and the 7-icon radial ring immediately jumps to the companion/pet's feet at `(592, 417)`. Catch and Item actions are gated/disabled for pets while Attack, Defend, Skill, Escape, and Auto remain fully interactive.
+  - **Dynamic Combat Camera Attack Zoom:** Implemented `play_camera_attack_zoom(focus_point)` smoothly scaling actors layer by 1.06x during physical attack lunges and elemental skill execution.
+  - **Verification:** 100% zero-error pass rate across dedicated automated test suite `tests/test_battle_round_timer_and_backdrop_parity.gd` (4/4 passed), `test_battle_view.gd` (11/11 passed), `test_encounters_and_battle_flow.gd` (23/23 passed), and `test_fight_window_and_combat_settings.gd` (8/8 passed).
+
 ### Session: Quest & Team Window Skin Alignment (2026-10)
 
 - [Quest & Team Window Skin Alignment Specification](file:///D:/Godot/WonderlandOnline/wonderland-online-client/docs/quest_and_team_window_skin_alignment_spec.md):
