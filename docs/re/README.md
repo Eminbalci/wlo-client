@@ -10,8 +10,11 @@ Update it whenever something is decoded or observed. Evidence level: **observed*
 | [ui_windows.md](ui_windows.md) | Real window layouts measured from live captures (positions, controls, texts) |
 | [binary_notes.md](binary_notes.md) | Addresses and findings in aLogin.exe / Main.exe |
 | [protocol.md](protocol.md) | Packet framing, action codes, login error strings |
-| [original_repo.md](original_repo.md) | What is in `D:\GitHub\WLRI` (105 specs, data files, Formula.dat decoded) |
+| [original_repo.md](original_repo.md) | What is in `D:\GitHub\WLRI` (105 specs, data files, Formula.dat decoded, image archive formats, extraction output) |
 | [battle.md](battle.md) | Real battle screen, command ring, pet turn, countdown, live battle packets |
-| [dispatch_table.md](dispatch_table.md) | Generated: every action code -> handler address, action-0 notice texts |
+| [eve_events.md](eve_events.md) | Eve.emg NPC event scripts: branch rules, all condition kinds, ops (ported from the C# server) |
+| [alogin_functions.md](alogin_functions.md) | aLogin.exe: 600 functions (prologue-based) with the strings they use; Ghidra times out, see binary_notes.md |
+| [dispatch_table.md](dispatch_table.md) | Older build (sha 190dae51): action -> handler, action-0 notice texts |
+| [dispatch_table_959659ae.md](dispatch_table_959659ae.md) | Current aLogin.exe (sha 959659ae): 91 actions -> handler VA + strings used |
 
 Reference screenshots of the live client: `docs/reference/real_client/*.png` (806x629 form, 800x600 view).

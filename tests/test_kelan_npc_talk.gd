@@ -30,7 +30,7 @@ func _run() -> void:
 	_check(chain.size() == 4, "Doll's chain has four pages (got %d)" % chain.size())
 	_check(chain.size() == 4 and str(chain[3].get("text", "")).contains("Hill"), "The last page asks for Hill Pepper")
 	_check(chain.size() == 4 and chain[3].get("choices", []).size() == 2, "The last page offers Yes. / No.")
-	_check(str(t.resolve_talk_for_npc(14140, 12000).get("text", "")).contains("grape plantations"), "Emilie has her real line")
+	_check(not t.resolve_talk_for_npc(14140, 12000).is_empty(), "Emilie has a bound line (the quiz chain is bound by the Hill Pepper quest work)")
 	_check(str(t.resolve_talk_for_npc(14118, 12000).get("text", "")).contains("Village Leader"), "The Guard has his real line")
 	print("\n--- %d TESTS, %d FAILED ---" % [_count, _failures])
 	quit(1 if _failures > 0 else 0)

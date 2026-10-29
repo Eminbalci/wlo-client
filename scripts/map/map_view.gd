@@ -13,6 +13,7 @@ const CharacterManager = preload("res://scripts/ui/auth/character_manager.gd")
 const SinkingCutsceneController = preload("res://scripts/events/sinking_cutscene.gd")
 const NpcStateEvaluator = preload("res://scripts/map/npc_state_evaluator.gd")
 const EncounterSystemScript = preload("res://scripts/map/encounter_system.gd")
+const NpcEventScript = preload("res://scripts/map/npc_event_script.gd")
 const BattleViewScene = preload("res://scenes/battle/battle_view.tscn")
 
 signal ground_item_harvested(item: GroundItem, player: Node2D)
@@ -132,6 +133,7 @@ func _ready() -> void:
 					"max_sp": 180
 				}
 		
+		call_deferred("_restore_single_player_state")
 		if "role_id" in char_data and player.has_method("set_role"):
 			player.set_role(int(char_data.role_id))
 		if "name" in char_data:
@@ -446,8 +448,12 @@ func _on_quest_completed(quest_id: int, rewards: Dictionary) -> void:
 			player.gold += gold
 
 	var exp_pts: int = int(rewards.get("reward_exp", rewards.get("exp", 0)))
-	if exp_pts > 0 and player and "exp_percent" in player:
-		player.exp_percent = minf(100.0, player.exp_percent + (float(exp_pts) / 10.0))
+	if exp_pts > 0:
+		var status = hud.character_status_ctrl if (hud and "character_status_ctrl" in hud) else null
+		if status:
+			status.add_experience(exp_pts)
+		elif player and "exp_percent" in player:
+			player.exp_percent = minf(100.0, player.exp_percent + (float(exp_pts) / 10.0))
 
 	var items: Array = rewards.get("reward_items", rewards.get("items", []))
 	for it in items:
@@ -468,6 +474,7 @@ func _on_quest_completed(quest_id: int, rewards: Dictionary) -> void:
 			cm_char["exp_percent"] = player.exp_percent
 		CharacterManager.save_character(0, cm_char, "default")
 
+	_save_to_slot()
 	# 3. Synchronize quest log & NPC quest markers
 	_sync_hud_quest_log()
 	_refresh_all_npc_quest_markers()
@@ -963,6 +970,8 @@ func _spawn_dynamic_map_npcs(target_map_id: int) -> void:
 		npc.name = "%s_%d" % [resolved_name.replace(" ", "_"), spawn.click_id]
 		npc.npc_name = resolved_name
 		npc.npc_id = spawn.npc_id
+		npc.set_meta("eve_events", spawn.events.duplicate())
+		npc.set_meta("eve_map", target_map_id)
 		npc.click_id = spawn.click_id
 		npc.template_id = spawn.npc_id
 		npc.rotation = 0.0
@@ -1953,16 +1962,9 @@ func _apply_battle_rewards(rewards: Dictionary) -> void:
 			hud.add_inventory_item(int(item.get("item_id", 0)), int(item.get("quantity", 1)), str(item.get("item_name", "")))
 	var status = hud.character_status_ctrl if "character_status_ctrl" in hud else null
 	if status and exp_gain > 0:
-		status.current_exp += exp_gain
-		var levelled := false
-		while status.current_exp >= status.current_max_exp:
-			status.current_exp -= status.current_max_exp
-			status.current_level += 1
-			status.current_free += 4
-			status.current_max_hp += 12
-			status.current_max_sp += 6
-			levelled = true
-		if levelled and hud.has_method("add_chat_message"):
+		var old_level: int = int(status.current_level)
+		status.add_experience(exp_gain)
+		if int(status.current_level) > old_level and hud.has_method("add_chat_message"):
 			hud.add_chat_message("System", "Level up! You are now level %d." % status.current_level, "System")
 	for tid in _battle_enemy_templates:
 		if hud.has_method("register_monster_seen"):
@@ -2184,6 +2186,9 @@ func is_container_npc(npc: Node2D) -> bool:
 func _handle_container_npc_interaction(npc: Node2D) -> void:
 	var n_id: int = npc.npc_id if "npc_id" in npc else 0
 	var n_name: String = npc.npc_name if "npc_name" in npc else "Chest"
+	# Authentic loot and quest flags come from the chest Eve event; the table below is only a fallback.
+	if npc.has_meta("eve_events") and not (npc.get_meta("eve_events") as Array).is_empty() and _try_eve_conversation(npc, n_name):
+		return
 	var cur_map: int = map_renderer.current_map_id if (map_renderer and "current_map_id" in map_renderer) else 10001
 	var container_key: int = cur_map * 100000 + (n_id if n_id > 0 else int(npc.get_instance_id()))
 	
@@ -2515,6 +2520,9 @@ func _on_npc_interacted(npc: Node2D) -> void:
 			if not sfx.is_empty() and hud and hud.has_method("play_sfx"):
 				hud.play_sfx(sfx)
 	
+	if not is_merchant_npc(npc) and _try_eve_conversation(npc, n_name):
+		return
+
 	if n_text.is_empty() and not is_merchant_npc(npc):
 		# No Talk.dat line is bound to this NPC yet (the real binding lives in the server's event scripts): show only a
 		# "..." bubble instead of inventing a greeting.
@@ -2655,6 +2663,159 @@ func trigger_ship_sinking_cutscene() -> SinkingCutsceneController:
 		sinking_cutscene.trigger_after_captain_dialogue()
 	return sinking_cutscene
 
+## NPC conversations come from the original server's event scripts (Eve.emg), exactly as the C# server runs them:
+## the NPC's linked events pick the first branch whose quest condition holds; its ops are NPC / player lines, quest flags,
+## and a final Yes/No question. Quest progress is tracked in `_quest_steps` (quest id -> step).
+var _quest_steps: Dictionary = {}
+
+func _talk_text_lookup(talk_id: int) -> Dictionary:
+	var game_db = _get_autoload_node("/root/GameDatabase")
+	if game_db and "talks" in game_db and game_db.talks:
+		return game_db.talks.get_talk(talk_id)
+	return {}
+
+
+func _apply_script_actions(actions: Array) -> void:
+	for action in actions:
+		if not (action is Dictionary):
+			continue
+		if action.has("quest_id"):
+			NpcEventScript.apply_quest_actions([action], _quest_steps)
+		elif action.has("gold") and hud and hud.has_method("add_gold"):
+			hud.add_gold(int(action["gold"]))
+		elif action.has("exp"):
+			if hud and "character_status_ctrl" in hud and hud.character_status_ctrl:
+				hud.character_status_ctrl.add_experience(int(action["exp"]))
+		elif action.has("reward_item") and hud:
+			var item_id: int = int(action["reward_item"])
+			var count: int = int(action.get("count", 1))
+			var item_name := ""
+			var game_db = _get_autoload_node("/root/GameDatabase")
+			if game_db and "items" in game_db and game_db.items:
+				var rec = game_db.items.get_item(item_id)
+				if rec:
+					item_name = str(rec.name).strip_edges()
+			if hud.has_method("add_inventory_item"):
+				hud.add_inventory_item(item_id, count, item_name)
+			if hud.dialogue_ctrl:
+				hud.dialogue_ctrl.show_quest_reward(item_name if not item_name.is_empty() else "item %d" % item_id, count)
+	_mirror_eve_quest_to_log()
+	_save_to_slot()
+
+
+func _mirror_eve_quest_to_log() -> void:
+	if quest_component == null:
+		return
+	var target: int = int(_quest_steps.get(12018, 0))
+	var iterations: int = 0
+	while iterations < 5 and quest_component.active_quests.has(1003) and int(quest_component.active_quests[1003].get("current_step", 0)) < target:
+		quest_component.advance_objective(1003)
+		iterations += 1
+	if not _quest_steps.has(12018):
+		if quest_component.active_quests.has(1003) and int(quest_component.active_quests[1003].get("current_step", 0)) >= 2:
+			quest_component.advance_objective(1003)
+
+
+## What the event conditions can see about the player (quests, bag, gold, level).
+func _eve_state() -> Dictionary:
+	var count_item := func(item_id: int) -> int:
+		var total := 0
+		if hud and hud.inventory_ctrl:
+			for slot in hud.inventory_ctrl.inventory_data:
+				if slot is Dictionary and int(slot.get("id", 0)) == item_id:
+					total += int(slot.get("count", 1))
+		return total
+	var free := 0
+	if hud and hud.inventory_ctrl:
+		for slot in hud.inventory_ctrl.inventory_data:
+			if not (slot is Dictionary) or slot.is_empty() or int(slot.get("id", 0)) <= 0:
+				free += 1
+	var level := 1
+	if hud and "character_status_ctrl" in hud and hud.character_status_ctrl:
+		level = int(hud.character_status_ctrl.current_level)
+	return {"quests": _quest_steps, "item_count": count_item, "gold": hud.get_gold() if hud else 0, "level": level, "free_slots": free}
+
+
+func _try_eve_conversation(npc: Node2D, n_name: String) -> bool:
+	var eve = ground_parser.eve_parser if ground_parser else null
+	if eve == null or not hud or not hud.dialogue_ctrl or not npc.has_meta("eve_events"):
+		return false
+	var npc_events: Array = npc.get_meta("eve_events")
+	var map_id: int = int(npc.get_meta("eve_map", 0))
+	if npc_events.is_empty() or map_id <= 0:
+		return false
+	var events: Array = eve.get_events_for_map(map_id)
+	var lookup := Callable(self, "_talk_text_lookup")
+	var built: Dictionary = NpcEventScript.build(events, npc_events, _eve_state(), lookup)
+	if built["pages"].is_empty() and built["actions"].is_empty():
+		return false
+	var event: Dictionary = NpcEventScript.find_event(events, int(built["event_click_id"]))
+	var tid := 0
+	var game_db = _get_autoload_node("/root/GameDatabase")
+	if game_db and "npcs" in game_db and game_db.npcs:
+		var rec = game_db.npcs.get_npc(int(npc.npc_id))
+		if rec:
+			tid = int(rec.talk_image)
+	var script: Dictionary = {"pages": built["pages"], "actions": built["actions"], "question": int(built.get("question", 0))}
+	_present_eve_script(event, script, 0, n_name, tid, -1)
+	return true
+
+
+## Shows one script (lines + optional question). A question's text and options are the Talk record after the last line
+## (Doll's Yes/No: 20227; Emilie's digits: 20337 "1/2/3", then 20338). The answer branch can ask the next question;
+## once an answer branch is done the search falls through to the branches behind it (`resume_after`, array position of
+## the answer branch; -1 = none), which is how Emilie's quiz reaches "wrong" (20339) or "right" (20340).
+func _present_eve_script(event: Dictionary, script: Dictionary, last_talk_id: int, n_name: String, tid: int, resume_after: int) -> void:
+	var dialogue = hud.dialogue_ctrl
+	var lookup := Callable(self, "_talk_text_lookup")
+	var pages: Array[Dictionary] = []
+	for page in script["pages"]:
+		pages.append(page)
+	var actions: Array = script["actions"]
+	var question: int = int(script.get("question", 0))
+	if question <= 0:
+		var finish := func() -> void:
+			_apply_script_actions(actions)
+			if resume_after < 0:
+				return
+			var fall: Dictionary = NpcEventScript.find_branch(event, _eve_state(), 0, 0, 0, resume_after + 1)
+			if fall.is_empty():
+				return
+			_present_eve_script(event, NpcEventScript.branch_script(fall, lookup), last_talk_id, n_name, tid, -1)
+		if pages.is_empty():
+			finish.call()
+			return
+		dialogue.show_script(pages, n_name, tid, finish)
+		return
+	var base_id: int = int(pages[pages.size() - 1]["talk_id"]) if not pages.is_empty() else last_talk_id
+	var prompt_id: int = base_id + 1
+	var prompt: Dictionary = _talk_text_lookup(prompt_id)
+	var options: Array = []
+	for c in prompt.get("choices", []):
+		options.append(str(c.get("text", "")) if c is Dictionary else str(c))
+	if options.is_empty():
+		options = ["Yes.", "No."]
+	var prompt_text := NpcEventScript.clean_text(str(prompt.get("text", "")))
+	if not prompt_text.is_empty():
+		pages.append({"who": "npc", "talk_id": prompt_id, "text": prompt_text})
+	if pages.is_empty():
+		return
+	var on_answer := func(choice_idx: int, _text: String) -> void:
+		_apply_script_actions(actions)
+		var answer_sub: Dictionary = NpcEventScript.find_branch(event, _eve_state(), 7, question, NpcEventScript.ANSWER_BASE + choice_idx)
+		if answer_sub.is_empty():
+			# A wrong digit has no branch of its own: the quiz marks decide what Emilie says next.
+			var last_answer := -1
+			for i in event.get("subs", []).size():
+				var cand: Dictionary = event["subs"][i]
+				if int(cand.get("cond_byte", 0)) == 7 and int(cand.get("words", [0])[0]) == question:
+					last_answer = i
+			_present_eve_script(event, {"pages": [], "actions": [], "question": 0}, prompt_id, n_name, tid, last_answer)
+			return
+		_present_eve_script(event, NpcEventScript.branch_script(answer_sub, lookup), prompt_id, n_name, tid, NpcEventScript.position_of(event, answer_sub))
+	dialogue.show_script(pages, n_name, tid, Callable(), options, on_answer)
+
+
 func _on_dialogue_closed() -> void:
 	_pending_npc_interaction = null
 	if _active_dialogue_npc and is_instance_valid(_active_dialogue_npc):
@@ -2677,6 +2838,19 @@ func _on_dialogue_closed() -> void:
 			player.is_movement_locked = false
 	_is_captain_dialogue_active = false
 	_interacting_npc_id = 0
+	_release_movement_if_free()
+
+func _release_movement_if_free() -> void:
+	if player == null or not is_instance_valid(player):
+		return
+	if sinking_cutscene != null and sinking_cutscene.is_cutscene_active:
+		return
+	if "_is_animating_wakeup" in player and player._is_animating_wakeup:
+		return
+	if "is_prone" in player and player.is_prone:
+		return
+	if "is_movement_locked" in player:
+		player.is_movement_locked = false
 
 func _on_sinking_cutscene_finished() -> void:
 	if _island_warped:
@@ -2699,28 +2873,11 @@ func _on_sinking_cutscene_finished() -> void:
 	# Ensure Kelang and beach entities are present on beach
 	_ensure_beach_entities()
 		
-	# Play awakening prone get-up animation
-	if player:
-		if player.has_method("play_wakeup_animation"):
-			player.play_wakeup_animation(2.0, func():
-				if player and "is_movement_locked" in player:
-					player.is_movement_locked = false
-				# Kelang talks to player upon awakening
-				for e in _beach_entities:
-					if is_instance_valid(e) and e is NpcEntity and (e.npc_id in [14062, 12032] or "kelang" in e.npc_name.to_lower()):
-						if e.has_method("show_emotion"):
-							e.show_emotion("shock", 2.0)
-						if e.has_method("show_speech_bubble"):
-							e.show_speech_bubble("Hey! Are you okay? You washed ashore from the shipwreck.", 4.0)
-						interact_with_npc(e)
-						break
-			)
-		elif player.has_method("wake_up"):
-			player.wake_up()
-		elif "is_prone" in player:
-			player.is_prone = false
-			if "is_movement_locked" in player:
-				player.is_movement_locked = false
+	# Captain Robinson pulls the player out of the water (no Kelang conversation)
+	var shore_point := Vector2(1342, 2495)
+	if player and is_instance_valid(player):
+		player.global_position = shore_point + Vector2(-160, 60)
+	_robinson_pull_out(shore_point)
 
 	# Play authentic awakening music (BGM0024 or BGM0012)
 	play_awakening_music()
@@ -2786,6 +2943,7 @@ func _ensure_beach_entities() -> void:
 
 ## Loads any of the 1,119 maps in Wonderland Online, updating renderer, portals, ground items, and NPCs.
 func load_map(target_map_id: int, spawn_pos: Vector2 = Vector2.ZERO) -> bool:
+	_save_to_slot()
 	_pending_npc_interaction = null
 	if spawn_pos == Vector2.ZERO:
 		spawn_pos = _resolve_default_spawn(target_map_id)
@@ -2877,3 +3035,237 @@ func get_active_npcs() -> Array[NpcEntity]:
 			if child is NpcEntity and child != player and child.visible:
 				active_list.append(child)
 	return active_list
+
+## Single-player save: everything the player owns, written to the save slot chosen on the title screen.
+var _restoring: bool = false
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		_save_to_slot()
+
+
+func _restore_single_player_state() -> void:
+	var gdb: Node = get_tree().root.get_node_or_null("GameDatabase")
+	if gdb == null or not ("active_character" in gdb) or gdb.active_character.is_empty():
+		return
+	var char_data: Dictionary = gdb.active_character
+	if not char_data.has("save_slot"):
+		return
+	_restoring = true
+	var map_id: int = int(char_data.get("map_id", 0))
+	var pos: Vector2 = SaveGame.array_to_vec(char_data.get("position", []))
+	if map_id > 0 and map_renderer and map_id != int(map_renderer.current_map_id):
+		load_map(map_id, pos)
+	elif player and pos != Vector2.ZERO:
+		player.global_position = pos
+	_apply_save_snapshot(char_data)
+	_restoring = false
+
+
+func _save_to_slot() -> void:
+	if _restoring or not is_inside_tree():
+		return
+	var gdb: Node = get_tree().root.get_node_or_null("GameDatabase")
+	if gdb == null or not ("active_character" in gdb) or gdb.active_character.is_empty():
+		return
+	var char_data: Dictionary = gdb.active_character
+	if not char_data.has("save_slot"):
+		return
+	var slot: int = int(char_data["save_slot"])
+	var snap: Dictionary = _gather_save_snapshot()
+	var merged: Dictionary = char_data.duplicate(true)
+	for key in snap:
+		merged[key] = snap[key]
+	if int(snap.get("level", 0)) > 0:
+		merged["level"] = int(snap["level"])
+	SaveGame.write_slot(slot, merged)
+	gdb.active_character = merged.duplicate(true)
+
+
+static func _json_safe(value: Variant) -> Variant:
+	if value == null:
+		return null
+	var t: int = typeof(value)
+	if t == TYPE_INT or t == TYPE_FLOAT or t == TYPE_STRING or t == TYPE_BOOL:
+		return value
+	if t == TYPE_ARRAY:
+		var safe_arr: Array = []
+		for item in (value as Array):
+			var safe_item: Variant = _json_safe(item)
+			if typeof(safe_item) != TYPE_NIL:
+				safe_arr.append(safe_item)
+		return safe_arr
+	if t == TYPE_DICTIONARY:
+		var safe_dict: Dictionary = {}
+		var dict: Dictionary = value as Dictionary
+		for k in dict:
+			var safe_val: Variant = _json_safe(dict[k])
+			if typeof(safe_val) != TYPE_NIL:
+				safe_dict[str(k)] = safe_val
+		return safe_dict
+	return null
+
+
+func _gather_save_snapshot() -> Dictionary:
+	var map_id_val: int = 0
+	if map_renderer != null and "current_map_id" in map_renderer and map_renderer.current_map_id != null:
+		map_id_val = int(map_renderer.current_map_id)
+
+	var pos_val: Array = [0.0, 0.0]
+	if player != null and "global_position" in player and player.global_position != null:
+		pos_val = [float(player.global_position.x), float(player.global_position.y)]
+
+	var gold_val: int = 0
+	if hud != null and hud.has_method("get_gold"):
+		gold_val = int(hud.get_gold())
+
+	var inv_val: Array = []
+	if hud != null and "_inventory_data" in hud and hud._inventory_data is Array:
+		var safe_inv: Variant = _json_safe(hud._inventory_data)
+		if safe_inv is Array:
+			inv_val = safe_inv
+
+	var eq_val: Dictionary = {}
+	if hud != null and "_equipment_data" in hud and hud._equipment_data is Dictionary:
+		var safe_eq: Variant = _json_safe(hud._equipment_data)
+		if safe_eq is Dictionary:
+			eq_val = safe_eq
+
+	var q_steps_val: Dictionary = {}
+	if _quest_steps != null:
+		for k in _quest_steps:
+			q_steps_val[str(k)] = int(_quest_steps[k])
+
+	var q_active_val: Dictionary = {}
+	var q_completed_val: Dictionary = {}
+	if quest_component != null:
+		if "active_quests" in quest_component and quest_component.active_quests is Dictionary:
+			for k in quest_component.active_quests:
+				var safe_entry: Variant = _json_safe(quest_component.active_quests[k])
+				if typeof(safe_entry) != TYPE_NIL:
+					q_active_val[str(k)] = safe_entry
+		if "completed_quests" in quest_component and quest_component.completed_quests is Dictionary:
+			for k in quest_component.completed_quests:
+				var safe_entry: Variant = _json_safe(quest_component.completed_quests[k])
+				if typeof(safe_entry) != TYPE_NIL:
+					q_completed_val[str(k)] = safe_entry
+
+	var exp_val: int = 0
+	var level_val: int = 1
+	if hud != null and "character_status_ctrl" in hud and hud.character_status_ctrl != null:
+		var csc: Variant = hud.character_status_ctrl
+		if "current_exp" in csc and csc.current_exp != null:
+			exp_val = int(csc.current_exp)
+		if "current_level" in csc and csc.current_level != null:
+			level_val = int(csc.current_level)
+
+	return {
+		"map_id": map_id_val,
+		"position": pos_val,
+		"gold": gold_val,
+		"inventory": inv_val,
+		"equipment": eq_val,
+		"quest_steps": q_steps_val,
+		"quests_active": q_active_val,
+		"quests_completed": q_completed_val,
+		"exp": exp_val,
+		"level": level_val
+	}
+
+
+func _apply_save_snapshot(snap: Dictionary) -> void:
+	if snap.is_empty():
+		return
+
+	if hud != null and snap.has("inventory") and snap["inventory"] is Array:
+		var sanitized_inv: Array[Dictionary] = []
+		for item in (snap["inventory"] as Array):
+			if item is Dictionary:
+				sanitized_inv.append(item as Dictionary)
+		hud._inventory_data = sanitized_inv
+
+	if hud != null and snap.has("gold") and hud.has_method("update_gold"):
+		hud.update_gold(int(snap["gold"]))
+
+	if hud != null and "character_status_ctrl" in hud and hud.character_status_ctrl != null:
+		var csc: Variant = hud.character_status_ctrl
+		if snap.has("equipment") and snap["equipment"] is Dictionary:
+			var eq: Dictionary = snap["equipment"] as Dictionary
+			csc.equipment_data = eq
+			if csc.has_method("update_character_paper_doll"):
+				csc.update_character_paper_doll(eq)
+		if snap.has("exp") and snap.has("level"):
+			csc.current_exp = int(snap["exp"])
+			csc.current_level = int(snap["level"])
+			if csc.has_method("_refresh_header"):
+				csc._refresh_header()
+
+	if _quest_steps != null:
+		_quest_steps.clear()
+		if snap.has("quest_steps") and snap["quest_steps"] is Dictionary:
+			var steps_data: Dictionary = snap["quest_steps"] as Dictionary
+			for k in steps_data:
+				_quest_steps[int(k)] = int(steps_data[k])
+
+	if quest_component != null:
+		if snap.has("quests_active") and snap["quests_active"] is Dictionary:
+			var active_dict: Dictionary = {}
+			var raw_act: Dictionary = snap["quests_active"] as Dictionary
+			for k in raw_act:
+				if raw_act[k] is Dictionary:
+					active_dict[int(k)] = raw_act[k] as Dictionary
+			quest_component.active_quests = active_dict
+
+		if snap.has("quests_completed") and snap["quests_completed"] is Dictionary:
+			var completed_dict: Dictionary = {}
+			var raw_comp: Dictionary = snap["quests_completed"] as Dictionary
+			for k in raw_comp:
+				if raw_comp[k] is Dictionary:
+					completed_dict[int(k)] = raw_comp[k] as Dictionary
+			quest_component.completed_quests = completed_dict
+
+		if quest_component.has_method("ensure_initialized"):
+			quest_component.ensure_initialized()
+
+
+func _robinson_pull_out(shore_point: Vector2) -> void:
+	var captain: Node = null
+	for entity in _deck_entities:
+		if is_instance_valid(entity) and entity.get("npc_id") == 14003:
+			captain = entity
+			break
+
+	# Nearest open-sea tile to the landing point on map 10003 (found from the map collision data).
+	var water_point: Vector2 = Vector2(1190, 2610)
+	if is_instance_valid(player):
+		player.global_position = water_point
+		if "is_movement_locked" in player:
+			player.is_movement_locked = true
+		if "is_prone" in player:
+			player.is_prone = true
+
+	if captain != null:
+		captain.visible = true
+		captain.world_position = shore_point + Vector2(-48, 0)
+		captain.heading = IsometricMath.Heading.SOUTH_WEST
+
+	var tween: Tween = create_tween()
+	tween.tween_property(player, "global_position", shore_point, 4.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.finished.connect(func() -> void:
+		if captain != null:
+			captain.visible = false
+		if is_instance_valid(player):
+			if player.has_method("play_wakeup_animation"):
+				player.play_wakeup_animation(2.0, _on_rescue_wakeup_done)
+			else:
+				if "is_prone" in player:
+					player.is_prone = false
+				if "is_movement_locked" in player:
+					player.is_movement_locked = false
+	)
+
+
+func _on_rescue_wakeup_done() -> void:
+	if is_instance_valid(player) and "is_movement_locked" in player:
+		player.is_movement_locked = false

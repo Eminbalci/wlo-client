@@ -880,6 +880,11 @@ func _ensure_chat_art() -> void:
 	_drag_handle.tooltip_text = "Drag to resize the chat"
 	_drag_handle.gui_input.connect(_on_chat_size_gui_input)
 	dock.add_child(_drag_handle)
+	var emote = dock.get_node_or_null("EmotePopup")
+	if emote != null:
+		dock.move_child(_drag_handle, emote.get_index())
+	if panel_talk_form_left != null and chat_history_panel != null and panel_talk_form_left.get_parent() == chat_history_panel:
+		chat_history_panel.move_child(panel_talk_form_left, -1)
 	if not chat_history_panel.resized.is_connected(_sync_chat_art):
 		chat_history_panel.resized.connect(_sync_chat_art)
 		chat_history_panel.item_rect_changed.connect(_sync_chat_art)

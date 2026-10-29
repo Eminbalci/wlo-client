@@ -781,18 +781,13 @@ func _setup_click_handlers() -> void:
 			dialogue_text.gui_input.connect(on_dialogue_clicked)
 
 func _on_choice_clicked(choice_idx: int, choice_txt: String) -> void:
+	# Close first: the callback may open the follow-up conversation (next question, answer lines) and must stay visible.
+	var callback := _current_choice_callback
+	hide_dialogue()
 	if hud and hud.has_signal("dialogue_choice_selected"):
 		hud.dialogue_choice_selected.emit(choice_idx, choice_txt)
-	if _current_choice_callback.is_valid():
-		_current_choice_callback.call(choice_idx, choice_txt)
-	var sender_name := "Player"
-	if hud:
-		var name_lbl = hud.get_node_or_null("PlayerStatusDock/NameLabel") as Label
-		if name_lbl and not name_lbl.text.is_empty():
-			sender_name = name_lbl.text
-	if hud and hud.has_method("add_chat_message"):
-		hud.add_chat_message(sender_name, choice_txt, "Local")
-	hide_dialogue()
+	if callback.is_valid():
+		callback.call(choice_idx, choice_txt)
 
 func _update_portrait(portrait_index: int) -> void:
 	var loader = _get_archive_loader()

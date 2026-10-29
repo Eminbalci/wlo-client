@@ -1,5 +1,7 @@
 # Packet dispatcher of aLogin.exe (decoded)
 
+> **Older build.** The addresses below (0x2de1d4, 0x2de224, 0x2de2ec) belong to an earlier aLogin.exe (sha 190dae51...). The current file (sha 959659ae...) has its dispatcher at 0x2f2334 with tables 0x2f234c / 0x2f2414. Current table: [dispatch_table_959659ae.md](dispatch_table_959659ae.md).
+
 Function `0x2de1d4` reads the action code (first payload byte, `bl`) and switches over 0..0xC7:
 byte table `0x2de224` (action -> case index), dword table `0x2de2ec` (case index -> handler).
 Case 0 (`0x2efbd1`) is the default / ignore path. Evidence: **decoded** (capstone disassembly of the exe).

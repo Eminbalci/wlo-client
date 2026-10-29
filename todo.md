@@ -271,13 +271,15 @@
 - [x] Close buttons over the baked x sphere, cursor mapping, chat colours, compound window, sinking cutscene visuals, battle sprites/buttons/gauge, encounters and battle-to-world flow (see README).
 - [x] Battle: real battle backgrounds by environment/bg_id (Forest, Beach, Cave, Deck), 20-30s centered cyan digital countdown timer with warning red color below 5s, configurable turn limit in BattleManager.
 - [x] Battle: 2-phase player-to-pet command radial ring handoff, permission gating (Catch/Item disabled for pet), dynamic combat camera attack zoom, and caster lunges.
-- [ ] Level-up / EXP curve and HP/SP restore rules are approximations; verify against the real game.
+- [x] Level / EXP curve decoded from aLogin.exe (0x388628 / 0x388748 / 0x3886fc): step n -> n+1 costs Round((n+1)^A + B), A = double at Formula.dat 0xF1 (3.1), B = int32 at 0x169 (5); reborn uses 3.3 / 50 (and (L-150)^4.9 above 150); cap 199 (190 reborn). Matches the C# server; the 30/70/130/210 table in the WLRI docs is wrong (real: 14, 35, 79, 152). `scripts/database/formula_data.gd`, `tests/test_exp_curve.gd` (30/30). Confirmed by Gemini (round half to even, 4.9).
+  - `add_experience` now levels up on that curve (battle and quest EXP go through it); the EXP bar percent bug (0..1 passed as 0..100) is fixed.
+- [ ] Still approximations: HP/SP growth per level (+12 / +6) and stat points per level (3, from the C# server). Decode from the server stat formulas / the rest of Formula.dat.
 - [ ] Items: audit inventory slots/tooltips/equipment against the real client (not started).
 - [ ] "UI missing elements" reported by the user: list which screens are incomplete.
 - [x] Cursors: verify the inferred roles (cursor1 normal, cursor3 attack, cursor4 talk, cursor8 harvest, cursor17 examine, cursor6 portal, cursor12 mining, cursor18 shop, cursor15 skill, cursor16 quest, cursor10 busy, cursor11 target; verified all 12 types, animation and hotspots in `tests/test_cursor_manager.gd`).
 - [x] Top-right action bar added after comparing with the running real client.
 - [ ] Real client comparison still open: ask the user to open the inventory, a shop, the skill window and a battle in the real game, then capture each with `PrintWindow` (see README) and compare layouts.
-- [x] Item use: consumables only decrement the stack and log "Used X." (no HP/SP restore); the status fields of Item.dat for consumables are not decoded yet (HUDInventory.use_or_equip_inventory_item).
+- [x] Item use: consumables restore HP/SP from Item.dat status types 25/26 and show a stat tooltip (`tests/test_consumable_item_recovery.gd`, 35/35). Verified 2026-10-29; the earlier 'not decoded' note was stale.
 
 ## Real-client fidelity (2026-10-28)
 - [x] Decode the dispatcher handlers (`docs/re/dispatch_table.md`): implemented Action 0x02 (Item Pickup/Entity Update), Action 0x05 (NPC Dialogue/Portal), Action 0x07 (Map Warp), Action 0x19/0x1B (Trade/Shop), and Action 0x32/0x33 (Battle Command/Stat Sync) with signals in `network_manager.gd`, verified in `tests/test_network.gd`.

@@ -20,3 +20,18 @@ Layout: 1 byte count (2), then little-endian doubles starting at offset 1, then 
 ```
 These look like element-advantage / damage multipliers and tuning constants (not yet tied to code: find the reader in aLogin.exe by searching for "Formula.dat").
 Godot currently uses its own multipliers (`battle_manager.gd`); replace them once the semantics are confirmed.
+
+## Image archives and how they were decoded (all formats verified on the real files)
+Extractor: `scratchpad` script `wlri_extract.py` (port of `scripts/core/wlo_archive_reader.gd` and `scripts/core/jma_parser.gd`).
+Output (one PNG per image, outside the repo): `D:\Godot\WonderlandOnline\original_assets\{bmg,jma,loose}\` with `manifest.csv` per group.
+
+| Source | Format | Count |
+|--------|--------|-------|
+| `pic/*.BMg`, `pic/*.JMg`, `pic/*.JMG` | u16 count, 32-byte entries: u8 name_len, 23-byte name, u32 offset, u32 size. Payload BMP (8/24/32 bit) or JPG | 15,699 BMP + 439 JPG (in 28 archives) |
+| `jma/*.jma` | `ja` magic, u32 count at byte 10, 28-byte entries from byte 14: u8 name_len, 19-byte name, u32 size, u32 offset | 6,178 `.jmp` (sprite sets) |
+| `jma/*.jmp` (inside jma) | `jm`, frame count u32 at byte 10, 40-byte frame entries from 14 (name, bounds, pivot, size, offset, width, height), then 256-colour BGRA palette, then 8-bit indexed rows padded to 4 bytes | frames per jmp = frame count |
+| `jma/*.Jxa` | `jx` magic, same header as the jma, total = header + index; not needed (the jma carries the same index) | - |
+| `menu/**/*.bmp`, `pic/*.bmp`, `images/*.jpg|gif`, `pic/*.jpg` | loose files | see manifest |
+
+Chroma: pure green (0,255,0) is transparent in BMP; sprite palette index 0 and green are transparent.
+Note: the jmp frame "bpp" field is 1 (not 8); it is not a bit depth, do not check it.

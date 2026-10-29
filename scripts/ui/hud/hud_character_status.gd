@@ -5,6 +5,7 @@ extends RefCounted
 ## drag-and-drop equipment swapping, paper doll composite textures, and combat stats calculation.
 
 const SkinButtonScript = preload("res://scripts/ui/hud/skin_button.gd")
+const FormulaData = preload("res://scripts/database/formula_data.gd")
 const ELEMENT_ICON_FORMAT: String = "res://assets/hud/icon_element_%d.png"
 const ELEMENT_IDS: Dictionary = {"earth": 1, "water": 2, "fire": 3, "wind": 4}
 
@@ -352,7 +353,7 @@ func apply_character_data(char_data: Dictionary) -> void:
 	var c_sp: int = int(char_data.get("sp", 150))
 	var c_max_sp: int = int(char_data.get("max_sp", c_sp))
 	var c_exp: int = int(char_data.get("exp", 0))
-	var c_max_exp: int = int(char_data.get("max_exp", 10000))
+	var c_max_exp: int = int(char_data.get("max_exp", FormulaData.exp_to_next_level(c_level)))
 
 	var c_str: int = int(char_data.get("str", 10))
 	var c_con: int = int(char_data.get("con", 10))
@@ -511,9 +512,49 @@ func restore_hp(amount: int) -> int:
 	_refresh_header()
 	_sync_active_character_data()
 	if hud and hud.has_method("set_player_stats"):
-		var exp_pct: float = float(current_exp) / float(maxi(1, current_max_exp))
+		var exp_pct: float = float(current_exp) / float(maxi(1, current_max_exp)) * 100.0
 		hud.set_player_stats(current_name, current_level, current_hp, current_max_hp, current_sp, current_max_sp, exp_pct)
 	return restored
+
+## Stat points per level: the C# server adds 3 per level (Equip.SetLevel); not yet observed in the real client.
+const STAT_POINTS_PER_LEVEL: int = 3
+## Max HP / SP growth per level: approximations (the real values come from the server's stat formulas).
+const HP_PER_LEVEL: int = 12
+const SP_PER_LEVEL: int = 6
+
+## Adds EXP within the current level and levels up on the real client's curve (FormulaData).
+## Returns the EXP actually added (0 at the level cap).
+func add_experience(amount: int) -> int:
+	if amount <= 0:
+		return 0
+	var cap: int = FormulaData.max_level()
+	if current_level >= cap:
+		return 0
+	current_max_exp = FormulaData.exp_to_next_level(current_level)
+	current_exp += amount
+	var levelled: bool = false
+	while current_level < cap and current_exp >= current_max_exp:
+		current_exp -= current_max_exp
+		current_level += 1
+		current_free += STAT_POINTS_PER_LEVEL
+		current_max_hp += HP_PER_LEVEL
+		current_max_sp += SP_PER_LEVEL
+		current_max_exp = FormulaData.exp_to_next_level(current_level)
+		levelled = true
+	var added: int = amount
+	if current_level >= cap:
+		added -= current_exp
+		current_exp = 0
+	if levelled:
+		update_character_stats(current_name, current_level, current_element, current_hp, current_max_hp, current_sp, current_max_sp, current_exp, current_max_exp, current_str, current_con, current_int, current_wis, current_agi, current_free)
+	elif stat_left_exp:
+		stat_left_exp.text = "%d / %d" % [current_exp, current_max_exp]
+	_refresh_header()
+	_sync_active_character_data()
+	if hud != null and hud.has_method("set_player_stats"):
+		var exp_pct: float = float(current_exp) / float(maxi(1, current_max_exp)) * 100.0
+		hud.set_player_stats(current_name, current_level, current_hp, current_max_hp, current_sp, current_max_sp, exp_pct)
+	return added
 
 ## Restores character SP up to current_max_sp and synchronizes all docks and UI readouts
 func restore_sp(amount: int) -> int:
@@ -527,7 +568,7 @@ func restore_sp(amount: int) -> int:
 	_refresh_header()
 	_sync_active_character_data()
 	if hud and hud.has_method("set_player_stats"):
-		var exp_pct: float = float(current_exp) / float(maxi(1, current_max_exp))
+		var exp_pct: float = float(current_exp) / float(maxi(1, current_max_exp)) * 100.0
 		hud.set_player_stats(current_name, current_level, current_hp, current_max_hp, current_sp, current_max_sp, exp_pct)
 	return restored
 
