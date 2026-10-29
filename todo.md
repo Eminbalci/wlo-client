@@ -277,7 +277,8 @@
   - Max HP/SP (ids 205/206) are only stored by the client; growth now follows the C# server's MaxHp/MaxSp formula (level up and CON/WIS points).
 - [ ] Still unverified: stat points per level (3, C# server), the job byte (0x1f9c) meaning per role, the server bonus behind flag 0x20a5.
 - [ ] Items: audit inventory slots/tooltips/equipment against the real client (not started).
-- [ ] "UI missing elements" reported by the user: list which screens are incomplete.
+- [x] "UI missing elements": the real client has 165 windows (`Form_*` in aLogin.exe), 15 exist in Godot. Prioritised list in `docs/ui_coverage.md`.
+- [ ] Build the P1 windows from `docs/ui_coverage.md` (pet status, trade, warehouse, repair, world map, potential, titles, mail, channel, skill tree, emotes, player info, drop/pick up, other stores, inn/doctor, rewards).
 - [x] Cursors: verify the inferred roles (cursor1 normal, cursor3 attack, cursor4 talk, cursor8 harvest, cursor17 examine, cursor6 portal, cursor12 mining, cursor18 shop, cursor15 skill, cursor16 quest, cursor10 busy, cursor11 target; verified all 12 types, animation and hotspots in `tests/test_cursor_manager.gd`).
 - [x] Top-right action bar added after comparing with the running real client.
 - [ ] Real client comparison still open: ask the user to open the inventory, a shop, the skill window and a battle in the real game, then capture each with `PrintWindow` (see README) and compare layouts.
