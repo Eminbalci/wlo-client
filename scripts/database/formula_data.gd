@@ -11,6 +11,15 @@ extends RefCounted
 ## - 0x388748 g(n) = f(1) + ... + f(n): total EXP at which level n is reached (level 1 is free).
 ## - 0x3886fc level_from_total_exp: last n with g(n) <= total, capped at 199 (190 when reborn, 0x49f0ec).
 ## So going from level n to n + 1 costs f(n + 1): 14, 35, 79, 152, 263 ... (same as the C# server's CalcMaxExp).
+##
+## Combat stats (stat getter 0x430580, ids 41..45): with L = level + 100 * reborn (0x49f0e4),
+##   base  = attr * c0 + L * c1 + L * element_bonus * c3
+##   value = R(base + equip * c2 [+ a server bonus, flag 0x20a5]) + R(base * job_bonus)
+## c0..c3 are the four doubles at `offset` (attr, level, equip, element); element_bonus is 1 when the
+## character has the stat's element; job_bonus is 0.1 for the listed jobs (byte 0x1f9c), else 0.
+## R (0x1297d8) rounds half up: Ceil when Frac >= 0.5, else Floor.
+## Max HP / SP (ids 205 / 206) are only stored by the client: the server computes them. max_hp / max_sp use the
+## C# server's Equip.MaxHp / MaxSp (C# Math.Round = half to even); their 0.35 / 3.2 / 0.3 factors are also in Formula.dat.
 
 const FORMULA_PATH: String = "res://assets/data/Formula.dat"
 const OFFSET_EXP_EXPONENT: int = 0xF1
@@ -23,6 +32,23 @@ const REBORN_HIGH_LEVEL: int = 150
 const REBORN_HIGH_EXPONENT: float = 4.9
 const MAX_LEVEL: int = 199
 const MAX_LEVEL_REBORN: int = 190
+
+const COMBAT_STATS: Dictionary = {
+	"atk": {"offset": 0x01, "element": 3, "jobs": [1]},
+	"def": {"offset": 0x21, "element": 1, "jobs": [2]},
+	"matk": {"offset": 0x41, "element": 3, "jobs": [4]},
+	"mdef": {"offset": 0x61, "element": 1, "jobs": [5]},
+	"spd": {"offset": 0x81, "element": 4, "jobs": [3, 6]},
+}
+## Values of the shipped Formula.dat, used when the file is missing.
+const DEFAULT_COMBAT_COEFFICIENTS: Dictionary = {
+	"atk": [2.0, 1.4, 1.0, 0.6],
+	"def": [1.75, 2.0, 1.0, 0.6],
+	"matk": [2.0, 1.4, 1.0, 0.2],
+	"mdef": [2.2, 2.0, 1.0, 0.2],
+	"spd": [1.8, 1.6, 1.0, 0.5],
+}
+const JOB_BONUS: float = 0.1
 
 static var _bytes: PackedByteArray = PackedByteArray()
 static var _loaded: bool = false
@@ -96,3 +122,39 @@ static func _round_half_even(value: float) -> int:
 	if is_equal_approx(diff, 0.5):
 		return int(lower) + (int(lower) & 1)
 	return int(roundf(value))
+
+
+## [attr, level, equip, element] coefficients of a combat stat ("atk", "def", "matk", "mdef", "spd").
+static func combat_coefficients(stat: String) -> Array[float]:
+	var layout: Dictionary = COMBAT_STATS[stat]
+	var defaults: Array = DEFAULT_COMBAT_COEFFICIENTS[stat]
+	var result: Array[float] = []
+	for i in 4:
+		result.append(get_double(int(layout["offset"]) + i * 8, float(defaults[i])))
+	return result
+
+
+## Combat stat as the client shows it. `element_id`: 1 Earth, 2 Water, 3 Fire, 4 Wind.
+static func combat_stat(stat: String, attr: int, level: int, equip: int = 0, element_id: int = 0, job: int = 0, reborn: bool = false) -> int:
+	var c: Array[float] = combat_coefficients(stat)
+	var layout: Dictionary = COMBAT_STATS[stat]
+	var eff_level: float = float(level + (100 if reborn else 0))
+	var element_bonus: float = 1.0 if element_id == int(layout["element"]) else 0.0
+	var base: float = float(attr) * c[0] + eff_level * c[1] + eff_level * element_bonus * c[3]
+	var job_bonus: float = JOB_BONUS if (layout["jobs"] as Array).has(job) else 0.0
+	return _round_half_up(base + float(equip) * c[2]) + _round_half_up(base * job_bonus)
+
+
+static func _round_half_up(value: float) -> int:
+	var lower: float = floorf(value)
+	return int(lower) + 1 if value - lower >= 0.5 else int(lower)
+
+
+## Base max HP before equipment (server formula).
+static func max_hp(level: int, con: int) -> int:
+	return _round_half_even(pow(float(level), 0.35) * float(con) * 2.0 + float(level) + float(con) * 2.0 + 180.0)
+
+
+## Base max SP before equipment (server formula).
+static func max_sp(level: int, wis: int) -> int:
+	return _round_half_even(pow(float(level), 0.3) * float(wis) * 3.2 + float(level) + float(wis) * 2.0 + 94.0)

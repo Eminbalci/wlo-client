@@ -1905,17 +1905,13 @@ func _build_player_battle_actor() -> Dictionary:
 	var element_ids := {"earth": 1, "water": 2, "fire": 3, "wind": 4}
 	var actor := {"id": 1, "name": "Daniel", "level": 1, "hp": 150, "max_hp": 150, "sp": 100, "max_sp": 100, "element": 3, "role_id": 6}
 	if status:
-		var strength: int = int(status.current_str)
+		var combat: Dictionary = status.get_combat_stats(status.get_equipment_bonus())
 		actor = {
 			"id": int(status.current_role_id), "role_id": int(status.current_role_id),
 			"name": str(status.current_name), "level": int(status.current_level),
 			"hp": int(status.current_hp), "max_hp": int(status.current_max_hp),
 			"sp": int(status.current_sp), "max_sp": int(status.current_max_sp),
-			"atk": 8 + int(status.current_level) * 3 + strength * 2,
-			"matk": 6 + int(status.current_level) * 2 + int(status.current_int) * 2,
-			"def": 4 + int(status.current_level) * 2 + int(status.current_con),
-			"mdef": 4 + int(status.current_level) * 2 + int(status.current_wis),
-			"spd": 4 + int(status.current_level) + int(status.current_agi),
+			"atk": combat["atk"], "matk": combat["matk"], "def": combat["def"], "mdef": combat["mdef"], "spd": combat["spd"],
 			"element": int(element_ids.get(str(status.current_element).to_lower(), 0)),
 			"equip_layers": status.current_equip_layers,
 		}

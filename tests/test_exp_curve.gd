@@ -53,7 +53,8 @@ func _init() -> void:
 	assert_eq(cs.current_exp, 5, "Remainder inside LV3")
 	assert_eq(cs.current_max_exp, 79, "Bar denominator at LV3")
 	assert_eq(cs.current_free, 2 * cs.STAT_POINTS_PER_LEVEL, "Stat points for two levels")
-	assert_eq(cs.current_max_hp, 100 + 2 * cs.HP_PER_LEVEL, "Max HP growth")
+	# CON 10: server MaxHp LV1 = 221, LV3 = Round(3^0.35 * 20 + 3 + 20 + 180) = 232
+	assert_eq(cs.current_max_hp, 100 + 11, "Max HP grows by the server formula")
 	cs.current_level = 199
 	cs.current_exp = 0
 	assert_eq(cs.add_experience(500), 0, "No EXP at the level cap")

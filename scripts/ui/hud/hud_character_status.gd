@@ -50,6 +50,8 @@ var current_int: int = 6
 var current_wis: int = 6
 var current_agi: int = 18
 var current_free: int = 0
+## Job byte of the real client (0x1f9c); 0 = none. Jobs 1..6 give +10% to one combat stat.
+var current_job: int = 0
 
 var stat_add_buttons: Dictionary = {} # String (stat_name) -> Button
 
@@ -471,11 +473,6 @@ func update_character_stats(
 	current_agi = c_agi
 	current_free = c_free
 
-	base_atk = c_str * 2
-	base_def = c_con * 2
-	base_matk = c_int * 2
-	base_mdef = c_wis * 2
-	base_spd = c_agi * 2
 
 	if stat_name:
 		stat_name.text = c_name
@@ -518,9 +515,6 @@ func restore_hp(amount: int) -> int:
 
 ## Stat points per level: the C# server adds 3 per level (Equip.SetLevel); not yet observed in the real client.
 const STAT_POINTS_PER_LEVEL: int = 3
-## Max HP / SP growth per level: approximations (the real values come from the server's stat formulas).
-const HP_PER_LEVEL: int = 12
-const SP_PER_LEVEL: int = 6
 
 ## Adds EXP within the current level and levels up on the real client's curve (FormulaData).
 ## Returns the EXP actually added (0 at the level cap).
@@ -537,8 +531,9 @@ func add_experience(amount: int) -> int:
 		current_exp -= current_max_exp
 		current_level += 1
 		current_free += STAT_POINTS_PER_LEVEL
-		current_max_hp += HP_PER_LEVEL
-		current_max_sp += SP_PER_LEVEL
+		# Max HP / SP grow by the server formula's difference, so equipment bonuses already in them are kept.
+		current_max_hp += FormulaData.max_hp(current_level, current_con) - FormulaData.max_hp(current_level - 1, current_con)
+		current_max_sp += FormulaData.max_sp(current_level, current_wis) - FormulaData.max_sp(current_level - 1, current_wis)
 		current_max_exp = FormulaData.exp_to_next_level(current_level)
 		levelled = true
 	var added: int = amount
@@ -623,14 +618,16 @@ func allocate_stat_point(stat_name: String) -> bool:
 			current_str += 1
 		"con":
 			current_con += 1
-			current_max_hp += 2
-			current_hp += 2
+			var hp_gain: int = FormulaData.max_hp(current_level, current_con) - FormulaData.max_hp(current_level, current_con - 1)
+			current_max_hp += hp_gain
+			current_hp += hp_gain
 		"int":
 			current_int += 1
 		"wis":
 			current_wis += 1
-			current_max_sp += 2
-			current_sp += 2
+			var sp_gain: int = FormulaData.max_sp(current_level, current_wis) - FormulaData.max_sp(current_level, current_wis - 1)
+			current_max_sp += sp_gain
+			current_sp += sp_gain
 		"agi":
 			current_agi += 1
 		_:
@@ -1020,21 +1017,39 @@ func _update_equipment_socket_icons() -> void:
 				icon.texture = null
 			btn.tooltip_text = "%s Slot" % sname.capitalize()
 
-func _update_combat_stats() -> void:
-	var total_atk: int = base_atk
-	var total_def: int = base_def
-	var total_matk: int = base_matk
-	var total_mdef: int = base_mdef
-	var total_spd: int = base_spd
-
+## Sum of the equipped items' combat bonuses per stat.
+func get_equipment_bonus() -> Dictionary:
+	var equip: Dictionary = {"atk": 0, "def": 0, "matk": 0, "mdef": 0, "spd": 0}
 	for sname in equipment_data:
 		var itm: Dictionary = equipment_data[sname]
 		var st: Dictionary = itm.get("stats", {})
-		total_atk += int(st.get("atk", 0))
-		total_def += int(st.get("def", 0))
-		total_matk += int(st.get("matk", 0))
-		total_mdef += int(st.get("mdef", 0))
-		total_spd += int(st.get("spd", 0))
+		for key in equip:
+			equip[key] += int(st.get(key, 0))
+	return equip
+
+## ATK / DEF / MATK / MDEF / SPD for the current attributes, level and element (`equip`: bonus per stat).
+func get_combat_stats(equip: Dictionary = {}) -> Dictionary:
+	var element_id: int = int(ELEMENT_IDS.get(current_element.to_lower(), 0))
+	var attrs: Dictionary = {"atk": current_str, "def": current_con, "matk": current_int, "mdef": current_wis, "spd": current_agi}
+	var result: Dictionary = {}
+	for key in attrs:
+		result[key] = FormulaData.combat_stat(key, int(attrs[key]), current_level, int(equip.get(key, 0)), element_id, current_job)
+	return result
+
+## Combat stats from Formula.dat as the real client computes them (FormulaData.combat_stat); equipment adds its bonus.
+func _update_combat_stats() -> void:
+	var stats: Dictionary = get_combat_stats(get_equipment_bonus())
+	var bases: Dictionary = get_combat_stats()
+	base_atk = bases["atk"]
+	base_def = bases["def"]
+	base_matk = bases["matk"]
+	base_mdef = bases["mdef"]
+	base_spd = bases["spd"]
+	var total_atk: int = stats["atk"]
+	var total_def: int = stats["def"]
+	var total_matk: int = stats["matk"]
+	var total_mdef: int = stats["mdef"]
+	var total_spd: int = stats["spd"]
 
 	if stat_atk: stat_atk.text = "%d" % total_atk
 	if stat_def: stat_def.text = "%d" % total_def

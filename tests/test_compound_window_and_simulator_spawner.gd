@@ -461,7 +461,8 @@ func _test_character_status_free_point_allocation() -> void:
 	assert(allocated == true, "Point allocation to STR must succeed")
 	assert(cs.current_str == 11, "STR must now be 11")
 	assert(cs.current_free == 4, "Free points must now be 4")
-	assert(cs.base_atk == 22, "Base ATK must be 11 * 2 = 22")
+	# Formula.dat ATK (FormulaData): STR 11 * 2.0 + LV10 * 1.4 + LV10 * Fire bonus 0.6 = 42
+	assert(cs.base_atk == 42, "Base ATK must be 42 (Formula.dat, STR 11, LV10, Fire)")
 	
 	# Allocate remaining 4 points
 	hud.allocate_stat_point("con")
