@@ -81,3 +81,8 @@ Check: 832x640 / 400x300 = 2.08 and 2.13, almost the same scale, so fields 3-4 a
 - Small index-like values (0, 1, 4, 256, 1024, 1025) appear in the same fields.
 - File names are numeric event ids (e.g. 11016, 12030, 12031, 12032); 11069152 and 12855855 look like packed ids (map, event, sub).
 - Hypothesis: these are per-event tint / light (or effect colour) layers for the matching event, not actors. Not verified: the next check is to find the event with the same numeric id and compare its visual effect.
+
+## Numeric file names: which id space?
+- 696 sty files have a 4-5 digit numeric stem. 231 of them are real map ids (in `assets/data/all_maps.json`, e.g. 11016, 11020, 12855).
+- 465 are not map ids (e.g. 11001, 11025, 12010, 12011, 12016-12022, 12030-12032). They belong to another id space (event, NPC or sub-map); not decoded.
+- So the numeric family is not one thing: the map-id files are map layers, the rest are another kind of record.
