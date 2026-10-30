@@ -281,9 +281,9 @@
 - [x] Item editor slot names now match the client (Head, Body, Weapon, Hands, Shoes, Special Eq).
 - [x] "UI missing elements": the real client has 165 windows (`Form_*` in aLogin.exe), 15 exist in Godot. Prioritised list in `docs/ui_coverage.md`.
 - [ ] P1 windows (`docs/ui_coverage.md`). Already present: pet status, trade, warehouse, repair, world map, GPS, potential, titles, mail, channel, emotes, drop/pick up, inn, rewards, battle skill picker.
-  - [ ] P1-a Form_Huminfo (other player's info)
+  - [ ] P1-a Form_Huminfo (other player's info): BLOKLU. Orijinal belge ve düzen yakalaması yok; oyunda başka bir oyuncuya sağ tıklayıp pencereyi yakalamak gerekiyor (kullanıcı).
   - [ ] P1-b Form_Shopping / Form_Buy / Form_ShoppingCar (other store types; `shop_window.gd` exists, check coverage first)
-  - [ ] P1-c Form_Medical (doctor / heal)
+  - [x] P1-c Form_Medical (doktor): Eve opcode 7 (d1 6/7) onay sorar, evet denince oyuncu HP/SP tam dolar (`tests/test_clinic_rest.gd` 5/5). Açık noktalar: pet iyileştirmesi yok, onay metni orijinal değil.
   - [ ] P1-d Form_SkillTree / Form_SkillTree1 (skill tree; `skill_window.tscn` exists, check coverage first)
 - [x] Cursors: verify the inferred roles (cursor1 normal, cursor3 attack, cursor4 talk, cursor8 harvest, cursor17 examine, cursor6 portal, cursor12 mining, cursor18 shop, cursor15 skill, cursor16 quest, cursor10 busy, cursor11 target; verified all 12 types, animation and hotspots in `tests/test_cursor_manager.gd`).
 - [x] Top-right action bar added after comparing with the running real client.

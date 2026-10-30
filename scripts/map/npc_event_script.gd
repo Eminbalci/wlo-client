@@ -232,6 +232,9 @@ static func _process_ops(ops: Array, talk_lookup: Callable, pages: Array, action
 				actions.append({"exp": _action_value(op)})
 			elif d1 == 3:
 				actions.append({"transition": d2})
+		elif opcode == 7 and (d1 == 6 or d1 == 7):
+			# Witch Doctor / Clinic: offer the full rest (HP and SP) (C# EveEventInterpreter case 6/7)
+			actions.append({"rest": d1})
 		elif opcode == 5:
 			actions.append({"quest_id": d1, "kind": d2, "value": _action_value(op)})
 

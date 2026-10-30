@@ -2701,6 +2701,9 @@ func _apply_script_actions(actions: Array) -> void:
 	for action in actions:
 		if not (action is Dictionary):
 			continue
+		if action.has("rest"):
+			_begin_npc_rest("Doctor")
+			continue
 		if action.has("transition"):
 			if int(action["transition"]) == 1:
 				start_shipwreck_transition()
@@ -3314,3 +3317,33 @@ func _robinson_pull_out(shore_point: Vector2) -> void:
 func _on_rescue_wakeup_done() -> void:
 	if is_instance_valid(player) and "is_movement_locked" in player:
 		player.is_movement_locked = false
+
+
+## Witch Doctor / Clinic: offer a full rest (HP and SP), as the server's BeginNpcRest does (player only; pets have no HP model here).
+func _begin_npc_rest(npc_name: String) -> void:
+	if not hud or not hud.character_status_ctrl:
+		return
+	var ccs = hud.character_status_ctrl
+	var needs_rest: bool = ccs.current_hp < ccs.current_max_hp or ccs.current_sp < ccs.current_max_sp
+	if not needs_rest:
+		hud.add_chat_message("System", "You are already in good health.", "System")
+		return
+	var pages: Array[Dictionary] = [
+		{"who": "npc", "talk_id": 0, "text": "Would you like to rest here to recover your HP and SP?"}
+	]
+	hud.dialogue_ctrl.show_script(pages, npc_name, 0, Callable(), ["Yes.", "No."], Callable(self, "_on_rest_choice"))
+
+
+func _on_rest_choice(choice_idx: int, _text: String) -> void:
+	if choice_idx != 0:
+		return
+	var ccs = hud.character_status_ctrl if hud else null
+	if not ccs:
+		return
+	var hp_diff: int = ccs.current_max_hp - ccs.current_hp
+	if hp_diff > 0:
+		ccs.restore_hp(hp_diff)
+	var sp_diff: int = ccs.current_max_sp - ccs.current_sp
+	if sp_diff > 0:
+		ccs.restore_sp(sp_diff)
+	hud.add_chat_message("System", "You feel fully restored.", "System")
