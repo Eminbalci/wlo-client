@@ -75,3 +75,9 @@ Next: decode the 33-byte character style records (51 files). Compare them with `
 | 6-8 | some records carry ASCII (e.g. 1246777930 = "JRP"); a fixed 4-byte text tail | text, not a value |
 
 Check: 832x640 / 400x300 = 2.08 and 2.13, almost the same scale, so fields 3-4 are probably the illustration's display size.
+
+## Numeric-named 45-byte files (e.g. 11016.sty, 12030.sty): profile over 16 files, 1874 records
+- Many values are packed colour words: 0xFF000000 (4278190080), 0x00FF0000 (16711680), 0x0000FF00 (65280), 0xFF (255), 0x10000 (65536). These look like colour / light tints per record.
+- Small index-like values (0, 1, 4, 256, 1024, 1025) appear in the same fields.
+- File names are numeric event ids (e.g. 11016, 12030, 12031, 12032); 11069152 and 12855855 look like packed ids (map, event, sub).
+- Hypothesis: these are per-event tint / light (or effect colour) layers for the matching event, not actors. Not verified: the next check is to find the event with the same numeric id and compare its visual effect.
