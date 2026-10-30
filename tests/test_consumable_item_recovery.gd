@@ -74,13 +74,13 @@ func test_item_database_consumable_records() -> void:
 	# Formatted stats in tooltip
 	var b_stats = bread.get_formatted_stats()
 	assert_eq(b_stats.size(), 1, "Bread has 1 formatted stat")
-	assert_eq(b_stats[0]["name"], "HP", "Stat name is 'HP'")
-	assert_eq(b_stats[0]["text"], "HP +50", "Stat text is 'HP +50'")
+	assert_eq(b_stats[0]["name"], "Hp", "Stat name is 'Hp' (client string at 0x2a4a20)")
+	assert_eq(b_stats[0]["text"], "Hp: +50", "Stat text is 'Hp: +50'")
 
 	var w_stats = wine.get_formatted_stats()
 	assert_eq(w_stats.size(), 1, "Rice Wine has 1 formatted stat")
-	assert_eq(w_stats[0]["name"], "SP", "Stat name is 'SP'")
-	assert_eq(w_stats[0]["text"], "SP +150", "Stat text is 'SP +150'")
+	assert_eq(w_stats[0]["name"], "Sp", "Stat name is 'Sp' (client string at 0x2a4a2c)")
+	assert_eq(w_stats[0]["text"], "Sp: +150", "Stat text is 'Sp: +150'")
 
 func test_character_status_restoration() -> void:
 	print("\n--- 2. Testing HUDCharacterStatus restore_hp & restore_sp ---")
@@ -176,12 +176,12 @@ func test_item_tooltip_consumable_stats() -> void:
 	}
 
 	tip.display_item(item_sample)
-	assert_eq(tip._title_label.text, "Multi Bread", "Tooltip title displays 'Multi Bread'")
+	assert_eq(tip._title_label.text, "[ Multi Bread ]", "Tooltip title uses the client format '[ Name ]' (aLogin 0x2a265b)")
 	assert_eq(tip._stats_container.get_child_count(), 2, "Tooltip displays 2 recovery stats")
 
 	var stat1: Label = tip._stats_container.get_child(0) as Label
 	var stat2: Label = tip._stats_container.get_child(1) as Label
-	assert_eq(stat1.text, "HP +140", "First stat is 'HP +140'")
-	assert_eq(stat2.text, "SP +60", "Second stat is 'SP +60'")
+	assert_eq(stat1.text, "Hp: +140 ", "First stat uses client format 'Hp: +140 '")
+	assert_eq(stat2.text, "Sp: +60 ", "Second stat uses client format 'Sp: +60 '")
 
 	tip.queue_free()

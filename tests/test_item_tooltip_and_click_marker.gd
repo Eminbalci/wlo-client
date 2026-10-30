@@ -63,10 +63,10 @@ func _test_item_tooltip() -> void:
 	
 	tooltip.display_item(sample_item)
 	assert(tooltip.visible, "Tooltip must become visible")
-	assert(tooltip._title_label.text == "Iron Sword", "Title must match 'Iron Sword'")
-	assert(tooltip._type_label.text.contains("Weapon"), "Type must indicate Weapon")
-	assert(tooltip._type_label.text.contains("Req. Lv: 10"), "Type must indicate Req. Lv: 10")
-	assert(tooltip._durability_label.text == "Durability: 50 / 50", "Durability must be displayed")
+	assert(tooltip._title_label.text == "[ Iron Sword ]", "Title must use the client format '[ Iron Sword ]'")
+	var tip_lines: PackedStringArray = tooltip.get_lines_text()
+	assert(tip_lines.has("LV Req: 10"), "Tooltip must show 'LV Req: 10' (aLogin 0x2a30fd)")
+	assert(tip_lines.has("State: Good"), "Equipment tooltip must show the durability state line")
 	assert(tooltip._desc_label.text == "A sturdy forged iron broadsword.", "Description must match")
 	assert(tooltip._stats_container.get_child_count() == 2, "Must show 2 stat labels")
 	print("  PASS: Item Tooltip stats, durability, type, and description formatted authentically")
@@ -99,7 +99,7 @@ func _test_hud_tooltip_integration() -> void:
 	
 	hud.show_inventory_item_tooltip(0, Vector2(500, 300), Vector2(34, 34))
 	assert(hud._item_tooltip.visible, "Tooltip must show when hovering populated slot")
-	assert(hud._item_tooltip._title_label.text == "Bread", "Tooltip title must be 'Bread'")
+	assert(hud._item_tooltip._title_label.text == "[ Bread ]", "Tooltip title must be '[ Bread ]'")
 	
 	hud.hide_item_tooltip()
 	assert(not hud._item_tooltip.visible, "Tooltip must hide on mouse exit")

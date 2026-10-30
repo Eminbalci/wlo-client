@@ -289,21 +289,31 @@ func add_inventory_item(item_id: int, count: int = 1, item_name: String = "", ic
 				if desc.is_empty():
 					desc = rec.description
 
-	# Check if existing item can be stacked
+	# Stack onto existing stacks first. aLogin 0x3f1c9a clamps a stack at 50 (STACK_LIMIT) and
+	# 0x3f2d1b only offers a slot whose count is below 50; the rest goes to a new slot.
+	var remaining: int = count
 	for i in range(inventory_data.size()):
 		var itm: Dictionary = inventory_data[i]
 		if not itm.is_empty() and int(itm.get("id", 0)) == item_id:
 			var cur_count: int = int(itm.get("count", 1))
-			itm["count"] = cur_count + count
+			if cur_count >= ItemDatabase.STACK_LIMIT:
+				continue
+			var add_n: int = mini(remaining, ItemDatabase.STACK_LIMIT - cur_count)
+			itm["count"] = cur_count + add_n
+			remaining -= add_n
 			_refresh_inventory_slot(i)
-			return true
+			if remaining <= 0:
+				return true
 
-	# Find first empty slot
+	# Put the remainder into empty slots, at most STACK_LIMIT per slot
 	for i in range(inventory_data.size()):
 		if inventory_data[i].is_empty() or int(inventory_data[i].get("id", 0)) <= 0:
-			var rec := create_item_record(item_id, final_icon, count, item_name, desc, "")
+			var put_n: int = mini(remaining, ItemDatabase.STACK_LIMIT)
+			var rec := create_item_record(item_id, final_icon, put_n, item_name, desc, "")
 			set_inventory_data_item(i, rec)
-			return true
+			remaining -= put_n
+			if remaining <= 0:
+				return true
 
 	_log_system_message("Inventory is full!")
 	return false
@@ -710,7 +720,7 @@ func _is_item_compatible_with_socket(item: Dictionary, socket_name: String) -> b
 		3: return sname == "weapon"
 		4: return sname == "wrist"
 		5: return sname == "shoes"
-		6, 7: return sname == "special"
+		6: return sname == "special" # equip_pos 7 (maps, tokens, vehicles) is not equipment (aLogin 0x3e92a4)
 	return false
 
 func _get_vehicle_type(item_id: int) -> int:

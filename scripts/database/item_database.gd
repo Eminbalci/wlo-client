@@ -24,6 +24,15 @@ class ItemRecord:
 	var sell_price: int = 0
 	var status_types: Array[int] = []
 	var status_values: Array[int] = []
+	# Fields decoded from Item.dat exactly as aLogin.exe 0x3e7e40 decodes them (see docs/re/item_window_and_tooltip.md).
+	var has_dat_record: bool = false # true once the Item.dat record was decoded
+	var kind: int = 0 # rec+0x2F byte: sub-kind used by special cases (0x71/0x72/0x77/0x97...)
+	var flags: int = 0 # rec+0x7B word: bit 0x02 = non-tradeable, bit 0x08 = "Can't craft"
+	var set_id: int = 0 # rec+0x81 byte: equipment set id (5 equipped pieces with the same id = set bonus)
+	var grid_w: int = 1 # rec+0x196 byte: bag footprint width in cells
+	var grid_h: int = 1 # rec+0x197 byte: bag footprint height in cells
+	var time_limit_hours: int = 0 # rec+0x1A5 word: time-limited item lifetime in hours
+	var max_uses: int = 0 # rec+0x1A7 word: max uses (shown as "Uses: ")
 
 	func get_material_name() -> String:
 		if not materials.is_empty():
@@ -40,6 +49,9 @@ class ItemRecord:
 		return materials
 
 	func get_rank() -> int:
+		# The real client prints rec+0x2D verbatim ("Rank: " at 0x2a2fd0); trust it whenever Item.dat was read.
+		if has_dat_record:
+			return rank
 		if rank > 0:
 			return rank
 		if ItemDatabase.KNOWN_MATERIAL_RANKS.has(id):
@@ -48,15 +60,28 @@ class ItemRecord:
 			return maxi(1, int(level / 2))
 		return maxi(1, level)
 
+	func is_equipment() -> bool:
+		# aLogin 0x3e92a4: equip_pos 1..6 is wearable equipment.
+		return equip_pos >= 1 and equip_pos <= 6
+
+	func is_non_tradeable() -> bool:
+		# aLogin 0x2a6cec: flags word & 2 => "<Non-tradeable>".
+		return (flags & 2) != 0
+
+	func get_type_name() -> String:
+		return ItemDatabase.get_item_type_name(item_type)
+
 	func get_equip_slot_name() -> String:
+		# Slot names follow the real "Type: " strings of the item kinds that use each equip_pos
+		# (Item.dat: pos1 = type 13 Head, 2 = 12 Body, 3 = types 1..11 weapons, 4 = 14 Hands,
+		# 5 = 15 Shoes, 6 = 16 Special Eq). 7..10 are not equipment (0x3e92a4).
 		match equip_pos:
-			1: return "Headgear"
-			2: return "Clothes"
+			1: return "Head"
+			2: return "Body"
 			3: return "Weapon"
-			4: return "Wrist / Shield"
+			4: return "Hands"
 			5: return "Shoes"
-			6: return "Accessory"
-			7, 8: return "Consumable"
+			6: return "Special Eq"
 			_: return "Item"
 
 	func get_hp_restore() -> int:
@@ -81,37 +106,141 @@ class ItemRecord:
 		return total
 
 	func get_formatted_stats() -> Array[Dictionary]:
+		# Mirrors the stat lines of the real tooltip (aLogin 0x2a28a3..0x2a2c92): "<Name>: +N" where
+		# N = value - 100; values 0 and 100 print nothing; code 250 is never printed.
 		var stats: Array[Dictionary] = []
-		var is_consumable: bool = (equip_pos in [7, 8] or item_type in [20, 23])
 		for i in range(mini(status_types.size(), status_values.size())):
 			var st: int = status_types[i]
 			var raw_val: int = status_values[i]
-			if st == 0 or raw_val == 0:
+			if st == 0 or st == 250 or raw_val == 0 or raw_val == 100:
 				continue
 			var delta: int = raw_val - 100
-			var stat_name: String = ""
-			match st:
-				210, 211, 41, 28: stat_name = "ATK"
-				212, 42, 29: stat_name = "DEF"
-				215, 43, 27: stat_name = "MATK"
-				216, 44, 33: stat_name = "MDEF"
-				214, 45, 30: stat_name = "SPD"
-				207, 205: stat_name = "MaxHP"
-				208, 206: stat_name = "MaxSP"
-				25: stat_name = "HP" if is_consumable else "MaxHP"
-				26: stat_name = "SP" if is_consumable else "MaxSP"
-				64: stat_name = "Amity"
-				36: stat_name = "EXP"
-				_: stat_name = "Stat_%d" % st
 			stats.append({
-				"name": stat_name,
+				"name": ItemDatabase.get_status_name(st),
+				"code": st,
 				"delta": delta,
-				"text": "%s %s%d" % [stat_name, "+" if delta >= 0 else "", delta],
+				"text": ItemDatabase.format_status_line(st, delta),
 				"is_positive": delta >= 0
 			})
 		return stats
 
 var _items: Dictionary = {} # int -> ItemRecord
+
+## Hard-coded inventory facts recovered from aLogin.exe (docs/re/item_window_and_tooltip.md).
+const STACK_LIMIT: int = 50 # 0x3f1c9a: stack count byte is clamped to 0x32
+const BAG_SLOTS: int = 50 # bag loops run 1..0x32; grid ctor 0x10fa8c is called with 0x32
+const BAG_COLUMNS: int = 5 # grid ctor: width byte = 5
+const BAG_ROWS: int = 10 # grid ctor: max row index = 9 (rows 0..9)
+const EQUIP_SLOT_COUNT: int = 6 # character equip array [char+0x64 + pos*4], pos 1..6
+
+## Status code -> label, from the switch at aLogin 0x2a28c0 (strings at 0x2a4a20..0x2a4abc).
+const STATUS_NAMES: Dictionary = {
+	25: "Hp", 26: "Sp", 36: "EXP", 64: "Amity", 100: "Shoot RES",
+	207: "MaxHp", 208: "MaxSp", 210: "ATK", 211: "DEF", 214: "SPD", 215: "MATK", 216: "MDEF",
+}
+
+## Item.dat type byte (rec+0x0F) -> "Type: " text, from aLogin 0x49f674 (jump table 0x49f695).
+## Codes 0, 17..20, 22..24 and > 25 all fall to "Prop".
+const ITEM_TYPE_NAMES: Dictionary = {
+	1: "Saber", 2: "Sword", 3: "Halberd", 4: "Bow", 5: "Wand", 6: "Claw", 7: "Knuckle",
+	8: "Axe", 9: "Club", 10: "Exotic", 11: "Hammer", 12: "Body", 13: "Head", 14: "Hands",
+	15: "Shoes", 16: "Special Eq", 21: "Quest Item", 25: "Spec Prop",
+}
+
+## Tooltip colours (RGB565 in the client): every line 0xFFE0, the durability word 0xFFE0 or 0xF800.
+const TOOLTIP_TEXT_COLOR := Color(1.0, 1.0, 0.0, 1.0)
+const TOOLTIP_WARN_COLOR := Color(1.0, 0.0, 0.0, 1.0)
+
+static func get_status_name(code: int) -> String:
+	return STATUS_NAMES.get(code, "")
+
+static func get_item_type_name(type_code: int) -> String:
+	return ITEM_TYPE_NAMES.get(type_code, "Prop")
+
+static func format_status_line(code: int, delta: int) -> String:
+	var label := get_status_name(code)
+	var head := (label + ": ") if not label.is_empty() else ""
+	return head + ("+%d" % delta if delta >= 0 else "%d" % delta)
+
+## Durability word for the tooltip "State:" line, from aLogin 0x2a44dc (wear byte 0..250).
+## Returns [text, is_warning]. Some item ids print "Usable" instead of "Good" for wear 1..149
+## (id lists behind 0x3f1e74/0x3f1e78, not decoded); those are reported as "Good" here.
+static func durability_state(wear: int) -> Array:
+	if wear >= 250:
+		return ["Broken", true]
+	if wear >= 200:
+		return ["Wearing", true]
+	if wear >= 150:
+		return ["Used", false]
+	return ["Good", false]
+
+## Builds the tooltip lines in the order of aLogin 0x2a2058. `inst` carries per-instance data:
+## forge (int), wear (0..250), used (int), socket_name, model_name, content_name,
+## time_left_hours, non_tradeable (bool), compound (bool: hover inside the compound window).
+static func build_tooltip_lines(rec: ItemRecord, inst: Dictionary = {}) -> Array[Dictionary]:
+	var lines: Array[Dictionary] = []
+	if rec == null:
+		return lines
+	var color := TOOLTIP_TEXT_COLOR
+	var forge: int = int(inst.get("forge", 0))
+	var suffix := ""
+	if forge > 0 and rec.equip_pos >= 1 and rec.equip_pos <= 5:
+		suffix = "+%d" % forge
+	lines.append({"text": "[ %s%s ]" % [rec.name, suffix], "color": color})
+	if rec.is_non_tradeable() or bool(inst.get("non_tradeable", false)):
+		lines.append({"text": "<Non-tradeable>", "color": color})
+	# 0x3ec1f8: kind 0x97 potions restoring Hp/Sp show "left/total" instead of stat lines.
+	var potion_mode: int = 0
+	if rec.kind == 0x97 and not rec.status_types.is_empty():
+		if rec.status_types[0] == 25:
+			potion_mode = 1
+		elif rec.status_types[0] == 26:
+			potion_mode = 2
+	if potion_mode == 0:
+		for st in rec.get_formatted_stats():
+			lines.append({"text": str(st["text"]) + " ", "color": color, "stat": true})
+	lines.append({"text": "Type: " + rec.get_type_name(), "color": color})
+	lines.append({"text": "Rank: %d" % rec.get_rank(), "color": color})
+	if rec.level > 0:
+		if rec.kind == 0x72:
+			lines.append({"text": "LV Req: %dBelow " % mini(rec.level, 199), "color": color})
+		else:
+			lines.append({"text": "LV Req: %d" % rec.level, "color": color})
+	if potion_mode != 0:
+		var total: int = rec.status_values[0] - 100
+		var used: int = int(inst.get("used", 0))
+		lines.append({"text": "%d/%d" % [total - used, total], "color": color})
+	if rec.time_limit_hours > 0 and ((rec.equip_pos >= 1 and rec.equip_pos <= 7) or rec.equip_pos == 9):
+		var hours: int = int(inst.get("time_left_hours", rec.time_limit_hours))
+		var days: int = int(hours / 24)
+		var rem: int = hours % 24
+		var t := ""
+		if days > 0:
+			t += "%dday" % days
+		if rem > 0:
+			t += "%d hr " % rem
+		if days <= 0 and rem <= 0:
+			t = "1 hour "
+		lines.append({"text": "Time: " + t, "color": color})
+	if rec.max_uses > 0:
+		var wear_u: int = int(inst.get("wear", 0))
+		lines.append({"text": "Uses: %d " % int(float(250 - wear_u) * float(rec.max_uses) / 250.0), "color": color})
+	var content := str(inst.get("content_name", ""))
+	if not content.is_empty():
+		lines.append({"text": "Content:" + content, "color": color})
+	if rec.is_equipment() and rec.max_uses <= 0:
+		var state := durability_state(int(inst.get("wear", 0)))
+		lines.append({"text": "State: " + str(state[0]), "color": color, "state_word": state[0],
+			"state_color": TOOLTIP_WARN_COLOR if state[1] else TOOLTIP_TEXT_COLOR})
+	var socket := str(inst.get("socket_name", ""))
+	if not socket.is_empty() and rec.is_equipment():
+		lines.append({"text": "Socket: " + socket, "color": color})
+	var model := str(inst.get("model_name", ""))
+	if not model.is_empty():
+		lines.append({"text": "Model: " + model, "color": color})
+	if not bool(inst.get("compound", false)) and not rec.description.is_empty():
+		lines.append({"text": rec.description, "color": color})
+	return lines
 
 const KNOWN_MATERIAL_RANKS: Dictionary = {
 	# Wood materials (45001..45020)
@@ -865,6 +994,7 @@ func load_from_file(file_path: String) -> bool:
 		
 		if not desc_str.is_empty():
 			item.description = desc_str
+		_apply_dat_fields(item, rec)
 		if not auth_mats.is_empty():
 			item.authentic_materials = auth_mats
 	
@@ -875,6 +1005,27 @@ func load_from_file(file_path: String) -> bool:
 		it.rank = it.get_rank()
 	
 	return not _items.is_empty()
+
+## Copies the Item.dat fields the real client reads (offsets are record-relative; aLogin adds 4).
+static func _apply_dat_fields(item: ItemRecord, rec: PackedByteArray) -> void:
+	item.has_dat_record = true
+	item.item_type = decode_byte(rec[0x0f])
+	item.equip_pos = decode_byte(rec[0x2e])
+	item.rank = decode_byte(rec[0x2d])
+	item.kind = decode_byte(rec[0x2f])
+	item.level = decode_byte(rec[0x71])
+	item.buy_price = decode_dword(rec.decode_u32(0x72))
+	item.sell_price = decode_dword(rec.decode_u32(0x76))
+	item.flags = decode_word(rec.decode_u16(0x7b))
+	item.set_id = decode_byte(rec[0x81])
+	item.grid_w = maxi(1, decode_byte(rec[0x196]))
+	item.grid_h = maxi(1, decode_byte(rec[0x197]))
+	item.time_limit_hours = decode_word(rec.decode_u16(0x1a5))
+	item.max_uses = decode_word(rec.decode_u16(0x1a7))
+	var types: Array[int] = [decode_word(rec.decode_u16(0x1e)), decode_word(rec.decode_u16(0x20))]
+	var values: Array[int] = [decode_dword(rec.decode_u32(0x24)), decode_dword(rec.decode_u32(0x28))]
+	item.status_types = types
+	item.status_values = values
 
 func get_item(item_id: int) -> ItemRecord:
 	var item: ItemRecord = _items.get(item_id)

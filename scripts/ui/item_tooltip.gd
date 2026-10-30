@@ -3,278 +3,196 @@ extends PanelContainer
 
 const ItemDatabase = preload("res://scripts/database/item_database.gd")
 
-## Authentic Wonderland Online Inventory Item Hover Tooltip.
-## Displays item name, level requirement, equipment type, stats (ATK, DEF, MATK, MDEF, SPD, HP, SP),
-## durability, and authentic description with classic light blue parchment styling.
+## Item hover tooltip rebuilt from aLogin.exe 0x2a2058 (see docs/re/item_window_and_tooltip.md).
+## The real client fills a TStringList with one line per entry, in this order:
+##   "[ Name+forge ]", "<Non-tradeable>", stat lines ("DEF: +1 "), "Type: ...", "Rank: N",
+##   "LV Req: N", potion "left/total", "Time: ...", "Uses: N ", "Content:...", "State: Good",
+##   "Socket: ...", "Model: ...", description.
+## Every line is drawn in RGB565 0xFFE0 (yellow); only the durability word can be 0xF800 (red).
+## Window is 0xC4 = 196 px wide, 20 px per line, text inset 10 px.
+
+const TOOLTIP_WIDTH: int = 196
+const LINE_HEIGHT: int = 20
+const TEXT_INSET: int = 10
 
 var _title_label: Label = null
-var _type_label: Label = null
-var _stats_container: VBoxContainer = null
-var _durability_label: Label = null
-var _separator: HSeparator = null
+var _lines_box: VBoxContainer = null
+var _stats_container: VBoxContainer = null # holds the stat lines ("DEF: +1 ")
 var _desc_label: Label = null
+var _lines: Array[Dictionary] = []
 
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	z_index = 100 # Render above all floating windows and docks
+	z_index = 100
 	visible = false
 	_build_ui()
 
 func _build_ui() -> void:
-	# Authentic WLO Tooltip Style: Soft Ice-Blue Parchment with Deep Slate Border
+	# Background/border colours are NOT recovered from the binary (open question); a dark translucent
+	# panel is used so the authentic yellow text stays readable.
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.87, 0.92, 1.0, 0.96)
-	style.border_color = Color(0.12, 0.24, 0.42, 1.0)
-	style.border_width_left = 1
-	style.border_width_top = 1
-	style.border_width_right = 1
-	style.border_width_bottom = 1
-	style.corner_radius_top_left = 3
-	style.corner_radius_top_right = 3
-	style.corner_radius_bottom_right = 3
-	style.corner_radius_bottom_left = 3
-	style.content_margin_left = 8
-	style.content_margin_top = 6
-	style.content_margin_right = 8
-	style.content_margin_bottom = 6
-	style.shadow_color = Color(0.0, 0.0, 0.0, 0.35)
-	style.shadow_size = 4
-	style.shadow_offset = Vector2(2, 2)
+	style.bg_color = Color(0.05, 0.08, 0.2, 0.85)
+	style.border_color = Color(0.45, 0.55, 0.8, 1.0)
+	style.set_border_width_all(1)
+	style.content_margin_left = TEXT_INSET
+	style.content_margin_right = TEXT_INSET
+	style.content_margin_top = TEXT_INSET
+	style.content_margin_bottom = TEXT_INSET
 	add_theme_stylebox_override("panel", style)
-	
-	var vbox := VBoxContainer.new()
-	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox.add_theme_constant_override("separation", 3)
-	add_child(vbox)
-	
-	# 1. Item Name Header
-	_title_label = Label.new()
-	_title_label.name = "TitleLabel"
-	_title_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_title_label.add_theme_color_override("font_color", Color(0.05, 0.15, 0.32, 1.0))
-	_title_label.add_theme_font_size_override("font_size", 13)
-	vbox.add_child(_title_label)
-	
-	# 2. Type & Level Requirement
-	_type_label = Label.new()
-	_type_label.name = "TypeLabel"
-	_type_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_type_label.add_theme_color_override("font_color", Color(0.32, 0.42, 0.58, 1.0))
-	_type_label.add_theme_font_size_override("font_size", 11)
-	vbox.add_child(_type_label)
-	
-	# 3. Stats List Container
+	custom_minimum_size = Vector2(TOOLTIP_WIDTH, 0)
+
+	_lines_box = VBoxContainer.new()
+	_lines_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_lines_box.add_theme_constant_override("separation", 0)
+	add_child(_lines_box)
+
+	_title_label = _make_line_label("TitleLabel")
+	_lines_box.add_child(_title_label)
 	_stats_container = VBoxContainer.new()
 	_stats_container.name = "StatsContainer"
 	_stats_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_stats_container.add_theme_constant_override("separation", 1)
-	vbox.add_child(_stats_container)
-	
-	# 4. Durability Label
-	_durability_label = Label.new()
-	_durability_label.name = "DurabilityLabel"
-	_durability_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_durability_label.add_theme_color_override("font_color", Color(0.25, 0.35, 0.45, 1.0))
-	_durability_label.add_theme_font_size_override("font_size", 11)
-	vbox.add_child(_durability_label)
-	
-	# 5. Separator
-	_separator = HSeparator.new()
-	_separator.name = "Separator"
-	_separator.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var sep_style := StyleBoxLine.new()
-	sep_style.color = Color(0.65, 0.75, 0.88, 0.8)
-	sep_style.thickness = 1
-	_separator.add_theme_stylebox_override("separator", sep_style)
-	vbox.add_child(_separator)
-	
-	# 6. Description Text
-	_desc_label = Label.new()
-	_desc_label.name = "DescLabel"
-	_desc_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_stats_container.add_theme_constant_override("separation", 0)
+	_lines_box.add_child(_stats_container)
+	_desc_label = _make_line_label("DescLabel")
 	_desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_desc_label.custom_minimum_size = Vector2(180, 0)
-	_desc_label.add_theme_color_override("font_color", Color(0.18, 0.22, 0.28, 1.0))
-	_desc_label.add_theme_font_size_override("font_size", 11)
-	vbox.add_child(_desc_label)
+	_desc_label.custom_minimum_size = Vector2(TOOLTIP_WIDTH - 2 * TEXT_INSET, LINE_HEIGHT)
+	_lines_box.add_child(_desc_label)
 
-## Configures the tooltip content using item record dictionary or database record
+func _make_line_label(lbl_name: String) -> Label:
+	var lbl := Label.new()
+	lbl.name = lbl_name
+	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lbl.custom_minimum_size = Vector2(0, LINE_HEIGHT)
+	lbl.add_theme_font_size_override("font_size", 12)
+	lbl.add_theme_color_override("font_color", ItemDatabase.TOOLTIP_TEXT_COLOR)
+	lbl.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+	lbl.add_theme_constant_override("shadow_offset_x", 1)
+	lbl.add_theme_constant_override("shadow_offset_y", 1)
+	return lbl
+
+## Returns the plain text of the lines currently shown (handy for tests / logs).
+func get_lines_text() -> PackedStringArray:
+	var out := PackedStringArray()
+	for l in _lines:
+		out.append(str(l["text"]))
+	return out
+
+## Resolves an ItemRecord for the given dictionary: the GameDatabase record when available,
+## otherwise a transient record built from the dictionary fields.
+func _resolve_record(item_data: Dictionary) -> ItemDatabase.ItemRecord:
+	var item_id: int = int(item_data.get("id", 0))
+	var main_loop = Engine.get_main_loop()
+	if main_loop is SceneTree and main_loop.root:
+		var game_db: Node = main_loop.root.get_node_or_null("/root/GameDatabase")
+		if game_db and "items" in game_db and game_db.items:
+			var rec = game_db.items.get_item(item_id)
+			if rec:
+				return rec
+	var r := ItemDatabase.ItemRecord.new()
+	r.id = item_id
+	r.name = str(item_data.get("name", "Unknown Item"))
+	r.description = str(item_data.get("description", item_data.get("desc", "")))
+	r.level = int(item_data.get("level", 0))
+	r.equip_pos = int(item_data.get("equip_pos", 0))
+	r.item_type = int(item_data.get("item_type", 0))
+	r.rank = int(item_data.get("rank", 0))
+	r.has_dat_record = item_data.has("rank")
+	r.flags = int(item_data.get("flags", 0))
+	var codes := {"hp": 25, "sp": 26, "exp": 36, "amity": 64, "maxhp": 207, "maxsp": 208,
+		"atk": 210, "def": 211, "spd": 214, "matk": 215, "mdef": 216}
+	var types: Array[int] = []
+	var values: Array[int] = []
+	var attrs = item_data.get("attributes", item_data.get("stats", {}))
+	if attrs is Dictionary:
+		for k in attrs:
+			var code: int = int(codes.get(str(k).to_lower(), 0))
+			if code > 0:
+				types.append(code)
+				values.append(100 + int(attrs[k]))
+	if types.is_empty():
+		if int(item_data.get("hp_restore", 0)) > 0:
+			types.append(25)
+			values.append(100 + int(item_data["hp_restore"]))
+		if int(item_data.get("sp_restore", 0)) > 0:
+			types.append(26)
+			values.append(100 + int(item_data["sp_restore"]))
+	r.status_types = types
+	r.status_values = values
+	return r
+
+## Configures the tooltip from an inventory/equipment item dictionary.
+## Optional instance keys: forge, wear, used, socket_name, model_name, content_name, time_left_hours, compound.
 func display_item(item_data: Dictionary) -> void:
 	if item_data.is_empty() or int(item_data.get("id", 0)) <= 0:
 		visible = false
 		return
-	
-	var item_id: int = int(item_data.get("id", 0))
-	var iname: String = str(item_data.get("name", "Unknown Item"))
-	var desc: String = str(item_data.get("description", ""))
-	var lvl: int = int(item_data.get("level", 0))
-	var dur: int = int(item_data.get("durability", 50))
-	var max_dur: int = int(item_data.get("max_durability", 50))
-	var equip_pos: int = int(item_data.get("equip_pos", 0))
-	var rank_val: int = int(item_data.get("rank", 0))
-	var mat_name: String = str(item_data.get("material_name", ""))
-	if mat_name.is_empty() and item_data.has("materials") and item_data["materials"] is Array:
-		var mats_arr: Array = item_data["materials"]
-		if not mats_arr.is_empty():
-			mat_name = ", ".join(mats_arr)
-	
-	# Check GameDatabase for full metadata if missing
-	var game_db: Node = null
-	var main_loop = Engine.get_main_loop()
-	if main_loop and "root" in main_loop and main_loop.root:
-		game_db = main_loop.root.get_node_or_null("/root/GameDatabase")
-	var rec = null
-	if game_db and "items" in game_db and game_db.items:
-		rec = game_db.items.get_item(item_id)
-		if rec:
-			if iname.is_empty() or iname == "Unknown Item":
-				iname = rec.name
-			if desc.is_empty():
-				desc = rec.description
-			if lvl == 0:
-				lvl = rec.level
-			if equip_pos == 0:
-				equip_pos = rec.equip_pos
-			if rank_val == 0:
-				rank_val = rec.get_rank()
-			if mat_name.is_empty():
-				mat_name = rec.get_material_name()
-	
-	if mat_name.is_empty():
-		mat_name = ItemDatabase.resolve_material_name_from_info(iname, desc, equip_pos, item_id)
-	if rank_val == 0:
-		if equip_pos > 0 and lvl > 0:
-			rank_val = maxi(1, int(lvl / 2))
-		elif lvl > 0:
-			rank_val = lvl
-		else:
-			rank_val = 1
-	
-	_title_label.text = iname
-	
-	# Equipment Type / Level / Material / Rank
-	var type_str := ""
-	if rec and rec.has_method("get_equip_slot_name"):
-		type_str = rec.get_equip_slot_name()
-	elif equip_pos > 0:
-		match equip_pos:
-			1: type_str = "Headgear"
-			2: type_str = "Clothes"
-			3: type_str = "Weapon"
-			4: type_str = "Wrist / Shield"
-			5: type_str = "Shoes"
-			6: type_str = "Accessory"
-			_: type_str = "Equipment"
-	else:
-		type_str = "Consumable / Item"
-	
-	if lvl > 0:
-		if not mat_name.is_empty() and rank_val > 0:
-			_type_label.text = "%s (Req. Lv: %d) | %s (Rank %d)" % [type_str, lvl, mat_name, rank_val]
-		elif not mat_name.is_empty():
-			_type_label.text = "%s (Req. Lv: %d) | %s" % [type_str, lvl, mat_name]
-		elif rank_val > 0:
-			_type_label.text = "%s (Req. Lv: %d) | Rank %d" % [type_str, lvl, rank_val]
-		else:
-			_type_label.text = "%s (Req. Lv: %d)" % [type_str, lvl]
-	else:
-		if not mat_name.is_empty() and rank_val > 0:
-			_type_label.text = "%s | %s (Rank %d)" % [type_str, mat_name, rank_val]
-		elif not mat_name.is_empty():
-			_type_label.text = "%s | %s" % [type_str, mat_name]
-		elif rank_val > 0:
-			_type_label.text = "%s (Rank %d)" % [type_str, rank_val]
-		else:
-			_type_label.text = type_str
-	
-	# Clear previous stats
+	var rec := _resolve_record(item_data)
+	var name_override := str(item_data.get("name", ""))
+	if rec.name.is_empty() and not name_override.is_empty():
+		rec.name = name_override
+	_lines = ItemDatabase.build_tooltip_lines(rec, item_data)
+
+	for child in _lines_box.get_children():
+		if child != _title_label and child != _desc_label and child != _stats_container:
+			_lines_box.remove_child(child)
+			child.queue_free()
+
+	var has_desc: bool = not bool(item_data.get("compound", false)) and not rec.description.is_empty()
+	var body_end: int = _lines.size() - (1 if has_desc else 0)
+	_title_label.text = str(_lines[0]["text"]) if not _lines.is_empty() else rec.name
+	_lines_box.move_child(_title_label, 0)
 	for child in _stats_container.get_children():
+		_stats_container.remove_child(child)
 		child.queue_free()
-	
-	# Populate formatted stats
-	var stats: Array[Dictionary] = []
-	if rec and rec.has_method("get_formatted_stats"):
-		stats = rec.get_formatted_stats()
-	elif item_data.has("attributes") and item_data["attributes"] is Dictionary:
-		for k in item_data["attributes"]:
-			var v = item_data["attributes"][k]
-			var delta := int(v)
-			stats.append({
-				"name": str(k),
-				"delta": delta,
-				"text": "%s %s%d" % [str(k), "+" if delta >= 0 else "", delta],
-				"is_positive": delta >= 0
-			})
-	else:
-		if int(item_data.get("hp_restore", 0)) > 0:
-			var hp_val: int = int(item_data["hp_restore"])
-			stats.append({
-				"name": "HP",
-				"delta": hp_val,
-				"text": "HP +%d" % hp_val,
-				"is_positive": true
-			})
-		if int(item_data.get("sp_restore", 0)) > 0:
-			var sp_val: int = int(item_data["sp_restore"])
-			stats.append({
-				"name": "SP",
-				"delta": sp_val,
-				"text": "SP +%d" % sp_val,
-				"is_positive": true
-			})
-	
-	for s in stats:
-		var stat_lbl := Label.new()
-		stat_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		stat_lbl.text = s["text"]
-		stat_lbl.add_theme_font_size_override("font_size", 11)
-		if s["is_positive"]:
-			# Royal Green for positive bonuses
-			stat_lbl.add_theme_color_override("font_color", Color(0.06, 0.48, 0.16, 1.0))
+	for i in range(1, body_end):
+		var line: Dictionary = _lines[i]
+		var lbl := _make_line_label("Line%d" % i)
+		if line.has("state_word"):
+			# Client draws "State: " in yellow, then the word in the state colour.
+			var row := HBoxContainer.new()
+			row.name = "StateRow"
+			row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			lbl.text = "State: "
+			row.add_child(lbl)
+			var word := _make_line_label("StateWord")
+			word.text = str(line["state_word"])
+			word.add_theme_color_override("font_color", line["state_color"])
+			row.add_child(word)
+			_lines_box.add_child(row)
+		elif line.get("stat", false):
+			lbl.text = str(line["text"])
+			_stats_container.add_child(lbl)
 		else:
-			# Crimson for negative penalties
-			stat_lbl.add_theme_color_override("font_color", Color(0.72, 0.12, 0.12, 1.0))
-		_stats_container.add_child(stat_lbl)
-	
-	_stats_container.visible = not stats.is_empty()
-	
-	# Durability (displayed for equipment)
-	if equip_pos > 0:
-		_durability_label.text = "Durability: %d / %d" % [dur, max_dur]
-		_durability_label.visible = true
-	else:
-		_durability_label.visible = false
-	
-	# Description
-	if not desc.is_empty():
-		_desc_label.text = desc
-		_desc_label.visible = true
-		_separator.visible = true
-	else:
-		_desc_label.visible = false
-		_separator.visible = false
-	
+			lbl.text = str(line["text"])
+			lbl.add_theme_color_override("font_color", line["color"])
+			_lines_box.add_child(lbl)
+	_stats_container.visible = _stats_container.get_child_count() > 0
+	var stats_at: int = 1
+	for i in range(_lines.size()):
+		if _lines[i].get("stat", false):
+			stats_at = i
+			break
+		if i > 0 and str(_lines[i]["text"]).begins_with("Type: "):
+			stats_at = i
+			break
+	_lines_box.move_child(_stats_container, stats_at)
+	_desc_label.visible = has_desc
+	_desc_label.text = rec.description if has_desc else ""
+	_lines_box.move_child(_desc_label, _lines_box.get_child_count() - 1)
 	visible = true
 	reset_size()
 
-## Positions the tooltip cleanly adjacent to the hovered slot
+## Client placement (0x2a4825..0x2a48c9): x = slot right + 2; if the box would pass x = 800 it goes
+## to slot left - width - 2; y = slot top, pulled up so the bottom stays inside y = 600.
 func position_at(slot_global_pos: Vector2, slot_size: Vector2) -> void:
 	reset_size()
 	var vp_size := Vector2(800, 600)
 	if is_inside_tree():
 		vp_size = get_viewport_rect().size
-	var tooltip_size := size
-	
-	# Default: show to the left of inventory slot (as in authentic screenshot)
-	var target_x: float = slot_global_pos.x - tooltip_size.x - 8.0
-	if target_x < 8.0:
-		# If off-screen to left, place to right of slot
-		target_x = slot_global_pos.x + slot_size.x + 8.0
-	
+	var target_x: float = slot_global_pos.x + slot_size.x + 2.0
+	if target_x + size.x > vp_size.x:
+		target_x = slot_global_pos.x - size.x - 2.0
 	var target_y: float = slot_global_pos.y
-	if target_y + tooltip_size.y > vp_size.y - 8.0:
-		target_y = vp_size.y - tooltip_size.y - 8.0
-	if target_y < 8.0:
-		target_y = 8.0
-	
-	global_position = Vector2(target_x, target_y)
+	if target_y + size.y > vp_size.y:
+		target_y = vp_size.y - size.y
+	global_position = Vector2(maxf(0.0, target_x), maxf(0.0, target_y))

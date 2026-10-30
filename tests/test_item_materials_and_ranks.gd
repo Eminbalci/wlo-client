@@ -28,11 +28,11 @@ func _test_database_item_materials_and_ranks() -> void:
 		loaded = db.load_from_file("D:/Godot/WonderlandOnline/wonderland-online-client/assets/data/Item.dat")
 	assert(loaded, "Failed to load item database")
 
-	# 10031: Copper Knife -> Copper, Rank 1
+	# 10031: Copper Knife -> Copper, Rank 2 (Item.dat rec+0x2D, printed by aLogin 0x2a2fd0)
 	var copper_knife = db.get_item(10031)
 	assert(copper_knife != null, "Item 10031 must exist")
 	assert(copper_knife.get_material_name().contains("Copper"), "10031 material must contain Copper, got: " + copper_knife.get_material_name())
-	assert(copper_knife.get_rank() == 1, "10031 rank must be 1, got: %d" % copper_knife.get_rank())
+	assert(copper_knife.get_rank() == 2, "10031 rank must be 2, got: %d" % copper_knife.get_rank())
 	print("  PASS: Item 10031 (Copper Knife) -> Material: %s | Rank: %d" % [copper_knife.get_material_name(), copper_knife.get_rank()])
 
 	# 10032: Bronze Knife -> Bronze, Rank 3
@@ -78,7 +78,7 @@ func _test_world_editor_meta_string_formatting() -> void:
 	]
 
 	assert(meta_text.contains("Level: 2"), "Meta must contain Level: 2")
-	assert(meta_text.contains("Rank: 1"), "Meta must contain Rank: 1")
+	assert(meta_text.contains("Rank: 2"), "Meta must contain Rank: 2")
 	assert(meta_text.contains("Material: Copper"), "Meta must contain Material: Copper")
 	print("  PASS: WorldEditor meta format output:\n" + meta_text)
 
@@ -88,9 +88,9 @@ func _test_item_tooltip_material_and_rank_display() -> void:
 	root.add_child(tooltip)
 
 	var items_to_test = [
-		{"id": 10031, "name": "Copper Knife", "level": 2, "equip_pos": 3, "expected_mat": "Copper", "expected_rank": 1},
-		{"id": 10032, "name": "Bronze Knife", "level": 6, "equip_pos": 3, "expected_mat": "Bronze", "expected_rank": 3},
-		{"id": 10033, "name": "Iron Knife", "level": 8, "equip_pos": 3, "expected_mat": "Iron", "expected_rank": 4},
+		{"id": 10031, "name": "Copper Knife", "level": 2, "equip_pos": 3, "rank": 2, "expected_mat": "Copper", "expected_rank": 2},
+		{"id": 10032, "name": "Bronze Knife", "level": 6, "equip_pos": 3, "rank": 3, "expected_mat": "Bronze", "expected_rank": 3},
+		{"id": 10033, "name": "Iron Knife", "level": 8, "equip_pos": 3, "rank": 4, "expected_mat": "Iron", "expected_rank": 4},
 		{"id": 45001, "name": "Ordinary Wood", "level": 0, "equip_pos": 0, "rank": 2, "expected_mat": "Wood", "expected_rank": 2},
 		{"id": 42011, "name": "Copper Material", "level": 0, "equip_pos": 0, "rank": 4, "expected_mat": "Copper", "expected_rank": 4},
 	]
@@ -98,9 +98,9 @@ func _test_item_tooltip_material_and_rank_display() -> void:
 	for it in items_to_test:
 		tooltip.display_item(it)
 		assert(tooltip.visible, "Tooltip must be visible")
-		var type_text: String = tooltip._type_label.text
-		assert(type_text.contains(it["expected_mat"]), "Tooltip type_label '%s' must contain material '%s'" % [type_text, it["expected_mat"]])
-		assert(type_text.contains("Rank %d" % it["expected_rank"]), "Tooltip type_label '%s' must contain Rank %d" % [type_text, it["expected_rank"]])
+		# The real tooltip has no material line outside the compound window; it prints "Rank: N".
+		var type_text: String = " | ".join(tooltip.get_lines_text())
+		assert(type_text.contains("Rank: %d" % it["expected_rank"]), "Tooltip '%s' must contain Rank: %d" % [type_text, it["expected_rank"]])
 		print("  PASS: Tooltip for %s -> '%s'" % [it["name"], type_text])
 
 	tooltip.queue_free()
