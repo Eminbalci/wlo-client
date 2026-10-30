@@ -220,6 +220,8 @@ static func _process_ops(ops: Array, talk_lookup: Callable, pages: Array, action
 				actions.append({"gold": _action_value(op)})
 			elif d1 == 1 and d2 == 5 and d3 == 1:
 				actions.append({"exp": _action_value(op)})
+			elif d1 == 3:
+				actions.append({"transition": d2})
 		elif opcode == 5:
 			actions.append({"quest_id": d1, "kind": d2, "value": _action_value(op)})
 

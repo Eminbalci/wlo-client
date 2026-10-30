@@ -2701,6 +2701,10 @@ func _apply_script_actions(actions: Array) -> void:
 	for action in actions:
 		if not (action is Dictionary):
 			continue
+		if action.has("transition"):
+			if int(action["transition"]) == 1:
+				start_shipwreck_transition()
+			continue
 		if action.has("quest_id"):
 			NpcEventScript.apply_quest_actions([action], _quest_steps)
 		elif action.has("gold") and hud and hud.has_method("add_gold"):
@@ -2874,6 +2878,25 @@ func _release_movement_if_free() -> void:
 	if "is_movement_locked" in player:
 		player.is_movement_locked = false
 
+var _sinking_target_map: int = 10003
+var _sinking_shore: Vector2 = Vector2(1342, 2495)
+var _sinking_water: Vector2 = Vector2(1190, 2610)
+
+
+## Starter-ship shipwreck (Eve transition type 1 on 10014..10018): the same sinking, landing on Map 10035.
+func start_shipwreck_transition() -> void:
+	var cur_map: int = int(map_renderer.current_map_id) if map_renderer else 0
+	if cur_map < 10014 or cur_map > 10018:
+		return
+	if _sinking_triggered:
+		return
+	_sinking_target_map = 10035
+	_sinking_shore = Vector2(1038, 2235)
+	_sinking_water = Vector2(850, 2390)
+	_island_warped = false
+	trigger_ship_sinking_cutscene()
+
+
 func _on_sinking_cutscene_finished() -> void:
 	if _island_warped:
 		return
@@ -2885,8 +2908,8 @@ func _on_sinking_cutscene_finished() -> void:
 	if quest_component:
 		quest_component.advance_objective_by_type("SurviveSinking")
 	
-	# Warp player to Deserted Island (Map 10003: Newbie / Monkey Beach at Pos 1342, 2495)
-	_on_portal_triggered(null, 10003, Vector2(1342, 2495))
+	# Warp to the landing island (10003 for the captain sequence, 10035 for the starter ships)
+	_on_portal_triggered(null, _sinking_target_map, _sinking_shore)
 	
 	if camera:
 		camera.offset = Vector2.ZERO
@@ -3259,7 +3282,7 @@ func _robinson_pull_out(shore_point: Vector2) -> void:
 			break
 
 	# Nearest open-sea tile to the landing point on map 10003 (found from the map collision data).
-	var water_point: Vector2 = Vector2(1190, 2610)
+	var water_point: Vector2 = _sinking_water
 	if is_instance_valid(player):
 		player.global_position = water_point
 		if "is_movement_locked" in player:

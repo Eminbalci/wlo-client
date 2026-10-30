@@ -335,4 +335,5 @@
 - [ ] Fırtına/kurtarma orijinal CG'si: `.sty` formatı çözülmedi, görev kimlikleriyle bağlantı kurulamadı.
 - [ ] Robinson'un çekme animasyonu sprite tabanlı; orijinal kare dizisi yok.
 - [ ] Yetenek penceresinin son satırı sohbet kutusunun altında kalıyor (layout bulgusu, test uyarı olarak işaretli).
-- [ ] Kalan açık maddeler: Eve pet/companion, Eve gemi-enkazı geçişi (10014–10018 → 10035), EXP eğrisi (spec ile sunucu çelişiyor).
+- [x] Eve gemi-enkazı geçişi (10014–10018 → 10035): transition 1 batmayı başlatıyor, 10035'e iniyor (`tests/test_shipwreck_transition.gd` 4/4).
+- [ ] Kalan açık maddeler: Eve pet/companion, EXP eğrisi (spec ile sunucu çelişiyor).
