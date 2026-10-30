@@ -626,6 +626,8 @@ func set_mode(new_mode: String) -> void:
 	if new_mode != "buy" and new_mode != "sell":
 		new_mode = "buy"
 	current_mode = new_mode
+	if current_mode == "sell" and sell_grid_buttons.is_empty():
+		sell_grid_buttons = build_sell_grid(self)
 	_style_tabs()
 	selected_item = {}
 	selected_index = -1
@@ -1199,3 +1201,34 @@ static func _catalog_from_item_dat(item_ids: Array[int]) -> Array[Dictionary]:
 			"description": str(rec.description)
 		})
 	return catalog
+
+
+## Sell grid (real client: "Select props to sell", the bag as a 5 x 10 icon grid). Built lazily; hidden for now.
+var sell_grid_buttons: Array = []
+
+
+func build_sell_grid(parent: Control) -> Array:
+	var grid := GridContainer.new()
+	grid.name = "SellGrid"
+	grid.columns = 5
+	grid.visible = false
+	parent.add_child(grid)
+
+	var buttons: Array = []
+	for i in range(50):
+		var button := Button.new()
+		grid.add_child(button)
+		buttons.append(button)
+
+	return buttons
+
+
+func set_grid_cell(btn: Button, item: Dictionary) -> void:
+	if item.is_empty() or item.get("id", 0) == 0:
+		btn.text = ""
+		btn.tooltip_text = ""
+		btn.disabled = true
+	else:
+		btn.text = str(item.get("count", 0))
+		btn.tooltip_text = str(item.get("name", ""))
+		btn.disabled = false
