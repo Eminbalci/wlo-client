@@ -751,6 +751,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_M:
 				toggle_minimap()
 				_mark_input_handled()
+			KEY_W:
+				toggle_world_map()
+				_mark_input_handled()
+			KEY_L:
+				open_mailbox()
+				_mark_input_handled()
 			KEY_PAGEUP:
 				prev_hotbar_page()
 				_mark_input_handled()
@@ -1479,3 +1485,58 @@ func open_pet_status(slot: int, pet: Dictionary = {}) -> Control:
 func _on_pet_mode_selected(slot: int, mode: int, _pet: Dictionary) -> void:
 	if team_window and team_window.has_method("_on_pet_row_button"):
 		team_window._on_pet_row_button(slot - 1, PetStatusWindow.team_action_for_mode(mode))
+
+## Windows built in code (no scene argument needed): created once under FloatingWindows.
+func get_or_create_code_window(window_name: String, factory: Callable) -> Control:
+	var existing = _lazy_windows.get(window_name)
+	if existing != null and is_instance_valid(existing):
+		return existing
+	var win: Control = factory.call()
+	win.name = window_name
+	win.visible = false
+	(floating_windows if floating_windows else self).add_child(win)
+	_lazy_windows[window_name] = win
+	return win
+
+var mail_store: MailStore = null
+
+func _get_mail_store() -> MailStore:
+	if mail_store == null:
+		mail_store = MailStore.new()
+	return mail_store
+
+func toggle_world_map() -> Control:
+	var win := get_or_create_code_window("WorldMapWindow", func() -> Control: return WorldMapWindow.new())
+	win.toggle()
+	return win
+
+## GPS device opened by using a GPS item; keeps the player's current map/position for saving.
+func open_gps(item_id: int = 0) -> Control:
+	var win := get_or_create_code_window("GpsWindow", func() -> Control: return GpsWindow.new())
+	if player and is_instance_valid(player) and "world_position" in player:
+		var pos: Vector2 = player.world_position
+		win.set_current_position(_current_map_id_for_windows(), int(pos.x), int(pos.y), _current_map_name_for_windows())
+	win.open(item_id)
+	return win
+
+func _current_map_id_for_windows() -> int:
+	return int(get("current_map_id")) if get("current_map_id") != null else 0
+
+func _current_map_name_for_windows() -> String:
+	return str(get("current_map_name")) if get("current_map_name") != null else ""
+
+func open_mailbox(tab: int = 0) -> Control:
+	var send_win := get_or_create_code_window("MailSendWindow", func() -> Control: return MailSendWindow.new(_get_mail_store()))
+	var box := get_or_create_code_window("MailBoxWindow", func() -> Control: return MailBoxWindow.new(_get_mail_store()))
+	if not box.compose_requested.is_connected(send_win.open_compose):
+		box.compose_requested.connect(send_win.open_compose)
+		box.mail_opened.connect(func(_folder: String, mail: Dictionary) -> void: send_win.open_read(mail))
+		send_win.history_requested.connect(func() -> void: box.open(1))
+		send_win.send_failed.connect(func(reason: String) -> void: add_chat_message("System", reason, "System"))
+	box.open(tab)
+	return box
+
+func open_channel_filter() -> Control:
+	var win := get_or_create_code_window("ChannelWindow", func() -> Control: return ChannelWindow.new())
+	win.open()
+	return win
