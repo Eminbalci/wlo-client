@@ -1408,3 +1408,51 @@ func buy_cart(entries: Array) -> bool:
 			all_ok = false
 	return all_ok
 
+
+## Shopping cart shown in the shop window (ShoppingCartWindow on the original ShoppingCar skin).
+var cart_entries: Array[Dictionary] = []
+var _cart_parts: Dictionary = {}
+
+
+func add_to_cart(item_id: int, quantity: int) -> bool:
+	if quantity <= 0:
+		return false
+	var catalog_item: Dictionary = {}
+	for item in merchant_catalog:
+		if int(item.get("id", 0)) == item_id:
+			catalog_item = item
+			break
+	if catalog_item.is_empty():
+		return false
+	for entry in cart_entries:
+		if int(entry.get("id", 0)) == item_id:
+			entry["amount"] = int(entry.get("amount", 0)) + quantity
+			return true
+	var effect_text: String = ""
+	if catalog_item.has("effect"):
+		effect_text = str(catalog_item["effect"])
+	elif catalog_item.has("description"):
+		effect_text = str(catalog_item["description"])
+	cart_entries.append({
+		"id": item_id,
+		"name": str(catalog_item.get("name", "")),
+		"effect": effect_text,
+		"price": int(catalog_item.get("price", 0)),
+		"amount": quantity
+	})
+	return true
+
+
+## Builds the cart panel once and fills it from cart_entries. Returns the total.
+func show_cart() -> int:
+	if _cart_parts.is_empty():
+		_cart_parts = ShoppingCartWindow.build(self)
+	var total: int = ShoppingCartWindow.fill_cart(_cart_parts, cart_entries)
+	(_cart_parts["root"] as Control).visible = true
+	return total
+
+
+func hide_cart() -> void:
+	if not _cart_parts.is_empty():
+		(_cart_parts["root"] as Control).visible = false
+
