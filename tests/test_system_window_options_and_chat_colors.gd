@@ -35,10 +35,22 @@ func _init() -> void:
 	print("STARTING TEST SUITE: System Window Options & Chat Channel Colors")
 	print("=================================================================\n")
 
+	# The defaults checked below need a clean settings file; keep the player's own file and put it back afterwards.
+	const SETTINGS_PATH := "user://system_settings.json"
+	var had_settings := FileAccess.file_exists(SETTINGS_PATH)
+	var settings_backup := FileAccess.get_file_as_string(SETTINGS_PATH) if had_settings else ""
+	if had_settings:
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(SETTINGS_PATH))
+
 	test_chat_dock_dynamic_colors()
 	test_hud_system_settings_sync()
 	test_pvp_and_combat_safety_sync()
 	test_gameplay_permission_flags()
+
+	if had_settings:
+		var f := FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
+		if f:
+			f.store_string(settings_backup)
 
 	print("\n=================================================================")
 	print("RESULTS: %d PASSED, %d FAILED" % [_passed, _failed])
