@@ -657,6 +657,7 @@ func set_mode(new_mode: String) -> void:
 		if btn_action_label:
 			btn_action_label.text = "Sell"
 
+	_refresh_sell_grid()
 	_render_current_page()
 	_refresh_preview()
 	mode_changed.emit(current_mode)
@@ -672,6 +673,8 @@ func _get_current_items() -> Array[Dictionary]:
 func _render_current_page() -> void:
 	if slot_rows.size() < SLOTS_PER_PAGE:
 		_setup_ui_layout()
+	for row in slot_rows:
+		row.visible = current_mode != "sell"
 	var items := _get_current_items()
 	var total_items := items.size()
 	var max_pages := maxi(1, int(ceil(float(total_items) / float(SLOTS_PER_PAGE))))
@@ -1232,3 +1235,32 @@ func set_grid_cell(btn: Button, item: Dictionary) -> void:
 		btn.text = str(item.get("count", 0))
 		btn.tooltip_text = str(item.get("name", ""))
 		btn.disabled = false
+
+
+## Fills the sell grid from the bag (50 cells) and wires each cell to pick its item.
+func refresh_sell_grid(buttons: Array, bag: Array, on_pick: Callable) -> void:
+	for i in range(buttons.size()):
+		var btn: Button = buttons[i]
+		var item: Dictionary = bag[i] if i < bag.size() else {}
+		set_grid_cell(btn, item)
+		for conn in btn.pressed.get_connections():
+			btn.pressed.disconnect(conn.callable)
+		if on_pick.is_valid():
+			btn.pressed.connect(func() -> void: on_pick.call(i, item))
+
+
+func _refresh_sell_grid() -> void:
+	var grid := get_node_or_null("SellGrid") as GridContainer
+	if grid == null:
+		return
+	grid.visible = current_mode == "sell"
+	var bag: Array = []
+	if _hud and "inventory_ctrl" in _hud and _hud.inventory_ctrl:
+		bag = _hud.inventory_ctrl.inventory_data
+	refresh_sell_grid(sell_grid_buttons, bag, Callable(self, "_on_sell_grid_pick"))
+
+
+func _on_sell_grid_pick(index: int, item: Dictionary) -> void:
+	if item.is_empty() or int(item.get("id", 0)) == 0:
+		return
+	select_item(item, index)
