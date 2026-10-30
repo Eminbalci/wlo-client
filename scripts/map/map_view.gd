@@ -2194,6 +2194,7 @@ func _handle_container_npc_interaction(npc: Node2D) -> void:
 	var n_name: String = npc.npc_name if "npc_name" in npc else "Chest"
 	# Authentic loot and quest flags come from the chest Eve event; the table below is only a fallback.
 	if npc.has_meta("eve_events") and not (npc.get_meta("eve_events") as Array).is_empty() and _try_eve_conversation(npc, n_name):
+		_completed_keys[int(map_renderer.current_map_id) * 1000 + _last_eve_click] = true
 		return
 	var cur_map: int = map_renderer.current_map_id if (map_renderer and "current_map_id" in map_renderer) else 10001
 	var container_key: int = cur_map * 100000 + (n_id if n_id > 0 else int(npc.get_instance_id()))
@@ -2762,7 +2763,7 @@ func _eve_state() -> Dictionary:
 	var level := 1
 	if hud and "character_status_ctrl" in hud and hud.character_status_ctrl:
 		level = int(hud.character_status_ctrl.current_level)
-	return {"quests": _quest_steps, "item_count": count_item, "gold": hud.get_gold() if hud else 0, "level": level, "free_slots": free, "pets": _player_pets.duplicate(), "active_companion": int(_active_companion_data.get("npc_id", _active_companion_data.get("id", 0))) if not _active_companion_data.is_empty() else 0}
+	return {"quests": _quest_steps, "item_count": count_item, "gold": hud.get_gold() if hud else 0, "level": level, "free_slots": free, "pets": _player_pets.duplicate(), "active_companion": int(_active_companion_data.get("npc_id", _active_companion_data.get("id", 0))) if not _active_companion_data.is_empty() else 0, "map_id": int(map_renderer.current_map_id) if map_renderer else 0, "completed_keys": _completed_keys}
 
 
 func _try_eve_conversation(npc: Node2D, n_name: String) -> bool:
@@ -2776,6 +2777,7 @@ func _try_eve_conversation(npc: Node2D, n_name: String) -> bool:
 	var events: Array = eve.get_events_for_map(map_id)
 	var lookup := Callable(self, "_talk_text_lookup")
 	var built: Dictionary = NpcEventScript.build(events, npc_events, _eve_state(), lookup)
+	_last_eve_click = int(built["event_click_id"])
 	if built["pages"].is_empty() and built["actions"].is_empty():
 		return false
 	var event: Dictionary = NpcEventScript.find_event(events, int(built["event_click_id"]))
@@ -3347,3 +3349,7 @@ func _on_rest_choice(choice_idx: int, _text: String) -> void:
 	if sp_diff > 0:
 		ccs.restore_sp(sp_diff)
 	hud.add_chat_message("System", "You feel fully restored.", "System")
+
+## Completed Eve keys (opened chests): map_id * 1000 + event click id.
+var _completed_keys: Dictionary = {}
+var _last_eve_click: int = 0

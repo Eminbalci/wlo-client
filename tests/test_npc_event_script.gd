@@ -110,5 +110,11 @@ func _run() -> void:
 	_check(not NpcEventScript.condition_matches(companion_cond, {"active_companion": 0}), "No active companion does not match")
 	var companion_not: Dictionary = {"cond_byte": 2, "words": [2, 6, 0, 6 | (8090 << 8), 0, 0]}
 	_check(not NpcEventScript.condition_matches(companion_not, {"active_companion": 8090}), "Companion 8090 following fails the != test")
+	# Chest (kind 3): an opened chest is the completed key map*1000 + event click id
+	var chest_opened: Dictionary = {"cond_byte": 3, "words": [0, 0, 0, 5 | (1 << 8), 0, 0]}
+	_check(NpcEventScript.condition_matches(chest_opened, {"map_id": 10003, "event_click": 1, "completed_keys": {10003001: true}}), "Opened chest (key 10003001) satisfies == 1")
+	_check(not NpcEventScript.condition_matches(chest_opened, {"map_id": 10003, "event_click": 1, "completed_keys": {}}), "Unopened chest does not satisfy == 1")
+	_check(not NpcEventScript.condition_matches(chest_opened, {"map_id": 10003, "event_click": 2, "completed_keys": {10003001: true}}), "A different chest (click 2) is not opened by key 10003001")
+
 	print("\n--- %d TESTS, %d FAILED ---" % [_count, _failures])
 	quit(1 if _failures > 0 else 0)

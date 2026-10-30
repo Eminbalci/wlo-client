@@ -64,6 +64,9 @@ static func find_event(eve_events: Array, click_id: int) -> Dictionary:
 ## The branch an event runs. `trigger` 0 = a click; 7 / 8 / 4 = the answer to question `question` (answer value `answer`).
 static func find_branch(event: Dictionary, state: Dictionary, trigger: int = 0, question: int = 0, answer: int = 0, start: int = 0) -> Dictionary:
 	var subs: Array = event.get("subs", [])
+	# Conditions that depend on the event itself (a chest is opened per event) read its click id from here.
+	var st: Dictionary = state.duplicate()
+	st["event_click"] = int(event.get("click_id", 0))
 	for i in range(start, subs.size()):
 		var sub: Dictionary = subs[i]
 		if sub.get("ops", []).is_empty():
@@ -84,7 +87,7 @@ static func find_branch(event: Dictionary, state: Dictionary, trigger: int = 0, 
 					continue
 			elif int(words[1]) != answer:
 				continue
-		var matches: bool = trigger != 0 or condition_matches(sub, state)
+		var matches: bool = trigger != 0 or condition_matches(sub, st)
 		var words_all: Array = sub.get("words", [])
 		var count: int = maxi(1, (int(words_all[5]) >> 8) if words_all.size() > 5 else 1)
 		if i + count > subs.size():
@@ -92,7 +95,7 @@ static func find_branch(event: Dictionary, state: Dictionary, trigger: int = 0, 
 		# The extra conditions belong to the action branch BEFORE them.
 		for j in range(i + 1, i + count):
 			var cond: Dictionary = subs[j]
-			if not cond.get("ops", []).is_empty() or not condition_matches(cond, state):
+			if not cond.get("ops", []).is_empty() or not condition_matches(cond, st):
 				matches = false
 		if matches:
 			return sub
@@ -175,7 +178,10 @@ static func condition_matches(cond: Dictionary, state: Dictionary) -> bool:
 					return compare(int(state.get("level", 1)), value, comparison)
 			return false
 		KIND_CHEST:
-			return compare(0, value, comparison) # chests are never opened yet
+			# An opened chest is the completed key map*1000 + event click id (C# EveEventRuntime case 3).
+			var chest_key: int = int(state.get("map_id", 0)) * 1000 + int(state.get("event_click", 0))
+			var completed: Dictionary = state.get("completed_keys", {})
+			return compare(1 if completed.has(chest_key) else 0, value, comparison)
 		KIND_SKILL:
 			if int(w[1]) != 1 or int(w[2]) != 0:
 				return false
