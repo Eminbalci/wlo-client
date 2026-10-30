@@ -35,7 +35,7 @@ func _run() -> void:
 	var panel = shop.sell_panel_refs.get("panel")
 	_record(panel != null and panel.visible, "sell panel exists and is visible in sell mode")
 	var grid = panel.get_node_or_null("SellGrid") if panel else null
-	_record(grid != null and grid.visible and grid.position == Vector2(33, 63), "sell grid sits in the panel at (33, 63)")
+	_record(grid != null and grid.visible and grid.position == Vector2(34, 67), "sell grid sits in the panel at (34, 67)")
 	_record(panel.get_node("Title").text == "Select props to sell", "sell panel title is the real client title")
 	shop.set_grid_cell(shop.sell_grid_buttons[0], {"id": 32011, "count": 3, "name": "Bread"})
 	_record(shop.sell_grid_buttons[0].text == "3" and shop.sell_grid_buttons[0].tooltip_text == "Bread", "filled cell shows count and name")

@@ -630,7 +630,7 @@ func set_mode(new_mode: String) -> void:
 		sell_panel_refs = build_sell_panel(self)
 		sell_grid_buttons = build_sell_grid(sell_panel_refs["panel"])
 		var sell_grid: GridContainer = sell_panel_refs["panel"].get_node("SellGrid") as GridContainer
-		sell_grid.position = Vector2(33, 63)
+		sell_grid.position = Vector2(34, 67)
 	_style_tabs()
 	selected_item = {}
 	selected_index = -1
@@ -1236,12 +1236,15 @@ func build_sell_grid(parent: Control) -> Array:
 	var grid := GridContainer.new()
 	grid.name = "SellGrid"
 	grid.columns = 5
+	grid.add_theme_constant_override("h_separation", 0)
+	grid.add_theme_constant_override("v_separation", 0)
 	grid.visible = true
 	parent.add_child(grid)
 
 	var buttons: Array = []
 	for i in range(50):
 		var button := Button.new()
+		button.custom_minimum_size = Vector2(34, 33)
 		grid.add_child(button)
 		buttons.append(button)
 
@@ -1327,33 +1330,33 @@ func build_sell_panel(parent: Control) -> Dictionary:
 	var lbl_selling_caption := Label.new()
 	lbl_selling_caption.name = "SellingAmountCaption"
 	lbl_selling_caption.text = "selling amount"
-	lbl_selling_caption.position = Vector2(17, 403)
+	lbl_selling_caption.position = Vector2(17, 421)
 	panel.add_child(lbl_selling_caption)
 
 	var selling_amount := Label.new()
 	selling_amount.name = "SellingAmount"
 	selling_amount.text = "0"
-	selling_amount.position = Vector2(187, 412)
+	selling_amount.position = Vector2(187, 421)
 	panel.add_child(selling_amount)
 
 	var lbl_money_caption := Label.new()
 	lbl_money_caption.name = "MoneyHeldCaption"
 	lbl_money_caption.text = "money held"
-	lbl_money_caption.position = Vector2(31, 433)
+	lbl_money_caption.position = Vector2(17, 443)
 	panel.add_child(lbl_money_caption)
 
 	var money_held := Label.new()
 	money_held.name = "MoneyHeld"
 	money_held.text = "0"
-	money_held.position = Vector2(188, 438)
+	money_held.position = Vector2(187, 443)
 	panel.add_child(money_held)
 
-	var btn_size := Vector2(55, 17)
+	var btn_size := Vector2(56, 18)
 
 	var confirm := Button.new()
 	confirm.name = "Confirm"
 	confirm.text = "Confirm"
-	confirm.position = Vector2(54, 458)
+	confirm.position = Vector2(55, 462)
 	confirm.size = btn_size
 	confirm.custom_minimum_size = btn_size
 	panel.add_child(confirm)
@@ -1361,7 +1364,7 @@ func build_sell_panel(parent: Control) -> Dictionary:
 	var close := Button.new()
 	close.name = "Close"
 	close.text = "Close"
-	close.position = Vector2(129, 458)
+	close.position = Vector2(129, 462)
 	close.size = btn_size
 	close.custom_minimum_size = btn_size
 	panel.add_child(close)
