@@ -43,3 +43,15 @@ on Map 10001 to see if they are duplicates or additional actors.
 - Decide whether the sty actor layer should be spawned (not a duplicate of the Ground triggers; check the coordinate system first).
 - Confirm f2 = actor model with a render check.
 - The storm CG is not in `.sty`; the sinking sequence stays a code reproduction.
+
+## Families of all 768 files (checked by stride and embedded names)
+| stride | embedded name | files | meaning (hypothesis) |
+|---|---|---|---|
+| 45 | `MapXXXXX` | 565 | map actor/prop layout (section above) |
+| 45 | `JRPJRole_N_M` | 6 | character style record (role image archive) |
+| 45 | `NNNNNNN` (e.g. 11003004) | 67 | event/NPC style record, not decoded |
+| 33 | `JRPJRole_N_M` | 51 | character style record (33-byte variant), e.g. `11005.sty` -> `JRole_5_1` |
+| 33 | `MapXXXXX` | 19 | map layout, 33-byte variant (e.g. `11081.sty`, Map60013) |
+| 33 | none | 49 | not decoded (e.g. `113.sty`) |
+
+Next: decode the 33-byte character style records (51 files). Compare them with `JRole_N_M` frame counts in the archives.
