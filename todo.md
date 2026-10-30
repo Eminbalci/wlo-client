@@ -262,7 +262,7 @@
 - [x] Optional: 'Loading' state on the character select cards (seen in the reference video before character data arrives; implemented in `character_select.gd` and verified).
 - [x] Character create wizard rebuilt on the matching skins (`tests/test_character_create_layout.gd`, 30/30).
 - [x] Admin tools first pass: Battle Studio toolbar wraps (was cut off at 1280 px). Still open there: Skill Studio side columns scroll horizontally.
-- [ ] LAST (requested by the user): admin tools (World Editor, Map/NPC/Item/Quest/Skill/Battle/Cutscene/Audio/Tent studios): fix UI, make their tests runnable (scene-based runner) and verify.
+- [x] LAST (requested by the user): admin tools: all 13 studio/editor suites run through `tools/run_all_tests.sh` (full run 117/117 ok, 2026-10-30); Skill Studio columns fit at 1280x720 (left column fixed 320 px, no horizontal scroll, `_test_columns_fit_1280`); formula breakdown showed a literal "%%".
 - [x] HUD windows realigned to their baked skins: System, Friends, Skill (new categories), Shop (Buy/Trade toggles), Combat settings (light frame). See README "HUD Windows Realigned".
 - [x] Apply System window options/colours: chat channel colours into the chat renderer (two chat implementations: `hud_chat.gd` and `chat_dock.gd`), PVP/PK and trading flags into gameplay.
 - [x] Quest ("mission") and Team ("group") windows: verify against their skins (text slightly clipped in the quest window resolved with TitleLabel ellipsis and HP/SP bar repositioning).

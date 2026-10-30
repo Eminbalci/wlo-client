@@ -761,11 +761,11 @@ func _run_formula_simulation() -> void:
 		raw_calc = float(base_damage) + (float(atk_val) * mult1) - float(def_val) + (float(atk_val) * mult2)
 		if raw_calc < 1.0:
 			raw_calc = 1.0
-		var mod_percent_str: String = "Neutral (0%%)"
+		var mod_percent_str: String = "Neutral (0%)"
 		if elem_mult > 1.0:
-			mod_percent_str = "Advantage (+25%%)"
+			mod_percent_str = "Advantage (+25%)"
 		elif elem_mult < 1.0:
-			mod_percent_str = "Disadvantage (-25%%)"
+			mod_percent_str = "Disadvantage (-25%)"
 		
 		last_sim_breakdown = "FORMULA: [Base (%d) + (%s %d * %.2f) - (%s %d) + (Sec %.2f)] * ElemMult (%.2f [%s])\n" % [
 			base_damage, atk_name, atk_val, mult1, def_name, def_val, mult2, elem_mult, mod_percent_str

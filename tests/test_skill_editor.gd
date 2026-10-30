@@ -274,10 +274,27 @@ func _test_scene_instantiation() -> void:
 	assert(editor_instance.get_node_or_null("%LblSkillCount") != null, "LblSkillCount node must exist")
 	
 	print("  PASS: skill_editor.tscn UI verified: 800x600 dark theme, responsive layout, unique node access.")
-	
+
+	_test_columns_fit_1280(editor_instance)
+
 	_test_database_skill_browser_and_search(editor_instance)
 	
 	editor_instance.queue_free()
+
+## Side columns never scroll sideways and their content fits the 1280-wide split.
+func _test_columns_fit_1280(editor_instance: Node) -> void:
+	var left_split := editor_instance.find_child("ContentHBox", true, false) as SplitContainer
+	assert(left_split != null, "ContentHBox split must exist")
+	var column_total: float = float(left_split.split_offset)
+	for scroll_name in ["LeftScroll", "CenterScroll", "RightScroll"]:
+		var scroll := editor_instance.find_child(scroll_name, true, false) as ScrollContainer
+		assert(scroll != null, "%s must exist" % scroll_name)
+		assert(scroll.horizontal_scroll_mode == ScrollContainer.SCROLL_MODE_DISABLED, "%s must not scroll horizontally" % scroll_name)
+		if scroll_name != "LeftScroll":
+			var content_min: float = (scroll.get_child(0) as Control).get_combined_minimum_size().x
+			column_total += maxf(content_min, (scroll.get_parent() as Control).custom_minimum_size.x)
+	assert(column_total <= 1260.0, "Skill Studio columns need %d px, more than fits at 1280x720" % int(column_total))
+	print("  PASS: Formula & motion columns fit at 1280x720 without horizontal scrolling (%d px)." % int(column_total))
 
 func _test_database_skill_browser_and_search(editor_instance: Node) -> void:
 	print("\n>>> [TEST 7] Verifying Skill Database Browser & Search System...")

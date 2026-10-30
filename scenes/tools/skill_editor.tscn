@@ -175,17 +175,16 @@ horizontal_alignment = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 6
-split_offset = 260
+split_offset = 320
 
 [node name="LeftPanel" type="PanelContainer" parent="MainVBox/ContentHBox"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="LeftScroll" type="ScrollContainer" parent="MainVBox/ContentHBox/LeftPanel"]
 layout_mode = 2
-horizontal_scroll_mode = 1
+horizontal_scroll_mode = 0
 vertical_scroll_mode = 1
 
 [node name="LeftVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll"]
@@ -229,10 +228,11 @@ text = "Desc:"
 
 [node name="SkillDescEdit" type="TextEdit" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 45)
+custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Spits burning wine flame causing fiery physical damage."
+wrap_mode = 1
 
 [node name="LblElem" type="Label" parent="MainVBox/ContentHBox/LeftPanel/LeftScroll/LeftVBox/GridIdentity"]
 layout_mode = 2
@@ -356,7 +356,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 6
-split_offset = 270
 
 [node name="CenterPanel" type="PanelContainer" parent="MainVBox/ContentHBox/RightSplit"]
 custom_minimum_size = Vector2(260, 0)
@@ -366,7 +365,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="CenterScroll" type="ScrollContainer" parent="MainVBox/ContentHBox/RightSplit/CenterPanel"]
 layout_mode = 2
-horizontal_scroll_mode = 1
+horizontal_scroll_mode = 0
 vertical_scroll_mode = 1
 
 [node name="CenterVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll"]
@@ -487,11 +486,13 @@ theme_override_constants/separation = 4
 unique_name_in_owner = true
 layout_mode = 2
 text = "Raw Damage: 185"
+autowrap_mode = 3
 
 [node name="LblElemMod" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/PanelResult/VBoxResult"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Element Mod: +25% (Counter Win)"
+autowrap_mode = 3
 
 [node name="LblFinalDamage" type="Label" parent="MainVBox/ContentHBox/RightSplit/CenterPanel/CenterScroll/CenterVBox/PanelResult/VBoxResult"]
 unique_name_in_owner = true
@@ -509,6 +510,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 editable = false
+wrap_mode = 1
 
 [node name="RightPanel" type="PanelContainer" parent="MainVBox/ContentHBox/RightSplit"]
 custom_minimum_size = Vector2(280, 0)
@@ -520,7 +522,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-horizontal_scroll_mode = 1
+horizontal_scroll_mode = 0
 vertical_scroll_mode = 1
 
 [node name="RightVBox" type="VBoxContainer" parent="MainVBox/ContentHBox/RightSplit/RightPanel/RightScroll"]
