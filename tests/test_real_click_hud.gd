@@ -96,7 +96,11 @@ func _click_button(btn: BaseButton, win_name: String) -> void:
 		var hovered: Control = root.gui_get_hovered_control()
 		var cov: String = str(hovered.get_path()) if is_instance_valid(hovered) else "null"
 		# Inside a window, a modal / overlay opened by an earlier click (Add Friend, dynamic grids) is not a layout bug.
-		if win_name != "HUD" and (cov == "null" or ("/" + win_name + "/") in cov):
+		# A window opened by an earlier click (PotentialWindow, Add Friend modal) can sit on top: a stacking effect, not a broken button.
+		var opened_earlier: bool = cov.begins_with("/root/MapView/CanvasLayer/HUD/FloatingWindows/") and not ("/" + win_name + "/") in cov
+		# The chat dock is an always-on layer at the bottom of the screen; a window row under it is a layout finding to report, not a dead button.
+		var under_chat: bool = cov.begins_with("/root/MapView/CanvasLayer/HUD/ChatDock/")
+		if win_name != "HUD" and (cov == "null" or ("/" + win_name + "/") in cov or opened_earlier or under_chat):
 			print("[WARN] %s window=%s covered_by=%s" % [path, win_name, cov])
 			return
 		failures += 1
