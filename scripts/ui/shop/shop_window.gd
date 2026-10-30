@@ -778,6 +778,9 @@ func _on_slot_gui_input(event: InputEvent, slot_idx: int) -> void:
 			var items := _get_current_items()
 			var item_idx := current_page * SLOTS_PER_PAGE + slot_idx
 			if item_idx >= 0 and item_idx < items.size():
+				# Real client: a buy-list click adds one of the item to the purchase list (stacks per item).
+				if current_mode == "buy":
+					add_to_cart(int(items[item_idx].get("id", 0)), 1)
 				select_item(items[item_idx], item_idx)
 
 func _on_page_prev() -> void:

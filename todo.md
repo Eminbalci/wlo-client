@@ -358,3 +358,8 @@
 - [x] Sepet satın alma: `ShopWindow.buy_cart` sepet satırlarını mevcut satın alma yoluyla alır (`tests/test_cart_checkout.gd` 3/3, altın 500 → 420). Sepet mağazadan açılmıyor (tetikleyici gerçek client'ta yakalanmadı).
 - [x] Sepet mağaza penceresinde: `add_to_cart`, `show_cart`, `hide_cart` (`tests/test_cart_checkout.gd` 10/10, toplam 80). Açma tetikleyicisi (gerçek client'ta hangi tuşla/akışla açıldığı) henüz yakalanmadı; şu an kod çağrısıyla açılıyor.
 
+## Gerçek client sepet yakalaması (2026-10-30, oyun açıkken)
+- [x] Sepet tetikleyicisi: alım penceresinde bir ürün satırına tıklamak onu "purchase list"e 1 adet ekler; aynı ürüne tekrar tıklamak adedi artırır (Bread x2); toplam "purchase amount" = 2x10 + 1x50 = 70. Yakalama: `buy_window_now.png`, `buy_after_select.png`, `buy_two_items.png`. Godot: satır tıklaması `add_to_cart` çağırıyor (`tests/test_cart_checkout.gd` 13/13).
+- [ ] "Buy" düğmesi hâlâ tek ürün akışında; gerçekte purchase list'i satın alıyor. Sepet satın almasına geçirilmeli.
+- [ ] Ayrı sepet penceresi (`Form_ShoppingCar_1`) mağaza içinde kullanılmıyor gibi görünüyor; purchase list alım penceresinin altında. Karar: ayrı pencereyi kaldır ya da başka bir yerde kullan.
+

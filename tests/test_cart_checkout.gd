@@ -45,5 +45,18 @@ func _run() -> void:
 	_record(shop._cart_parts["root"].visible, "cart panel is shown")
 	shop.hide_cart()
 	_record(not shop._cart_parts["root"].visible, "cart panel can be hidden")
+	# Real client: clicking a buy row adds one to the purchase list (same item stacks)
+	shop.cart_entries.clear()
+	shop.set_mode("buy")
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.pressed = true
+	shop._on_slot_gui_input(click, 0)
+	shop._on_slot_gui_input(click, 0)
+	shop._on_slot_gui_input(click, 1)
+	_record(shop.cart_entries.size() == 2, "two buy-row clicks on different items make two purchase-list lines")
+	_record(int(shop.cart_entries[0].get("amount", 0)) == 2, "clicking the same row twice stacks it to 2 (real: Bread x2)")
+	var purchase_total: int = shop.show_cart()
+	_record(purchase_total == 70, "purchase amount is 2 x 10 + 1 x 50 = 70 (%d)" % purchase_total)
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
