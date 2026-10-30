@@ -325,3 +325,14 @@
 
 
 
+
+## Oturum 2026-10-30 (tek oyunculu, kaptan, sandıklar)
+- [x] Başlık ekranı: TEK OYUNCU / ÇOK OYUNCU / Çıkış (`scripts/ui/title/title_screen.gd`, ana sahne).
+- [x] Tek oyunculu kayıt slotları (5 slot: yeni oyun, devam, sil) `scripts/core/save_game.gd`, `scripts/ui/title/single_player_slots.gd`; `tests/test_single_player_slots.gd` 26/26.
+- [x] Oyun içi durum kaydı (envanter, ekipman, gold, EXP, görevler, görev adımları, harita, konum): `tests/test_single_player_state.gd` 10/10.
+- [x] Kaptan: konuşmadan sonra donma düzeltildi (`_release_movement_if_free`); Kelang konuşması kaldırıldı; Robinson oyuncuyu sudan çekiyor (`_robinson_pull_out`); `tests/test_captain_rescue.gd` 4/4.
+- [x] Ada sandıkları Eve ödüllerini veriyor (elle yazılmış tablo sadece Eve olayı olmayan sandıklarda). `tests/test_island_chest_eve_loot.gd` 4/4.
+- [ ] Fırtına/kurtarma orijinal CG'si: `.sty` formatı çözülmedi, görev kimlikleriyle bağlantı kurulamadı.
+- [ ] Robinson'un çekme animasyonu sprite tabanlı; orijinal kare dizisi yok.
+- [ ] Yetenek penceresinin son satırı sohbet kutusunun altında kalıyor (layout bulgusu, test uyarı olarak işaretli).
+- [ ] Kalan açık maddeler: Eve pet/companion, Eve gemi-enkazı geçişi (10014–10018 → 10035), EXP eğrisi (spec ile sunucu çelişiyor).
