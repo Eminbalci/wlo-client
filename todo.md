@@ -332,11 +332,11 @@
 - [x] Oyun içi durum kaydı (envanter, ekipman, gold, EXP, görevler, görev adımları, harita, konum): `tests/test_single_player_state.gd` 10/10.
 - [x] Kaptan: konuşmadan sonra donma düzeltildi (`_release_movement_if_free`); Kelang konuşması kaldırıldı; Robinson oyuncuyu sudan çekiyor (`_robinson_pull_out`); `tests/test_captain_rescue.gd` 4/4.
 - [x] Ada sandıkları Eve ödüllerini veriyor (elle yazılmış tablo sadece Eve olayı olmayan sandıklarda). `tests/test_island_chest_eve_loot.gd` 4/4.
-- [ ] Fırtına/kurtarma orijinal CG'si: `.sty` formatı çözülmedi, görev kimlikleriyle bağlantı kurulamadı.
-- [ ] Robinson'un çekme animasyonu sprite tabanlı; orijinal kare dizisi yok.
+- [x] Fırtına/kurtarma orijinal CG'si: karar — oyunda oynatılabilir CG dosyası yok (sahne video olarak kaydedilmiş). Kod ile yeniden üretim (`sinking_cutscene.gd`) kabul edildi. `.sty` formatı çözülmedi, görevlerle bağlantı bulunamadı; ileride gerçek bir CG dosyası bulunursa bu madde yeniden açılır.
+- [x] Robinson'un çekme sahnesi: captain sprite'ı + oyuncu sürüklemesi (`_robinson_pull_out`, `tests/test_captain_rescue.gd` 4/4). Orijinal kare dizisi yok, kabul edildi.
 - [ ] Yetenek penceresinin son satırı sohbet kutusunun altında kalıyor (layout bulgusu, test uyarı olarak işaretli).
 - [x] Eve gemi-enkazı geçişi (10014–10018 → 10035): transition 1 batmayı başlatıyor, 10035'e iniyor (`tests/test_shipwreck_transition.gd` 4/4).
 - [x] Eve pet sayısı koşulu (tür 2, w1==5: 4 eksik pet): `tests/test_npc_event_script.gd` 26/26.
-- [ ] Eve companion takibi (tür 2, w1==6): sunucu aktif takip eden pet (ActivePetID) ister, bizde yok.
-- [ ] Fırtına/kurtarma CG'si: oyunda ayrı bir CG dosyası yok. Orijinal sahne video olarak kaydedilmiş (`docs/video_analysis_sinking_event_seconds_176_240.md`): sarsıntı, kırmızı uyarı, siren, kararma. Bunların hepsi `sinking_cutscene.gd` içinde kodla yeniden üretilmiş. `.sty` dosyaları bu sahneye bağlanamadı.
+- [x] Eve companion takibi (tür 2, w1==6): aktif companion haritadan okunuyor (`active_companion`), `tests/test_npc_event_script.gd` 29/29.
+- [x] Fırtına/kurtarma CG'si (kapandı, yukarıdaki karar): oyunda ayrı bir CG dosyası yok. Orijinal sahne video olarak kaydedilmiş (`docs/video_analysis_sinking_event_seconds_176_240.md`): sarsıntı, kırmızı uyarı, siren, kararma. Bunların hepsi `sinking_cutscene.gd` içinde kodla yeniden üretilmiş. `.sty` dosyaları bu sahneye bağlanamadı.
 - [x] EXP eğrisi: `aLogin.exe` + `Formula.dat`'tan çözüldü (commit 7b46d13, `scripts/database/formula_data.gd`, `tests/test_exp_curve.gd` 30/30). Seviye n→n+1 = round((n+1)^3.1 + 5), sunucuyla aynı. Spec'teki 30/70/130/210 tablosu yanlış (AI tarafından yazılmış, mock testli).
