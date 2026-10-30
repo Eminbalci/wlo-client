@@ -1283,6 +1283,19 @@ func build_sell_panel(parent: Control) -> Dictionary:
 	panel.visible = false
 	parent.add_child(panel)
 
+	# Measured frame (approximate, not the original skin): 233 x 500, light blue with a thin border.
+	var frame := Panel.new()
+	frame.name = "SellFrame"
+	frame.position = Vector2.ZERO
+	frame.size = Vector2(233, 500)
+	var frame_style := StyleBoxFlat.new()
+	frame_style.bg_color = Color("#eef4fb")
+	frame_style.border_color = Color("#8fb3d9")
+	frame_style.set_border_width_all(2)
+	frame_style.set_corner_radius_all(6)
+	frame.add_theme_stylebox_override("panel", frame_style)
+	panel.add_child(frame)
+
 	var title := Label.new()
 	title.name = "Title"
 	title.text = "Select props to sell"
@@ -1342,7 +1355,7 @@ func build_sell_panel(parent: Control) -> Dictionary:
 
 
 ## Sell mode shows only the sell panel over the window frame: buy-only parts are hidden and restored when buying again.
-const _SELL_KEEP_NODES: Array[String] = ["Background", "CloseButton", "SellPanel", "ShopAudioPlayer"]
+const _SELL_KEEP_NODES: Array[String] = ["CloseButton", "SellPanel", "ShopAudioPlayer"]
 
 
 func _update_buy_parts_visibility() -> void:
