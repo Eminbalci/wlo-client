@@ -1283,17 +1283,27 @@ func build_sell_panel(parent: Control) -> Dictionary:
 	panel.visible = false
 	parent.add_child(panel)
 
-	# Measured frame (approximate, not the original skin): 233 x 500, light blue with a thin border.
-	var frame := Panel.new()
-	frame.name = "SellFrame"
-	frame.position = Vector2.ZERO
-	frame.size = Vector2(233, 500)
-	var frame_style := StyleBoxFlat.new()
-	frame_style.bg_color = Color("#eef4fb")
-	frame_style.border_color = Color("#8fb3d9")
-	frame_style.set_border_width_all(2)
-	frame_style.set_corner_radius_all(6)
-	frame.add_theme_stylebox_override("panel", frame_style)
+	# Original sell skin (menu/Skins/white/Form_SaleThing_1.bmp, "Select props to sell"); falls back to a measured frame.
+	var frame: Control
+	if ResourceLoader.exists("res://assets/ui/shop/form_sale_thing_1.png"):
+		var skin := TextureRect.new()
+		skin.name = "SellFrame"
+		skin.texture = load("res://assets/ui/shop/form_sale_thing_1.png")
+		skin.stretch_mode = TextureRect.STRETCH_KEEP
+		skin.position = Vector2.ZERO
+		frame = skin
+	else:
+		var measured := Panel.new()
+		measured.name = "SellFrame"
+		measured.position = Vector2.ZERO
+		measured.size = Vector2(241, 505)
+		var frame_style := StyleBoxFlat.new()
+		frame_style.bg_color = Color("#eef4fb")
+		frame_style.border_color = Color("#8fb3d9")
+		frame_style.set_border_width_all(2)
+		frame_style.set_corner_radius_all(6)
+		measured.add_theme_stylebox_override("panel", frame_style)
+		frame = measured
 	panel.add_child(frame)
 
 	var title := Label.new()
