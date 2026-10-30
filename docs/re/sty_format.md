@@ -32,7 +32,14 @@ Each 45-byte file is the map's ambient actor/prop layout: creatures, villagers a
 (and how many are animated) is not yet verified. The next check: compare with the Ground.MMG / Wem objects the client already draws
 on Map 10001 to see if they are duplicates or additional actors.
 
+## Comparison with the Ground triggers of Map 10001 (checked)
+- The client draws map objects from Ground.MMG triggers (72 on Map 10001, Wem event ids 10001xxx).
+- Distance from each in-bounds sty record (120) to the nearest trigger: median 288 px, 8 within 40 px.
+- Random points on the same map: median 157 px, 23 of 300 within 40 px.
+- So the sty records do NOT duplicate the Ground trigger objects. They are a separate actor layer (or use another coordinate system).
+
 ## Open items
 - Decode the 33-byte family (119 files).
+- Decide whether the sty actor layer should be spawned (not a duplicate of the Ground triggers; check the coordinate system first).
 - Confirm f2 = actor model with a render check.
 - The storm CG is not in `.sty`; the sinking sequence stays a code reproduction.
