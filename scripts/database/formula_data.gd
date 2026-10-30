@@ -14,9 +14,12 @@ extends RefCounted
 ##
 ## Combat stats (stat getter 0x430580, ids 41..45): with L = level + 100 * reborn (0x49f0e4),
 ##   base  = attr * c0 + L * c1 + L * element_bonus * c3
-##   value = R(base + equip * c2 [+ a server bonus, flag 0x20a5]) + R(base * job_bonus)
+##   value = R(base + equip * c2 + pet_bonus) + R(base * job_bonus)
 ## c0..c3 are the four doubles at `offset` (attr, level, equip, element); element_bonus is 1 when the
-## character has the stat's element; job_bonus is 0.1 for the listed jobs (byte 0x1f9c), else 0.
+## character has the stat's element; job_bonus is 0.1 for the stat's reborn job (byte 0x1f9c = the C# server's RebornJob:
+## 1 Killer ATK, 2 Warrior DEF, 3 Knight SPD, 4 Wit MATK, 5 Priest MDEF, 6 Seer SPD), else 0.
+## pet_bonus: while a pet is active (byte 0x20a5 = its slot 1..4, set at 0x292179 before sending action 0x0F/0x0B) the
+## client adds a per-stat value the server sends (dwords 0x1fe0..0x1ff0, ATK..SPD).
 ## R (0x1297d8) rounds half up: Ceil when Frac >= 0.5, else Floor.
 ## Max HP / SP (ids 205 / 206) are only stored by the client: the server computes them. max_hp / max_sp use the
 ## C# server's Equip.MaxHp / MaxSp (C# Math.Round = half to even); their 0.35 / 3.2 / 0.3 factors are also in Formula.dat.
@@ -135,14 +138,14 @@ static func combat_coefficients(stat: String) -> Array[float]:
 
 
 ## Combat stat as the client shows it. `element_id`: 1 Earth, 2 Water, 3 Fire, 4 Wind.
-static func combat_stat(stat: String, attr: int, level: int, equip: int = 0, element_id: int = 0, job: int = 0, reborn: bool = false) -> int:
+static func combat_stat(stat: String, attr: int, level: int, equip: int = 0, element_id: int = 0, job: int = 0, reborn: bool = false, pet_bonus: int = 0) -> int:
 	var c: Array[float] = combat_coefficients(stat)
 	var layout: Dictionary = COMBAT_STATS[stat]
 	var eff_level: float = float(level + (100 if reborn else 0))
 	var element_bonus: float = 1.0 if element_id == int(layout["element"]) else 0.0
 	var base: float = float(attr) * c[0] + eff_level * c[1] + eff_level * element_bonus * c[3]
 	var job_bonus: float = JOB_BONUS if (layout["jobs"] as Array).has(job) else 0.0
-	return _round_half_up(base + float(equip) * c[2]) + _round_half_up(base * job_bonus)
+	return _round_half_up(base + float(equip) * c[2] + float(pet_bonus)) + _round_half_up(base * job_bonus)
 
 
 static func _round_half_up(value: float) -> int:

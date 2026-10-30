@@ -256,7 +256,7 @@
 - [x] ChatDock channel-tab offset and whisper input positions: tests aligned with the code (-21 px / 74 / 163).
 - [x] `test_inspect_stretch`: aligned with the real stretch settings; no longer hangs.
 - [x] Editor tests run through `tests/run_node_test.gd` / `tools/run_all_tests.sh` (`test_item_editor`, `test_quest_editor`, `test_skill_editor`, `test_audio_editor`, `test_battle_editor`, `test_cutscene_editor`, `test_all_world_tools`, `test_battle_view_scene`) do not extend SceneTree, so they cannot run with `--script`; they need a scene-based runner.
-- [ ] Compare aLogin screens (server select, login, character select/create) against original screenshots and rebuild from decoded DFM/skin data.
+- [x] Compare aLogin screens (server select, login, character select/create) against original screenshots and rebuild from decoded DFM/skin data (done by the items below: select layout fixes, server/login review, create wizard rebuild).
 - [x] Character select layout fixes (title banner, stray arrows, sprite and EXP bar placement; `tests/test_character_select_layout.gd`, 19/19).
 - [x] Server select and login screens reviewed: layout matches their skins (no defects found by screenshot).
 - [x] Optional: 'Loading' state on the character select cards (seen in the reference video before character data arrives; implemented in `character_select.gd` and verified).
@@ -275,7 +275,7 @@
   - `add_experience` now levels up on that curve (battle and quest EXP go through it); the EXP bar percent bug (0..1 passed as 0..100) is fixed.
 - [x] Combat stats decoded from aLogin.exe (stat getter 0x430580, ids 41..45 = ATK/DEF/MATK/MDEF/SPD): Round(attr*c0 + L*c1 + equip*c2 + L*elem*c3) + Round(base*0.1 for the stat's job), coefficients from Formula.dat (0x01/0x21/0x41/0x61/0x81), element bonus Fire->ATK/MATK, Earth->DEF/MDEF, Wind->SPD, rounding half up (0x1297d8), L = level + 100*reborn. Used by the character window and the battle actor (`FormulaData.combat_stat`, `tests/test_stat_formulas.gd`).
   - Max HP/SP (ids 205/206) are only stored by the client; growth now follows the C# server's MaxHp/MaxSp formula (level up and CON/WIS points).
-- [ ] Still unverified: stat points per level (3, C# server), the job byte (0x1f9c) meaning per role, the server bonus behind flag 0x20a5.
+- [x] Stat points per level: 3 (both C# server paths, SetLevel and AddExp). Job byte 0x1f9c = reborn job (RebornJob 1 Killer..6 Seer), matching the client's +10% stat per job. Flag 0x20a5 = active pet slot (written at 0x292179, action 0x0F/0x0B); its per-stat bonus is server data (`FormulaData.combat_stat` pet_bonus).
 - [ ] Items: audit inventory slots/tooltips/equipment against the real client (not started).
 - [x] "UI missing elements": the real client has 165 windows (`Form_*` in aLogin.exe), 15 exist in Godot. Prioritised list in `docs/ui_coverage.md`.
 - [ ] Build the P1 windows from `docs/ui_coverage.md` (pet status, trade, warehouse, repair, world map, potential, titles, mail, channel, skill tree, emotes, player info, drop/pick up, other stores, inn/doctor, rewards).
