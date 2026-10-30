@@ -1189,6 +1189,8 @@ func _gui_input(event: InputEvent) -> void:
 
 ## Item ids sold by the Kelan Village Props Shop (real client: Miscellaneous). Data is read from Item.dat.
 const PROPS_SHOP_ITEM_IDS: Array[int] = [32011, 32002, 45001, 45003, 42008]
+## Shop buy prices that differ from Item.dat (the shop sells at its own price; Item.dat keeps the item value).
+const SHOP_BUY_PRICE_OVERRIDE: Dictionary = {45003: 30}
 
 
 ## Builds shop entries from the item database (Item.dat). Items missing from the database are skipped.
@@ -1206,7 +1208,7 @@ static func _catalog_from_item_dat(item_ids: Array[int]) -> Array[Dictionary]:
 			"id": item_id,
 			"name": str(rec.name).strip_edges(),
 			"icon_id": int(rec.icon_id),
-			"price": int(rec.buy_price),
+			"price": int(SHOP_BUY_PRICE_OVERRIDE.get(item_id, rec.buy_price)),
 			"description": str(rec.description)
 		})
 	return catalog

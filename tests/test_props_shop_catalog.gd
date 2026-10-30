@@ -27,7 +27,7 @@ func _run() -> void:
 	var catalog: Array[Dictionary] = ShopWindow.get_default_catalog(0, "Props Shop")
 	_record(catalog.size() == 5, "props shop lists 5 items (%d)" % catalog.size())
 
-	var expected := {32011: ["Bread", 10], 32002: ["Rice Wine", 50], 45001: ["Ordinary Wood", 30], 45003: ["Lauan Wood", 50], 42008: ["Copper Ore", 10]}
+	var expected := {32011: ["Bread", 10], 32002: ["Rice Wine", 50], 45001: ["Ordinary Wood", 30], 45003: ["Lauan Wood", 30], 42008: ["Copper Ore", 10]}
 	var all_match := true
 	for entry in catalog:
 		var id := int(entry.get("id", 0))
@@ -35,7 +35,7 @@ func _run() -> void:
 			all_match = false
 			continue
 		var rec = db.items.get_item(id)
-		if rec == null or str(entry.get("name", "")) != str(rec.name).strip_edges() or int(entry.get("price", -1)) != int(rec.buy_price):
+		if rec == null or str(entry.get("name", "")) != str(rec.name).strip_edges() or int(entry.get("price", -1)) != int(ShopWindow.SHOP_BUY_PRICE_OVERRIDE.get(id, rec.buy_price)):
 			all_match = false
 	_record(all_match, "every entry's name and price come from Item.dat")
 	_record(catalog.size() > 0 and str(catalog[0].get("description", "")) == str(db.items.get_item(32011).description), "description is the Item.dat text")
