@@ -64,7 +64,7 @@ func _run() -> void:
 
 func get_nodes_in_group_count(hud: Node) -> int:
 	var count := 0
-	for child in hud.get_children():
-		if child is ItemMallWindow:
+	for node in hud.find_children("*", "Control", true, false):
+		if node is ItemMallWindow:
 			count += 1
 	return count

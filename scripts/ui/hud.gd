@@ -1149,7 +1149,9 @@ var item_mall_window: Control = null
 func open_item_mall() -> void:
 	if item_mall_window == null or not is_instance_valid(item_mall_window):
 		item_mall_window = ItemMallWindowScript.new()
-		add_child(item_mall_window)
+		# Floating windows share one layer so the click check treats the mall like the Team window.
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(item_mall_window)
 	item_mall_window.open()
 
 func toggle_team_window() -> void:
