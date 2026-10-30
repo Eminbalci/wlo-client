@@ -344,3 +344,9 @@
 - [x] Eve companion takibi (tür 2, w1==6): aktif companion haritadan okunuyor (`active_companion`), `tests/test_npc_event_script.gd` 29/29.
 - [x] Fırtına/kurtarma CG'si (kapandı, yukarıdaki karar): oyunda ayrı bir CG dosyası yok. Orijinal sahne video olarak kaydedilmiş (`docs/video_analysis_sinking_event_seconds_176_240.md`): sarsıntı, kırmızı uyarı, siren, kararma. Bunların hepsi `sinking_cutscene.gd` içinde kodla yeniden üretilmiş. `.sty` dosyaları bu sahneye bağlanamadı.
 - [x] EXP eğrisi: `aLogin.exe` + `Formula.dat`'tan çözüldü (commit 7b46d13, `scripts/database/formula_data.gd`, `tests/test_exp_curve.gd` 30/30). Seviye n→n+1 = round((n+1)^3.1 + 5), sunucuyla aynı. Spec'teki 30/70/130/210 tablosu yanlış (AI tarafından yazılmış, mock testli).
+
+## Gerçek client yakalamaları (2026-10-30, `docs/reference/real_client/`)
+- [ ] Props Shop satış penceresi (`props_shop_sell_real.png`): "Select props to sell" başlığı, çanta ile aynı 5×10 ikon ızgarası, altında "selling amount" ve "money held", Confirm/Close. Godot satış sekmesi liste satırları kullanıyor; ızgaraya çevrilmeli.
+- [ ] Item tooltip (ızgarada üzerine gelince): ad, "Non-tradeable" gibi durum, etki (örn. Hp +100), tür (prop), rank ve açıklama. Godot tooltip biçimi karşılaştırılmadı.
+- [ ] Mağazanın "Buy items" penceresinde Lauan fiyatı (30) ile Item.dat (50) çelişkisi.
+
