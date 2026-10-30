@@ -350,4 +350,6 @@
 - [ ] Item tooltip (ızgarada üzerine gelince): ad, "Non-tradeable" gibi durum, etki (örn. Hp +100), tür (prop), rank ve açıklama. Godot tooltip biçimi karşılaştırılmadı.
 - [ ] Mağazanın "Buy items" penceresinde Lauan fiyatı (30) ile Item.dat (50) çelişkisi.
 - [ ] Satış penceresi ayrı bir panel olmalı (gerçek: "Select props to sell", ızgara ortada, altında "selling amount" ve "money held", Confirm/Close). Şu an sell modu buy düzenini kullanıyor; ızgara sol üstte liste satırlarının üstüne biniyor (`godot_shop_sell_grid.png`). Yakalama aracı: `scripts/tools/capture_shop_sell_grid.gd`.
+- [x] Sat paneli: başlık "Select props to sell", 5×10 ızgara (33,63), "selling amount"/"money held" alanları, Confirm/Close, gerçek ölçümlerle (`build_sell_panel`). Sat modunda alım parçaları gizleniyor, alıma dönünce geri açılıyor. Test: `test_sell_grid_build` 10/10, mağaza 54/54.
+- [ ] Sat paneli arka planı: gerçek sat penceresinin skin'i `menu/Skins/default` ve `white` içinde bulunamadı. Şu an alım penceresinin skin'i kullanılıyor (tablo çizgileri ve "effects/single price" yazıları skin'de gömülü). Kaynak aranmalı.
 

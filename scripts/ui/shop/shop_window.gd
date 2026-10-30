@@ -626,8 +626,11 @@ func set_mode(new_mode: String) -> void:
 	if new_mode != "buy" and new_mode != "sell":
 		new_mode = "buy"
 	current_mode = new_mode
-	if current_mode == "sell" and sell_grid_buttons.is_empty():
-		sell_grid_buttons = build_sell_grid(self)
+	if current_mode == "sell" and sell_panel_refs.is_empty():
+		sell_panel_refs = build_sell_panel(self)
+		sell_grid_buttons = build_sell_grid(sell_panel_refs["panel"])
+		var sell_grid: GridContainer = sell_panel_refs["panel"].get_node("SellGrid") as GridContainer
+		sell_grid.position = Vector2(33, 63)
 	_style_tabs()
 	selected_item = {}
 	selected_index = -1
@@ -673,8 +676,11 @@ func _get_current_items() -> Array[Dictionary]:
 func _render_current_page() -> void:
 	if slot_rows.size() < SLOTS_PER_PAGE:
 		_setup_ui_layout()
-	for row in slot_rows:
-		row.visible = current_mode != "sell"
+	if current_mode == "sell":
+		# Sell mode shows the bag grid in the sell panel instead of the list rows.
+		for row in slot_rows:
+			row.visible = false
+		return
 	var items := _get_current_items()
 	var total_items := items.size()
 	var max_pages := maxi(1, int(ceil(float(total_items) / float(SLOTS_PER_PAGE))))
@@ -1208,13 +1214,15 @@ static func _catalog_from_item_dat(item_ids: Array[int]) -> Array[Dictionary]:
 
 ## Sell grid (real client: "Select props to sell", the bag as a 5 x 10 icon grid). Built lazily; hidden for now.
 var sell_grid_buttons: Array = []
+var sell_panel_refs: Dictionary = {}
+var _sell_hidden_nodes: Array[Node] = []
 
 
 func build_sell_grid(parent: Control) -> Array:
 	var grid := GridContainer.new()
 	grid.name = "SellGrid"
 	grid.columns = 5
-	grid.visible = false
+	grid.visible = true
 	parent.add_child(grid)
 
 	var buttons: Array = []
@@ -1250,10 +1258,10 @@ func refresh_sell_grid(buttons: Array, bag: Array, on_pick: Callable) -> void:
 
 
 func _refresh_sell_grid() -> void:
-	var grid := get_node_or_null("SellGrid") as GridContainer
-	if grid == null:
+	if sell_panel_refs.is_empty():
 		return
-	grid.visible = current_mode == "sell"
+	sell_panel_refs["panel"].visible = current_mode == "sell"
+	_update_buy_parts_visibility()
 	var bag: Array = []
 	if _hud and "inventory_ctrl" in _hud and _hud.inventory_ctrl:
 		bag = _hud.inventory_ctrl.inventory_data
@@ -1264,3 +1272,86 @@ func _on_sell_grid_pick(index: int, item: Dictionary) -> void:
 	if item.is_empty() or int(item.get("id", 0)) == 0:
 		return
 	select_item(item, index)
+
+
+## Sell panel (real client: "Select props to sell"); positions measured from the real capture.
+func build_sell_panel(parent: Control) -> Dictionary:
+	var panel := Control.new()
+	panel.name = "SellPanel"
+	panel.visible = false
+	parent.add_child(panel)
+
+	var title := Label.new()
+	title.name = "Title"
+	title.text = "Select props to sell"
+	title.position = Vector2(30, 18)
+	panel.add_child(title)
+
+	var lbl_selling_caption := Label.new()
+	lbl_selling_caption.name = "SellingAmountCaption"
+	lbl_selling_caption.text = "selling amount"
+	lbl_selling_caption.position = Vector2(17, 403)
+	panel.add_child(lbl_selling_caption)
+
+	var selling_amount := Label.new()
+	selling_amount.name = "SellingAmount"
+	selling_amount.text = "0"
+	selling_amount.position = Vector2(187, 412)
+	panel.add_child(selling_amount)
+
+	var lbl_money_caption := Label.new()
+	lbl_money_caption.name = "MoneyHeldCaption"
+	lbl_money_caption.text = "money held"
+	lbl_money_caption.position = Vector2(31, 433)
+	panel.add_child(lbl_money_caption)
+
+	var money_held := Label.new()
+	money_held.name = "MoneyHeld"
+	money_held.text = "0"
+	money_held.position = Vector2(188, 438)
+	panel.add_child(money_held)
+
+	var btn_size := Vector2(55, 17)
+
+	var confirm := Button.new()
+	confirm.name = "Confirm"
+	confirm.text = "Confirm"
+	confirm.position = Vector2(54, 458)
+	confirm.size = btn_size
+	confirm.custom_minimum_size = btn_size
+	panel.add_child(confirm)
+
+	var close := Button.new()
+	close.name = "Close"
+	close.text = "Close"
+	close.position = Vector2(129, 458)
+	close.size = btn_size
+	close.custom_minimum_size = btn_size
+	panel.add_child(close)
+
+	return {
+		"panel": panel,
+		"title": title,
+		"selling_amount": selling_amount,
+		"money_held": money_held,
+		"confirm": confirm,
+		"close": close
+	}
+
+
+## Sell mode shows only the sell panel over the window frame: buy-only parts are hidden and restored when buying again.
+const _SELL_KEEP_NODES: Array[String] = ["Background", "CloseButton", "SellPanel", "ShopAudioPlayer"]
+
+
+func _update_buy_parts_visibility() -> void:
+	if current_mode == "sell":
+		for child in get_children():
+			if child is CanvasItem and child.visible and not (child.name in _SELL_KEEP_NODES):
+				child.visible = false
+				_sell_hidden_nodes.append(child)
+	else:
+		for node in _sell_hidden_nodes:
+			if is_instance_valid(node):
+				node.visible = true
+		_sell_hidden_nodes.clear()
+		_render_current_page()

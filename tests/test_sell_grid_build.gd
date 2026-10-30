@@ -32,8 +32,11 @@ func _run() -> void:
 	_record(shop.sell_grid_buttons.is_empty(), "no sell grid before sell mode")
 	shop.set_mode("sell")
 	_record(shop.sell_grid_buttons.size() == 50, "sell mode builds 50 grid cells (%d)" % shop.sell_grid_buttons.size())
-	var grid = shop.get_node_or_null("SellGrid")
-	_record(grid != null and grid.visible, "grid exists and is visible in sell mode")
+	var panel = shop.sell_panel_refs.get("panel")
+	_record(panel != null and panel.visible, "sell panel exists and is visible in sell mode")
+	var grid = panel.get_node_or_null("SellGrid") if panel else null
+	_record(grid != null and grid.visible and grid.position == Vector2(33, 63), "sell grid sits in the panel at (33, 63)")
+	_record(panel.get_node("Title").text == "Select props to sell", "sell panel title is the real client title")
 	shop.set_grid_cell(shop.sell_grid_buttons[0], {"id": 32011, "count": 3, "name": "Bread"})
 	_record(shop.sell_grid_buttons[0].text == "3" and shop.sell_grid_buttons[0].tooltip_text == "Bread", "filled cell shows count and name")
 	shop.set_grid_cell(shop.sell_grid_buttons[1], {})
@@ -41,10 +44,10 @@ func _run() -> void:
 	# Sell mode shows the grid and fills it from the bag
 	hud.inventory_ctrl.inventory_data[0] = {"id": 32011, "count": 3, "name": "Bread", "icon_id": 1011}
 	shop.set_mode("sell")
-	var grid2 = shop.get_node_or_null("SellGrid")
-	_record(grid2 != null and grid2.visible, "sell mode shows the grid")
+	var grid2 = panel.get_node_or_null("SellGrid")
+	_record(grid2 != null and panel.visible, "sell mode shows the grid")
 	_record(shop.sell_grid_buttons[0].text == "3", "grid cell 0 shows the bag count (3)")
 	shop.set_mode("buy")
-	_record(grid2 != null and not grid2.visible, "buy mode hides the grid")
+	_record(not panel.visible, "buy mode hides the sell panel")
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
