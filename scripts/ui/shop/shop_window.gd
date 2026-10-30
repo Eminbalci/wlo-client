@@ -869,7 +869,16 @@ func _on_qty_changed(new_val: float) -> void:
 ## Action button pressed: Execute Buy or Sell
 func _on_action_pressed() -> void:
 	if current_mode == "buy":
-		execute_buy()
+		# Real client: Buy purchases the whole purchase list; with an empty list it buys the selected item.
+		if not cart_entries.is_empty():
+			var ids: Array = []
+			for entry in cart_entries:
+				ids.append({"id": int(entry.get("id", 0)), "quantity": int(entry.get("amount", 0))})
+			if buy_cart(ids):
+				cart_entries.clear()
+				hide_cart()
+		else:
+			execute_buy()
 	else:
 		execute_sell()
 

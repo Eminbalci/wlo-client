@@ -58,5 +58,12 @@ func _run() -> void:
 	_record(int(shop.cart_entries[0].get("amount", 0)) == 2, "clicking the same row twice stacks it to 2 (real: Bread x2)")
 	var purchase_total: int = shop.show_cart()
 	_record(purchase_total == 70, "purchase amount is 2 x 10 + 1 x 50 = 70 (%d)" % purchase_total)
+	# Buy purchases the whole purchase list (real client) and clears it
+	shop.refresh_gold()
+	var gold_before: int = shop.player_gold
+	hud.update_gold(gold_before)
+	shop._on_action_pressed()
+	_record(shop.cart_entries.is_empty(), "Buy clears the purchase list after buying")
+	_record(shop.player_gold == gold_before - 70, "Buy charges the purchase total (70) from gold (%d -> %d)" % [gold_before, shop.player_gold])
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
