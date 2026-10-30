@@ -236,7 +236,9 @@ func _on_shoes_toggle_pressed() -> void:
 		hud.add_chat_message("System", "Shoes view switched to: %s." % mode_name, "System")
 
 func _on_potential_button_pressed() -> void:
-	if hud and hud.has_method("add_chat_message"):
+	if hud and hud.has_method("open_potential"):
+		hud.open_potential()
+	elif hud and hud.has_method("add_chat_message"):
 		hud.add_chat_message("System", "Potential System: Current Potential Level %d." % current_potential, "System")
 
 

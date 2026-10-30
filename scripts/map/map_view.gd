@@ -2156,6 +2156,16 @@ func is_merchant_npc(npc: Node2D) -> bool:
 			return true
 	return false
 
+## Storage keepers (warehouse / bank NPCs), matched by name.
+func is_storage_npc(npc: Node2D) -> bool:
+	if not is_instance_valid(npc):
+		return false
+	var n_name: String = str(npc.get("npc_name")).to_lower() if npc.get("npc_name") != null else ""
+	for kw in ["storage", "warehouse", "bank", "keeper"]:
+		if kw in n_name:
+			return true
+	return false
+
 ## Opens the merchant shop window via HUD
 func open_merchant_shop(merchant_id: int = 0, merchant_name: String = "", catalog: Array = []) -> void:
 	if hud and hud.has_method("open_shop"):
@@ -2516,8 +2526,15 @@ func _on_npc_interacted(npc: Node2D) -> void:
 			if not sfx.is_empty() and hud and hud.has_method("play_sfx"):
 				hud.play_sfx(sfx)
 	
-	if not is_merchant_npc(npc) and _try_eve_conversation(npc, n_name):
+	if not is_merchant_npc(npc) and not is_storage_npc(npc) and _try_eve_conversation(npc, n_name):
 		return
+
+	# Storage keepers open the warehouse, smiths also repair (the real server opens these windows from its event scripts).
+	if is_storage_npc(npc):
+		if not n_choices.has("Warehouse"):
+			n_choices.insert(0, "Warehouse")
+		if n_text.is_empty():
+			n_text = "Do you want to store something?"
 
 	if n_text.is_empty() and not is_merchant_npc(npc):
 		# No Talk.dat line is bound to this NPC yet (the real binding lives in the server's event scripts): show only a
@@ -2551,8 +2568,17 @@ func _on_npc_interacted(npc: Node2D) -> void:
 		if n_text.is_empty():
 			n_text = "Welcome to %s! Would you like to buy or sell anything today?" % n_name
 
+	if is_merchant and "smith" in n_name.to_lower() and not n_choices.has("Repair"):
+		n_choices.insert(mini(1, n_choices.size()), "Repair")
+
 	var choice_callback: Callable = func(choice_idx: int, _choice_text: String) -> void:
 		var c_low := _choice_text.to_lower()
+		if c_low == "warehouse" and hud and hud.has_method("open_warehouse"):
+			hud.open_warehouse()
+			return
+		if c_low == "repair" and hud and hud.has_method("open_repair"):
+			hud.open_repair()
+			return
 		if is_merchant and (choice_idx == 0 or "buy" in c_low or "sell" in c_low or "trade" in c_low or "shop" in c_low):
 			open_merchant_shop(n_id, n_name)
 			return

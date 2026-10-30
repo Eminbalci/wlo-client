@@ -1393,3 +1393,89 @@ func show_equipment_item_tooltip(socket_name: String, socket_global_pos: Vector2
 
 func hide_item_tooltip() -> void:
 	if _item_tooltip: _item_tooltip.visible = false
+
+# ==================== Windows created on first use ====================
+## Real-client windows that are not in hud.tscn: instantiated under FloatingWindows when first opened.
+var _lazy_windows: Dictionary = {}
+
+func get_or_create_window(window_name: String, scene_path: String) -> Control:
+	var existing = _lazy_windows.get(window_name)
+	if existing != null and is_instance_valid(existing):
+		return existing
+	var scene: PackedScene = load(scene_path)
+	if scene == null:
+		return null
+	var win: Control = scene.instantiate()
+	win.name = window_name
+	win.visible = false
+	var parent: Control = floating_windows if floating_windows else self
+	parent.add_child(win)
+	for sig in ["message", "action_refused"]:
+		if win.has_signal(sig):
+			win.connect(sig, func(text: String) -> void: add_chat_message("System", text, "System"))
+	_lazy_windows[window_name] = win
+	return win
+
+func _center_lazy_window(win: Control) -> void:
+	var area: Vector2 = size if size.x > 0.0 else get_viewport_rect().size
+	win.position = ((area - win.size) * 0.5).floor()
+
+## Item trade. Offline the partner is a stub with `partner_items` / `partner_gold`.
+func open_trade(partner_name: String, partner_items: Array = [], partner_gold: int = 0) -> Control:
+	var win := get_or_create_window("TradeWindow", "res://scenes/ui/trade/trade_window.tscn")
+	if win == null:
+		return null
+	win.open_trade(partner_name, inventory_ctrl)
+	TradePartnerStub.new(partner_name, partner_items, partner_gold).attach(win)
+	_center_lazy_window(win)
+	return win
+
+func open_warehouse() -> Control:
+	var win := get_or_create_window("WarehouseWindow", "res://scenes/ui/warehouse/warehouse_window.tscn")
+	if win == null:
+		return null
+	win.open_warehouse(inventory_ctrl)
+	_center_lazy_window(win)
+	return win
+
+func open_repair() -> Control:
+	var win := get_or_create_window("RepairWindow", "res://scenes/ui/repair/repair_window.tscn")
+	if win == null:
+		return null
+	win.open_repair(inventory_ctrl)
+	_center_lazy_window(win)
+	return win
+
+## Potential awakening (item window button) or return (`mode`: PotentialWindow.MODE_AWAKEN / MODE_RETURN).
+func open_potential(mode: int = PotentialWindow.MODE_AWAKEN) -> Control:
+	var win := get_or_create_window("PotentialWindow", "res://scenes/ui/hud/potential_window.tscn")
+	if win == null:
+		return null
+	win.set_mode(mode)
+	win.populate_from_game(character_status_ctrl, team_window)
+	win.open_window()
+	_center_lazy_window(win)
+	return win
+
+func open_player_titles(owned_title_ids: Array = [0], current_title_id: int = 0) -> Control:
+	var win := get_or_create_window("PlayerTitleWindow", "res://scenes/ui/hud/player_title_window.tscn")
+	if win == null:
+		return null
+	win.populate(owned_title_ids, current_title_id)
+	win.open_window()
+	return win
+
+## Rest / Battle / Ride popup beside a pet row of the team window (`slot` 1..4).
+func open_pet_status(slot: int, pet: Dictionary = {}) -> Control:
+	var win := get_or_create_window("PetStatusWindow", "res://scenes/ui/hud/pet_status_window.tscn")
+	if win == null:
+		return null
+	if not win.pet_mode_selected.is_connected(_on_pet_mode_selected):
+		win.pet_mode_selected.connect(_on_pet_mode_selected)
+	var tw_pos: Vector2 = team_window.position if team_window else Vector2.ZERO
+	win.open_at(tw_pos, slot, pet)
+	return win
+
+func _on_pet_mode_selected(slot: int, mode: int, _pet: Dictionary) -> void:
+	if team_window and team_window.has_method("_on_pet_row_button"):
+		team_window._on_pet_row_button(slot - 1, PetStatusWindow.team_action_for_mode(mode))
