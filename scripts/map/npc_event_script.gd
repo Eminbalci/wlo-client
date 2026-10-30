@@ -152,8 +152,14 @@ static func condition_matches(cond: Dictionary, state: Dictionary) -> bool:
 				return false
 			return compare(int(quests.get(int(w[0]), 0)), value, comparison)
 		KIND_INVENTORY:
+			if int(w[0]) == 2:
+				# pet sub-kind 5: how many pets are missing from a full stable of 4 (C# EveEventRuntime case 5)
+				if int(w[1]) == 5:
+					var pets: Array = state.get("pets", [])
+					return compare(maxi(0, 4 - pets.size()), value, comparison)
+				return false # companion following (sub-kind 6) needs the active companion, not modelled yet
 			if int(w[0]) != 1:
-				return false # pet / companion conditions are not modelled
+				return false
 			match int(w[1]):
 				1:
 					var counter: Callable = state.get("item_count", Callable())

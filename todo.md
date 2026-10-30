@@ -336,4 +336,7 @@
 - [ ] Robinson'un çekme animasyonu sprite tabanlı; orijinal kare dizisi yok.
 - [ ] Yetenek penceresinin son satırı sohbet kutusunun altında kalıyor (layout bulgusu, test uyarı olarak işaretli).
 - [x] Eve gemi-enkazı geçişi (10014–10018 → 10035): transition 1 batmayı başlatıyor, 10035'e iniyor (`tests/test_shipwreck_transition.gd` 4/4).
-- [ ] Kalan açık maddeler: Eve pet/companion, EXP eğrisi (spec ile sunucu çelişiyor).
+- [x] Eve pet sayısı koşulu (tür 2, w1==5: 4 eksik pet): `tests/test_npc_event_script.gd` 26/26.
+- [ ] Eve companion takibi (tür 2, w1==6): sunucu aktif takip eden pet (ActivePetID) ister, bizde yok.
+- [ ] Fırtına/kurtarma CG'si: `.sty` formatı çözülmedi.
+- [ ] EXP eğrisi: gerçek oyunda seviye atlayıp değerleri görmek gerekiyor.

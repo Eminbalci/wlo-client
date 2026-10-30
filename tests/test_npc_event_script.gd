@@ -97,5 +97,12 @@ func _run() -> void:
 	var slots_cond: Dictionary = {"cond_byte": 15, "words": [1, 0, 0, 4 | (2 << 8), 0, 0]}
 	_check(NpcEventScript.condition_matches(slots_cond, {"free_slots": 3}) and not NpcEventScript.condition_matches(slots_cond, {"free_slots": 1}), "Kind 15 needs free bag slots")
 
+	# Pet sub-kind 5: 4 minus the pets owned must satisfy the comparison (C# case 5)
+	var pet_cond_zero_owned: Dictionary = {"cond_byte": 2, "words": [2, 5, 0, 4 | (3 << 8), 0, 0]}
+	_check(NpcEventScript.condition_matches(pet_cond_zero_owned, {"pets": []}), "Pet count: 4 missing pets is >= 3")
+	_check(not NpcEventScript.condition_matches(pet_cond_zero_owned, {"pets": [1, 2, 3, 4]}), "Pet count: a full stable (0 missing) is not >= 3")
+	var pet_companion: Dictionary = {"cond_byte": 2, "words": [2, 6, 0, 5 | (1 << 8), 0, 0]}
+	_check(not NpcEventScript.condition_matches(pet_companion, {"pets": [1]}), "Companion following stays unmodelled (never matches)")
+
 	print("\n--- %d TESTS, %d FAILED ---" % [_count, _failures])
 	quit(1 if _failures > 0 else 0)

@@ -2759,7 +2759,7 @@ func _eve_state() -> Dictionary:
 	var level := 1
 	if hud and "character_status_ctrl" in hud and hud.character_status_ctrl:
 		level = int(hud.character_status_ctrl.current_level)
-	return {"quests": _quest_steps, "item_count": count_item, "gold": hud.get_gold() if hud else 0, "level": level, "free_slots": free}
+	return {"quests": _quest_steps, "item_count": count_item, "gold": hud.get_gold() if hud else 0, "level": level, "free_slots": free, "pets": _player_pets.duplicate()}
 
 
 func _try_eve_conversation(npc: Node2D, n_name: String) -> bool:
