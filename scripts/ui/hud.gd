@@ -17,6 +17,7 @@ const HUDHotbarClass = preload("res://scripts/ui/hud/hud_hotbar.gd")
 const HUDWindowManagerClass = preload("res://scripts/ui/hud/hud_window_manager.gd")
 const HUDInventoryClass = preload("res://scripts/ui/hud/hud_inventory.gd")
 const NotebookWindowScript = preload("res://scripts/ui/hud/notebook_window.gd")
+const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
 const HUDCharacterStatusClass = preload("res://scripts/ui/hud/hud_character_status.gd")
 const HUDChatClass = preload("res://scripts/ui/hud/hud_chat.gd")
 const HUDDialogueClass = preload("res://scripts/ui/hud/hud_dialogue.gd")
@@ -1141,6 +1142,15 @@ func use_skill(skill_id: int) -> bool:
 			p.show_speech_bubble(sname, 2.0)
 	
 	return true
+
+## The top bar Item Mall icon (711) opens the mall points window (Form_Shopping_1).
+var item_mall_window: Control = null
+
+func open_item_mall() -> void:
+	if item_mall_window == null or not is_instance_valid(item_mall_window):
+		item_mall_window = ItemMallWindowScript.new()
+		add_child(item_mall_window)
+	item_mall_window.open()
 
 func toggle_team_window() -> void:
 	if window_manager_ctrl: window_manager_ctrl.toggle_team_window()

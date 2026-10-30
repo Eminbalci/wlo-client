@@ -147,6 +147,9 @@ func _on_action_requested(action_id: String) -> void:
 		"battle_settings", "pk_settings":
 			if _hud.has_method("toggle_fight_menu"):
 				_hud.toggle_fight_menu()
+		"item_mall":
+			if _hud.has_method("open_item_mall"):
+				_hud.open_item_mall()
 		"trade":
 			if _hud.has_method("is_trading_allowed") and not _hud.is_trading_allowed():
 				_hud.add_chat_message("System", "Trading is currently disabled in System Settings.", "System")
