@@ -280,7 +280,11 @@
 - [ ] Bag layout: the real bag is one 5x10 grid (50 cells, multi-cell items by footprint); Godot has 45 slots x 2 pages. Trace the arrows beside the item title, then rebuild the bag.
 - [x] Item editor slot names now match the client (Head, Body, Weapon, Hands, Shoes, Special Eq).
 - [x] "UI missing elements": the real client has 165 windows (`Form_*` in aLogin.exe), 15 exist in Godot. Prioritised list in `docs/ui_coverage.md`.
-- [ ] Build the P1 windows from `docs/ui_coverage.md` (pet status, trade, warehouse, repair, world map, potential, titles, mail, channel, skill tree, emotes, player info, drop/pick up, other stores, inn/doctor, rewards).
+- [ ] P1 windows (`docs/ui_coverage.md`). Already present: pet status, trade, warehouse, repair, world map, GPS, potential, titles, mail, channel, emotes, drop/pick up, inn, rewards, battle skill picker.
+  - [ ] P1-a Form_Huminfo (other player's info)
+  - [ ] P1-b Form_Shopping / Form_Buy / Form_ShoppingCar (other store types; `shop_window.gd` exists, check coverage first)
+  - [ ] P1-c Form_Medical (doctor / heal)
+  - [ ] P1-d Form_SkillTree / Form_SkillTree1 (skill tree; `skill_window.tscn` exists, check coverage first)
 - [x] Cursors: verify the inferred roles (cursor1 normal, cursor3 attack, cursor4 talk, cursor8 harvest, cursor17 examine, cursor6 portal, cursor12 mining, cursor18 shop, cursor15 skill, cursor16 quest, cursor10 busy, cursor11 target; verified all 12 types, animation and hotspots in `tests/test_cursor_manager.gd`).
 - [x] Top-right action bar added after comparing with the running real client.
 - [ ] Real client comparison still open: ask the user to open the inventory, a shop, the skill window and a battle in the real game, then capture each with `PrintWindow` (see README) and compare layouts.
