@@ -22,8 +22,15 @@ Records repeat in groups (e.g. five records at x=1600, y=670, model 1025): likel
 - Not the Eve NPC spawns: no record matches an Eve NPC world position on Map 10001 (Captain 14003 is at 1421,632; no record there).
 - The first record of each file looks like a header (f0=256, f1=2304, ...).
 
-## Working hypothesis
-These are scene actors: decorative or background characters placed per map (for example the ship's crew and passengers on Map 10001, which the sinking video shows running and panicking). This is not yet confirmed; the next check is to render the 10001 records on the map and compare with the ship-deck screenshots in `docs/video_analysis_sinking_event_seconds_176_240.md`.
+## Model check (visual, `001.jma` frames)
+- 1025 = a worm (creature), 1281 = a farmer NPC with a pitchfork, 1537 = an egg nest (prop).
+- So a 45-byte record places a sprite of a creature, NPC or prop at a pixel position on the map.
+- Map 10001 records include creatures (1025) on the ship deck, so these are not only crew. Only the Eve NPC spawns are separate.
+
+## Working hypothesis (updated)
+Each 45-byte file is the map's ambient actor/prop layout: creatures, villagers and props. Whether the client should spawn them
+(and how many are animated) is not yet verified. The next check: compare with the Ground.MMG / Wem objects the client already draws
+on Map 10001 to see if they are duplicates or additional actors.
 
 ## Open items
 - Decode the 33-byte family (119 files).
