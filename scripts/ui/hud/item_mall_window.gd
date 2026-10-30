@@ -10,7 +10,7 @@ extends Control
 signal closed
 
 const SKIN_PATH: String = "res://assets/ui/shop/form_shopping_1.png"
-const CATEGORIES: Array[String] = ["Hot", "Armory", "Weaponry", "Grocery", "Furniture", "Slot Machine", "Fishing"]
+const CATEGORIES: Array[String] = ["Hot", "Armory", "Weaponry", "Grocery", "Furniture", "Slot Machine", "Forging Room"]
 const ROW_COUNT: int = 10
 
 ## Measured in window coordinates (screenshot minus the window's top-left corner).
