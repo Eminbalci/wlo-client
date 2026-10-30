@@ -104,5 +104,11 @@ func _run() -> void:
 	var pet_companion: Dictionary = {"cond_byte": 2, "words": [2, 6, 0, 5 | (1 << 8), 0, 0]}
 	_check(not NpcEventScript.condition_matches(pet_companion, {"pets": [1]}), "Companion following stays unmodelled (never matches)")
 
+	# Companion following (sub-kind 6): the active companion must equal the packed template
+	var companion_cond: Dictionary = {"cond_byte": 2, "words": [2, 6, 0, 5 | (8090 << 8), 0, 0]}
+	_check(NpcEventScript.condition_matches(companion_cond, {"active_companion": 8090}), "Companion 8090 following matches the == test")
+	_check(not NpcEventScript.condition_matches(companion_cond, {"active_companion": 0}), "No active companion does not match")
+	var companion_not: Dictionary = {"cond_byte": 2, "words": [2, 6, 0, 6 | (8090 << 8), 0, 0]}
+	_check(not NpcEventScript.condition_matches(companion_not, {"active_companion": 8090}), "Companion 8090 following fails the != test")
 	print("\n--- %d TESTS, %d FAILED ---" % [_count, _failures])
 	quit(1 if _failures > 0 else 0)

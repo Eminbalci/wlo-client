@@ -338,5 +338,5 @@
 - [x] Eve gemi-enkazı geçişi (10014–10018 → 10035): transition 1 batmayı başlatıyor, 10035'e iniyor (`tests/test_shipwreck_transition.gd` 4/4).
 - [x] Eve pet sayısı koşulu (tür 2, w1==5: 4 eksik pet): `tests/test_npc_event_script.gd` 26/26.
 - [ ] Eve companion takibi (tür 2, w1==6): sunucu aktif takip eden pet (ActivePetID) ister, bizde yok.
-- [ ] Fırtına/kurtarma CG'si: `.sty` formatı çözülmedi.
-- [ ] EXP eğrisi: gerçek oyunda seviye atlayıp değerleri görmek gerekiyor.
+- [ ] Fırtına/kurtarma CG'si: oyunda ayrı bir CG dosyası yok. Orijinal sahne video olarak kaydedilmiş (`docs/video_analysis_sinking_event_seconds_176_240.md`): sarsıntı, kırmızı uyarı, siren, kararma. Bunların hepsi `sinking_cutscene.gd` içinde kodla yeniden üretilmiş. `.sty` dosyaları bu sahneye bağlanamadı.
+- [x] EXP eğrisi: `aLogin.exe` + `Formula.dat`'tan çözüldü (commit 7b46d13, `scripts/database/formula_data.gd`, `tests/test_exp_curve.gd` 30/30). Seviye n→n+1 = round((n+1)^3.1 + 5), sunucuyla aynı. Spec'teki 30/70/130/210 tablosu yanlış (AI tarafından yazılmış, mock testli).

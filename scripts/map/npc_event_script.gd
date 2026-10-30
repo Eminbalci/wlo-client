@@ -157,7 +157,11 @@ static func condition_matches(cond: Dictionary, state: Dictionary) -> bool:
 				if int(w[1]) == 5:
 					var pets: Array = state.get("pets", [])
 					return compare(maxi(0, 4 - pets.size()), value, comparison)
-				return false # companion following (sub-kind 6) needs the active companion, not modelled yet
+				# companion following (sub-kind 6, C# case 6): the active companion must be the packed template
+				if int(w[2]) != 0 or value <= 0 or value > 65535 or (comparison != 5 and comparison != 6):
+					return false
+				var following: bool = int(state.get("active_companion", 0)) == value
+				return following if comparison == 5 else not following
 			if int(w[0]) != 1:
 				return false
 			match int(w[1]):
