@@ -282,9 +282,9 @@
 - [x] "UI missing elements": the real client has 165 windows (`Form_*` in aLogin.exe), 15 exist in Godot. Prioritised list in `docs/ui_coverage.md`.
 - [ ] P1 windows (`docs/ui_coverage.md`). Already present: pet status, trade, warehouse, repair, world map, GPS, potential, titles, mail, channel, emotes, drop/pick up, inn, rewards, battle skill picker.
   - [ ] P1-a Form_Huminfo (other player's info): BLOKLU. Orijinal belge ve düzen yakalaması yok; oyunda başka bir oyuncuya sağ tıklayıp pencereyi yakalamak gerekiyor (kullanıcı).
-  - [ ] P1-b Form_Shopping / Form_Buy / Form_ShoppingCar (other store types; `shop_window.gd` exists, check coverage first)
+  - [ ] P1-b Form_Shopping / Form_Buy / Form_ShoppingCar: store-type skins and tabs exist in `shop_window.gd`. Eksik: sunucunun katalog kimlikleri (0x1FB83 zırh, 0x1FB84 silah, 0x1FB85 genel) kullanılmıyor, mağaza içerikleri varsayılan listeden geliyor. Orijinal katalog verisi çıkarılınca bağlanacak.
   - [x] P1-c Form_Medical (doktor): Eve opcode 7 (d1 6/7) onay sorar, evet denince oyuncu HP/SP tam dolar (`tests/test_clinic_rest.gd` 5/5). Açık noktalar: pet iyileştirmesi yok, onay metni orijinal değil.
-  - [ ] P1-d Form_SkillTree / Form_SkillTree1 (skill tree; `skill_window.tscn` exists, check coverage first)
+  - [ ] P1-d Form_SkillTree / Form_SkillTree1: BLOKLU. Orijinal belge yok; `skill_window` sekmeli ve öğrenilmiş-yetenek filtreli. Düzen için gerçek client ekran görüntüsü gerekiyor (kullanıcı).
 - [x] Cursors: verify the inferred roles (cursor1 normal, cursor3 attack, cursor4 talk, cursor8 harvest, cursor17 examine, cursor6 portal, cursor12 mining, cursor18 shop, cursor15 skill, cursor16 quest, cursor10 busy, cursor11 target; verified all 12 types, animation and hotspots in `tests/test_cursor_manager.gd`).
 - [x] Top-right action bar added after comparing with the running real client.
 - [ ] Real client comparison still open: ask the user to open the inventory, a shop, the skill window and a battle in the real game, then capture each with `PrintWindow` (see README) and compare layouts.
