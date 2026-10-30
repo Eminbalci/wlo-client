@@ -55,3 +55,10 @@ on Map 10001 to see if they are duplicates or additional actors.
 | 33 | none | 49 | not decoded (e.g. `113.sty`) |
 
 Next: decode the 33-byte character style records (51 files). Compare them with `JRole_N_M` frame counts in the archives.
+
+## 33-byte character style family: findings (JRole)
+- `JRole_N_M.jpg` in `jRole.JMG` / `JRole_c01.JMg` (832x640) is a full-screen character illustration (a CG), not a sprite sheet. Checked visually with `JRole_5_1`.
+- The 33-byte record (checked on `11005.sty`) reads as: 1 byte type + 8 u32, with fields 400 and 340 repeating (a display size or position of the illustration). Hypothesis: the family places an illustration (CG or portrait) in a scene.
+- `Jpeg.JMg` = mini-game backgrounds (Boxing, Slot machine, Poke, etc.), not the storm.
+- `map.JMG` = one background per map id (`10001.jpg` = ship deck). Not a storm CG either.
+- Conclusion: the storm/rescue CG is not in the pic archives checked so far; the 33-byte JRole records are illustration placements, so they may be the CG layouts the original uses in dialogues and cutscenes.
