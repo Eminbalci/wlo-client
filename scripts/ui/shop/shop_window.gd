@@ -1380,3 +1380,31 @@ func _update_buy_parts_visibility() -> void:
 				node.visible = true
 		_sell_hidden_nodes.clear()
 		_render_current_page()
+
+
+## Cart checkout: buys every cart entry through the same buy path as a single purchase.
+## entries: [{id, quantity}]. Each id must be in the merchant catalog. Returns true when all bought.
+func buy_cart(entries: Array) -> bool:
+	if current_mode != "buy":
+		set_mode("buy")
+	var all_ok := true
+	for entry in entries:
+		if not (entry is Dictionary):
+			all_ok = false
+			continue
+		var item_id := int(entry.get("id", 0))
+		var qty := int(entry.get("quantity", 1))
+		var idx := -1
+		for i in range(merchant_catalog.size()):
+			if int(merchant_catalog[i].get("id", 0)) == item_id:
+				idx = i
+				break
+		if idx < 0:
+			all_ok = false
+			continue
+		select_item(merchant_catalog[idx], idx)
+		set_quantity(qty)
+		if not execute_buy():
+			all_ok = false
+	return all_ok
+

@@ -355,4 +355,5 @@
 - [x] Tooltip biçimi: `scripts/ui/item_tooltip.gd` aLogin.exe çözümünden kurulu; satır sırası ve renk gerçek yakalamayla (Chocolate) uyuşuyor. Piksel genişliği ölçülmedi.
 - [x] Sepet penceresi (`scripts/ui/shop/shopping_cart_window.gd`, orijinal `form_shoppingcar_1.png` arka planı, 7 satır, Total, Continue/Checkout/Leave; `tests/test_shopping_cart_window.gd` 5/5). Henüz mağazadan açılmıyor; sepet mantığı (ekleme, toplam, satın alma) yok. Eski not: assetler `assets/ui/shop/` altında. `form_shopping_1.png` ve `form_shopping_2.png` Çince puan (mall) penceresi ("目前點數", "紅利點數"), `form_shoppingcar_1.png` alışveriş sepeti (Name / Effect / Price / Amount, Total, "繼續購買 / 確定結帳 / 離開商城"). Sepet penceresi için ayrı bir pencere gerekiyor; henüz bağlanmadı.
 - [ ] Armory: `Form_WeaponStore_1` / `Form_EquipStore_1` zaten `assets/hud` altında mağaza arka planı olarak kullanılıyor; Armory'ye özel bir skin tespit edilmedi.
+- [x] Sepet satın alma: `ShopWindow.buy_cart` sepet satırlarını mevcut satın alma yoluyla alır (`tests/test_cart_checkout.gd` 3/3, altın 500 → 420). Sepet mağazadan açılmıyor (tetikleyici gerçek client'ta yakalanmadı).
 
