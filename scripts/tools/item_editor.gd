@@ -13,6 +13,7 @@ signal recipe_exported(file_path: String)
 signal stats_updated()
 signal preset_applied(preset_name: String)
 
+## Equip positions 1..6 as the real client names them (aLogin.exe 0x3e92a4): Head, Body, Weapon, Hands, Shoes, Special Eq.
 enum EquipSlot {
 	NONE = 0,
 	HEADGEAR = 1,
@@ -280,12 +281,12 @@ func _bind_ui_elements() -> void:
 func _populate_dropdowns() -> void:
 	if opt_equip_slot and opt_equip_slot.item_count == 0:
 		opt_equip_slot.add_item("None / Inventory", EquipSlot.NONE)
-		opt_equip_slot.add_item("Headgear", EquipSlot.HEADGEAR)
-		opt_equip_slot.add_item("Clothes", EquipSlot.CLOTHES)
+		opt_equip_slot.add_item("Head", EquipSlot.HEADGEAR)
+		opt_equip_slot.add_item("Body", EquipSlot.CLOTHES)
 		opt_equip_slot.add_item("Weapon", EquipSlot.WEAPON)
-		opt_equip_slot.add_item("Wrist / Shield", EquipSlot.WRIST_SHIELD)
+		opt_equip_slot.add_item("Hands", EquipSlot.WRIST_SHIELD)
 		opt_equip_slot.add_item("Shoes", EquipSlot.SHOES)
-		opt_equip_slot.add_item("Accessory", EquipSlot.ACCESSORY)
+		opt_equip_slot.add_item("Special Eq", EquipSlot.ACCESSORY)
 		opt_equip_slot.add_item("Consumable", EquipSlot.CONSUMABLE)
 		opt_equip_slot.add_item("Crafting Material", EquipSlot.CRAFTING_MATERIAL)
 		opt_equip_slot.add_item("Tent Furniture", EquipSlot.TENT_FURNITURE)
@@ -496,12 +497,12 @@ func _on_btn_export_recipe_pressed() -> void:
 static func get_equip_slot_name(slot: int) -> String:
 	match slot:
 		EquipSlot.NONE: return "None / Inventory"
-		EquipSlot.HEADGEAR: return "Headgear"
-		EquipSlot.CLOTHES: return "Clothes"
+		EquipSlot.HEADGEAR: return "Head"
+		EquipSlot.CLOTHES: return "Body"
 		EquipSlot.WEAPON: return "Weapon"
-		EquipSlot.WRIST_SHIELD: return "Wrist / Shield"
+		EquipSlot.WRIST_SHIELD: return "Hands"
 		EquipSlot.SHOES: return "Shoes"
-		EquipSlot.ACCESSORY: return "Accessory"
+		EquipSlot.ACCESSORY: return "Special Eq"
 		EquipSlot.CONSUMABLE: return "Consumable"
 		EquipSlot.CRAFTING_MATERIAL: return "Crafting Material"
 		EquipSlot.TENT_FURNITURE: return "Tent Furniture"

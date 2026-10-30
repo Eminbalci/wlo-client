@@ -50,7 +50,7 @@ func _test_item_creation_and_attributes() -> void:
 
 	# Verify slot names helper
 	assert(ItemEditorClass.get_equip_slot_name(ItemEditorClass.EquipSlot.WEAPON) == "Weapon", "Slot 3 must be Weapon")
-	assert(ItemEditorClass.get_equip_slot_name(ItemEditorClass.EquipSlot.CLOTHES) == "Clothes", "Slot 2 must be Clothes")
+	assert(ItemEditorClass.get_equip_slot_name(ItemEditorClass.EquipSlot.CLOTHES) == "Body", "Slot 2 must be Body (client name)")
 	assert(ItemEditorClass.get_equip_slot_name(ItemEditorClass.EquipSlot.SHOES) == "Shoes", "Slot 5 must be Shoes")
 	assert(ItemEditorClass.get_equip_slot_name(ItemEditorClass.EquipSlot.CONSUMABLE) == "Consumable", "Slot 7 must be Consumable")
 
@@ -202,7 +202,7 @@ func _test_json_export_and_import() -> void:
 	var record: Dictionary = editor.create_item_record()
 	assert(record["item_id"] == 21005, "Record item_id mismatch")
 	assert(record["item_name"] == "Iron Armor", "Record item_name mismatch")
-	assert(record["equip_slot_name"] == "Clothes", "Record slot name mismatch")
+	assert(record["equip_slot_name"] == "Body", "Record slot name mismatch")
 	assert(record["stats"]["def"] == 18, "Record stats def mismatch")
 	assert(record["stats"]["mdef"] == 4, "Record stats mdef mismatch")
 
