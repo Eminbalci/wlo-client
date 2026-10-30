@@ -110,3 +110,46 @@ static func build_cart_rows(parent: Control) -> Array:
 		rows.append(row)
 
 	return rows
+
+
+## Fills the cart rows from entries ({name, effect, price, amount}) and sets the total label.
+static func fill_cart(parts: Dictionary, entries: Array) -> int:
+	var rows: Array = parts.get("rows", [])
+	var total: int = 0
+	for i in range(rows.size()):
+		var row: Control = rows[i] as Control
+		if not row:
+			continue
+		var lbl_name: Label = row.get_node_or_null("Ad") as Label
+		var lbl_effect: Label = row.get_node_or_null("Etki") as Label
+		var lbl_price: Label = row.get_node_or_null("Fiyat") as Label
+		var sb_amount: SpinBox = row.get_node_or_null("Miktar") as SpinBox
+		if i < entries.size() and entries[i] is Dictionary:
+			var entry: Dictionary = entries[i]
+			var price: int = int(entry.get("price", 0))
+			var amount: int = int(entry.get("amount", 0))
+			if lbl_name:
+				lbl_name.text = str(entry.get("name", ""))
+			if lbl_effect:
+				lbl_effect.text = str(entry.get("effect", ""))
+			if lbl_price:
+				lbl_price.text = str(price)
+			if sb_amount:
+				sb_amount.value = float(amount)
+			row.visible = true
+			total += price * amount
+		else:
+			if lbl_name:
+				lbl_name.text = ""
+			if lbl_effect:
+				lbl_effect.text = ""
+			if lbl_price:
+				lbl_price.text = ""
+			if sb_amount:
+				sb_amount.value = 0.0
+			row.visible = false
+	var total_label: Label = parts.get("total") as Label
+	if total_label:
+		total_label.text = str(total)
+	return total
+

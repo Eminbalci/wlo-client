@@ -33,5 +33,13 @@ func _run() -> void:
 	_record(is_equal_approx(first_row.position.y, 40.0), "first row sits at y 40")
 	var last_row: Control = parts["rows"][6]
 	_record(is_equal_approx(last_row.position.y, 40.0 + 59.0 * 6.0), "last row sits at y 394")
+	var total := ShoppingCartWindow.fill_cart(parts, [
+		{"name": "Bread", "effect": "Hp: +50", "price": 10, "amount": 3},
+		{"name": "Rice Wine", "effect": "Sp: +150", "price": 50, "amount": 1}
+	])
+	_record(total == 80, "total is 3 x 10 + 1 x 50 = 80 (%d)" % total)
+	_record(parts["total"].text == "80", "total label shows 80")
+	_record((parts["rows"][0] as Control).get_node("Ad").text == "Bread", "row 0 shows Bread")
+	_record(not (parts["rows"][2] as Control).visible, "unused rows are hidden")
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
