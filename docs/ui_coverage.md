@@ -25,7 +25,8 @@ Form_ServerList, Form_SelectRole, Form_CreateRole.
 | Form_channel | chat channel picker |
 | Form_SkillTree, Form_SkillTree1, Form_BattleSkill | skill tree, battle skill picker |
 | Form_Emotion | emote picker |
-| Form_Huminfo, Form_ActionList | other player's info, action menu |
+| Form_Huminfo | "Info Visibility" options window (not another player's card; see info_visibility_window.gd) |
+| Form_ActionList | action menu |
 | Form_ThrowThing, Form_ThrowMoney, Form_pickup | drop item / gold, pick up |
 | Form_EquipStore, Form_Shopping, Form_Buy, Form_ShoppingCar | other store types |
 | Form_Inn, Form_Medical | inn, doctor |
