@@ -29,6 +29,35 @@ const TEX_BG_DEFAULT: String = "res://assets/hud/form_store_1.png"
 const TEX_BG_WEAPON: String = "res://assets/hud/form_weapon_store_1.png"
 const TEX_BG_PHARMACY: String = "res://assets/hud/form_pharmacy_store.png"
 
+## Store kinds of the real client's store form (aLogin.exe 0x383a48, docs/re/equip_store_window.md):
+## the same form swaps its skin by a mode byte: 1 = Form_EquipStore_1, 2 = Form_ThingStore_1,
+## 3 = Form_ActivityExchange (Btn_Exchange_1 replaces Btn_Buy_1 at (136,489)). Layout is shared.
+enum StoreKind { DEFAULT = 0, EQUIP = 1, THING = 2, ACTIVITY_EXCHANGE = 3 }
+const STORE_KIND_SKINS: Dictionary = {
+	StoreKind.DEFAULT: "res://assets/hud/form_store_1.png",
+	StoreKind.EQUIP: "res://assets/hud/form_equip_store_1.png",
+	StoreKind.THING: "res://assets/hud/form_thing_store_1.png",
+	StoreKind.ACTIVITY_EXCHANGE: "res://assets/hud/form_activity_exchange.png",
+}
+var store_kind: int = StoreKind.DEFAULT
+
+
+## Switches the window skin to one of the real store variants (EquipStore / ThingStore / ...).
+## Returns false when the skin is not available (the current skin is kept).
+func set_store_kind(kind: int) -> bool:
+	var path: String = str(STORE_KIND_SKINS.get(kind, ""))
+	if path.is_empty():
+		return false
+	var tex: Texture2D = SkinWindowKit.tex(path)
+	if tex == null:
+		return false
+	store_kind = kind
+	if background_rect == null:
+		background_rect = get_node_or_null("Background") as TextureRect
+	if background_rect:
+		background_rect.texture = tex
+	return true
+
 const TEX_CLOSE_NORMAL: String = "res://assets/hud/btn_close_normal.png"
 const TEX_CLOSE_HOVER: String = "res://assets/hud/btn_close_hover.png"
 const TEX_CLOSE_PRESSED: String = "res://assets/hud/btn_close_pressed.png"
@@ -1063,51 +1092,9 @@ static func get_default_catalog(m_id: int, m_name: String) -> Array[Dictionary]:
 			}
 		]
 
-	# 3. Grocery Store / Props Shopkeeper (Default: Kelan Village Props Shop, Grandma, General Store)
-	return [
-		{
-			"id": 34014,
-			"name": "Tao Rice Ball",
-			"icon_id": 1859,
-			"price": 20,
-			"description": "Restores 50 HP. Fresh steamed rice wrapped in salted seaweed."
-		},
-		{
-			"id": 41066,
-			"name": "Fresh Coconut",
-			"icon_id": 1379,
-			"price": 15,
-			"description": "Restores 30 HP and 30 SP. Crisp tropical fruit fresh from the palm."
-		},
-		{
-			"id": 30173,
-			"name": "Water Flask",
-			"icon_id": 1803,
-			"price": 10,
-			"description": "Restores 20 SP. Clean spring water."
-		},
-		{
-			"id": 45001,
-			"name": "Ordinary Wood",
-			"icon_id": 1001,
-			"price": 15,
-			"description": "Basic lumber material used for tent tools and crafting."
-		},
-		{
-			"id": 34281,
-			"name": "Healing Potion",
-			"icon_id": 3438,
-			"price": 50,
-			"description": "Restores 150 HP immediately. Essential survival medicine."
-		},
-		{
-			"id": 34282,
-			"name": "SP Potion",
-			"icon_id": 3439,
-			"price": 60,
-			"description": "Restores 100 SP immediately. Brewed from distilled mana herbs."
-		}
-	]
+	# 3. Grocery Store / Props Shopkeeper (Kelan Village Props Shop, real client capture 2026-10-30).
+	# Name, icon, description and price come from Item.dat (GameDatabase.items), not from this file.
+	return _catalog_from_item_dat(PROPS_SHOP_ITEM_IDS)
 
 func _resolve_item_icon(icon_id: int) -> Texture2D:
 	if icon_id <= 0:
@@ -1187,3 +1174,28 @@ func _gui_input(event: InputEvent) -> void:
 			new_pos.x = clampf(new_pos.x, 0.0, vp_size.x - FORM_WIDTH)
 			new_pos.y = clampf(new_pos.y, 0.0, vp_size.y - FORM_HEIGHT)
 		global_position = new_pos
+
+
+## Item ids sold by the Kelan Village Props Shop (real client: Miscellaneous). Data is read from Item.dat.
+const PROPS_SHOP_ITEM_IDS: Array[int] = [32011, 32002, 45001, 45003, 42008]
+
+
+## Builds shop entries from the item database (Item.dat). Items missing from the database are skipped.
+static func _catalog_from_item_dat(item_ids: Array[int]) -> Array[Dictionary]:
+	var catalog: Array[Dictionary] = []
+	var loop := Engine.get_main_loop()
+	var db: Node = loop.root.get_node_or_null("GameDatabase") if loop is SceneTree else null
+	if db == null or not ("items" in db) or db.items == null:
+		return catalog
+	for item_id in item_ids:
+		var rec = db.items.get_item(item_id)
+		if rec == null:
+			continue
+		catalog.append({
+			"id": item_id,
+			"name": str(rec.name).strip_edges(),
+			"icon_id": int(rec.icon_id),
+			"price": int(rec.buy_price),
+			"description": str(rec.description)
+		})
+	return catalog

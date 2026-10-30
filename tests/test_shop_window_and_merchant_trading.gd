@@ -16,6 +16,9 @@ var _test_failures: int = 0
 var _test_count: int = 0
 
 func _init() -> void:
+	# Let the autoloads (GameDatabase / Item.dat) finish loading before the shop reads its catalog.
+	await process_frame
+	await process_frame
 	print("=================================================================")
 	print("--- Running Shop Window & Merchant Trading Automated Test Suite ---")
 	print("=================================================================\n")
@@ -100,37 +103,25 @@ func _test_merchant_catalogs_and_buy_tab() -> void:
 	var shop := ShopWindowScript.new()
 	root.add_child(shop)
 
-	shop.open_shop(13001, "Kelan Grocery Grandma")
+	shop.open_shop(0, "Props Shop")
 	_assert_test(shop.visible, "Shop Window Opened and Visible")
 	_assert_test(shop.current_mode == "buy", "Current Mode is 'buy'")
-	_assert_test(shop.title_label.text == "Kelan Grocery Grandma", "Title Label Shows Merchant Name")
-	_assert_test(not shop.merchant_catalog.is_empty(), "Merchant Catalog Loaded with Starter Goods")
+	_assert_test(shop.title_label.text == "Props Shop", "Title Label Shows Merchant Name")
+	_assert_test(not shop.merchant_catalog.is_empty(), "Merchant Catalog Loaded from Item.dat")
 
 	# Check item 0
 	_assert_test(not shop.selected_item.is_empty(), "First Item Auto-selected for Preview")
 	var sel_name := str(shop.selected_item.get("name", ""))
-	_assert_test(sel_name == "Tao Rice Ball", "First Item is Tao Rice Ball", "Actual: %s" % sel_name)
-	_assert_test(int(shop.selected_item.get("price", 0)) == 20, "Tao Rice Ball Unit Price is 20 G")
+	_assert_test(sel_name == "Bread", "First Item is Bread", "Actual: %s" % sel_name)
+	_assert_test(int(shop.selected_item.get("price", 0)) == 10, "Bread Unit Price is 10 G (real client)")
 
 	# Check slot rows visibility
 	_assert_test(shop.slot_rows[0].visible, "First Slot Row Visible")
 	var name_lbl = shop.slot_rows[0].get_node_or_null("NameLabel") as Label
-	_assert_test(name_lbl != null and name_lbl.text == "Tao Rice Ball", "First Slot Row Displays Item Name")
+	_assert_test(name_lbl != null and name_lbl.text == "Bread", "First Slot Row Displays Item Name")
 
-	# Check pagination: catalog has 6 items, so max_pages = 2
-	_assert_test(shop.merchant_catalog.size() == 6, "Grocery Catalog Has 6 Items (Requires 2 Pages)")
-	_assert_test(shop.btn_page_dn != null and shop.btn_page_dn.visible, "Page Down Button Visible When Pages > 1")
-
-	# Test Page Down
-	shop._on_page_next()
-	_assert_test(shop.current_page == 1, "Navigated to Page 2")
-	_assert_test(shop.slot_rows[0].visible, "Slot Row 0 on Page 2 Visible (6th item: SP Potion)")
-	var p2_name_lbl = shop.slot_rows[0].get_node_or_null("NameLabel") as Label
-	_assert_test(p2_name_lbl != null and p2_name_lbl.text == "SP Potion", "Page 2 First Item is SP Potion", "Actual: %s" % (p2_name_lbl.text if p2_name_lbl else "null"))
-
-	# Test Page Up
-	shop._on_page_prev()
-	_assert_test(shop.current_page == 0, "Navigated Back to Page 1")
+	# Real client Props Shop: 5 items (Bread, Rice Wine, Ordinary Wood, Lauan, Copper Ore), one page
+	_assert_test(shop.merchant_catalog.size() == 5, "Props Shop Catalog Has 5 Items (real client)")
 
 	shop.queue_free()
 
@@ -150,13 +141,13 @@ func _test_buy_transaction_and_gold_deduction() -> void:
 	_assert_test(shop.player_gold == 500, "Initial Player Gold is 500 G", "Actual: %d" % shop.player_gold)
 
 	# Open shop with default items
-	shop.open_shop(13001, "Kelan Grocery Grandma")
+	shop.open_shop(0, "Props Shop")
 
-	# Select Tao Rice Ball (price = 20 G), set quantity = 3
+	# Select Bread (price = 10 G, real client), set quantity = 3
 	shop.select_item(shop.merchant_catalog[0], 0)
 	shop.set_quantity(3)
 	_assert_test(shop.quantity == 3, "Quantity Set to 3", "Actual: %d" % shop.quantity)
-	_assert_test(shop.total_cost_label.text.contains("60"), "Total Cost Calculated as 60 Gold", "Actual: %s" % shop.total_cost_label.text)
+	_assert_test(shop.total_cost_label.text.contains("30"), "Total Cost Calculated as 30 Gold", "Actual: %s" % shop.total_cost_label.text)
 
 	# Listen to item_bought signal
 	var bought_result := {"received": false, "id": 0, "count": 0, "total": 0}
@@ -170,14 +161,14 @@ func _test_buy_transaction_and_gold_deduction() -> void:
 	# Execute Buy
 	var buy_ok: bool = shop.execute_buy()
 	_assert_test(buy_ok, "execute_buy() Returned Success (true)")
-	_assert_test(shop.player_gold == 440, "Player Gold Deducted by 60 G (500 -> 440)", "Actual: %d" % shop.player_gold)
+	_assert_test(shop.player_gold == 470, "Player Gold Deducted by 30 G (500 -> 470)", "Actual: %d" % shop.player_gold)
 	_assert_test(bought_result["received"], "item_bought Signal Emitted")
-	_assert_test(bought_result["id"] == 34014 and bought_result["count"] == 3 and bought_result["total"] == 60, "Signal Emitted Correct Parameters (34014, 3, 60)")
+	_assert_test(bought_result["id"] == 32011 and bought_result["count"] == 3 and bought_result["total"] == 30, "Signal Emitted Correct Parameters (32011, 3, 30)")
 
 	# Verify item added to player inventory
 	var has_rice_ball := false
 	for it in hud.inventory_ctrl.inventory_data:
-		if it is Dictionary and int(it.get("id", 0)) == 34014 and int(it.get("count", 0)) >= 3:
+		if it is Dictionary and int(it.get("id", 0)) == 32011 and int(it.get("count", 0)) >= 3:
 			has_rice_ball = true
 			break
 	_assert_test(has_rice_ball, "Purchased Items Added to HUDInventory Slots")
@@ -206,7 +197,7 @@ func _test_sell_tab_and_sell_transaction() -> void:
 	# Give player 5 Fresh Coconuts (ID 41066, base price 15 G)
 	hud.add_inventory_item(41066, 5, "Fresh Coconut", 1379, "Restores 30 HP and 30 SP.")
 
-	shop.open_shop(13001, "Kelan Grocery Grandma")
+	shop.open_shop(0, "Props Shop")
 	shop.set_mode("sell")
 
 	_assert_test(shop.current_mode == "sell", "Switched Mode to 'sell'")

@@ -82,7 +82,7 @@ func setup(p_hud: Control, nodes: Dictionary) -> void:
 	_setup_grid()
 	_populate_starter_items()
 
-## Configures the 5x9 (45 slots) authentic inventory grid
+## Configures the 5x10 (50 slots) authentic inventory grid (real client capture, 2026-10-30)
 func _setup_grid() -> void:
 	if not inventory_grid:
 		return
@@ -91,12 +91,12 @@ func _setup_grid() -> void:
 	inventory_icons.clear()
 	inventory_counts.clear()
 	inventory_data.clear()
-	inventory_data.resize(45)
-	for idx in range(45):
+	inventory_data.resize(50)
+	for idx in range(50):
 		inventory_data[idx] = {}
 
 	const GRID_COLS: int = 5
-	const GRID_ROWS: int = 9
+	const GRID_ROWS: int = 10
 	const SLOT_STRIDE: int = 34
 	const SLOT_SIZE := Vector2(34, 34)
 
