@@ -16,5 +16,8 @@ Update it whenever something is decoded or observed. Evidence level: **observed*
 | [alogin_functions.md](alogin_functions.md) | aLogin.exe: 600 functions (prologue-based) with the strings they use; Ghidra times out, see binary_notes.md |
 | [dispatch_table.md](dispatch_table.md) | Older build (sha 190dae51): action -> handler, action-0 notice texts |
 | [dispatch_table_959659ae.md](dispatch_table_959659ae.md) | Current aLogin.exe (sha 959659ae): 91 actions -> handler VA + strings used |
+| [trade_window.md](trade_window.md) | Form_Trade (legacy, no skin), Form_TradeItem_1, Form_TradePet_1: control rects, trade action 0x19 subs |
+| [warehouse_window.md](warehouse_window.md) | Form_Warehouse (legacy, no skin) and Form_itemBank_1 (live bank): grids, arrows, action 0x1E |
+| [repair_window.md](repair_window.md) | Form_Repair: controls, OK handler checks, unrepairable Broken-item ids, action 0x17/0x54 |
 
 Reference screenshots of the live client: `docs/reference/real_client/*.png` (806x629 form, 800x600 view).

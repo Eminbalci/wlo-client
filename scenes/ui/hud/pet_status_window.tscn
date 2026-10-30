@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud/pet_status_window.gd" id="1_pet_status"]
+[ext_resource type="Texture2D" path="res://assets/hud/form_pet_status.png" id="2_form_pet_status"]
+
+[node name="PetStatusWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 49.0
+offset_bottom = 65.0
+script = ExtResource("1_pet_status")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 49.0
+offset_bottom = 65.0
+texture = ExtResource("2_form_pet_status")

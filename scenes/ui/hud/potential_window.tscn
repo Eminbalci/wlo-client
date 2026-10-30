@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud/potential_window.gd" id="1_potential"]
+[ext_resource type="Texture2D" path="res://assets/hud/form_potential_1.png" id="2_form_potential_1"]
+
+[node name="PotentialWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 299.0
+offset_bottom = 520.0
+script = ExtResource("1_potential")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 299.0
+offset_bottom = 520.0
+texture = ExtResource("2_form_potential_1")
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 26.0
+offset_right = 267.0
+offset_bottom = 44.0
+flat = true
