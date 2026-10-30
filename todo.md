@@ -349,4 +349,5 @@
 - [ ] Props Shop satış penceresi (`props_shop_sell_real.png`): "Select props to sell" başlığı, çanta ile aynı 5×10 ikon ızgarası, altında "selling amount" ve "money held", Confirm/Close. Godot satış sekmesi liste satırları kullanıyor; ızgaraya çevrilmeli.
 - [ ] Item tooltip (ızgarada üzerine gelince): ad, "Non-tradeable" gibi durum, etki (örn. Hp +100), tür (prop), rank ve açıklama. Godot tooltip biçimi karşılaştırılmadı.
 - [ ] Mağazanın "Buy items" penceresinde Lauan fiyatı (30) ile Item.dat (50) çelişkisi.
+- [ ] Satış penceresi ayrı bir panel olmalı (gerçek: "Select props to sell", ızgara ortada, altında "selling amount" ve "money held", Confirm/Close). Şu an sell modu buy düzenini kullanıyor; ızgara sol üstte liste satırlarının üstüne biniyor (`godot_shop_sell_grid.png`). Yakalama aracı: `scripts/tools/capture_shop_sell_grid.gd`.
 
