@@ -62,3 +62,16 @@ Next: decode the 33-byte character style records (51 files). Compare them with `
 - `Jpeg.JMg` = mini-game backgrounds (Boxing, Slot machine, Poke, etc.), not the storm.
 - `map.JMG` = one background per map id (`10001.jpg` = ship deck). Not a storm CG either.
 - Conclusion: the storm/rescue CG is not in the pic archives checked so far; the 33-byte JRole records are illustration placements, so they may be the CG layouts the original uses in dialogues and cutscenes.
+
+## 33-byte fields (profile over 51 JRole files, 981 records)
+| field | observed values | reading |
+|---|---|---|
+| 0 | 0 in 901 records, small values otherwise | type or index (not decoded) |
+| 1 | 0 in 918 records | not decoded |
+| 2 | 0 in 809, 16777216 (0x01000000) in 51 | flags |
+| 3 | 400 (328x), 432, 430 | width of the display area (hypothesis) |
+| 4 | 300 (281x), 340, 320 | height of the display area (hypothesis) |
+| 5 | 1024 (428x), 1025 (116x) | flags (0x400, 0x401) |
+| 6-8 | some records carry ASCII (e.g. 1246777930 = "JRP"); a fixed 4-byte text tail | text, not a value |
+
+Check: 832x640 / 400x300 = 2.08 and 2.13, almost the same scale, so fields 3-4 are probably the illustration's display size.
