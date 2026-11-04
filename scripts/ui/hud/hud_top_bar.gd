@@ -144,6 +144,9 @@ func _on_action_requested(action_id: String) -> void:
 		"team":
 			if _hud.has_method("toggle_team_window"):
 				_hud.toggle_team_window()
+		"make_friends":
+			if _hud.has_method("toggle_friends_window"):
+				_hud.toggle_friends_window()
 		"battle_settings", "pk_settings":
 			if _hud.has_method("toggle_fight_menu"):
 				_hud.toggle_fight_menu()
