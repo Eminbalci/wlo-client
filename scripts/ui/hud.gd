@@ -20,6 +20,7 @@ const NotebookWindowScript = preload("res://scripts/ui/hud/notebook_window.gd")
 const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
 const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
 const EventsWindow = preload("res://scripts/ui/hud/events_window.gd")
+const LuckyDrawWindow = preload("res://scripts/ui/hud/lucky_draw_window.gd")
 const HUDCharacterStatusClass = preload("res://scripts/ui/hud/hud_character_status.gd")
 const HUDChatClass = preload("res://scripts/ui/hud/hud_chat.gd")
 const HUDDialogueClass = preload("res://scripts/ui/hud/hud_dialogue.gd")
@@ -1192,6 +1193,21 @@ func toggle_events_window() -> void:
 		events_window.close()
 	else:
 		events_window.open()
+
+## The top bar Lucky Draw icon (Btn_9) toggles the chance / lucky draw window.
+var lucky_draw_window: Control = null
+
+func toggle_lucky_draw_window() -> void:
+	if lucky_draw_window == null or not is_instance_valid(lucky_draw_window):
+		lucky_draw_window = LuckyDrawWindow.new()
+		var floating := get_node_or_null("FloatingWindows")
+		if floating != null:
+			floating.add_child(lucky_draw_window)
+		lucky_draw_window.position = Vector2(200, 60)
+	if lucky_draw_window.visible:
+		lucky_draw_window.close()
+	else:
+		lucky_draw_window.open()
 
 func toggle_team_window() -> void:
 	if window_manager_ctrl: window_manager_ctrl.toggle_team_window()
