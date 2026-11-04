@@ -240,7 +240,7 @@ func _test_info_visibility() -> void:
 	root.add_child(w)
 	_skin_ok(w, Vector2(186, 379), "Form_HumInfo_1")
 	_check(w.check_boxes.size() == 11 and w.check_boxes[0].position == Vector2(19, 43) and w.check_boxes[10].position == Vector2(19, 343), "11 boxes at (19, 43+30i)")
-	_check(w.btn_ok.position == Vector2(51, 337) and w.btn_close.position == Vector2(97, 337), "OK (51,337) Close (97,337)")
+	_check(w.btn_ok.position == Vector2(51, 372) and w.btn_close.position == Vector2(97, 372), "OK (51,372) Close (97,372)")
 	_check(not w.applied.has(false), "all options start checked")
 	var applied: Array = []
 	var msgs := _messages(w)

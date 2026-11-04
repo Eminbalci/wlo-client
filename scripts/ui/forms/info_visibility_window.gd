@@ -17,14 +17,14 @@ signal settings_applied(flags: Array) ## Array[bool] of OPTION_NAMES.size()
 signal message(text: String)
 signal window_closed
 
-const WINDOW_SIZE: Vector2 = Vector2(186, 379)
+const WINDOW_SIZE: Vector2 = Vector2(186, 402)
 const DEFAULT_POSITION: Vector2 = Vector2(150, 100)
 const CHECK_X: int = 19
 const CHECK_Y0: int = 43
 const CHECK_PITCH: int = 30
 const CHECK_SIZE: Vector2 = Vector2(16, 16)
-const OK_RECT: Rect2 = Rect2(51, 337, 56, 20)
-const CLOSE_RECT: Rect2 = Rect2(97, 337, 56, 20)
+const OK_RECT: Rect2 = Rect2(51, 372, 56, 20)
+const CLOSE_RECT: Rect2 = Rect2(97, 372, 56, 20)
 const UNAVAILABLE_INDEX: int = 9 ## 0-based; the client tags boxes 1..10 and blocks tag 10
 
 ## Captions baked into the skin, top to bottom (read from the bitmap).
