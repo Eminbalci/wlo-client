@@ -148,6 +148,7 @@ func _build_product_row(index: int) -> Dictionary:
 	cart.text = "Add to Cart"
 	cart.custom_minimum_size = Vector2(75, 24)
 	cart.clip_text = true
+	cart.add_theme_font_size_override("font_size", 9)
 	var btn_style := StyleBoxFlat.new()
 	btn_style.bg_color = Color("#a5b6d6")
 	btn_style.border_color = Color("#738eb5")
