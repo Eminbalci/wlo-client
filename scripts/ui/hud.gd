@@ -18,6 +18,7 @@ const HUDWindowManagerClass = preload("res://scripts/ui/hud/hud_window_manager.g
 const HUDInventoryClass = preload("res://scripts/ui/hud/hud_inventory.gd")
 const NotebookWindowScript = preload("res://scripts/ui/hud/notebook_window.gd")
 const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
+const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
 const HUDCharacterStatusClass = preload("res://scripts/ui/hud/hud_character_status.gd")
 const HUDChatClass = preload("res://scripts/ui/hud/hud_chat.gd")
 const HUDDialogueClass = preload("res://scripts/ui/hud/hud_dialogue.gd")
@@ -1164,6 +1165,17 @@ func open_item_mall() -> void:
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(item_mall_window)
 	item_mall_window.open()
+
+## The top bar Money icon (668) opens the gold actions window.
+var gold_window: Control = null
+
+func open_gold_window() -> void:
+	if gold_window == null:
+		gold_window = GoldWindow.new()
+		var floating := get_node_or_null("FloatingWindows")
+		if floating != null:
+			floating.add_child(gold_window)
+	gold_window.open()
 
 func toggle_team_window() -> void:
 	if window_manager_ctrl: window_manager_ctrl.toggle_team_window()
