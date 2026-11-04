@@ -363,3 +363,39 @@
 - [ ] "Buy" düğmesi hâlâ tek ürün akışında; gerçekte purchase list'i satın alıyor. Sepet satın almasına geçirilmeli.
 - [ ] Ayrı sepet penceresi (`Form_ShoppingCar_1`) mağaza içinde kullanılmıyor gibi görünüyor; purchase list alım penceresinin altında. Karar: ayrı pencereyi kaldır ya da başka bir yerde kullan.
 
+
+# Rhode Island Gap List (Internet Feature Scan)
+Kaynak: Rhode Island özellik taraması ve `docs/ui_coverage.md`, `docs/real_game_fidelity_gap_analysis.md` karşılaştırması. `docs/ui_coverage.md` içindeki Warehouse, Repair ve Trade eksikleri güncel değil (ilgili klasörler var), doğrulanmalı.
+
+## P1: Temel oynanış
+- [ ] 1. Lonca / organizasyon: `Form_ChooseCooperation`, `Form_CreateCooperation`, `Form_ArmyGrounp` ve haftalık kuşatma.
+- [ ] 2. Meslek ve üretim: `Form_Career`, `Form_MakeThing`, `Form_Alchemist`, `Form_Reinforce`; `compound_window.gd` tam simya akışına bağlanacak.
+- [ ] 3. Balıkçılık: Rhode Island'da mevcut, script yok.
+- [ ] 4. Üst aksiyon çubuğunda 8 işlevsiz düğme (`hud_top_bar.gd`).
+- [ ] 5. Sistem duyuru bandı (ticker) eksik. Durum paneli "+" düğmesi tamamlandı, `tests/test_auto_heal_button.gd` 8/8 geçti.
+- [x] 6. Envanter 50 slot (5x10): kodda zaten var, `hud_inventory.gd` doğrulandı.
+- [ ] 7. Sistem ayarlarındaki PvP, Trade Lock, Blacklist gibi seçenekler oyun kurallarına bağlanacak (şu an yalnızca görsel).
+
+## P2: Orta oyun
+- [ ] 8. PvP sıralaması: `Form_PlayerBattleMain`, `Form_PlayerBattleRank`, `Form_MyPlayerBattleRank`.
+- [ ] 9. Takım penceresi `Instance` sekmesi (boş) ve `Form_DupChoose`, `Form_DupDetail`.
+- [ ] 10. Arkadaş penceresi `Emote` ve `Set Up` sekmeleri, sayfalama.
+- [ ] 11. Yetenek ağacı: `Form_SkillTree`, `Form_BattleSkill`.
+- [ ] 12. Potansiyel penceresi (`potential_window.gd` var, düğme bağlantısı doğrulanacak).
+
+## P3: Konut, pazar, hesap ve mini oyunlar
+- [ ] 13. Konut (çadır): `tools/tent_editor.gd` var, oyuncu konut penceresi yok (`Form_HomeAdorn`, `Form_Bed`, `Form_Cabinet`).
+- [ ] 14. Mağaza ve satış: `Form_StallCase`, `Form_Sale*`, `Form_Business`, `Form_Express`.
+- [ ] 15. Banka ve exchange: `Form_ATM`, `Form_BankMoney`, `Form_Exchange`.
+- [ ] 16. VIP: `Form_VIP`.
+- [ ] 17. Mini oyunlar: `Form_LotteryOL`, `Form_EggMachine`, `Form_TurnGame`.
+- [ ] 18. Hesap ve ayar pencereleri: `Form_ChangePassword`, `Form_ChangeRoleName`, `Form_ChangeColor`.
+
+## Rhode Island Ek Bulgular (Çin resmi sitesi, 2026-11-04)
+Kaynak: https://wlr.dragongamerhk.com/gameshow.php?id=23
+- [ ] A.練功島 (Eğitim Adası): 練功招待卷 ile girilir, 6 saat süre, en fazla 48 saat birikir. Süre yalnızca bölge içindeyken işler. Canavarlar aynı seviyedeki normal canavarın yarı HP ve saldırısına sahip. Savaş sonrası karakter ve pet 200 EXP kazanır. Partide bilet olmayan üyeler savaştan EXP ve eşya almaz. Bölgeler: orman, mağara (岩洞), okyanus.
+- [ ] B. Zodyak Tapınağı (聖殿十二宮): menüde var, ayrıntı bulunamadı.
+- [ ] C. Ar-Ge (R&D): simya fırını, üretim, araç yakıtı. Mevcut `compound_window.gd` ile ilişkisi kontrol edilecek.
+- [ ] D. Evlilik (Form_Marry) ve Boşanma (Form_Divorce): menüde var.
+- [ ] E. Geliştirme (enhancement) ve meslek değişimi (Form_Career): P1/P2 listesinde zaten var.
+- Eksik kalan kaynaklar: 組織 wiki sayfası (402) ve 職業技能 Bahamut wiki (403) çekilemedi. Lonca, konut, balıkçılık ve açık artırma kuralları için ayrıntı bulunamadı.
