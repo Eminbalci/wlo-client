@@ -468,6 +468,41 @@ func on_inventory_slot_right_clicked(slot_idx: int) -> void:
 func on_inventory_slot_double_clicked(slot_idx: int) -> void:
 	use_or_equip_inventory_item(slot_idx)
 
+## HP and SP restored by an item (item fields first, then the Item.dat record). x = HP, y = SP.
+func restore_amounts(item: Dictionary) -> Vector2i:
+	var hp_rest: int = int(item.get("hp_restore", 0))
+	var sp_rest: int = int(item.get("sp_restore", 0))
+	if hp_rest <= 0 and sp_rest <= 0:
+		var db = _get_game_database()
+		if db and "items" in db and db.items:
+			var rec = db.items.get_item(int(item.get("id", 0)))
+			if rec:
+				if rec.has_method("get_hp_restore"):
+					hp_rest = rec.get_hp_restore()
+				if rec.has_method("get_sp_restore"):
+					sp_rest = rec.get_sp_restore()
+	return Vector2i(hp_rest, sp_rest)
+
+## Index of the first bag slot holding an HP or SP restoring item, or -1.
+func find_auto_heal_slot() -> int:
+	for i in range(inventory_data.size()):
+		var item: Dictionary = inventory_data[i]
+		if item.is_empty() or int(item.get("id", 0)) <= 0:
+			continue
+		var amounts := restore_amounts(item)
+		if amounts.x > 0 or amounts.y > 0:
+			return i
+	return -1
+
+## The status dock "+" button: uses the first HP/SP restoring item in the bag. Returns true when one was used.
+func auto_heal_from_bag() -> bool:
+	var slot := find_auto_heal_slot()
+	if slot < 0:
+		_log_system_message("No Potion or Bottle in the bag.")
+		return false
+	use_or_equip_inventory_item(slot)
+	return true
+
 ## Uses a consumable item or equips an equippable item
 const NOTEPAD_ITEM_ID: int = 34038
 

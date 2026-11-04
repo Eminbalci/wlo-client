@@ -81,6 +81,7 @@ func setup(hud: Control, nodes: Dictionary = {}) -> void:
 	_setup_chroma_shader()
 	_setup_status_dock_textures()
 	_setup_status_bars()
+	_build_auto_heal_button()
 	
 	if avatar_rect:
 		avatar_rect.position = Vector2(30, -4)
@@ -92,6 +93,25 @@ func setup(hud: Control, nodes: Dictionary = {}) -> void:
 		avatar_bg.visible = false
 		avatar_bg.position = Vector2(18, 18)
 		avatar_bg.size = Vector2(64, 64)
+
+## The "+" under the portrait: uses a Potion or Bottle from the bag to restore HP/SP (real client tooltip:
+## "Restore HP/SP using Potions and Bottles"). Position is estimated from the portrait, not yet pixel-checked.
+func _build_auto_heal_button() -> void:
+	if status_dock == null or status_dock.has_node("AutoHealButton"):
+		return
+	var btn := Button.new()
+	btn.name = "AutoHealButton"
+	btn.text = "+"
+	btn.tooltip_text = "Restore HP/SP using Potions and Bottles"
+	btn.position = Vector2(56, 66)
+	btn.size = Vector2(20, 20)
+	btn.pressed.connect(_on_auto_heal_pressed)
+	status_dock.add_child(btn)
+
+func _on_auto_heal_pressed() -> void:
+	if _hud == null or not "inventory_ctrl" in _hud or _hud.inventory_ctrl == null:
+		return
+	_hud.inventory_ctrl.auto_heal_from_bag()
 
 ## Creates and compiles the 3-layer chroma mask shader material
 func _setup_chroma_shader() -> void:
