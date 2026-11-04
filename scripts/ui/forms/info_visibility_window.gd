@@ -90,6 +90,24 @@ func _build() -> void:
 		var idx: int = i
 		cb.pressed.connect(func() -> void: toggle(idx))
 		check_boxes.append(cb)
+
+		var bg := ColorRect.new()
+		bg.name = "LabelBg%d" % i
+		bg.position = Vector2(36, rect.position.y)
+		bg.size = Vector2(WINDOW_SIZE.x - 14 - 36, 16)
+		bg.color = Color("#e6f1fb")
+		bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(bg)
+
+		var lbl := Label.new()
+		lbl.name = "Label%d" % i
+		lbl.position = Vector2(38, rect.position.y)
+		lbl.size = Vector2(WINDOW_SIZE.x - 46, CHECK_SIZE.y)
+		lbl.text = OPTION_NAMES[i]
+		lbl.add_theme_font_size_override("font_size", 10)
+		lbl.add_theme_color_override("font_color", Color("#7b8fb0"))
+		lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(lbl)
 	btn_ok = SkinWindowKit.button(self, "BtnOK", "btn_ok_2", OK_RECT)
 	btn_close = SkinWindowKit.button(self, "BtnClose", "btn_close_2", CLOSE_RECT)
 	btn_ok.pressed.connect(apply_and_close)
