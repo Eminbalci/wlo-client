@@ -381,7 +381,7 @@ Kaynak: Rhode Island özellik taraması ve `docs/ui_coverage.md`, `docs/real_gam
 - [ ] 9. Takım penceresi `Instance` sekmesi (boş) ve `Form_DupChoose`, `Form_DupDetail`.
 - [ ] 10. Arkadaş penceresi `Emote` ve `Set Up` sekmeleri, sayfalama.
 - [ ] 11. Yetenek ağacı: `Form_SkillTree`, `Form_BattleSkill`.
-- [ ] 12. Potansiyel penceresi (`potential_window.gd` var, düğme bağlantısı doğrulanacak).
+- [x] 12. Potansiyel penceresi: düğme `hud_character_status.gd` üzerinden `hud.open_potential()` ile `potential_window.gd` açıyor (kod bağlantısı doğrulandı, piksel karşılaştırması yok).
 
 ## P3: Konut, pazar, hesap ve mini oyunlar
 - [ ] 13. Konut (çadır): `tools/tent_editor.gd` var, oyuncu konut penceresi yok (`Form_HomeAdorn`, `Form_Bed`, `Form_Cabinet`).
@@ -393,7 +393,7 @@ Kaynak: Rhode Island özellik taraması ve `docs/ui_coverage.md`, `docs/real_gam
 
 ## Rhode Island Ek Bulgular (Çin resmi sitesi, 2026-11-04)
 Kaynak: https://wlr.dragongamerhk.com/gameshow.php?id=23
-- [ ] A.練功島 (Eğitim Adası): 練功招待卷 ile girilir, 6 saat süre, en fazla 48 saat birikir. Süre yalnızca bölge içindeyken işler. Canavarlar aynı seviyedeki normal canavarın yarı HP ve saldırısına sahip. Savaş sonrası karakter ve pet 200 EXP kazanır. Partide bilet olmayan üyeler savaştan EXP ve eşya almaz. Bölgeler: orman, mağara (岩洞), okyanus.
+- [~] A. (İstemci dilimi tamam: bilet onayı ve 13050 geçişi, `tests/test_training_ticket.gd` 5/5. Süre sayacı ve bilet tüketimi sunucu kuralı bekliyor.) 練功島 (Eğitim Adası): 練功招待卷 ile girilir, 6 saat süre, en fazla 48 saat birikir. Süre yalnızca bölge içindeyken işler. Canavarlar aynı seviyedeki normal canavarın yarı HP ve saldırısına sahip. Savaş sonrası karakter ve pet 200 EXP kazanır. Partide bilet olmayan üyeler savaştan EXP ve eşya almaz. Bölgeler: orman, mağara (岩洞), okyanus.
 - [ ] B. Zodyak Tapınağı (聖殿十二宮): menüde var, ayrıntı bulunamadı.
 - [ ] C. Ar-Ge (R&D): simya fırını, üretim, araç yakıtı. Mevcut `compound_window.gd` ile ilişkisi kontrol edilecek.
 - [ ] D. Evlilik (Form_Marry) ve Boşanma (Form_Divorce): menüde var.
