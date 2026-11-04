@@ -35,6 +35,7 @@ signal overhead_bubble_emitted(text_or_code: String)
 signal minimap_zoom_changed(new_zoom: float)
 signal minimap_collapsed_changed(is_collapsed: bool)
 signal logout_requested
+signal training_island_requested(map_id: int)
 
 # Top-Left Player Status Dock (241x116)
 @onready var status_dock: Control = $PlayerStatusDock
@@ -1038,6 +1039,16 @@ func show_choices(choices: Array[String], callback: Callable = Callable()) -> vo
 
 func hide_choices() -> void:
 	if dialogue_ctrl: dialogue_ctrl.hide_choices()
+
+## Asks before sending the player to Training Island (map 13050)
+func request_training_island() -> void:
+	show_dialogue("System", "Go to Training Isle?", null, ["Yes", "No"], [], Callable(self, "_on_training_island_choice"))
+
+func _on_training_island_choice(idx: int, _txt: String) -> void:
+	if idx != 0:
+		return
+	training_island_requested.emit(13050)
+	add_chat_message("System", "Training Island: 6 hours granted (placeholder, server rules pending).", "System")
 
 func show_quest_reward(reward_name: String = "", count: int = 1, gold: int = 0, exp_pts: int = 0) -> void:
 	if dialogue_ctrl: dialogue_ctrl.show_quest_reward(reward_name, count, gold, exp_pts)

@@ -505,6 +505,7 @@ func auto_heal_from_bag() -> bool:
 
 ## Uses a consumable item or equips an equippable item
 const NOTEPAD_ITEM_ID: int = 34038
+const TRAINING_TICKET_ID: int = 34253
 
 func use_or_equip_inventory_item(slot_idx: int) -> void:
 	if slot_idx < 0 or slot_idx >= inventory_data.size():
@@ -518,6 +519,12 @@ func use_or_equip_inventory_item(slot_idx: int) -> void:
 	if item_id == NOTEPAD_ITEM_ID:
 		if hud and hud.has_method("open_notebook"):
 			hud.open_notebook()
+		return
+
+	# The Training Ticket asks the HUD to confirm the trip to Training Island (the ticket is not consumed yet)
+	if item_id == TRAINING_TICKET_ID:
+		if hud and hud.has_method("request_training_island"):
+			hud.request_training_island()
 		return
 
 	# 1. Mount / vehicle check

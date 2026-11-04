@@ -162,6 +162,8 @@ func _ready() -> void:
 				hud.dialogue_closed.connect(Callable(self, "_on_dialogue_closed"))
 			if hud.has_signal("minimap_clicked") and not hud.minimap_clicked.is_connected(_on_minimap_clicked):
 				hud.minimap_clicked.connect(_on_minimap_clicked)
+			if hud.has_signal("training_island_requested") and not hud.training_island_requested.is_connected(_on_training_island_requested):
+				hud.training_island_requested.connect(_on_training_island_requested)
 			if "player" in hud:
 				hud.player = player
 			if hud.has_signal("equipment_changed") and player.has_method("set_equipment"):
@@ -1735,6 +1737,9 @@ func _on_tile_clicked(world_coord: Vector2) -> void:
 	_pending_npc_interaction = null
 	if player and player.has_method("set_target_world_position"):
 		player.set_target_world_position(world_coord)
+
+func _on_training_island_requested(map_id: int) -> void:
+	load_map(map_id)
 
 func _on_minimap_clicked(norm_pos: Vector2) -> void:
 	if not player or not map_renderer:
