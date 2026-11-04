@@ -116,7 +116,16 @@ func _build_product_row(index: int) -> Dictionary:
 	var cart := Button.new()
 	cart.name = "RowCart_%d" % index
 	cart.text = "Add to Cart"
-	cart.disabled = true
+	var btn_style := StyleBoxFlat.new()
+	btn_style.bg_color = Color("#a5b6d6")
+	btn_style.border_color = Color("#738eb5")
+	btn_style.set_border_width_all(1)
+	btn_style.set_corner_radius_all(3)
+	cart.add_theme_stylebox_override("normal", btn_style)
+	cart.add_theme_stylebox_override("hover", btn_style)
+	cart.add_theme_stylebox_override("pressed", btn_style)
+	cart.add_theme_stylebox_override("disabled", btn_style)
+	cart.add_theme_color_override("font_color", Color("#3a4a6b"))
 	cart.position = Vector2(688, y - 2)
 	cart.size = Vector2(75, 24)
 	add_child(cart)
