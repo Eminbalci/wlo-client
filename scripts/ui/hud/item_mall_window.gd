@@ -17,7 +17,7 @@ const ROW_COUNT: int = 10
 const CATEGORY_X: Array[float] = [235.0, 335.0, 395.0, 475.0, 550.0, 625.0, 690.0]
 const ROW_Y_START: float = 46.0
 const ROW_Y_STEP: float = 40.0
-const BOTTOM_Y: float = 530.0
+const BOTTOM_Y: float = 520.0
 
 var current_points: int = 0
 var bonus_points: int = 0
@@ -67,7 +67,7 @@ func _build() -> void:
 		product_rows.append(_build_product_row(i))
 
 	var bottom := [
-		["Previous", 225.0, 60.0],
+		["Previous", 226.0, 60.0],
 		["Next", 357.0, 60.0],
 		["SecurityLock", 422.0, 75.0],
 		["ShopCart", 502.0, 70.0],
