@@ -51,6 +51,15 @@ func _build() -> void:
 	_add_text("PointsMallTab", Vector2(24, 36), "Points Mall")
 	_add_text("BonusMallTab", Vector2(118, 36), "Bonus Mall")
 	_add_text("PointsMallTitle", Vector2(52, 86), "POINTS MALL")
+
+	var points_backdrop := ColorRect.new()
+	points_backdrop.name = "PointsBackdrop"
+	points_backdrop.color = Color("#d8e7f7")
+	points_backdrop.position = Vector2(24, 124)
+	points_backdrop.size = Vector2(176, 44)
+	points_backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(points_backdrop)
+
 	current_label = _add_text("CurrentPoints", Vector2(24, 128), "")
 	bonus_label = _add_text("BonusPoints", Vector2(56, 146), "")
 
@@ -60,7 +69,11 @@ func _build() -> void:
 		tab.text = CATEGORIES[i]
 		tab.flat = true
 		tab.position = Vector2(CATEGORY_X[i], 12)
-		tab.size = Vector2(90, 20)
+		var width: float = 70.0
+		if i + 1 < CATEGORY_X.size():
+			width = (CATEGORY_X[i + 1] - CATEGORY_X[i]) - 4.0
+		tab.size = Vector2(width, 20)
+		tab.add_theme_font_size_override("font_size", 9)
 		add_child(tab)
 
 	for i in range(ROW_COUNT):
@@ -79,6 +92,7 @@ func _build() -> void:
 		b.text = entry[0]
 		b.position = Vector2(entry[1], BOTTOM_Y)
 		b.size = Vector2(entry[2], 22)
+		b.add_theme_font_size_override("font_size", 10)
 		add_child(b)
 
 	page_label = _add_text("Page", Vector2(305, BOTTOM_Y + 4), "1 / 1")
@@ -88,6 +102,7 @@ func _build() -> void:
 	close_button.text = "Exit"
 	close_button.position = Vector2(680, BOTTOM_Y)
 	close_button.size = Vector2(70, 22)
+	close_button.add_theme_font_size_override("font_size", 10)
 	close_button.pressed.connect(close)
 	add_child(close_button)
 
