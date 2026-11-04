@@ -156,6 +156,9 @@ func _on_action_requested(action_id: String) -> void:
 		"money":
 			if _hud.has_method("open_gold_window"):
 				_hud.open_gold_window()
+		"events":
+			if _hud.has_method("toggle_events_window"):
+				_hud.toggle_events_window()
 		"trade":
 			if _hud.has_method("is_trading_allowed") and not _hud.is_trading_allowed():
 				_hud.add_chat_message("System", "Trading is currently disabled in System Settings.", "System")

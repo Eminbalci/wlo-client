@@ -19,6 +19,7 @@ const HUDInventoryClass = preload("res://scripts/ui/hud/hud_inventory.gd")
 const NotebookWindowScript = preload("res://scripts/ui/hud/notebook_window.gd")
 const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
 const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
+const EventsWindow = preload("res://scripts/ui/hud/events_window.gd")
 const HUDCharacterStatusClass = preload("res://scripts/ui/hud/hud_character_status.gd")
 const HUDChatClass = preload("res://scripts/ui/hud/hud_chat.gd")
 const HUDDialogueClass = preload("res://scripts/ui/hud/hud_dialogue.gd")
@@ -1176,6 +1177,21 @@ func open_gold_window() -> void:
 		if floating != null:
 			floating.add_child(gold_window)
 	gold_window.open()
+
+## The top bar Events icon (Btn_8) toggles the events / activities schedule window.
+var events_window: Control = null
+
+func toggle_events_window() -> void:
+	if events_window == null or not is_instance_valid(events_window):
+		events_window = EventsWindow.new()
+		var floating := get_node_or_null("FloatingWindows")
+		if floating != null:
+			floating.add_child(events_window)
+			events_window.position = Vector2(200, 60)
+	if events_window.visible:
+		events_window.close()
+	else:
+		events_window.open()
 
 func toggle_team_window() -> void:
 	if window_manager_ctrl: window_manager_ctrl.toggle_team_window()
