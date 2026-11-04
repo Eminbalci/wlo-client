@@ -50,7 +50,8 @@ func _build() -> void:
 
 	_add_text("PointsMallTab", Vector2(24, 36), "Points Mall")
 	_add_text("BonusMallTab", Vector2(118, 36), "Bonus Mall")
-	_add_text("PointsMallTitle", Vector2(52, 86), "POINTS MALL")
+	var title := _add_text("PointsMallTitle", Vector2(52, 86), "POINTS MALL")
+	title.add_theme_color_override("font_color", Color("#5a5ef0"))
 
 	var points_backdrop := ColorRect.new()
 	points_backdrop.name = "PointsBackdrop"
@@ -74,10 +75,21 @@ func _build() -> void:
 			width = (CATEGORY_X[i + 1] - CATEGORY_X[i]) - 4.0
 		tab.size = Vector2(width, 20)
 		tab.add_theme_font_size_override("font_size", 9)
+		tab.add_theme_color_override("font_color", Color("#3a4a6b"))
+		tab.add_theme_color_override("font_hover_color", Color("#3a4a6b"))
+		tab.add_theme_color_override("font_pressed_color", Color("#3a4a6b"))
+		tab.add_theme_color_override("font_disabled_color", Color("#3a4a6b"))
+		tab.add_theme_color_override("font_focus_color", Color("#3a4a6b"))
 		add_child(tab)
 
 	for i in range(ROW_COUNT):
 		product_rows.append(_build_product_row(i))
+
+	var bottom_style := StyleBoxFlat.new()
+	bottom_style.bg_color = Color("#dfe9f7")
+	bottom_style.border_color = Color("#738eb5")
+	bottom_style.set_border_width_all(1)
+	bottom_style.set_corner_radius_all(3)
 
 	var bottom := [
 		["Previous", 226.0, 60.0],
@@ -93,6 +105,15 @@ func _build() -> void:
 		b.position = Vector2(entry[1], BOTTOM_Y)
 		b.size = Vector2(entry[2], 22)
 		b.add_theme_font_size_override("font_size", 10)
+		b.add_theme_stylebox_override("normal", bottom_style)
+		b.add_theme_stylebox_override("hover", bottom_style)
+		b.add_theme_stylebox_override("pressed", bottom_style)
+		b.add_theme_stylebox_override("disabled", bottom_style)
+		b.add_theme_color_override("font_color", Color("#3a4a6b"))
+		b.add_theme_color_override("font_hover_color", Color("#3a4a6b"))
+		b.add_theme_color_override("font_pressed_color", Color("#3a4a6b"))
+		b.add_theme_color_override("font_disabled_color", Color("#3a4a6b"))
+		b.add_theme_color_override("font_focus_color", Color("#3a4a6b"))
 		add_child(b)
 
 	page_label = _add_text("Page", Vector2(305, BOTTOM_Y + 4), "1 / 1")
@@ -103,6 +124,15 @@ func _build() -> void:
 	close_button.position = Vector2(680, BOTTOM_Y)
 	close_button.size = Vector2(70, 22)
 	close_button.add_theme_font_size_override("font_size", 10)
+	close_button.add_theme_stylebox_override("normal", bottom_style)
+	close_button.add_theme_stylebox_override("hover", bottom_style)
+	close_button.add_theme_stylebox_override("pressed", bottom_style)
+	close_button.add_theme_stylebox_override("disabled", bottom_style)
+	close_button.add_theme_color_override("font_color", Color("#3a4a6b"))
+	close_button.add_theme_color_override("font_hover_color", Color("#3a4a6b"))
+	close_button.add_theme_color_override("font_pressed_color", Color("#3a4a6b"))
+	close_button.add_theme_color_override("font_disabled_color", Color("#3a4a6b"))
+	close_button.add_theme_color_override("font_focus_color", Color("#3a4a6b"))
 	close_button.pressed.connect(close)
 	add_child(close_button)
 
@@ -116,6 +146,8 @@ func _build_product_row(index: int) -> Dictionary:
 	var cart := Button.new()
 	cart.name = "RowCart_%d" % index
 	cart.text = "Add to Cart"
+	cart.custom_minimum_size = Vector2(75, 24)
+	cart.clip_text = true
 	var btn_style := StyleBoxFlat.new()
 	btn_style.bg_color = Color("#a5b6d6")
 	btn_style.border_color = Color("#738eb5")
