@@ -12,3 +12,9 @@ Money 668, Events 705, Lucky Draw 745. Tooltips were read from the hover capture
 Notes:
 - Discard was not clicked (destroys gold). Draw was not clicked (server-side random reward).
 - Events and Lucky Draw content (schedules, draw counts, rewards) comes from the server; the client shell can be built from these captures.
+
+## Status of all top bar icons (code check)
+- PK (skin 1): wired to `battle_settings` -> `toggle_fight_menu` (done).
+- Team, Make Friends, Money, Events, Lucky Draw, Item Mall: open their windows (done).
+- Jump In (skin 2) and Spectate (skin 3): depend on server battle sessions that this client does not have yet. They
+  report "not available in this client yet" instead of opening a fake window. Needs server battle data.
