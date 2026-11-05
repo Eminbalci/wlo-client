@@ -186,9 +186,9 @@ func init_default_learned_skills(role_id: int = 1, element: int = 3) -> void:
 		SkillDatabaseScript.Element.WIND:
 			_learned_skill_ids[14001] = true # Wind Blade
 	# Life skills
-	_learned_skill_ids[10021] = true # Collection
-	_learned_skill_ids[10022] = true # Cutting
-	_learned_skill_ids[10023] = true # Mining
+	_learned_skill_ids[15983] = true # Collection
+	_learned_skill_ids[15984] = true # Cutting
+	_learned_skill_ids[15985] = true # Mining
 
 ## Builds all internal UI nodes idempotently
 func _build_ui_if_needed() -> void:
