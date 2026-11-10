@@ -66,10 +66,10 @@ func _build() -> void:
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	var panel_style := StyleBoxFlat.new()
-	panel_style.bg_color = Color(0.12, 0.16, 0.24, 0.95)
-	panel_style.border_color = Color(0.85, 0.72, 0.32, 1.0)
+	panel_style.bg_color = Color("#e6f1fb")
+	panel_style.border_color = Color("#8fb3d9")
 	panel_style.set_border_width_all(2)
-	panel_style.set_corner_radius_all(4)
+	panel_style.set_corner_radius_all(6)
 	panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.5)
 	panel_style.shadow_size = 6
 	panel.add_theme_stylebox_override("panel", panel_style)
@@ -97,10 +97,8 @@ func _build() -> void:
 	title_label.text = "Activities"
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	title_label.add_theme_color_override("font_color", Color(1.0, 0.92, 0.45, 1.0))
+	title_label.add_theme_color_override("font_color", Color("#5a6f96"))
 	title_label.add_theme_font_size_override("font_size", 14)
-	title_label.add_theme_color_override("font_outline_color", Color(0.0, 0.0, 0.0, 0.9))
-	title_label.add_theme_constant_override("outline_size", 2)
 	title_bar.add_child(title_label)
 
 	close_button = Button.new()
@@ -124,10 +122,8 @@ func _build() -> void:
 	day_label.text = ""
 	day_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	day_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	day_label.add_theme_color_override("font_color", Color(0.75, 0.88, 1.0, 1.0))
+	day_label.add_theme_color_override("font_color", Color("#5a6f96"))
 	day_label.add_theme_font_size_override("font_size", 12)
-	day_label.add_theme_color_override("font_outline_color", Color(0.0, 0.0, 0.0, 0.8))
-	day_label.add_theme_constant_override("outline_size", 1)
 	day_bar.add_child(day_label)
 
 	main_vbox.add_child(day_bar)
@@ -136,8 +132,8 @@ func _build() -> void:
 	var header_panel := PanelContainer.new()
 	header_panel.name = "HeaderPanel"
 	var header_style := StyleBoxFlat.new()
-	header_style.bg_color = Color(0.18, 0.23, 0.32, 0.9)
-	header_style.border_color = Color(0.4, 0.5, 0.65, 0.7)
+	header_style.bg_color = Color("#dfe9f7")
+	header_style.border_color = Color("#b8cde6")
 	header_style.set_border_width_all(1)
 	header_style.set_corner_radius_all(2)
 	header_panel.add_theme_stylebox_override("panel", header_style)
@@ -156,10 +152,8 @@ func _build() -> void:
 		col_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL if i == 0 else Control.SIZE_SHRINK_CENTER
 		col_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if i == 0 else HORIZONTAL_ALIGNMENT_CENTER
 		col_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		col_lbl.add_theme_color_override("font_color", Color(0.95, 0.85, 0.5, 1.0))
+		col_lbl.add_theme_color_override("font_color", Color("#3a4a6b"))
 		col_lbl.add_theme_font_size_override("font_size", 12)
-		col_lbl.add_theme_color_override("font_outline_color", Color(0.0, 0.0, 0.0, 0.8))
-		col_lbl.add_theme_constant_override("outline_size", 1)
 		header_hbox.add_child(col_lbl)
 
 	header_panel.add_child(header_hbox)
@@ -181,8 +175,8 @@ func _build() -> void:
 		row_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 		var row_style := StyleBoxFlat.new()
-		row_style.bg_color = Color(0.15, 0.19, 0.28, 0.75) if r % 2 == 0 else Color(0.12, 0.16, 0.24, 0.75)
-		row_style.border_color = Color(0.28, 0.35, 0.48, 0.6)
+		row_style.bg_color = Color("#f4f8fd")
+		row_style.border_color = Color("#b8cde6")
 		row_style.set_border_width_all(1)
 		row_style.set_corner_radius_all(2)
 		row_panel.add_theme_stylebox_override("panel", row_style)
@@ -201,7 +195,7 @@ func _build() -> void:
 			cell_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			cell_lbl.clip_text = true
 			cell_lbl.add_theme_font_size_override("font_size", 11)
-			cell_lbl.add_theme_color_override("font_color", Color(0.9, 0.9, 0.9, 1.0))
+			cell_lbl.add_theme_color_override("font_color", Color("#3a4a6b"))
 			row_hbox.add_child(cell_lbl)
 			labels_for_row.append(cell_lbl)
 
@@ -240,7 +234,7 @@ func _build() -> void:
 	pager_label.custom_minimum_size = Vector2(50.0, 0.0)
 	pager_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	pager_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	pager_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
+	pager_label.add_theme_color_override("font_color", Color("#3a4a6b"))
 	pager_label.add_theme_font_size_override("font_size", 12)
 	pager_hbox.add_child(pager_label)
 
@@ -278,6 +272,23 @@ func _build() -> void:
 	leave_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	leave_button.pressed.connect(_on_leave_pressed)
 	bottom_hbox.add_child(leave_button)
+
+	var btn_style := StyleBoxFlat.new()
+	btn_style.bg_color = Color("#dfe9f7")
+	btn_style.border_color = Color("#738eb5")
+	btn_style.set_border_width_all(1)
+	btn_style.set_corner_radius_all(3)
+
+	for btn in [prev_button, next_button, teleport_button, leave_button, close_button]:
+		btn.add_theme_stylebox_override("normal", btn_style)
+		btn.add_theme_stylebox_override("hover", btn_style)
+		btn.add_theme_stylebox_override("pressed", btn_style)
+		btn.add_theme_stylebox_override("disabled", btn_style)
+		btn.add_theme_color_override("font_color", Color("#3a4a6b"))
+		btn.add_theme_color_override("font_hover_color", Color("#3a4a6b"))
+		btn.add_theme_color_override("font_pressed_color", Color("#3a4a6b"))
+		btn.add_theme_color_override("font_disabled_color", Color("#3a4a6b"))
+		btn.add_theme_color_override("font_focus_color", Color("#3a4a6b"))
 
 	main_vbox.add_child(bottom_hbox)
 
@@ -350,12 +361,12 @@ func _on_row_clicked(visual_row_index: int) -> void:
 func _set_row_highlight(panel: PanelContainer, is_selected: bool, row_index: int) -> void:
 	var style := StyleBoxFlat.new()
 	if is_selected:
-		style.bg_color = Color(0.24, 0.38, 0.60, 0.95)
-		style.border_color = Color(0.95, 0.85, 0.35, 1.0)
+		style.bg_color = Color("#dfe9f7")
+		style.border_color = Color("#738eb5")
 		style.set_border_width_all(2)
 	else:
-		style.bg_color = Color(0.15, 0.19, 0.28, 0.75) if row_index % 2 == 0 else Color(0.12, 0.16, 0.24, 0.75)
-		style.border_color = Color(0.28, 0.35, 0.48, 0.6)
+		style.bg_color = Color("#f4f8fd")
+		style.border_color = Color("#b8cde6")
 		style.set_border_width_all(1)
 	style.set_corner_radius_all(2)
 	panel.add_theme_stylebox_override("panel", style)
