@@ -9374,5 +9374,13 @@
     "name": "Inca",
     "bgm_name": "BGM0023",
     "bgm_id": 23
+  },
+  "60016": {
+    "record_index": 1172,
+    "map_id": 60016,
+    "raw_id": 21,
+    "name": "Copy of Residence",
+    "bgm_name": "BGM0011",
+    "bgm_id": 11
   }
 }
