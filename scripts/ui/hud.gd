@@ -1244,13 +1244,21 @@ const AUTO_WANDER_OFFSETS := [
 	Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1),
 ]
 
+## Go remoteWalkPause: one second between wander walks.
+const AUTO_WANDER_PAUSE_MS := 1000
+var _auto_wander_next_ms: int = 0
+
 func auto_player_wander() -> bool:
 	if player == null:
 		return false
 	if player.get("is_moving") == true:
 		return false
+	var now := Time.get_ticks_msec()
+	if now < _auto_wander_next_ms:
+		return false
 	for offset in AUTO_WANDER_OFFSETS:
 		if auto_player_move(player.global_position + offset * AUTO_WANDER_RADIUS):
+			_auto_wander_next_ms = now + AUTO_WANDER_PAUSE_MS
 			return true
 	return false
 

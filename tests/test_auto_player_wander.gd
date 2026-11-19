@@ -35,6 +35,10 @@ func _run() -> void:
 	if hud.player:
 		hud.player.set("is_moving", true)
 		_record(not hud.auto_player_wander(), "no wander while the player is walking")
+	if hud.player:
+		hud.player.set("is_moving", false)
+		hud._auto_wander_next_ms = Time.get_ticks_msec() + 5000
+		_record(not hud.auto_player_wander(), "no second wander inside the one-second pause")
 	inst.queue_free()
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
