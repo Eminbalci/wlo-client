@@ -121,7 +121,7 @@ func _test_merchant_catalogs_and_buy_tab() -> void:
 	_assert_test(name_lbl != null and name_lbl.text == "Bread", "First Slot Row Displays Item Name")
 
 	# Real client Props Shop: 5 items (Bread, Rice Wine, Ordinary Wood, Lauan, Copper Ore), one page
-	_assert_test(shop.merchant_catalog.size() == 5, "Props Shop Catalog Has 5 Items (real client)")
+	_assert_test(shop.merchant_catalog.size() == 6, "Props Shop Catalog Has 6 Items (real client + added 59010)")
 
 	shop.queue_free()
 
