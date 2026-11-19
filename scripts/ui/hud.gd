@@ -200,6 +200,10 @@ var stat_left_free: Label:
 @onready var skill_bg: TextureRect = $FloatingWindows/SkillWindow/Background
 @onready var team_window: Control = $FloatingWindows/TeamWindow
 @onready var team_bg: TextureRect = $FloatingWindows/TeamWindow/Background
+
+func _connect_team_instance_tab() -> void:
+	if team_window and team_window.has_signal("instance_tab_selected") and not team_window.instance_tab_selected.is_connected(_on_team_instance_tab):
+		team_window.instance_tab_selected.connect(_on_team_instance_tab)
 @onready var quest_window: Control = $FloatingWindows/QuestWindow
 @onready var quest_bg: TextureRect = $FloatingWindows/QuestWindow/Background
 @onready var friends_window: Control = $FloatingWindows/FriendsWindow
@@ -414,6 +418,7 @@ func _start_window_drag(win: Control, global_mouse_pos: Vector2) -> void:
 
 
 func _ready() -> void:
+	_connect_team_instance_tab()
 	_item_tooltip = ItemTooltipScene.new()
 	_item_tooltip.name = "ItemTooltip"
 	add_child(_item_tooltip)
@@ -1191,6 +1196,9 @@ func open_instance_window(send: Callable = Callable()) -> void:
 		(floating if floating else self).add_child(instance_window)
 		instance_window.configure(send)
 	instance_window.show_page()
+
+func _on_team_instance_tab() -> void:
+	open_instance_window()
 
 func handle_instance_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
 	if instance_window == null or not is_instance_valid(instance_window):
