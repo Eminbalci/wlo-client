@@ -159,6 +159,13 @@ func _init() -> void:
 	var created_data: Array = []
 	cc.character_created.connect(func(c): created_data.append(c))
 	cc._on_confirm_create()
+	var dlg = cc.get_node_or_null("CreateCodeDialog")
+	if dlg:
+		dlg.fields[0].text = "abcdef"
+		dlg.fields[1].text = "abcdef"
+		dlg.fields[2].text = "ghijkl"
+		dlg.fields[3].text = "ghijkl"
+		dlg.submit()
 
 	assert(created_data.size() == 1, "character_created signal must be emitted")
 	var new_char: Dictionary = created_data[0]

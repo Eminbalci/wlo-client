@@ -115,6 +115,7 @@ func _test_character_create_kinematics() -> void:
 	cc.first_name_input.text = ""
 	cc.family_name_input.text = ""
 	cc._on_confirm_create()
+	cc._on_confirm_create()
 	_check(cc.step4_error_label.text.contains("Please enter"), "Empty name rejected")
 
 	cc.first_name_input.text = "Abcdefgh"
@@ -127,5 +128,16 @@ func _test_character_create_kinematics() -> void:
 	cc.first_name_input.text = "HeroDaniel"
 	cc.family_name_input.text = ""
 	cc._on_confirm_create()
+	_confirm_create_code(cc)
 	_check(created.size() == 1 and str(created[0].get("name", "")) == "HeroDaniel", "Valid name creates character")
 	cc.queue_free()
+
+func _confirm_create_code(cc: Node) -> void:
+	var dlg = cc.get_node_or_null("CreateCodeDialog")
+	if dlg == null:
+		return
+	dlg.fields[0].text = "abcdef"
+	dlg.fields[1].text = "abcdef"
+	dlg.fields[2].text = "ghijkl"
+	dlg.fields[3].text = "ghijkl"
+	dlg.submit()

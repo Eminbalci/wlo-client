@@ -548,10 +548,37 @@ func _on_slot_create_pressed(slot_idx: int) -> void:
 
 func _on_slot_del_pressed(slot_idx: int) -> void:
 	_play_click_sfx()
+	var char_data: Dictionary = _characters.get(str(slot_idx), {})
+	var stored := str(char_data.get("deletion_code_hash", ""))
+	if stored == "":
+		_delete_slot(slot_idx)
+		return
+	if _delete_dialog == null:
+		_delete_dialog = PasswordDialog.new()
+		_delete_dialog.name = "DeleteCodeDialog"
+		add_child(_delete_dialog)
+	_delete_dialog.ensure_built()
+	_delete_dialog.set_mode(2)
+	_delete_dialog.verify_hash = stored
+	_delete_dialog.open()
+	if not _delete_dialog.code_verified.is_connected(_on_delete_code_verified):
+		_delete_dialog.code_verified.connect(_on_delete_code_verified)
+	_pending_delete_slot = slot_idx
+
+
+func _on_delete_code_verified() -> void:
+	_delete_slot(_pending_delete_slot)
+
+
+func _delete_slot(slot_idx: int) -> void:
 	CharacterManager.delete_character(slot_idx, account_name)
 	_characters.erase(str(slot_idx))
 	_update_slot_card(slot_idx)
 	delete_requested.emit(slot_idx)
+
+
+var _delete_dialog: PasswordDialog = null
+var _pending_delete_slot: int = -1
 
 func _on_back_pressed() -> void:
 	_play_click_sfx()
