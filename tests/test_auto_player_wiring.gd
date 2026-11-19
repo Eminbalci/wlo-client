@@ -40,12 +40,12 @@ func _run() -> void:
 	var potion_id := 0
 	for id in db.items.get_all_items().keys():
 		var rec = db.items.get_item(int(id))
-		if rec and String(rec.name).to_lower().contains("potion"):
+		if rec and int(rec.equip_pos) == 8:
 			potion_id = int(id)
 			break
-	_record(potion_id > 0, "the item database has a potion to test with")
+	_record(potion_id > 0, "the item database has a battle consumable (equip slot 8) to test with")
 	hud.inventory_ctrl.inventory_data[2] = {"id": potion_id, "count": 1}
-	_record(hud.find_supply_slot() == 2, "the first supply item in the bag is found")
+	_record(hud.find_supply_slot() == 2, "the first battle consumable in the bag is found")
 
 	var before: Vector2 = hud.player.global_position if hud.player else Vector2.ZERO
 	runner.apply({"action": AutoPlayerController.ACTION_MOVE}, null)

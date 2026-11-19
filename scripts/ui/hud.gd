@@ -1210,23 +1210,24 @@ func _on_business_trade_items() -> void:
 
 ## AutoPlayer wiring: walking moves the player toward its current position's target; a supply use
 ## picks the first bag slot whose item name reads like a consumable (Godot has no consumable type code).
-const SUPPLY_NAME_HINTS := ["potion", "pill", "herb", "medicine", "elixir", "supply"]
+## Go battleConsumableSlot: an item whose equip slot is 8 is a battle consumable (internal/assets/battle_items.go).
+const BATTLE_CONSUMABLE_SLOT := 8
 
 func find_supply_slot() -> int:
 	_ensure_sub_controllers()
 	if inventory_ctrl == null:
 		return -1
+	var db := get_node_or_null("/root/GameDatabase")
+	if db == null:
+		return -1
 	for i in range(inventory_ctrl.inventory_data.size()):
 		var item: Dictionary = inventory_ctrl.inventory_data[i]
 		var item_id := int(item.get("id", 0))
-		if item_id <= 0 or int(item.get("count", item.get("amount", 1))) <= 0:
+		if item_id <= 0 or int(item.get("count", 1)) <= 0:
 			continue
-		var db := get_node_or_null("/root/GameDatabase")
-		var rec = db.items.get_item(item_id) if db else null
-		var lowered: String = (str(rec.name) if rec else "").to_lower()
-		for hint in SUPPLY_NAME_HINTS:
-			if lowered.contains(hint):
-				return i
+		var rec = db.items.get_item(item_id)
+		if rec and int(rec.equip_pos) == BATTLE_CONSUMABLE_SLOT:
+			return i
 	return -1
 
 func auto_player_use_supply() -> bool:
