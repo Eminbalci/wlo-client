@@ -22,6 +22,7 @@ const GiftCardWindowScript = preload("res://scripts/ui/hud/gift_card_window.gd")
 const BlackNameListWindowScript = preload("res://scripts/ui/hud/black_name_list_window.gd")
 const InstanceWindowScript = preload("res://scripts/ui/hud/instance_window.gd")
 const WorldPkWindowScript = preload("res://scripts/ui/hud/world_pk_window.gd")
+const BusinessWindowScript = preload("res://scripts/ui/hud/business_window.gd")
 const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
 const EventsWindow = preload("res://scripts/ui/hud/events_window.gd")
 const LuckyDrawWindow = preload("res://scripts/ui/hud/lucky_draw_window.gd")
@@ -1186,6 +1187,26 @@ func open_black_name_list() -> void:
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(black_name_list_window)
 	black_name_list_window.open()
+
+## Toolbar Trade menu (Go Business form). Trade Items starts the trade with the system's trade flow.
+var business_window: BusinessWindow = null
+
+func toggle_business_window() -> void:
+	if business_window == null or not is_instance_valid(business_window):
+		business_window = BusinessWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(business_window)
+		business_window.configure(func() -> int: return get_gold())
+		business_window.trade_items_requested.connect(_on_business_trade_items)
+	business_window.toggle()
+
+func _on_business_trade_items() -> void:
+	if business_window:
+		business_window.close()
+	if is_trading_allowed():
+		add_chat_message("System", "Select a target player to initiate trade.", "System")
+	else:
+		add_chat_message("System", "Trading is currently disabled in System Settings.", "System")
 
 ## World PK window (Go PlayerBattle form). The server supplies its data through the window's state.
 var world_pk_window: WorldPkWindow = null

@@ -162,11 +162,12 @@ func _on_action_requested(action_id: String) -> void:
 		"lucky_draw":
 			if _hud.has_method("toggle_lucky_draw_window"):
 				_hud.toggle_lucky_draw_window()
+		"player_battle":
+			if _hud.has_method("open_world_pk"):
+				_hud.open_world_pk()
 		"trade":
-			if _hud.has_method("is_trading_allowed") and not _hud.is_trading_allowed():
-				_hud.add_chat_message("System", "Trading is currently disabled in System Settings.", "System")
-			elif _hud.has_method("add_chat_message"):
-				_hud.add_chat_message("System", "Select a target player to initiate trade.", "System")
+			if _hud.has_method("toggle_business_window"):
+				_hud.toggle_business_window()
 		_:
 			if _hud.has_method("add_chat_message"):
 				var label := action_id.replace("_", " ").capitalize()
