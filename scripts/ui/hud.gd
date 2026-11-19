@@ -1236,6 +1236,24 @@ func auto_player_use_supply() -> bool:
 	inventory_ctrl.use_or_equip_inventory_item(slot)
 	return true
 
+## Go remote.go wander: eight offsets at radius 160, tried in this order; the first walkable one is taken.
+## The Go client skips wandering while it walks, is dead, or has a pending NPC; the caller checks that.
+const AUTO_WANDER_RADIUS := 160.0
+const AUTO_WANDER_OFFSETS := [
+	Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(0, 1),
+	Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1),
+]
+
+func auto_player_wander() -> bool:
+	if player == null:
+		return false
+	if player.get("is_moving") == true:
+		return false
+	for offset in AUTO_WANDER_OFFSETS:
+		if auto_player_move(player.global_position + offset * AUTO_WANDER_RADIUS):
+			return true
+	return false
+
 func auto_player_move(target: Vector2) -> bool:
 	if player and player.has_method("move_to_world_pos"):
 		return player.move_to_world_pos(target)
@@ -1244,10 +1262,7 @@ func auto_player_move(target: Vector2) -> bool:
 ## Builds the AutoPlayer runner with the HUD's walk and supply actions connected.
 func make_auto_player_runner() -> AutoPlayerRunner:
 	var runner := AutoPlayerRunner.new()
-	# Wander: a random point within 64 px of the player. Route choice beyond this is not ported.
-	runner.on_move = func() -> void:
-		if player:
-			auto_player_move(player.global_position + Vector2(randf_range(-64.0, 64.0), randf_range(-64.0, 64.0)))
+	runner.on_move = func() -> void: auto_player_wander()
 	runner.on_use_supply = func() -> void: auto_player_use_supply()
 	return runner
 
