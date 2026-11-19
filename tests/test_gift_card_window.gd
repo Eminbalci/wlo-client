@@ -53,8 +53,25 @@ func _run() -> void:
 
 	w.request_card(3, 50001)
 	_record(w._rewards.is_empty(), "requesting again clears the previous rewards")
+	await _check_hud()
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
+
+
+func _check_hud() -> void:
+	var inst: Node = (load("res://scenes/world/map_view.tscn") as PackedScene).instantiate()
+	root.add_child(inst)
+	for i in range(60):
+		await process_frame
+	var hud = inst.get("hud")
+	_sent.clear()
+	hud.open_gift_card(2, 50001, Callable(self, "_capture"))
+	_record(hud.gift_card_window != null and _sent.size() == 1 and _sent[0] == PackedByteArray([23, 133, 1, 2, 0x51, 0xC3, 0]), "the HUD opens the selector and sends the card request")
+	_record(hud.handle_gift_packet(23, 108, PackedByteArray([23, 108, 2, 1, 0, 0x51, 0xC3, 1, 1, 0x46, 0x85, 1])), "the HUD routes the details reply to the selector")
+	_record(hud.gift_card_window.visible, "the routed details open the selector in the HUD")
+	_record(not hud.handle_gift_packet(23, 99, PackedByteArray([23, 99, 2])), "unrelated AC23 sub packets are not consumed")
+	hud.gift_card_window.close()
+	inst.queue_free()
 
 
 func _name(id: int) -> String:

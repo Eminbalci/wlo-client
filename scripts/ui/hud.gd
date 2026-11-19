@@ -18,6 +18,7 @@ const HUDWindowManagerClass = preload("res://scripts/ui/hud/hud_window_manager.g
 const HUDInventoryClass = preload("res://scripts/ui/hud/hud_inventory.gd")
 const NotebookWindowScript = preload("res://scripts/ui/hud/notebook_window.gd")
 const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
+const GiftCardWindowScript = preload("res://scripts/ui/hud/gift_card_window.gd")
 const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
 const EventsWindow = preload("res://scripts/ui/hud/events_window.gd")
 const LuckyDrawWindow = preload("res://scripts/ui/hud/lucky_draw_window.gd")
@@ -1167,6 +1168,25 @@ func open_item_mall() -> void:
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(item_mall_window)
 	item_mall_window.open()
+
+## Gift exchange card selector (Go item_cards form). `send` carries the outgoing payload to the network layer.
+var gift_card_window: GiftCardWindow = null
+
+func open_gift_card(slot: int, item_id: int, send: Callable = Callable()) -> void:
+	if gift_card_window == null or not is_instance_valid(gift_card_window):
+		gift_card_window = GiftCardWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(gift_card_window)
+		gift_card_window.configure(send, func(id: int) -> String:
+			var rec = GameDatabase.items.get_item(id)
+			return rec.name if rec else str(id))
+	gift_card_window.request_card(slot, item_id)
+
+## Routes an AC 23 server packet to the gift card selector. Returns true when the window consumed it.
+func handle_gift_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
+	if gift_card_window == null or not is_instance_valid(gift_card_window):
+		return false
+	return gift_card_window.handle_packet(action, sub, payload)
 
 ## The top bar Money icon (668) opens the gold actions window.
 var gold_window: Control = null
