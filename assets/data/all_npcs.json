@@ -290988,5 +290988,70 @@
         "entity_type": 5
       }
     ]
+  },
+  "50016": {
+    "template_id": 50016,
+    "name": "Copy of Message Board",
+    "sprite_id": 1539,
+    "model_id": 1539,
+    "model_jmp": "1539.jmp",
+    "model_jma": "001.jma",
+    "icon_id": 1000,
+    "icon_jmp": "1000.jmp",
+    "icon_jma": "001.jma",
+    "level": 1,
+    "hp": 43,
+    "sp": 100,
+    "element": 1,
+    "stats": {
+      "str": 0,
+      "con": 3,
+      "int": 0,
+      "wis": 0,
+      "agi": 0
+    },
+    "talk_image": 0,
+    "talk_image_jmp": "",
+    "talk_image_jma": "",
+    "is_monster": false,
+    "skills": [
+      0,
+      0,
+      0
+    ],
+    "npc_type": 8,
+    "monster_book_index": 0,
+    "maps_present": [
+      {
+        "map_id": 12050,
+        "click_id": 36,
+        "name": "Npc",
+        "pos": [
+          1862,
+          1245
+        ],
+        "rotation": 6,
+        "events": [
+          57
+        ],
+        "behavior": 1,
+        "entity_type": 5
+      },
+      {
+        "map_id": 12050,
+        "click_id": 37,
+        "name": "Npc",
+        "pos": [
+          1157,
+          2583
+        ],
+        "rotation": 5,
+        "events": [
+          58
+        ],
+        "behavior": 1,
+        "entity_type": 5
+      }
+    ]
   }
 }
