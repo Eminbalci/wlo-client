@@ -55,6 +55,7 @@ func apply_browse(p: PackedByteArray) -> bool:
 	pages = parsed.pages
 	page = parsed.page
 	listings = parsed.rows
+	refresh_controls()
 	return true
 
 
@@ -100,6 +101,67 @@ func create_room(room_name: String) -> bool:
 	_request(p)
 	_create_open = false
 	return true
+
+
+## Visible controls: five listing rows (name, creator, member count), page label and arrows, and
+## Create. Built on demand so tests and the HUD can add the window before it is shown.
+var _rows: Array[Label] = []
+var _page_label: Label = null
+var _create_button: Button = null
+var _prev_button: Button = null
+var _next_button: Button = null
+
+
+func build_controls() -> void:
+	if not _rows.is_empty():
+		return
+	for i in PAGE_ROWS:
+		var l := Label.new()
+		l.name = "Row%d" % i
+		l.position = Vector2(30, ROW_TOP + i * ROW_STEP)
+		l.size = Vector2(240, 42)
+		add_child(l)
+		_rows.append(l)
+	_page_label = Label.new()
+	_page_label.name = "Page"
+	_page_label.position = Vector2(170, 434)
+	add_child(_page_label)
+	_prev_button = Button.new()
+	_prev_button.name = "PrevPage"
+	_prev_button.text = "<"
+	_prev_button.position = Vector2(135, 430)
+	_prev_button.size = Vector2(21, 21)
+	_prev_button.pressed.connect(func() -> void: go_page(-1))
+	add_child(_prev_button)
+	_next_button = Button.new()
+	_next_button.name = "NextPage"
+	_next_button.text = ">"
+	_next_button.position = Vector2(220, 430)
+	_next_button.size = Vector2(21, 21)
+	_next_button.pressed.connect(func() -> void: go_page(1))
+	add_child(_next_button)
+	_create_button = Button.new()
+	_create_button.name = "Create"
+	_create_button.text = "Create"
+	_create_button.position = Vector2(149, 465)
+	_create_button.size = Vector2(71, 20)
+	add_child(_create_button)
+	refresh_controls()
+
+
+## Fills the rows and the page label from the current listings.
+func refresh_controls() -> void:
+	if _rows.is_empty():
+		return
+	for i in PAGE_ROWS:
+		if i < listings.size():
+			var r: Dictionary = listings[i]
+			_rows[i].text = "%s  (%s, %d players)" % [r.name, r.creator, r.members]
+			_rows[i].visible = true
+		else:
+			_rows[i].text = ""
+			_rows[i].visible = false
+	_page_label.text = "%d/%d" % [page, maxi(pages, 1)]
 
 
 func _request(p: PackedByteArray) -> void:

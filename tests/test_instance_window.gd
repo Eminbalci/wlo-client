@@ -33,6 +33,7 @@ func _run() -> void:
 	w.configure(Callable(self, "_capture"))
 	root.add_child(w)
 
+	w.build_controls()
 	w.show_page()
 	_record(_sent.back() == PackedByteArray([85, 1, 1]), "opening the browser requests page 1")
 
@@ -41,6 +42,8 @@ func _run() -> void:
 	_record(w.handle_packet(85, 1, reply), "a browse reply is consumed")
 	_record(w.pages == 3 and w.listings.size() == 1 and w.listings[0].name == "Hall", "the reply fills the listings and page count")
 
+	_record(w._rows[0].text.begins_with("Hall") and w._rows[0].visible and not w._rows[1].visible, "the listing shows one row and hides the empty ones")
+	_record(w._page_label.text == "1/3", "the page label shows page and total")
 	w.go_page(1)
 	_record(_sent.back() == PackedByteArray([85, 1, 2]), "the next arrow requests page 2")
 	w.page = 3
