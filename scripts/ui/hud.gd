@@ -21,6 +21,7 @@ const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
 const GiftCardWindowScript = preload("res://scripts/ui/hud/gift_card_window.gd")
 const BlackNameListWindowScript = preload("res://scripts/ui/hud/black_name_list_window.gd")
 const InstanceWindowScript = preload("res://scripts/ui/hud/instance_window.gd")
+const WorldPkWindowScript = preload("res://scripts/ui/hud/world_pk_window.gd")
 const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
 const EventsWindow = preload("res://scripts/ui/hud/events_window.gd")
 const LuckyDrawWindow = preload("res://scripts/ui/hud/lucky_draw_window.gd")
@@ -1185,6 +1186,16 @@ func open_black_name_list() -> void:
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(black_name_list_window)
 	black_name_list_window.open()
+
+## World PK window (Go PlayerBattle form). The server supplies its data through the window's state.
+var world_pk_window: WorldPkWindow = null
+
+func open_world_pk() -> void:
+	if world_pk_window == null or not is_instance_valid(world_pk_window):
+		world_pk_window = WorldPkWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(world_pk_window)
+	world_pk_window.open()
 
 ## Instance (dungeon) browser from the team form's Instances tab.
 var instance_window: InstanceWindow = null
