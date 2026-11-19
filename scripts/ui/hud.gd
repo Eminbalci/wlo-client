@@ -1208,6 +1208,49 @@ func _on_business_trade_items() -> void:
 	else:
 		add_chat_message("System", "Trading is currently disabled in System Settings.", "System")
 
+## AutoPlayer wiring: walking moves the player toward its current position's target; a supply use
+## picks the first bag slot whose item name reads like a consumable (Godot has no consumable type code).
+const SUPPLY_NAME_HINTS := ["potion", "pill", "herb", "medicine", "elixir", "supply"]
+
+func find_supply_slot() -> int:
+	_ensure_sub_controllers()
+	if inventory_ctrl == null:
+		return -1
+	for i in range(inventory_ctrl.inventory_data.size()):
+		var item: Dictionary = inventory_ctrl.inventory_data[i]
+		var item_id := int(item.get("id", 0))
+		if item_id <= 0 or int(item.get("count", item.get("amount", 1))) <= 0:
+			continue
+		var db := get_node_or_null("/root/GameDatabase")
+		var rec = db.items.get_item(item_id) if db else null
+		var lowered: String = (str(rec.name) if rec else "").to_lower()
+		for hint in SUPPLY_NAME_HINTS:
+			if lowered.contains(hint):
+				return i
+	return -1
+
+func auto_player_use_supply() -> bool:
+	var slot := find_supply_slot()
+	if slot < 0 or inventory_ctrl == null:
+		return false
+	inventory_ctrl.use_or_equip_inventory_item(slot)
+	return true
+
+func auto_player_move(target: Vector2) -> bool:
+	if player and player.has_method("move_to_world_pos"):
+		return player.move_to_world_pos(target)
+	return false
+
+## Builds the AutoPlayer runner with the HUD's walk and supply actions connected.
+func make_auto_player_runner() -> AutoPlayerRunner:
+	var runner := AutoPlayerRunner.new()
+	# Wander: a random point within 64 px of the player. Route choice beyond this is not ported.
+	runner.on_move = func() -> void:
+		if player:
+			auto_player_move(player.global_position + Vector2(randf_range(-64.0, 64.0), randf_range(-64.0, 64.0)))
+	runner.on_use_supply = func() -> void: auto_player_use_supply()
+	return runner
+
 ## World PK window (Go PlayerBattle form). The server supplies its data through the window's state.
 var world_pk_window: WorldPkWindow = null
 
