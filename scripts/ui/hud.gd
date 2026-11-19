@@ -20,6 +20,7 @@ const NotebookWindowScript = preload("res://scripts/ui/hud/notebook_window.gd")
 const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
 const GiftCardWindowScript = preload("res://scripts/ui/hud/gift_card_window.gd")
 const BlackNameListWindowScript = preload("res://scripts/ui/hud/black_name_list_window.gd")
+const InstanceWindowScript = preload("res://scripts/ui/hud/instance_window.gd")
 const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
 const EventsWindow = preload("res://scripts/ui/hud/events_window.gd")
 const LuckyDrawWindow = preload("res://scripts/ui/hud/lucky_draw_window.gd")
@@ -1179,6 +1180,22 @@ func open_black_name_list() -> void:
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(black_name_list_window)
 	black_name_list_window.open()
+
+## Instance (dungeon) browser from the team form's Instances tab.
+var instance_window: InstanceWindow = null
+
+func open_instance_window(send: Callable = Callable()) -> void:
+	if instance_window == null or not is_instance_valid(instance_window):
+		instance_window = InstanceWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(instance_window)
+		instance_window.configure(send)
+	instance_window.show_page()
+
+func handle_instance_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
+	if instance_window == null or not is_instance_valid(instance_window):
+		return false
+	return instance_window.handle_packet(action, sub, payload)
 
 ## Gift exchange card selector (Go item_cards form). `send` carries the outgoing payload to the network layer.
 var gift_card_window: GiftCardWindow = null
