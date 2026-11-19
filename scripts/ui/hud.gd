@@ -19,6 +19,7 @@ const HUDInventoryClass = preload("res://scripts/ui/hud/hud_inventory.gd")
 const NotebookWindowScript = preload("res://scripts/ui/hud/notebook_window.gd")
 const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
 const GiftCardWindowScript = preload("res://scripts/ui/hud/gift_card_window.gd")
+const BlackNameListWindowScript = preload("res://scripts/ui/hud/black_name_list_window.gd")
 const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
 const EventsWindow = preload("res://scripts/ui/hud/events_window.gd")
 const LuckyDrawWindow = preload("res://scripts/ui/hud/lucky_draw_window.gd")
@@ -1168,6 +1169,16 @@ func open_item_mall() -> void:
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(item_mall_window)
 	item_mall_window.open()
+
+## Blocked player list (settings Blacklist button). Local only, no server packet.
+var black_name_list_window: BlackNameListWindow = null
+
+func open_black_name_list() -> void:
+	if black_name_list_window == null or not is_instance_valid(black_name_list_window):
+		black_name_list_window = BlackNameListWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(black_name_list_window)
+	black_name_list_window.open()
 
 ## Gift exchange card selector (Go item_cards form). `send` carries the outgoing payload to the network layer.
 var gift_card_window: GiftCardWindow = null
