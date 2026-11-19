@@ -160,6 +160,18 @@ func save_names() -> void:
 	f.close()
 
 
+## Number of names saved at `path` (0 when the file is missing or unreadable).
+static func saved_count(path: String = DEFAULT_SAVE_PATH) -> int:
+	if not FileAccess.file_exists(path):
+		return 0
+	var f := FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		return 0
+	var parsed: Variant = JSON.parse_string(f.get_as_text())
+	f.close()
+	return (parsed as Array).size() if parsed is Array else 0
+
+
 func open() -> void:
 	visible = true
 	move_to_front()

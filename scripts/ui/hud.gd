@@ -1206,7 +1206,8 @@ func open_gift_card(slot: int, item_id: int, send: Callable = Callable()) -> voi
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(gift_card_window)
 		gift_card_window.configure(send, func(id: int) -> String:
-			var rec = GameDatabase.items.get_item(id)
+			var db := get_node_or_null("/root/GameDatabase")
+			var rec = db.items.get_item(id) if db else null
 			return rec.name if rec else str(id))
 	gift_card_window.request_card(slot, item_id)
 

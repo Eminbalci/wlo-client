@@ -62,6 +62,8 @@ func _run() -> void:
 	w.close()
 	_record(not w.visible and closed_count[0] == 1, "close() hides the list and emits closed")
 
+	_record(BlackNameListWindow.saved_count(TEST_PATH) == 1, "saved_count reads the stored names")
+	_record(BlackNameListWindow.saved_count("user://no_such_blacklist.json") == 0, "saved_count is 0 without a file")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_PATH))
 	await _check_hud()
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
