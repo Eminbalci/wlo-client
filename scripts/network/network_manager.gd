@@ -496,7 +496,15 @@ func send_request_create_character(slot: int = 1) -> Error:
 	return send_raw_payload(payload)
 
 ## Submits new character creation attributes to the server.
-func send_create_character(slot: int, char_name: String, role_id: int, element: int, str_v: int, con_v: int, int_v: int, wis_v: int, agi_v: int) -> Error:
+func send_create_character(slot: int, char_name: String, role_id: int, element: int, str_v: int, con_v: int, int_v: int, wis_v: int, agi_v: int, deletion_code_hash: String = "") -> Error:
+	var payload := build_create_payload(slot, char_name, role_id, element, str_v, con_v, int_v, wis_v, agi_v, deletion_code_hash)
+	print("[NetworkManager] Submitting new character '%s' in slot %d..." % [char_name, slot])
+	return send_raw_payload(payload)
+
+
+## Builds the AC 0x3F sub 0x03 create payload. The optional deletion-code hash is a trailing
+## length-prefixed string; the server ignores it when absent.
+static func build_create_payload(slot: int, char_name: String, role_id: int, element: int, str_v: int, con_v: int, int_v: int, wis_v: int, agi_v: int, deletion_code_hash: String = "") -> PackedByteArray:
 	var payload := PackedByteArray()
 	payload.append(0x3F)
 	payload.append(0x03)
@@ -511,8 +519,11 @@ func send_create_character(slot: int, char_name: String, role_id: int, element: 
 	payload.append(int_v & 0xFF)
 	payload.append(wis_v & 0xFF)
 	payload.append(agi_v & 0xFF)
-	print("[NetworkManager] Submitting new character '%s' in slot %d..." % [char_name, slot])
-	return send_raw_payload(payload)
+	if deletion_code_hash != "":
+		var hash_bytes := deletion_code_hash.to_ascii_buffer()
+		payload.append(hash_bytes.size() & 0xFF)
+		payload.append_array(hash_bytes)
+	return payload
 
 ## Selects an existing character slot to enter the game world: Action 0x3F, Sub 0x02.
 func send_select_character(slot: int) -> Error:
