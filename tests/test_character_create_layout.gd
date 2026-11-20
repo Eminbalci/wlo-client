@@ -98,6 +98,7 @@ func _run() -> void:
 	var created: Array = []
 	cc.character_created.connect(func(c: Dictionary) -> void: created.append(c))
 	cc.step4_btn_ok.pressed.emit()
+	_confirm_create_code(cc)
 	_check(created.size() == 1, "Create button emits character_created")
 	if created.size() == 1:
 		_check(created[0].get("name") == "Layout Test", "Created character carries the entered name")
@@ -107,3 +108,13 @@ func _run() -> void:
 	CM.clear_all_characters("layout_suite")
 	print("\n--- %d TESTS, %d FAILED ---" % [_count, _failures])
 	quit(1 if _failures > 0 else 0)
+
+func _confirm_create_code(cc: Node) -> void:
+	var dlg = cc.get_node_or_null("CreateCodeDialog")
+	if dlg == null:
+		return
+	dlg.fields[0].text = "abcdef"
+	dlg.fields[1].text = "abcdef"
+	dlg.fields[2].text = "ghijkl"
+	dlg.fields[3].text = "ghijkl"
+	dlg.submit()

@@ -93,6 +93,7 @@ func _connect_submodules() -> void:
 		character_select_node.character_selected.connect(_on_enter_world_with_character)
 		character_select_node.create_requested.connect(_on_create_character_requested)
 		character_select_node.back_requested.connect(_on_char_select_back_to_login)
+		character_select_node.delete_requested.connect(_on_character_delete_requested)
 
 	# 4. CharacterCreate signals
 	if character_create_node:
@@ -236,8 +237,17 @@ func _on_packet_received(action_code: int, payload: PackedByteArray) -> void:
 				login_dialog_node.set_status("Login/Pwd error")
 			return
 
-	# ActionCode 2 or 63 (0x3F) is Auth response
-	if action_code == 2 or action_code == 63:
+	# Action 63 (0x3F): sub 2 is the login OK with the user id, sub 1 is the character list. The
+	# first payload byte is the action code, so it is not a success flag.
+	if action_code == 63 and payload.size() >= 2:
+		match payload[1]:
+			1:
+				ServerCharacters.apply_list(payload, current_account)
+				_transition_to_character_select()
+		return
+
+	# ActionCode 2 is the legacy auth response
+	if action_code == 2:
 		var result: int = payload[0] if payload.size() > 0 else 1
 		if result == 1 or payload.size() == 0:
 			_transition_to_character_select()
@@ -263,7 +273,8 @@ func _transition_to_character_select() -> void:
 		return
 	# Seed at least one sample character if account has none, for immediate previewing
 	var existing := CharacterManager.get_characters(current_account)
-	if existing.is_empty():
+	# The starter sample is only for offline preview; online, the account shows what the server has.
+	if existing.is_empty() and _is_offline_mode:
 		var starter_char := CharacterManager.create_default_character(
 			0, 6, current_account, "Fire", 12, 10, 8, 8, 10
 		)
@@ -274,6 +285,16 @@ func _transition_to_character_select() -> void:
 func _on_char_select_back_to_login() -> void:
 	goto_state(FlowState.LOGIN_DIALOG)
 
+## Online: ask the server to delete the character too, with the code the player typed.
+func _on_character_delete_requested(slot_index: int) -> void:
+	if _is_offline_mode or _network == null or not _network.is_connected_to_server():
+		return
+	var code: String = character_select_node.last_delete_code if character_select_node else ""
+	_network.send_packet(NetworkManager.build_delete_payload(CreateRequest.server_slot(slot_index), code))
+	if character_select_node:
+		character_select_node.last_delete_code = ""
+
+
 func _on_create_character_requested(slot_index: int) -> void:
 	if character_create_node:
 		character_create_node.account_name = current_account
@@ -282,6 +303,9 @@ func _on_create_character_requested(slot_index: int) -> void:
 
 func _on_character_created(char_data: Dictionary) -> void:
 	var target_slot: int = int(char_data.get("slot_index", 0))
+	# Online: also create the character on the server, with the deletion-code hash.
+	if not _is_offline_mode and _network != null and _network.is_connected_to_server() and not char_data.is_empty():
+		_network.send_packet(CreateRequest.payload_from_character(char_data))
 	if character_select_node:
 		character_select_node.account_name = current_account
 		character_select_node.selected_slot_index = target_slot
@@ -361,6 +385,13 @@ func _on_enter_world_with_character(arg: Variant) -> void:
 	# Save character state if needed
 	var target_slot: int = int(char_data.get("slot_index", 0))
 	CharacterManager.save_character(target_slot, char_data, current_account)
+
+	# Online: select the character on the server and keep the connection for the world scene.
+	if not _is_offline_mode and _network != null and _network.is_connected_to_server():
+		_network.send_packet(PackedByteArray([0x3F, 0x02, CreateRequest.server_slot(int(char_data.get("slot_index", 0)))]))
+		var session := get_node_or_null("/root/NetSession")
+		if session != null:
+			session.adopt(_network)
 
 	# Transition to main world map view
 	var target_scene := MAP_VIEW_SCENE_PATH

@@ -1146,6 +1146,31 @@ func _on_confirm_create() -> void:
 	char_data["first_name"] = first
 	char_data["family_name"] = last
 
+	_ask_deletion_code_then_save(char_data)
+
+
+## Asks for the character's deletion code (typed twice) before the character is saved.
+func _ask_deletion_code_then_save(char_data: Dictionary) -> void:
+	if _code_dialog == null:
+		_code_dialog = PasswordDialog.new()
+		_code_dialog.name = "CreateCodeDialog"
+		add_child(_code_dialog)
+	_code_dialog.ensure_built()
+	_code_dialog.set_mode(1)
+	_code_dialog.open()
+	if not _code_dialog.confirmed.is_connected(_on_create_code_confirmed):
+		_code_dialog.confirmed.connect(_on_create_code_confirmed)
+	_pending_char_data = char_data
+
+
+func _on_create_code_confirmed(_password: String, code: String) -> void:
+	var char_data := _pending_char_data
+	_pending_char_data = {}
+	char_data["deletion_code_hash"] = DeletionCode.hash_code(code)
 	CharacterManager.save_character(target_slot, char_data, account_name)
 	_play_sfx(SFX_CLICK_PATH)
 	character_created.emit(char_data)
+
+
+var _code_dialog: PasswordDialog = null
+var _pending_char_data: Dictionary = {}

@@ -1200,7 +1200,7 @@ func _gui_input(event: InputEvent) -> void:
 
 
 ## Item ids sold by the Kelan Village Props Shop (real client: Miscellaneous). Data is read from Item.dat.
-const PROPS_SHOP_ITEM_IDS: Array[int] = [32011, 32002, 45001, 45003, 42008]
+const PROPS_SHOP_ITEM_IDS: Array[int] = [32011, 32002, 45001, 45003, 42008, 59010]
 ## Shop buy prices that differ from Item.dat (the shop sells at its own price; Item.dat keeps the item value).
 const SHOP_BUY_PRICE_OVERRIDE: Dictionary = {45003: 30}
 

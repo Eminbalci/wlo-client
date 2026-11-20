@@ -388,7 +388,7 @@ func _handle_ac3f(sub_code: int, payload: PackedByteArray) -> void:
 				else:
 					_handle_login_failure("Authentication failed with error code %d" % res, res)
 		0x01: # Character List payload
-			var chars := _parse_character_list(payload)
+			var chars := parse_character_list(payload)
 			cached_characters = chars
 			current_state = State.CHARACTER_SELECT
 			print("[NetworkManager] Received character list (%d characters)." % chars.size())
@@ -496,7 +496,15 @@ func send_request_create_character(slot: int = 1) -> Error:
 	return send_raw_payload(payload)
 
 ## Submits new character creation attributes to the server.
-func send_create_character(slot: int, char_name: String, role_id: int, element: int, str_v: int, con_v: int, int_v: int, wis_v: int, agi_v: int) -> Error:
+func send_create_character(slot: int, char_name: String, role_id: int, element: int, str_v: int, con_v: int, int_v: int, wis_v: int, agi_v: int, deletion_code_hash: String = "") -> Error:
+	var payload := build_create_payload(slot, char_name, role_id, element, str_v, con_v, int_v, wis_v, agi_v, deletion_code_hash)
+	print("[NetworkManager] Submitting new character '%s' in slot %d..." % [char_name, slot])
+	return send_raw_payload(payload)
+
+
+## Builds the AC 0x3F sub 0x03 create payload. The optional deletion-code hash is a trailing
+## length-prefixed string; the server ignores it when absent.
+static func build_create_payload(slot: int, char_name: String, role_id: int, element: int, str_v: int, con_v: int, int_v: int, wis_v: int, agi_v: int, deletion_code_hash: String = "") -> PackedByteArray:
 	var payload := PackedByteArray()
 	payload.append(0x3F)
 	payload.append(0x03)
@@ -511,8 +519,32 @@ func send_create_character(slot: int, char_name: String, role_id: int, element: 
 	payload.append(int_v & 0xFF)
 	payload.append(wis_v & 0xFF)
 	payload.append(agi_v & 0xFF)
-	print("[NetworkManager] Submitting new character '%s' in slot %d..." % [char_name, slot])
-	return send_raw_payload(payload)
+	if deletion_code_hash != "":
+		var hash_bytes := deletion_code_hash.to_ascii_buffer()
+		payload.append(hash_bytes.size() & 0xFF)
+		payload.append_array(hash_bytes)
+	return payload
+
+## Builds the AC6:1 walk packet the C# server reads: [6, 1, direction u8, x u16, y u16]. The server
+## stores (x, y) as the new position and broadcasts it to the map; no step trail is needed.
+static func build_walk_payload(x: int, y: int, direction: int = 3) -> PackedByteArray:
+	var payload := PackedByteArray([6, 1, direction & 0xFF])
+	var coords := PackedByteArray()
+	coords.resize(4)
+	coords.encode_u16(0, clampi(x, 0, 65535))
+	coords.encode_u16(2, clampi(y, 0, 65535))
+	payload.append_array(coords)
+	return payload
+
+
+## Builds the AC35:2 delete request: [35, 2, slot, "" (unused string), deletion code]. The server hashes
+## the code and compares it with the one stored at creation; the slot is the server's 1..2.
+static func build_delete_payload(slot: int, deletion_code: String) -> PackedByteArray:
+	var code := deletion_code.to_utf8_buffer()
+	var payload := PackedByteArray([35, 2, slot & 0xFF, 0, code.size() & 0xFF])
+	payload.append_array(code)
+	return payload
+
 
 ## Selects an existing character slot to enter the game world: Action 0x3F, Sub 0x02.
 func send_select_character(slot: int) -> Error:
@@ -717,7 +749,7 @@ static func unpack_chat_broadcast(payload: PackedByteArray) -> Dictionary:
 # ==============================================================================
 # Internal Character Record Parsing
 # ==============================================================================
-func _parse_character_list(payload: PackedByteArray) -> Array[Dictionary]:
+static func parse_character_list(payload: PackedByteArray) -> Array[Dictionary]:
 	var list: Array[Dictionary] = []
 	var offset: int = 2 # Skip ActionCode (0x3F) and SubCode (0x01)
 
@@ -772,7 +804,7 @@ func _parse_character_list(payload: PackedByteArray) -> Array[Dictionary]:
 			"name": char_name,
 			"level": level,
 			"element": element,
-			"element_name": _element_id_to_name(element),
+			"element_name": element_id_to_name(element),
 			"cur_hp": cur_hp,
 			"full_hp": full_hp,
 			"cur_sp": cur_sp,
@@ -788,12 +820,14 @@ func _parse_character_list(payload: PackedByteArray) -> Array[Dictionary]:
 
 	return list
 
-func _element_id_to_name(elem_id: int) -> String:
+## Element codes as the server uses them (C# Affinity): Earth 1, Water 2, Fire 3, Wind 4, Dark 5.
+static func element_id_to_name(elem_id: int) -> String:
 	match elem_id:
-		1: return "Water"
-		2: return "Fire"
-		3: return "Wind"
-		4: return "Earth"
+		1: return "Earth"
+		2: return "Water"
+		3: return "Fire"
+		4: return "Wind"
+		5: return "Dark"
 		_: return "None"
 
 func _state_to_string(st: State) -> String:

@@ -23,6 +23,10 @@ signal companion_recalled(companion_id: int)
 signal companion_mounted(companion: Dictionary)
 signal companion_dismounted(companion: Dictionary)
 signal companion_ride_toggled(is_riding: bool)
+## Emitted when the Instance tab is opened; the HUD starts the instance browser from it.
+signal instance_tab_selected
+## Emitted with the tab index (0 Party, 1 Instance) whenever a tab is pressed.
+signal tab_changed(index: int)
 
 const IsometricMath = preload("res://scripts/map/isometric_math.gd")
 const AuthAudioScript = preload("res://scripts/ui/auth/auth_audio.gd")
@@ -713,7 +717,10 @@ func _build_real_client_controls() -> void:
 		var tab_idx: int = i
 		tab.pressed.connect(func() -> void:
 			active_tab = tab_idx
-			_refresh_real_client_controls())
+			_refresh_real_client_controls()
+			tab_changed.emit(tab_idx)
+			if tab_idx == 1:
+				instance_tab_selected.emit())
 		add_child(tab)
 		tab_buttons.append(tab)
 	for i in MAX_MEMBERS:

@@ -95,6 +95,20 @@ func _ready() -> void:
 	_build_ui_if_needed()
 	load_settings()
 
+func _refresh_blacklist_text() -> void:
+	var button := get_node_or_null("BlacklistButton") as Button
+	if button == null:
+		return
+	var count := BlackNameListWindow.saved_count()
+	button.text = "No blocked players" if count == 0 else "Blocked players: %d" % count
+
+
+func _on_blacklist_pressed() -> void:
+	if _hud != null and _hud.has_method("open_black_name_list"):
+		_hud.open_black_name_list()
+	_refresh_blacklist_text()
+
+
 func setup(hud: Control = null) -> void:
 	_hud = hud
 	ensure_audio_buses()
@@ -250,14 +264,17 @@ func _build_ui_if_needed() -> void:
 	_suppress_option_events = false
 
 	# Right column below the baked "Blacklist" caption
-	var blacklist := get_node_or_null("BlacklistLabel") as Label
+	# Opens the blocked player list (Go Btn_setup_1 -> Blacklist) with the saved count.
+	var blacklist := get_node_or_null("BlacklistButton") as Button
 	if not blacklist:
-		blacklist = Label.new()
-		blacklist.name = "BlacklistLabel"
+		blacklist = Button.new()
+		blacklist.name = "BlacklistButton"
+		blacklist.flat = true
 		add_child(blacklist)
+		blacklist.pressed.connect(_on_blacklist_pressed)
 	blacklist.position = Vector2(214, 264)
 	blacklist.size = Vector2(156, 18)
-	blacklist.text = "No blocked players"
+	_refresh_blacklist_text()
 	blacklist.add_theme_font_size_override("font_size", 10)
 	blacklist.add_theme_color_override("font_color", Color(0.42, 0.46, 0.60, 1.0))
 

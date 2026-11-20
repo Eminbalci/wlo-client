@@ -91,6 +91,7 @@ func _init() -> void:
 func _ready() -> void:
 	_build_ui_if_needed()
 	_update_player_element_tab()
+	_build_express_tree()
 	refresh_skill_list()
 	_connect_visibility_refresh()
 
@@ -470,7 +471,31 @@ func select_tab(tab_index: int) -> void:
 	_highlight_active_tab()
 	_refresh_category_label()
 	refresh_skill_list()
+	_refresh_express_tree()
 	tab_changed.emit(_active_tab)
+
+## The Intro tab shows the element skill tree (Go skills/form.go) for the player's element.
+var _express: SkillExpressWindow = null
+
+func _build_express_tree() -> void:
+	if _express != null:
+		return
+	_express = SkillExpressWindow.new()
+	_express.name = "SkillExpressTree"
+	add_child(_express)
+	_express.visible = false
+	_express.set_element(_player_element)
+	_refresh_express_tree()
+
+func _refresh_express_tree() -> void:
+	if _express == null:
+		return
+	_express.set_element(_player_element)
+	var grades := {}
+	for id in _learned_skill_ids.keys():
+		grades[int(id)] = 1
+	_express.set_grades(grades)
+	_express.visible = _active_tab == TAB_INTRO
 
 func get_active_tab() -> int:
 	return _active_tab

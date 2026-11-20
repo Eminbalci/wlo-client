@@ -25,9 +25,9 @@ func _run() -> void:
 	await process_frame
 	var db = root.get_node("GameDatabase")
 	var catalog: Array[Dictionary] = ShopWindow.get_default_catalog(0, "Props Shop")
-	_record(catalog.size() == 5, "props shop lists 5 items (%d)" % catalog.size())
+	_record(catalog.size() == 6, "props shop lists 6 items (%d)" % catalog.size())
 
-	var expected := {32011: ["Bread", 10], 32002: ["Rice Wine", 50], 45001: ["Ordinary Wood", 30], 45003: ["Lauan Wood", 30], 42008: ["Copper Ore", 10]}
+	var expected := {32011: ["Bread", 10], 32002: ["Rice Wine", 50], 45001: ["Ordinary Wood", 30], 45003: ["Lauan Wood", 30], 42008: ["Copper Ore", 10], 59010: ["Bread", 10]}
 	var all_match := true
 	for entry in catalog:
 		var id := int(entry.get("id", 0))

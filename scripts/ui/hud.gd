@@ -18,6 +18,11 @@ const HUDWindowManagerClass = preload("res://scripts/ui/hud/hud_window_manager.g
 const HUDInventoryClass = preload("res://scripts/ui/hud/hud_inventory.gd")
 const NotebookWindowScript = preload("res://scripts/ui/hud/notebook_window.gd")
 const ItemMallWindowScript = preload("res://scripts/ui/hud/item_mall_window.gd")
+const GiftCardWindowScript = preload("res://scripts/ui/hud/gift_card_window.gd")
+const BlackNameListWindowScript = preload("res://scripts/ui/hud/black_name_list_window.gd")
+const InstanceWindowScript = preload("res://scripts/ui/hud/instance_window.gd")
+const WorldPkWindowScript = preload("res://scripts/ui/hud/world_pk_window.gd")
+const BusinessWindowScript = preload("res://scripts/ui/hud/business_window.gd")
 const GoldWindow = preload("res://scripts/ui/hud/gold_window.gd")
 const EventsWindow = preload("res://scripts/ui/hud/events_window.gd")
 const LuckyDrawWindow = preload("res://scripts/ui/hud/lucky_draw_window.gd")
@@ -197,6 +202,12 @@ var stat_left_free: Label:
 @onready var skill_bg: TextureRect = $FloatingWindows/SkillWindow/Background
 @onready var team_window: Control = $FloatingWindows/TeamWindow
 @onready var team_bg: TextureRect = $FloatingWindows/TeamWindow/Background
+
+func _connect_team_instance_tab() -> void:
+	if team_window and team_window.has_signal("instance_tab_selected") and not team_window.instance_tab_selected.is_connected(_on_team_instance_tab):
+		team_window.instance_tab_selected.connect(_on_team_instance_tab)
+	if team_window and team_window.has_signal("tab_changed") and not team_window.tab_changed.is_connected(_on_team_tab_changed):
+		team_window.tab_changed.connect(_on_team_tab_changed)
 @onready var quest_window: Control = $FloatingWindows/QuestWindow
 @onready var quest_bg: TextureRect = $FloatingWindows/QuestWindow/Background
 @onready var friends_window: Control = $FloatingWindows/FriendsWindow
@@ -411,6 +422,8 @@ func _start_window_drag(win: Control, global_mouse_pos: Vector2) -> void:
 
 
 func _ready() -> void:
+	_connect_team_instance_tab()
+	_connect_net_session()
 	_item_tooltip = ItemTooltipScene.new()
 	_item_tooltip.name = "ItemTooltip"
 	add_child(_item_tooltip)
@@ -1167,6 +1180,343 @@ func open_item_mall() -> void:
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(item_mall_window)
 	item_mall_window.open()
+
+## Blocked player list (settings Blacklist button). Local only, no server packet.
+var black_name_list_window: BlackNameListWindow = null
+
+func open_black_name_list() -> void:
+	if black_name_list_window == null or not is_instance_valid(black_name_list_window):
+		black_name_list_window = BlackNameListWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(black_name_list_window)
+	black_name_list_window.open()
+
+## Toolbar Trade menu (Go Business form). Trade Items starts the trade with the system's trade flow.
+var business_window: BusinessWindow = null
+
+func toggle_business_window() -> void:
+	if business_window == null or not is_instance_valid(business_window):
+		business_window = BusinessWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(business_window)
+		business_window.configure(func() -> int: return get_gold())
+		business_window.trade_items_requested.connect(_on_business_trade_items)
+	business_window.toggle()
+
+func _on_business_trade_items() -> void:
+	if business_window:
+		business_window.close()
+	if is_trading_allowed():
+		add_chat_message("System", "Select a target player to initiate trade.", "System")
+	else:
+		add_chat_message("System", "Trading is currently disabled in System Settings.", "System")
+
+## AutoPlayer wiring: walking moves the player toward its current position's target; a supply use
+## picks the first bag slot whose item name reads like a consumable (Godot has no consumable type code).
+## Go battleConsumableSlot: an item whose equip slot is 8 is a battle consumable (internal/assets/battle_items.go).
+const BATTLE_CONSUMABLE_SLOT := 8
+
+func find_supply_slot() -> int:
+	_ensure_sub_controllers()
+	if inventory_ctrl == null:
+		return -1
+	var db := get_node_or_null("/root/GameDatabase")
+	if db == null:
+		return -1
+	for i in range(inventory_ctrl.inventory_data.size()):
+		var item: Dictionary = inventory_ctrl.inventory_data[i]
+		var item_id := int(item.get("id", 0))
+		if item_id <= 0 or int(item.get("count", 1)) <= 0:
+			continue
+		var rec = db.items.get_item(item_id)
+		if rec and int(rec.equip_pos) == BATTLE_CONSUMABLE_SLOT:
+			return i
+	return -1
+
+func auto_player_use_supply() -> bool:
+	var slot := find_supply_slot()
+	if slot < 0 or inventory_ctrl == null:
+		return false
+	inventory_ctrl.use_or_equip_inventory_item(slot)
+	return true
+
+## Go remote.go wander: eight offsets at radius 160, tried in this order; the first walkable one is taken.
+## The Go client skips wandering while it walks, is dead, or has a pending NPC; the caller checks that.
+const AUTO_WANDER_RADIUS := 160.0
+const AUTO_WANDER_OFFSETS := [
+	Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(0, 1),
+	Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1),
+]
+
+## Go remoteWalkPause: one second between wander walks.
+const AUTO_WANDER_PAUSE_MS := 1000
+var _auto_wander_next_ms: int = 0
+
+func auto_player_wander() -> bool:
+	if player == null:
+		return false
+	if player.get("is_moving") == true:
+		return false
+	var now := Time.get_ticks_msec()
+	if now < _auto_wander_next_ms:
+		return false
+	for offset in AUTO_WANDER_OFFSETS:
+		if auto_player_move(player.global_position + offset * AUTO_WANDER_RADIUS):
+			_auto_wander_next_ms = now + AUTO_WANDER_PAUSE_MS
+			return true
+	return false
+
+func auto_player_move(target: Vector2) -> bool:
+	if player and player.has_method("move_to_world_pos"):
+		return player.move_to_world_pos(target)
+	return false
+
+## Builds the AutoPlayer runner with the HUD's walk and supply actions connected.
+func make_auto_player_runner() -> AutoPlayerRunner:
+	var runner := AutoPlayerRunner.new()
+	runner.on_move = func() -> void: auto_player_wander()
+	runner.on_use_supply = func() -> void: auto_player_use_supply()
+	return runner
+
+## World PK window (Go PlayerBattle form). The server supplies its data through the window's state.
+var world_pk_window: WorldPkWindow = null
+
+## The top bar button toggles the window (Go toggleWorldPK): a second press hides it.
+func toggle_world_pk() -> void:
+	if world_pk_window != null and is_instance_valid(world_pk_window) and world_pk_window.visible:
+		world_pk_window.close()
+		return
+	if is_battle_active():
+		return
+	open_world_pk()
+
+
+## True while a battle is running (Go: battle.state.Active blocks opening World PK). Reads the world
+## scene's is_battle_active unless a provider Callable is set.
+var battle_active_provider: Callable = Callable()
+
+func is_battle_active() -> bool:
+	if battle_active_provider.is_valid():
+		return bool(battle_active_provider.call())
+	var host := _world_host("is_battle_active")
+	return host != null and bool(host.is_battle_active())
+
+
+## The world scene that owns this HUD: the nearest ancestor that has `method`. The HUD sits under a
+## layer inside the scene, so its direct parent is not the scene itself.
+func _world_host(method: String) -> Node:
+	var node := get_parent()
+	while node != null:
+		if node.has_method(method):
+			return node
+		node = node.get_parent()
+	return null
+
+
+func open_world_pk() -> void:
+	if world_pk_window == null or not is_instance_valid(world_pk_window):
+		world_pk_window = WorldPkWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(world_pk_window)
+	world_pk_window.open()
+
+## Instance (dungeon) browser from the team form's Instances tab.
+var instance_window: InstanceWindow = null
+
+func open_instance_window(send: Callable = Callable()) -> void:
+	if not send.is_valid():
+		send = _net_send_callable()
+	if instance_window == null or not is_instance_valid(instance_window):
+		instance_window = InstanceWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(instance_window)
+		instance_window.configure(send)
+	instance_window.show_page()
+
+## Routes server replies from the live session to the windows that listen for them.
+func _connect_net_session() -> void:
+	var net := get_node_or_null("/root/NetSession")
+	if net != null and not net.packet_received.is_connected(_on_net_packet):
+		net.packet_received.connect(_on_net_packet)
+	if net != null and not net.world_state_changed.is_connected(_apply_net_world_state):
+		net.world_state_changed.connect(_apply_net_world_state)
+	if net != null and not net.stats_changed.is_connected(_apply_net_stats):
+		net.stats_changed.connect(_apply_net_stats)
+	# The world scene finishes its own _ready after the HUD's, so the first application waits a frame.
+	_apply_net_world_state.call_deferred()
+	_apply_net_stats.call_deferred()
+
+
+## Puts the server's attributes, level, hp and sp on the active character and refreshes the status window.
+func _apply_net_stats() -> void:
+	var net := get_node_or_null("/root/NetSession")
+	var db := get_node_or_null("/root/GameDatabase")
+	if net == null or db == null or net.stats.is_empty() or not ("active_character" in db):
+		return
+	var st: Dictionary = net.stats
+	var record: Dictionary = db.active_character.duplicate()
+	for key in ["str", "con", "int", "wis", "agi", "level", "exp", "hp", "sp", "max_hp", "max_sp"]:
+		record[key] = int(st[key])
+	record["element"] = NetworkManager.element_id_to_name(int(st.element))
+	db.active_character = record
+	apply_character_data(record)
+
+
+## Where walk packets go: the live session unless a test replaces it. Takes a PackedByteArray.
+var walk_sink: Callable = Callable()
+
+
+func _connect_player_walk() -> void:
+	if player != null and player.has_signal("walk_started") and not player.walk_started.is_connected(_on_player_walk_started):
+		player.walk_started.connect(_on_player_walk_started)
+
+
+## Tells the server where the player is walking, when there is a live session.
+func _on_player_walk_started(target: Vector2) -> void:
+	var payload := NetworkManager.build_walk_payload(int(target.x), int(target.y))
+	if walk_sink.is_valid():
+		walk_sink.call(payload)
+		return
+	var net := get_node_or_null("/root/NetSession")
+	if net != null and net.is_online():
+		net.send(payload)
+
+
+## Starts the world from what the server sent: its inventory, and its spawn point when that is on
+## the map the scene is showing.
+func _apply_net_world_state() -> void:
+	_connect_player_walk()
+	var net := get_node_or_null("/root/NetSession")
+	if net == null:
+		return
+	if not net.inventory.is_empty():
+		apply_server_inventory(net.inventory.values(), true)
+	if not net.spawn.is_empty():
+		apply_server_spawn(net.spawn)
+
+
+func apply_server_inventory(entries: Array, replace: bool = false) -> void:
+	_ensure_sub_controllers()
+	if inventory_ctrl == null:
+		return
+	if replace:
+		for i in range(inventory_ctrl.inventory_data.size()):
+			inventory_ctrl.clear_inventory_slot(i)
+	for e in entries:
+		inventory_ctrl.set_inventory_data_item(int(e.slot) - 1, inventory_ctrl.create_item_record(int(e.id), 0, int(e.count), "", ""))
+
+
+## Starts the player at the server's spawn point: on this map it moves the player, on another map
+## it loads that map when the game has it (the scene database), and otherwise it does nothing.
+func apply_server_spawn(spawn: Dictionary) -> bool:
+	if player == null:
+		return false
+	var map_id := int(spawn.get("map", 0))
+	var pos := Vector2(float(spawn.get("x", 0)), float(spawn.get("y", 0)))
+	if map_id == current_map_id:
+		player.global_position = pos
+		return true
+	var host := _world_host("load_map")
+	var db := get_node_or_null("/root/GameDatabase")
+	if host == null or db == null or not ("scenes" in db):
+		return false
+	if db.scenes.get_scene(map_id) == null:
+		return false
+	return bool(host.load_map(map_id, pos))
+
+
+func _on_net_packet(action: int, payload: PackedByteArray) -> void:
+	if payload.size() < 2:
+		return
+	_route_remote_players(action, payload)
+	var sub := int(payload[1])
+	match action:
+		85:
+			handle_instance_packet(action, sub, payload)
+		23:
+			handle_gift_packet(action, sub, payload)
+
+
+## Other players on the map, drawn as markers under the world scene's entities.
+var remote_players: RemotePlayers = null
+
+func _ensure_remote_players() -> RemotePlayers:
+	if remote_players != null and is_instance_valid(remote_players):
+		return remote_players
+	var host := _world_host("load_map")
+	var entities = host.get("entities") if host != null else null
+	if entities == null:
+		return null
+	remote_players = RemotePlayers.new()
+	remote_players.name = "RemotePlayers"
+	entities.add_child(remote_players)
+	return remote_players
+
+
+func _route_remote_players(action: int, payload: PackedByteArray) -> void:
+	if action != 4 and action != 6 and action != 12:
+		return
+	var layer := _ensure_remote_players()
+	if layer == null:
+		return
+	var net := get_node_or_null("/root/NetSession")
+	if net != null and not net.spawn.is_empty():
+		layer.own_id = int(net.spawn.char_id)
+	layer.set_map(current_map_id)
+	layer.handle_packet(action, payload)
+
+
+func _net_send_callable() -> Callable:
+	var net := get_node_or_null("/root/NetSession")
+	return Callable(net, "send") if net != null else Callable()
+
+
+func _on_team_instance_tab() -> void:
+	_on_team_tab_changed(1)
+
+## Shows the instance panel inside the team window on the Instance tab and hides it on Party.
+func _on_team_tab_changed(index: int) -> void:
+	if team_window == null:
+		return
+	if instance_window == null or not is_instance_valid(instance_window):
+		instance_window = InstanceWindowScript.new()
+		instance_window.configure(_net_send_callable())
+	if instance_window.get_parent() != team_window:
+		if instance_window.get_parent():
+			instance_window.get_parent().remove_child(instance_window)
+		team_window.add_child(instance_window)
+	instance_window.build_room_controls()
+	instance_window.position = Vector2(0, 40)
+	instance_window.visible = index == 1
+	if index == 1:
+		instance_window.move_to_front()
+
+func handle_instance_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
+	if instance_window == null or not is_instance_valid(instance_window):
+		return false
+	return instance_window.handle_packet(action, sub, payload)
+
+## Gift exchange card selector (Go item_cards form). `send` carries the outgoing payload to the network layer.
+var gift_card_window: GiftCardWindow = null
+
+func open_gift_card(slot: int, item_id: int, send: Callable = Callable()) -> void:
+	if not send.is_valid():
+		send = _net_send_callable()
+	if gift_card_window == null or not is_instance_valid(gift_card_window):
+		gift_card_window = GiftCardWindowScript.new()
+		var floating := get_node_or_null("FloatingWindows")
+		(floating if floating else self).add_child(gift_card_window)
+		gift_card_window.configure(send, func(id: int) -> String:
+			var db := get_node_or_null("/root/GameDatabase")
+			var rec = db.items.get_item(id) if db else null
+			return rec.name if rec else str(id))
+	gift_card_window.request_card(slot, item_id)
+
+## Routes an AC 23 server packet to the gift card selector. Returns true when the window consumed it.
+func handle_gift_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
+	if gift_card_window == null or not is_instance_valid(gift_card_window):
+		return false
+	return gift_card_window.handle_packet(action, sub, payload)
 
 ## The top bar Money icon (668) opens the gold actions window.
 var gold_window: Control = null

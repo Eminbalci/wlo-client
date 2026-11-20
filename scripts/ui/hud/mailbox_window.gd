@@ -68,8 +68,41 @@ func _init(p_store: MailStore = null) -> void:
 	store = p_store if p_store != null else MailStoreScript.new()
 
 
+var _reader: MailReadWindow = null
+
+func _ensure_reader() -> MailReadWindow:
+	if _reader == null:
+		_reader = MailReadWindow.new()
+		_reader.reply_requested.connect(_on_send)
+		_reader.delete_requested.connect(func() -> void: delete_selected(); _reader.close())
+		_reader.next_requested.connect(func() -> void: _step_reader(1))
+		_reader.prev_requested.connect(func() -> void: _step_reader(-1))
+		add_child(_reader)
+	return _reader
+
+func _show_reader(folder_name: String, mail: Dictionary) -> void:
+	var mails := visible_mails()
+	var idx := -1
+	for i in mails.size():
+		if int(mails[i].id) == int(mail.id):
+			idx = i
+	_ensure_reader().show_mail(mail, idx > 0, idx >= 0 and idx < mails.size() - 1)
+
+func _step_reader(delta: int) -> void:
+	var mails := visible_mails()
+	var idx := -1
+	for i in mails.size():
+		if int(mails[i].id) == selected_mail_id:
+			idx = i
+	var target := idx + delta
+	if target < 0 or target >= mails.size():
+		return
+	select_row(target)
+	open_row(target)
+
 func _ready() -> void:
 	_build()
+	mail_opened.connect(_show_reader)
 	var vp := get_viewport_rect().size
 	position = ((vp - WINDOW_SIZE) * 0.5).floor()
 

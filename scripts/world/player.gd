@@ -9,6 +9,8 @@ signal position_updated(world_pos: Vector2)
 signal heading_changed(heading: int)
 signal equipment_changed(equip_layers: Dictionary)
 signal movement_blocked(reason: String, target_pos: Vector2)
+## Emitted when a walk to `target` was accepted and started (a path exists and movement is not locked).
+signal walk_started(target: Vector2)
 signal vehicle_changed(vehicle_type: VehicleType)
 signal pet_mounted(pet_data: Dictionary)
 signal pet_dismounted
@@ -559,6 +561,13 @@ func is_riding() -> bool:
 	return is_riding_pet
 
 func set_target_world_position(new_target: Vector2, allow_fallback: bool = true) -> bool:
+	var started := _start_walk(new_target, allow_fallback)
+	if started:
+		walk_started.emit(new_target)
+	return started
+
+
+func _start_walk(new_target: Vector2, allow_fallback: bool = true) -> bool:
 	if is_movement_locked or is_prone or _is_animating_wakeup or motion_state in [MotionState.PRONE, MotionState.ATTACK, MotionState.DEFEND, MotionState.VICTORY]:
 		is_moving = false
 		_current_waypoints.clear()
