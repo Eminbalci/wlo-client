@@ -1327,6 +1327,40 @@ func _connect_net_session() -> void:
 	var net := get_node_or_null("/root/NetSession")
 	if net != null and not net.packet_received.is_connected(_on_net_packet):
 		net.packet_received.connect(_on_net_packet)
+	if net != null and not net.world_state_changed.is_connected(_apply_net_world_state):
+		net.world_state_changed.connect(_apply_net_world_state)
+	_apply_net_world_state()
+
+
+## Starts the world from what the server sent: its inventory, and its spawn point when that is on
+## the map the scene is showing.
+func _apply_net_world_state() -> void:
+	var net := get_node_or_null("/root/NetSession")
+	if net == null:
+		return
+	if not net.inventory.is_empty():
+		apply_server_inventory(net.inventory.values(), true)
+	if not net.spawn.is_empty():
+		apply_server_spawn(net.spawn)
+
+
+func apply_server_inventory(entries: Array, replace: bool = false) -> void:
+	_ensure_sub_controllers()
+	if inventory_ctrl == null:
+		return
+	if replace:
+		for i in range(inventory_ctrl.inventory_data.size()):
+			inventory_ctrl.clear_inventory_slot(i)
+	for e in entries:
+		inventory_ctrl.set_inventory_data_item(int(e.slot) - 1, inventory_ctrl.create_item_record(int(e.id), 0, int(e.count), "", ""))
+
+
+## Moves the player to the server's spawn point when it is on the map this scene shows.
+func apply_server_spawn(spawn: Dictionary) -> bool:
+	if player == null or int(spawn.get("map", 0)) != current_map_id:
+		return false
+	player.global_position = Vector2(float(spawn.x), float(spawn.y))
+	return true
 
 
 func _on_net_packet(action: int, payload: PackedByteArray) -> void:
