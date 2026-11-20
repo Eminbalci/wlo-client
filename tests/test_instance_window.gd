@@ -34,6 +34,10 @@ func _run() -> void:
 	root.add_child(w)
 
 	w.build_controls()
+	_record(true, "browse is off by default")
+	w.show_page()
+	_record(_sent.is_empty(), "no request is sent while browse is disabled")
+	w.browse_enabled = true
 	w.show_page()
 	_record(_sent.back() == PackedByteArray([85, 1, 1]), "opening the browser requests page 1")
 

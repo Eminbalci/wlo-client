@@ -36,11 +36,21 @@ func set_definitions(list: Array) -> void:
 	selected_definition = -1
 
 
+## The Go protocol's AC85:1 is a room browse, but the C# server (the original client's protocol)
+## uses AC85:1 to create or enter a room. Sending it as a browse creates a room on that server, so the
+## browse request is off until a server that implements the Go browse is targeted.
+var browse_enabled: bool = false
+
+
 func show_page() -> void:
+	if not browse_enabled:
+		return
 	_request(InstanceProtocol.encode_browse(page))
 
 
 func go_page(delta: int) -> void:
+	if not browse_enabled:
+		return
 	var next := page + delta
 	if next < 1 or (pages > 0 and next > pages):
 		return
