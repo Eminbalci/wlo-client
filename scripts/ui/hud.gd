@@ -1286,7 +1286,20 @@ func toggle_world_pk() -> void:
 	if world_pk_window != null and is_instance_valid(world_pk_window) and world_pk_window.visible:
 		world_pk_window.close()
 		return
+	if is_battle_active():
+		return
 	open_world_pk()
+
+
+## True while a battle is running (Go: battle.state.Active blocks opening World PK). Reads the world
+## scene's is_battle_active unless a provider Callable is set.
+var battle_active_provider: Callable = Callable()
+
+func is_battle_active() -> bool:
+	if battle_active_provider.is_valid():
+		return bool(battle_active_provider.call())
+	var host := get_parent()
+	return host != null and host.has_method("is_battle_active") and bool(host.is_battle_active())
 
 
 func open_world_pk() -> void:

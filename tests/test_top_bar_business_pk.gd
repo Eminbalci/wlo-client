@@ -38,6 +38,11 @@ func _run() -> void:
 	esc.pressed = true
 	hud.world_pk_window._unhandled_key_input(esc)
 	_record(not hud.world_pk_window.visible, "Escape closes World PK")
+	hud.world_pk_window.close()
+	hud.battle_active_provider = func() -> bool: return true
+	bar._on_action_requested("player_battle")
+	_record(not hud.world_pk_window.visible, "World PK does not open during a battle")
+	hud.battle_active_provider = Callable()
 	bar._on_action_requested("trade")
 	_record(hud.business_window != null and hud.business_window.visible, "the trade action opens the Business menu")
 	bar._on_action_requested("trade")
