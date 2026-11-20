@@ -129,6 +129,13 @@ func refresh() -> void:
 	_cancel.visible = state.settings_dirty()
 
 
+## Escape closes the window (Go WorldPKKey).
+func _unhandled_key_input(event: InputEvent) -> void:
+	if visible and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		close()
+		get_viewport().set_input_as_handled()
+
+
 func open() -> void:
 	state.select_tab(state.tab)
 	refresh()

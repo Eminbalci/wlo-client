@@ -1281,6 +1281,14 @@ func make_auto_player_runner() -> AutoPlayerRunner:
 ## World PK window (Go PlayerBattle form). The server supplies its data through the window's state.
 var world_pk_window: WorldPkWindow = null
 
+## The top bar button toggles the window (Go toggleWorldPK): a second press hides it.
+func toggle_world_pk() -> void:
+	if world_pk_window != null and is_instance_valid(world_pk_window) and world_pk_window.visible:
+		world_pk_window.close()
+		return
+	open_world_pk()
+
+
 func open_world_pk() -> void:
 	if world_pk_window == null or not is_instance_valid(world_pk_window):
 		world_pk_window = WorldPkWindowScript.new()

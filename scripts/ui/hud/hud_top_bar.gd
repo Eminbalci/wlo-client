@@ -163,8 +163,8 @@ func _on_action_requested(action_id: String) -> void:
 			if _hud.has_method("toggle_lucky_draw_window"):
 				_hud.toggle_lucky_draw_window()
 		"player_battle":
-			if _hud.has_method("open_world_pk"):
-				_hud.open_world_pk()
+			if _hud.has_method("toggle_world_pk"):
+				_hud.toggle_world_pk()
 		"trade":
 			if _hud.has_method("toggle_business_window"):
 				_hud.toggle_business_window()
