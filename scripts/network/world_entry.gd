@@ -105,3 +105,12 @@ static func parse_remote_walk(payload: PackedByteArray) -> Dictionary:
 	if payload.size() < 11 or payload[0] != 6 or payload[1] != 1:
 		return {}
 	return {"char_id": payload.decode_u32(2), "direction": int(payload[6]), "x": payload.decode_u16(7), "y": payload.decode_u16(9)}
+
+
+## Presence of another player: AC12 [12, char id u32, map u16, x u16, y u16, ...]. A map of 0 means the
+## player left (live capture: the packet a client gets when another player disconnects).
+## Returns {char_id, map, x, y} or {}.
+static func parse_presence(payload: PackedByteArray) -> Dictionary:
+	if payload.size() < 11 or payload[0] != 12:
+		return {}
+	return {"char_id": payload.decode_u32(1), "map": payload.decode_u16(5), "x": payload.decode_u16(7), "y": payload.decode_u16(9)}

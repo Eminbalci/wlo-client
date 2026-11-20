@@ -22,6 +22,18 @@ func handle_packet(action: int, payload: PackedByteArray) -> bool:
 				return false
 			_show(info)
 			return true
+		12:
+			var presence := WorldEntry.parse_presence(payload)
+			if presence.is_empty() or int(presence.char_id) == own_id or not players.has(int(presence.char_id)):
+				return false
+			if int(presence.map) == 0:
+				remove_player(int(presence.char_id))
+			else:
+				var entry: Dictionary = players[int(presence.char_id)]
+				entry.map = int(presence.map)
+				entry.target = Vector2(float(presence.x), float(presence.y))
+				_apply_visibility(entry)
+			return true
 		6:
 			var walk := WorldEntry.parse_remote_walk(payload)
 			if walk.is_empty() or not players.has(int(walk.char_id)):
@@ -29,6 +41,13 @@ func handle_packet(action: int, payload: PackedByteArray) -> bool:
 			players[int(walk.char_id)].target = Vector2(float(walk.x), float(walk.y))
 			return true
 	return false
+
+
+## Removes a player's marker (the player left the map).
+func remove_player(char_id: int) -> void:
+	if players.has(char_id):
+		(players[char_id].node as Node).queue_free()
+		players.erase(char_id)
 
 
 func set_map(map_id: int) -> void:

@@ -1454,7 +1454,7 @@ func _ensure_remote_players() -> RemotePlayers:
 
 
 func _route_remote_players(action: int, payload: PackedByteArray) -> void:
-	if action != 4 and action != 6:
+	if action != 4 and action != 6 and action != 12:
 		return
 	var layer := _ensure_remote_players()
 	if layer == null:
