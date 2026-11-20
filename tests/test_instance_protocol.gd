@@ -55,5 +55,14 @@ func _run() -> void:
 	var defs := InstanceProtocol.parse_definitions(PackedByteArray([85, 14, 2, 1, 0, 1, 2, 0, 0]))
 	_record(defs.size() == 2 and defs[0].id == 1 and defs[1].flag == 0, "definitions are read as id and flag pairs")
 
+	# C# server flavour, from a live capture against the local server.
+	_record(InstanceProtocol.encode_enter(30001, 4) == PackedByteArray([85, 1, 49, 117, 4]), "enter request is AC85:1 with map u16 and max members")
+	var roster := InstanceProtocol.parse_roster(PackedByteArray([85, 0, 49, 117, 1, 67, 108, 111, 110, 101, 84, 101, 115, 116, 19, 39, 0, 0]))
+	_record(roster.get("map") == 30001 and roster.members.size() == 1 and roster.members[0].name == "CloneTest" and roster.members[0].id == 10003, "the live roster (one member) is parsed")
+	_record(InstanceProtocol.parse_roster(PackedByteArray([85, 0, 49, 117, 2, 65, 1, 0, 0, 0, 66, 2, 0, 0, 0])).is_empty(), "a multi-member roster is not guessed")
+	var joined := InstanceProtocol.parse_room_joined(PackedByteArray([85, 4, 233, 3, 0, 0, 49, 117, 1, 4]))
+	_record(joined.get("room") == 1001 and joined.get("map") == 30001, "the live room-joined packet is parsed")
+	var started := InstanceProtocol.parse_started(PackedByteArray([85, 5, 1, 0, 233, 3, 0, 0, 49, 117]))
+	_record(started.get("wave") == 1 and started.get("room") == 1001 and started.get("map") == 30001, "the live instance-started packet is parsed")
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)

@@ -22,6 +22,11 @@ var listings: Array = []
 var definitions: Array = [] # [{id, name}]
 var definition_page: int = 0
 var selected_definition: int = -1
+## C# server flavour state: the room the player is in (0 = none), its map, started flag and roster.
+var room_id: int = 0
+var room_map: int = 0
+var room_started: bool = false
+var roster: Array = []
 var _send: Callable = Callable()
 var _create_open := false
 
@@ -84,7 +89,39 @@ func handle_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
 			return true
 		InstanceProtocol.DEFINITIONS:
 			return not InstanceProtocol.parse_definitions(payload).is_empty()
+		0:
+			var r := InstanceProtocol.parse_roster(payload)
+			if r.is_empty():
+				return false
+			room_map = r.map
+			roster = r.members
+			return true
+		4:
+			var j := InstanceProtocol.parse_room_joined(payload)
+			if j.is_empty():
+				return false
+			room_id = j.room
+			room_map = j.map
+			return true
+		5:
+			var st := InstanceProtocol.parse_started(payload)
+			if st.is_empty():
+				return false
+			room_id = st.room
+			room_map = st.map
+			room_started = true
+			return true
 	return false
+
+
+## C# server: AC85:1 creates or enters the player's room on `map_id`. Returns false with a message when
+## the player is already in a room.
+func enter_room(map_id: int, max_members: int = 4) -> bool:
+	if room_id != 0:
+		status_message.emit("Leave the current instance room first.")
+		return false
+	_request(InstanceProtocol.encode_enter(map_id, max_members))
+	return true
 
 
 func select_definition(index: int) -> void:

@@ -111,6 +111,57 @@ static func parse_definitions(p: PackedByteArray) -> Array:
 	return out
 
 
+# --- C# server flavour (the original client's AC85, verified against a live capture) -----------------
+# The Go layouts above are not what the C# server speaks: there AC85:1 creates or enters a room.
+# These cover the C# server's own packets. Names in the roster have no length prefix on the wire, so
+# the roster parser only resolves a single-member roster (the name is what precedes the last 4 bytes).
+
+## Enter or create a room: AC85:1 [map u16, max members u8].
+static func encode_enter(map_id: int, max_members: int = 4) -> PackedByteArray:
+	return PackedByteArray([ACTION, BROWSE, map_id & 0xFF, (map_id >> 8) & 0xFF, clampi(max_members, 1, 255)])
+
+
+## Room joined: AC85:4 [room u32, map u16, ...]. Returns {room, map} or {}.
+static func parse_room_joined(p: PackedByteArray) -> Dictionary:
+	var r := _Reader.new(p, 2)
+	var room := r.u32()
+	var map_id := r.u16()
+	if not r.ok():
+		return {}
+	return {"room": room, "map": map_id}
+
+
+## Instance started: AC85:5 [wave u8, pad u8, room u32, map u16]. Returns {wave, room, map} or {}.
+static func parse_started(p: PackedByteArray) -> Dictionary:
+	var r := _Reader.new(p, 2)
+	var wave := r.u8()
+	r.u8()
+	var room := r.u32()
+	var map_id := r.u16()
+	if not r.ok():
+		return {}
+	return {"wave": wave, "room": room, "map": map_id}
+
+
+## Roster: AC85:0 [map u16, count u8, (name bytes, char id u32)...]. Only count 0 or 1 is resolved,
+## because the name carries no length. Returns {map, members: [{name, id}]} or {} when unresolved.
+static func parse_roster(p: PackedByteArray) -> Dictionary:
+	var r := _Reader.new(p, 2)
+	var map_id := r.u16()
+	var count := r.u8()
+	if not r.ok() or count > 1:
+		return {}
+	if count == 0:
+		return {"map": map_id, "members": []} if r.remaining() == 0 else {}
+	var rest := r.remaining()
+	if rest < 5:
+		return {}
+	var name_len := rest - 4
+	var name := p.slice(5, 5 + name_len).get_string_from_utf8()
+	var id := p[5 + name_len] | (p[6 + name_len] << 8) | (p[7 + name_len] << 16) | (p[8 + name_len] << 24)
+	return {"map": map_id, "members": [{"name": name, "id": id}]}
+
+
 ## Minimal bounded reader mirroring the Go Reader: any overrun flags an error instead of crashing.
 class _Reader:
 	var _data: PackedByteArray

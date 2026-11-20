@@ -69,5 +69,14 @@ func _run() -> void:
 	var before := _sent.size()
 	_record(not empty.create_room("X") and _sent.size() == before, "create without a selection sends nothing")
 
+	# C# server flavour.
+	var cs = InstanceWindow.new()
+	cs.configure(Callable(self, "_capture"))
+	root.add_child(cs)
+	_record(cs.enter_room(30001, 4) and _sent.back() == PackedByteArray([85, 1, 49, 117, 4]), "enter_room sends the C# enter request")
+	_record(cs.handle_packet(85, 0, PackedByteArray([85, 0, 49, 117, 1, 67, 108, 111, 110, 101, 84, 101, 115, 116, 19, 39, 0, 0])) and cs.roster.size() == 1, "a roster reply fills the roster")
+	_record(cs.handle_packet(85, 4, PackedByteArray([85, 4, 233, 3, 0, 0, 49, 117, 1, 4])) and cs.room_id == 1001, "a room-joined reply sets the room")
+	_record(not cs.enter_room(30001, 4), "entering again while in a room is refused")
+	_record(cs.handle_packet(85, 5, PackedByteArray([85, 5, 1, 0, 233, 3, 0, 0, 49, 117])) and cs.room_started, "an instance-started reply marks the room started")
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
