@@ -525,6 +525,15 @@ static func build_create_payload(slot: int, char_name: String, role_id: int, ele
 		payload.append_array(hash_bytes)
 	return payload
 
+## Builds the AC35:2 delete request: [35, 2, slot, "" (unused string), deletion code]. The server hashes
+## the code and compares it with the one stored at creation; the slot is the server's 1..2.
+static func build_delete_payload(slot: int, deletion_code: String) -> PackedByteArray:
+	var code := deletion_code.to_utf8_buffer()
+	var payload := PackedByteArray([35, 2, slot & 0xFF, 0, code.size() & 0xFF])
+	payload.append_array(code)
+	return payload
+
+
 ## Selects an existing character slot to enter the game world: Action 0x3F, Sub 0x02.
 func send_select_character(slot: int) -> Error:
 	selected_slot = slot

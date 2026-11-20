@@ -93,6 +93,7 @@ func _connect_submodules() -> void:
 		character_select_node.character_selected.connect(_on_enter_world_with_character)
 		character_select_node.create_requested.connect(_on_create_character_requested)
 		character_select_node.back_requested.connect(_on_char_select_back_to_login)
+		character_select_node.delete_requested.connect(_on_character_delete_requested)
 
 	# 4. CharacterCreate signals
 	if character_create_node:
@@ -283,6 +284,16 @@ func _transition_to_character_select() -> void:
 
 func _on_char_select_back_to_login() -> void:
 	goto_state(FlowState.LOGIN_DIALOG)
+
+## Online: ask the server to delete the character too, with the code the player typed.
+func _on_character_delete_requested(slot_index: int) -> void:
+	if _is_offline_mode or _network == null or not _network.is_connected_to_server():
+		return
+	var code: String = character_select_node.last_delete_code if character_select_node else ""
+	_network.send_packet(NetworkManager.build_delete_payload(CreateRequest.server_slot(slot_index), code))
+	if character_select_node:
+		character_select_node.last_delete_code = ""
+
 
 func _on_create_character_requested(slot_index: int) -> void:
 	if character_create_node:

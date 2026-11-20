@@ -567,7 +567,12 @@ func _on_slot_del_pressed(slot_idx: int) -> void:
 
 
 func _on_delete_code_verified() -> void:
+	last_delete_code = _delete_dialog.verified_code if _delete_dialog != null else ""
 	_delete_slot(_pending_delete_slot)
+
+
+## The deletion code that was verified for the last delete (empty for a character without one).
+var last_delete_code: String = ""
 
 
 func _delete_slot(slot_idx: int) -> void:

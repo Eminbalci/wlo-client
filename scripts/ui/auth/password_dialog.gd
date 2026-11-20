@@ -62,6 +62,8 @@ func _build() -> void:
 ## Mode 1 = create (OK right, Previous left), mode 2 = delete (OK left, Cancel right).
 ## Stored deletion-code hash for mode 2 (verification). Empty means create rules apply.
 var verify_hash: String = ""
+## The code that passed the last verification (sent to the server with the delete request).
+var verified_code: String = ""
 
 
 func set_mode(value: int) -> void:
@@ -123,6 +125,7 @@ signal code_rejected
 func verify_code(stored_hash: String) -> bool:
 	ensure_built()
 	if DeletionCode.matches(fields[2].text, stored_hash):
+		verified_code = fields[2].text
 		visible = false
 		code_verified.emit()
 		return true

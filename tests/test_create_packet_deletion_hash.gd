@@ -28,5 +28,7 @@ func _run() -> void:
 	var with_hash := NetworkManagerScript.build_create_payload(1, "Hero", 1, 3, 1, 2, 3, 4, 5, h)
 	_record(with_hash.size() == base.size() + 1 + 64, "the hash is appended as a length-prefixed string")
 	_record(with_hash[with_hash.size() - 65] == 64, "the length byte precedes the hash")
+	var del := NetworkManagerScript.build_delete_payload(2, "secret1")
+	_record(del == PackedByteArray([35, 2, 2, 0, 7, 115, 101, 99, 114, 101, 116, 49]), "the delete request is AC35:2 with the slot, an empty string and the code")
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)
