@@ -388,7 +388,7 @@ func _handle_ac3f(sub_code: int, payload: PackedByteArray) -> void:
 				else:
 					_handle_login_failure("Authentication failed with error code %d" % res, res)
 		0x01: # Character List payload
-			var chars := _parse_character_list(payload)
+			var chars := parse_character_list(payload)
 			cached_characters = chars
 			current_state = State.CHARACTER_SELECT
 			print("[NetworkManager] Received character list (%d characters)." % chars.size())
@@ -728,7 +728,7 @@ static func unpack_chat_broadcast(payload: PackedByteArray) -> Dictionary:
 # ==============================================================================
 # Internal Character Record Parsing
 # ==============================================================================
-func _parse_character_list(payload: PackedByteArray) -> Array[Dictionary]:
+static func parse_character_list(payload: PackedByteArray) -> Array[Dictionary]:
 	var list: Array[Dictionary] = []
 	var offset: int = 2 # Skip ActionCode (0x3F) and SubCode (0x01)
 
@@ -783,7 +783,7 @@ func _parse_character_list(payload: PackedByteArray) -> Array[Dictionary]:
 			"name": char_name,
 			"level": level,
 			"element": element,
-			"element_name": _element_id_to_name(element),
+			"element_name": element_id_to_name(element),
 			"cur_hp": cur_hp,
 			"full_hp": full_hp,
 			"cur_sp": cur_sp,
@@ -799,12 +799,14 @@ func _parse_character_list(payload: PackedByteArray) -> Array[Dictionary]:
 
 	return list
 
-func _element_id_to_name(elem_id: int) -> String:
+## Element codes as the server uses them (C# Affinity): Earth 1, Water 2, Fire 3, Wind 4, Dark 5.
+static func element_id_to_name(elem_id: int) -> String:
 	match elem_id:
-		1: return "Water"
-		2: return "Fire"
-		3: return "Wind"
-		4: return "Earth"
+		1: return "Earth"
+		2: return "Water"
+		3: return "Fire"
+		4: return "Wind"
+		5: return "Dark"
 		_: return "None"
 
 func _state_to_string(st: State) -> String:

@@ -236,8 +236,17 @@ func _on_packet_received(action_code: int, payload: PackedByteArray) -> void:
 				login_dialog_node.set_status("Login/Pwd error")
 			return
 
-	# ActionCode 2 or 63 (0x3F) is Auth response
-	if action_code == 2 or action_code == 63:
+	# Action 63 (0x3F): sub 2 is the login OK with the user id, sub 1 is the character list. The
+	# first payload byte is the action code, so it is not a success flag.
+	if action_code == 63 and payload.size() >= 2:
+		match payload[1]:
+			1:
+				ServerCharacters.apply_list(payload, current_account)
+				_transition_to_character_select()
+		return
+
+	# ActionCode 2 is the legacy auth response
+	if action_code == 2:
 		var result: int = payload[0] if payload.size() > 0 else 1
 		if result == 1 or payload.size() == 0:
 			_transition_to_character_select()
@@ -263,7 +272,8 @@ func _transition_to_character_select() -> void:
 		return
 	# Seed at least one sample character if account has none, for immediate previewing
 	var existing := CharacterManager.get_characters(current_account)
-	if existing.is_empty():
+	# The starter sample is only for offline preview; online, the account shows what the server has.
+	if existing.is_empty() and _is_offline_mode:
 		var starter_char := CharacterManager.create_default_character(
 			0, 6, current_account, "Fire", 12, 10, 8, 8, 10
 		)
