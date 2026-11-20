@@ -69,3 +69,39 @@ static func parse_stats(payload: PackedByteArray) -> Dictionary:
 		"max_hp": payload.decode_u16(24),
 		"max_sp": payload.decode_u16(26),
 	}
+
+
+## Another player on the map: AC4 [4, char id u32, 1, element?, body?, map u16, x u16, y u16, ...,
+## name length u8, name]. The name is found as the first length-prefixed printable run after the
+## position, since the bytes between them are padding. Returns {char_id, map, x, y, name} or {}.
+static func parse_other_player(payload: PackedByteArray) -> Dictionary:
+	if payload.size() < 16 or payload[0] != 4:
+		return {}
+	var name := ""
+	var i := 14
+	while i < payload.size() - 1:
+		var n := int(payload[i])
+		if n >= 2 and n <= 14 and i + 1 + n <= payload.size():
+			var printable := true
+			for j in range(i + 1, i + 1 + n):
+				if payload[j] < 32 or payload[j] > 126:
+					printable = false
+					break
+			if printable:
+				name = payload.slice(i + 1, i + 1 + n).get_string_from_ascii()
+				break
+		i += 1
+	return {
+		"char_id": payload.decode_u32(1),
+		"map": payload.decode_u16(8),
+		"x": payload.decode_u16(10),
+		"y": payload.decode_u16(12),
+		"name": name,
+	}
+
+
+## Another player walking: AC6:1 [6, 1, char id u32, direction u8, x u16, y u16]. Returns {char_id, x, y} or {}.
+static func parse_remote_walk(payload: PackedByteArray) -> Dictionary:
+	if payload.size() < 11 or payload[0] != 6 or payload[1] != 1:
+		return {}
+	return {"char_id": payload.decode_u32(2), "direction": int(payload[6]), "x": payload.decode_u16(7), "y": payload.decode_u16(9)}

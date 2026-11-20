@@ -1428,12 +1428,42 @@ func apply_server_spawn(spawn: Dictionary) -> bool:
 func _on_net_packet(action: int, payload: PackedByteArray) -> void:
 	if payload.size() < 2:
 		return
+	_route_remote_players(action, payload)
 	var sub := int(payload[1])
 	match action:
 		85:
 			handle_instance_packet(action, sub, payload)
 		23:
 			handle_gift_packet(action, sub, payload)
+
+
+## Other players on the map, drawn as markers under the world scene's entities.
+var remote_players: RemotePlayers = null
+
+func _ensure_remote_players() -> RemotePlayers:
+	if remote_players != null and is_instance_valid(remote_players):
+		return remote_players
+	var host := _world_host("load_map")
+	var entities = host.get("entities") if host != null else null
+	if entities == null:
+		return null
+	remote_players = RemotePlayers.new()
+	remote_players.name = "RemotePlayers"
+	entities.add_child(remote_players)
+	return remote_players
+
+
+func _route_remote_players(action: int, payload: PackedByteArray) -> void:
+	if action != 4 and action != 6:
+		return
+	var layer := _ensure_remote_players()
+	if layer == null:
+		return
+	var net := get_node_or_null("/root/NetSession")
+	if net != null and not net.spawn.is_empty():
+		layer.own_id = int(net.spawn.char_id)
+	layer.set_map(current_map_id)
+	layer.handle_packet(action, payload)
 
 
 func _net_send_callable() -> Callable:
