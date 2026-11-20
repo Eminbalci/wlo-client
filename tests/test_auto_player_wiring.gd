@@ -47,9 +47,25 @@ func _run() -> void:
 	hud.inventory_ctrl.inventory_data[2] = {"id": potion_id, "count": 1}
 	_record(hud.find_supply_slot() == 2, "the first battle consumable in the bag is found")
 
-	var before: Vector2 = hud.player.global_position if hud.player else Vector2.ZERO
+	_record(hud.player != null, "the world scene has a player")
+	var before: Vector2 = hud.player.global_position
 	runner.apply({"action": AutoPlayerController.ACTION_MOVE}, null)
-	_record(hud.player == null or hud.player.is_moving or hud.player.global_position != before, "a move decision walks the player")
+	for i in range(40):
+		await create_timer(0.05).timeout
+	_record(hud.player.global_position != before, "a move decision really moves the player")
+
+	var supply_id := 0
+	for id in db.items.get_all_items().keys():
+		var srec = db.items.get_item(int(id))
+		if srec and int(srec.equip_pos) == 8 and srec.get_hp_restore() > 0:
+			supply_id = int(id)
+			break
+	for i in range(hud.inventory_ctrl.inventory_data.size()):
+		hud.inventory_ctrl.inventory_data[i] = {}
+	hud.inventory_ctrl.inventory_data[0] = {"id": supply_id, "count": 3}
+	runner.apply({"action": AutoPlayerController.ACTION_USE_SUPPLY}, null)
+	await create_timer(0.3).timeout
+	_record(int(hud.inventory_ctrl.inventory_data[0].get("count", 0)) == 2, "a supply decision uses one item from the stack")
 	inst.queue_free()
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)

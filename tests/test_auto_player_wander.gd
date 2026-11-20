@@ -30,8 +30,12 @@ func _run() -> void:
 	_record(hud.AUTO_WANDER_RADIUS == 160.0, "the wander radius is the Go value 160")
 	_record(hud.AUTO_WANDER_OFFSETS.size() == 8, "eight wander offsets")
 	_record(hud.AUTO_WANDER_OFFSETS[0] == Vector2(-1, 0) and hud.AUTO_WANDER_OFFSETS[2] == Vector2(1, 0), "offsets follow the Go order: left, up, right, down, then diagonals")
+	var start: Vector2 = hud.player.global_position
 	var moved: bool = hud.auto_player_wander()
-	_record(typeof(moved) == TYPE_BOOL, "wander returns a result without error")
+	_record(moved, "wander starts a walk")
+	for i in range(40):
+		await create_timer(0.05).timeout
+	_record(hud.player.global_position.x < start.x - 100.0, "the first Go offset (left, radius 160) is the direction taken")
 	if hud.player:
 		hud.player.set("is_moving", true)
 		_record(not hud.auto_player_wander(), "no wander while the player is walking")
