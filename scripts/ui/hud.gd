@@ -1342,8 +1342,9 @@ func _connect_net_session() -> void:
 		net.world_state_changed.connect(_apply_net_world_state)
 	if net != null and not net.stats_changed.is_connected(_apply_net_stats):
 		net.stats_changed.connect(_apply_net_stats)
-	_apply_net_world_state()
-	_apply_net_stats()
+	# The world scene finishes its own _ready after the HUD's, so the first application waits a frame.
+	_apply_net_world_state.call_deferred()
+	_apply_net_stats.call_deferred()
 
 
 ## Puts the server's attributes, level, hp and sp on the active character and refreshes the status window.
