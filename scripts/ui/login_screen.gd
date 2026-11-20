@@ -282,6 +282,9 @@ func _on_create_character_requested(slot_index: int) -> void:
 
 func _on_character_created(char_data: Dictionary) -> void:
 	var target_slot: int = int(char_data.get("slot_index", 0))
+	# Online: also create the character on the server, with the deletion-code hash.
+	if not _is_offline_mode and _network != null and _network.is_connected_to_server() and not char_data.is_empty():
+		_network.send_packet(CreateRequest.payload_from_character(char_data))
 	if character_select_node:
 		character_select_node.account_name = current_account
 		character_select_node.selected_slot_index = target_slot
