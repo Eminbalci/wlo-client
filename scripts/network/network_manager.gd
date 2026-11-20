@@ -525,6 +525,18 @@ static func build_create_payload(slot: int, char_name: String, role_id: int, ele
 		payload.append_array(hash_bytes)
 	return payload
 
+## Builds the AC6:1 walk packet the C# server reads: [6, 1, direction u8, x u16, y u16]. The server
+## stores (x, y) as the new position and broadcasts it to the map; no step trail is needed.
+static func build_walk_payload(x: int, y: int, direction: int = 3) -> PackedByteArray:
+	var payload := PackedByteArray([6, 1, direction & 0xFF])
+	var coords := PackedByteArray()
+	coords.resize(4)
+	coords.encode_u16(0, clampi(x, 0, 65535))
+	coords.encode_u16(2, clampi(y, 0, 65535))
+	payload.append_array(coords)
+	return payload
+
+
 ## Builds the AC35:2 delete request: [35, 2, slot, "" (unused string), deletion code]. The server hashes
 ## the code and compares it with the one stored at creation; the slot is the server's 1..2.
 static func build_delete_payload(slot: int, deletion_code: String) -> PackedByteArray:

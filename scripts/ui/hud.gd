@@ -1362,9 +1362,30 @@ func _apply_net_stats() -> void:
 	apply_character_data(record)
 
 
+## Where walk packets go: the live session unless a test replaces it. Takes a PackedByteArray.
+var walk_sink: Callable = Callable()
+
+
+func _connect_player_walk() -> void:
+	if player != null and player.has_signal("walk_started") and not player.walk_started.is_connected(_on_player_walk_started):
+		player.walk_started.connect(_on_player_walk_started)
+
+
+## Tells the server where the player is walking, when there is a live session.
+func _on_player_walk_started(target: Vector2) -> void:
+	var payload := NetworkManager.build_walk_payload(int(target.x), int(target.y))
+	if walk_sink.is_valid():
+		walk_sink.call(payload)
+		return
+	var net := get_node_or_null("/root/NetSession")
+	if net != null and net.is_online():
+		net.send(payload)
+
+
 ## Starts the world from what the server sent: its inventory, and its spawn point when that is on
 ## the map the scene is showing.
 func _apply_net_world_state() -> void:
+	_connect_player_walk()
 	var net := get_node_or_null("/root/NetSession")
 	if net == null:
 		return
