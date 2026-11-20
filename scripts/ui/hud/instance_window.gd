@@ -95,6 +95,7 @@ func handle_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
 				return false
 			room_map = r.map
 			roster = r.members
+			refresh_room_controls()
 			return true
 		4:
 			var j := InstanceProtocol.parse_room_joined(payload)
@@ -102,6 +103,7 @@ func handle_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
 				return false
 			room_id = j.room
 			room_map = j.map
+			refresh_room_controls()
 			return true
 		5:
 			var st := InstanceProtocol.parse_started(payload)
@@ -110,6 +112,7 @@ func handle_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
 			room_id = st.room
 			room_map = st.map
 			room_started = true
+			refresh_room_controls()
 			return true
 	return false
 
@@ -209,6 +212,54 @@ func refresh_controls() -> void:
 			_rows[i].text = ""
 			_rows[i].visible = false
 	_page_label.text = "%d/%d" % [page, maxi(pages, 1)]
+
+
+## C# server flavour controls: the room line, the roster rows and the Enter button.
+const DEFAULT_MAP := 30001
+var _room_label: Label = null
+var _roster_labels: Array[Label] = []
+var _enter_button: Button = null
+
+
+func build_room_controls() -> void:
+	if _room_label != null:
+		return
+	_room_label = Label.new()
+	_room_label.name = "RoomInfo"
+	_room_label.position = Vector2(30, 90)
+	_room_label.size = Vector2(300, 20)
+	add_child(_room_label)
+	for i in 4:
+		var l := Label.new()
+		l.name = "Member%d" % i
+		l.position = Vector2(30, 120 + i * 24)
+		l.size = Vector2(300, 20)
+		add_child(l)
+		_roster_labels.append(l)
+	_enter_button = Button.new()
+	_enter_button.name = "EnterRoom"
+	_enter_button.text = "Enter room"
+	_enter_button.position = Vector2(30, 240)
+	_enter_button.size = Vector2(100, 22)
+	_enter_button.pressed.connect(func() -> void:
+		enter_room(DEFAULT_MAP)
+		refresh_room_controls())
+	add_child(_enter_button)
+	refresh_room_controls()
+
+
+## Fills the room line, the roster rows and the Enter button from the room state.
+func refresh_room_controls() -> void:
+	if _room_label == null:
+		return
+	if room_id == 0:
+		_room_label.text = "Not in an instance room"
+	else:
+		_room_label.text = "Room %d, map %d%s" % [room_id, room_map, " (started)" if room_started else ""]
+	for i in _roster_labels.size():
+		_roster_labels[i].text = str(roster[i].name) if i < roster.size() else ""
+		_roster_labels[i].visible = i < roster.size()
+	_enter_button.disabled = room_id != 0
 
 
 func _request(p: PackedByteArray) -> void:

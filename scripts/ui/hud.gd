@@ -206,6 +206,8 @@ var stat_left_free: Label:
 func _connect_team_instance_tab() -> void:
 	if team_window and team_window.has_signal("instance_tab_selected") and not team_window.instance_tab_selected.is_connected(_on_team_instance_tab):
 		team_window.instance_tab_selected.connect(_on_team_instance_tab)
+	if team_window and team_window.has_signal("tab_changed") and not team_window.tab_changed.is_connected(_on_team_tab_changed):
+		team_window.tab_changed.connect(_on_team_tab_changed)
 @onready var quest_window: Control = $FloatingWindows/QuestWindow
 @onready var quest_bg: TextureRect = $FloatingWindows/QuestWindow/Background
 @onready var friends_window: Control = $FloatingWindows/FriendsWindow
@@ -1297,7 +1299,24 @@ func open_instance_window(send: Callable = Callable()) -> void:
 	instance_window.show_page()
 
 func _on_team_instance_tab() -> void:
-	open_instance_window()
+	_on_team_tab_changed(1)
+
+## Shows the instance panel inside the team window on the Instance tab and hides it on Party.
+func _on_team_tab_changed(index: int) -> void:
+	if team_window == null:
+		return
+	if instance_window == null or not is_instance_valid(instance_window):
+		instance_window = InstanceWindowScript.new()
+		instance_window.configure(Callable())
+	if instance_window.get_parent() != team_window:
+		if instance_window.get_parent():
+			instance_window.get_parent().remove_child(instance_window)
+		team_window.add_child(instance_window)
+	instance_window.build_room_controls()
+	instance_window.position = Vector2(0, 40)
+	instance_window.visible = index == 1
+	if index == 1:
+		instance_window.move_to_front()
 
 func handle_instance_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
 	if instance_window == null or not is_instance_valid(instance_window):
