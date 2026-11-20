@@ -21,6 +21,7 @@ ArchiveLoader="*res://scripts/core/archive_loader.gd"
 GameDatabase="*res://scripts/database/game_database.gd"
 CursorManager="*res://scripts/core/cursor_manager.gd"
 AuthAudio="*res://scripts/ui/auth/auth_audio.gd"
+NetSession="*res://scripts/network/net_session.gd"
 
 [display]
 

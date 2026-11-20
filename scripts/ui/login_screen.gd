@@ -365,6 +365,13 @@ func _on_enter_world_with_character(arg: Variant) -> void:
 	var target_slot: int = int(char_data.get("slot_index", 0))
 	CharacterManager.save_character(target_slot, char_data, current_account)
 
+	# Online: select the character on the server and keep the connection for the world scene.
+	if not _is_offline_mode and _network != null and _network.is_connected_to_server():
+		_network.send_packet(PackedByteArray([0x3F, 0x02, CreateRequest.server_slot(int(char_data.get("slot_index", 0)))]))
+		var session := get_node_or_null("/root/NetSession")
+		if session != null:
+			session.adopt(_network)
+
 	# Transition to main world map view
 	var target_scene := MAP_VIEW_SCENE_PATH
 	if not ResourceLoader.exists(target_scene) and ResourceLoader.exists("res://scenes/maps/map_10001_ship_deck.tscn"):

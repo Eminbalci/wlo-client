@@ -423,6 +423,7 @@ func _start_window_drag(win: Control, global_mouse_pos: Vector2) -> void:
 
 func _ready() -> void:
 	_connect_team_instance_tab()
+	_connect_net_session()
 	_item_tooltip = ItemTooltipScene.new()
 	_item_tooltip.name = "ItemTooltip"
 	add_child(_item_tooltip)
@@ -1291,12 +1292,37 @@ func open_world_pk() -> void:
 var instance_window: InstanceWindow = null
 
 func open_instance_window(send: Callable = Callable()) -> void:
+	if not send.is_valid():
+		send = _net_send_callable()
 	if instance_window == null or not is_instance_valid(instance_window):
 		instance_window = InstanceWindowScript.new()
 		var floating := get_node_or_null("FloatingWindows")
 		(floating if floating else self).add_child(instance_window)
 		instance_window.configure(send)
 	instance_window.show_page()
+
+## Routes server replies from the live session to the windows that listen for them.
+func _connect_net_session() -> void:
+	var net := get_node_or_null("/root/NetSession")
+	if net != null and not net.packet_received.is_connected(_on_net_packet):
+		net.packet_received.connect(_on_net_packet)
+
+
+func _on_net_packet(action: int, payload: PackedByteArray) -> void:
+	if payload.size() < 2:
+		return
+	var sub := int(payload[1])
+	match action:
+		85:
+			handle_instance_packet(action, sub, payload)
+		23:
+			handle_gift_packet(action, sub, payload)
+
+
+func _net_send_callable() -> Callable:
+	var net := get_node_or_null("/root/NetSession")
+	return Callable(net, "send") if net != null else Callable()
+
 
 func _on_team_instance_tab() -> void:
 	_on_team_tab_changed(1)
@@ -1307,7 +1333,7 @@ func _on_team_tab_changed(index: int) -> void:
 		return
 	if instance_window == null or not is_instance_valid(instance_window):
 		instance_window = InstanceWindowScript.new()
-		instance_window.configure(Callable())
+		instance_window.configure(_net_send_callable())
 	if instance_window.get_parent() != team_window:
 		if instance_window.get_parent():
 			instance_window.get_parent().remove_child(instance_window)
@@ -1327,6 +1353,8 @@ func handle_instance_packet(action: int, sub: int, payload: PackedByteArray) -> 
 var gift_card_window: GiftCardWindow = null
 
 func open_gift_card(slot: int, item_id: int, send: Callable = Callable()) -> void:
+	if not send.is_valid():
+		send = _net_send_callable()
 	if gift_card_window == null or not is_instance_valid(gift_card_window):
 		gift_card_window = GiftCardWindowScript.new()
 		var floating := get_node_or_null("FloatingWindows")
