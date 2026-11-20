@@ -78,5 +78,8 @@ func _run() -> void:
 	_record(cs.handle_packet(85, 4, PackedByteArray([85, 4, 233, 3, 0, 0, 49, 117, 1, 4])) and cs.room_id == 1001, "a room-joined reply sets the room")
 	_record(not cs.enter_room(30001, 4), "entering again while in a room is refused")
 	_record(cs.handle_packet(85, 5, PackedByteArray([85, 5, 1, 0, 233, 3, 0, 0, 49, 117])) and cs.room_started, "an instance-started reply marks the room started")
+	_record(cs.leave_room() and _sent.back() == PackedByteArray([85, 2]), "leave_room sends AC85:2")
+	_record(cs.handle_packet(85, 2, PackedByteArray([85, 2, 1])) and cs.room_id == 0 and not cs.room_started and cs.roster.is_empty(), "the live leave reply [85,2,1] clears the room instead of reading as 'room full'")
+	_record(not cs.leave_room(), "leaving without a room sends nothing")
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)

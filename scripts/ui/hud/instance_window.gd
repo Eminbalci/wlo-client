@@ -82,6 +82,14 @@ func handle_packet(action: int, sub: int, payload: PackedByteArray) -> bool:
 		InstanceProtocol.BROWSE:
 			return apply_browse(payload)
 		InstanceProtocol.STATUS:
+			# The C# server answers a leave with AC85:2 [1] while the player is in a room.
+			if room_id != 0:
+				room_id = 0
+				room_map = 0
+				room_started = false
+				roster = []
+				refresh_room_controls()
+				return true
 			var code := InstanceProtocol.parse_status(payload)
 			if code < 0:
 				return false
@@ -124,6 +132,14 @@ func enter_room(map_id: int, max_members: int = 4) -> bool:
 		status_message.emit("Leave the current instance room first.")
 		return false
 	_request(InstanceProtocol.encode_enter(map_id, max_members))
+	return true
+
+
+## C# server: AC85:2 leaves the current room.
+func leave_room() -> bool:
+	if room_id == 0:
+		return false
+	_request(PackedByteArray([InstanceProtocol.ACTION, InstanceProtocol.STATUS]))
 	return true
 
 
@@ -219,6 +235,7 @@ const DEFAULT_MAP := 30001
 var _room_label: Label = null
 var _roster_labels: Array[Label] = []
 var _enter_button: Button = null
+var _leave_button: Button = null
 
 
 func build_room_controls() -> void:
@@ -245,6 +262,13 @@ func build_room_controls() -> void:
 		enter_room(DEFAULT_MAP)
 		refresh_room_controls())
 	add_child(_enter_button)
+	_leave_button = Button.new()
+	_leave_button.name = "LeaveRoom"
+	_leave_button.text = "Leave room"
+	_leave_button.position = Vector2(140, 240)
+	_leave_button.size = Vector2(100, 22)
+	_leave_button.pressed.connect(func() -> void: leave_room())
+	add_child(_leave_button)
 	refresh_room_controls()
 
 
@@ -260,6 +284,7 @@ func refresh_room_controls() -> void:
 		_roster_labels[i].text = str(roster[i].name) if i < roster.size() else ""
 		_roster_labels[i].visible = i < roster.size()
 	_enter_button.disabled = room_id != 0
+	_leave_button.disabled = room_id == 0
 
 
 func _request(p: PackedByteArray) -> void:
