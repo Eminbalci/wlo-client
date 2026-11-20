@@ -8,7 +8,8 @@ extends RefCounted
 ## low byte of the character id, not a sub code.
 ## Inventory (AC23:5): [23, 5, entries...]. Each entry is 31 bytes: slot u8 (1..50), item id u16,
 ## amount u8, damage u8, 26 bytes of item metadata (live capture: 8 entries in a 250-byte packet). The server may split the list across several
-## packets, so entries carry their own slot and are merged by slot.
+## packets, so entries carry their own slot and are merged by slot. The amount is what the packet ADDS to
+## the slot (the first full list adds to an empty bag); AC23:9 removes an amount from a slot.
 
 const ENTRY_SIZE := 31
 
@@ -38,3 +39,33 @@ static func parse_inventory(payload: PackedByteArray) -> Array:
 			out.append({"slot": slot, "id": item_id, "count": int(payload[offset + 3]), "damage": int(payload[offset + 4])})
 		offset += ENTRY_SIZE
 	return out
+
+
+## Removal: AC23:9 [23, 9, slot u8, removed u8]. Returns {slot, count} or {}.
+static func parse_inventory_removal(payload: PackedByteArray) -> Dictionary:
+	if payload.size() < 4 or payload[0] != 23 or payload[1] != 9:
+		return {}
+	return {"slot": int(payload[2]), "count": int(payload[3])}
+
+
+## Character stats: AC5:3 [5, 3, element u8, hp u32, sp u16, CON u16, INT u16, STR u16, AGI u16,
+## WIS u16, level u8, exp u32, max hp u16, max sp u16, ...]. The attribute order was read from a live
+## capture of a character created with STR 6, CON 7, INT 8, WIS 9, AGI 10, which came back 7, 8, 6, 10, 9.
+## Returns {} when the packet is not a stats packet.
+static func parse_stats(payload: PackedByteArray) -> Dictionary:
+	if payload.size() < 28 or payload[0] != 5 or payload[1] != 3:
+		return {}
+	return {
+		"element": int(payload[2]),
+		"hp": payload.decode_u32(3),
+		"sp": payload.decode_u16(7),
+		"con": payload.decode_u16(9),
+		"int": payload.decode_u16(11),
+		"str": payload.decode_u16(13),
+		"agi": payload.decode_u16(15),
+		"wis": payload.decode_u16(17),
+		"level": int(payload[19]),
+		"exp": payload.decode_u32(20),
+		"max_hp": payload.decode_u16(24),
+		"max_sp": payload.decode_u16(26),
+	}

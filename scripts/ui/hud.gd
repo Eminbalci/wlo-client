@@ -1298,8 +1298,19 @@ var battle_active_provider: Callable = Callable()
 func is_battle_active() -> bool:
 	if battle_active_provider.is_valid():
 		return bool(battle_active_provider.call())
-	var host := get_parent()
-	return host != null and host.has_method("is_battle_active") and bool(host.is_battle_active())
+	var host := _world_host("is_battle_active")
+	return host != null and bool(host.is_battle_active())
+
+
+## The world scene that owns this HUD: the nearest ancestor that has `method`. The HUD sits under a
+## layer inside the scene, so its direct parent is not the scene itself.
+func _world_host(method: String) -> Node:
+	var node := get_parent()
+	while node != null:
+		if node.has_method(method):
+			return node
+		node = node.get_parent()
+	return null
 
 
 func open_world_pk() -> void:
@@ -1329,7 +1340,25 @@ func _connect_net_session() -> void:
 		net.packet_received.connect(_on_net_packet)
 	if net != null and not net.world_state_changed.is_connected(_apply_net_world_state):
 		net.world_state_changed.connect(_apply_net_world_state)
+	if net != null and not net.stats_changed.is_connected(_apply_net_stats):
+		net.stats_changed.connect(_apply_net_stats)
 	_apply_net_world_state()
+	_apply_net_stats()
+
+
+## Puts the server's attributes, level, hp and sp on the active character and refreshes the status window.
+func _apply_net_stats() -> void:
+	var net := get_node_or_null("/root/NetSession")
+	var db := get_node_or_null("/root/GameDatabase")
+	if net == null or db == null or net.stats.is_empty() or not ("active_character" in db):
+		return
+	var st: Dictionary = net.stats
+	var record: Dictionary = db.active_character.duplicate()
+	for key in ["str", "con", "int", "wis", "agi", "level", "exp", "hp", "sp", "max_hp", "max_sp"]:
+		record[key] = int(st[key])
+	record["element"] = NetworkManager.element_id_to_name(int(st.element))
+	db.active_character = record
+	apply_character_data(record)
 
 
 ## Starts the world from what the server sent: its inventory, and its spawn point when that is on
@@ -1355,12 +1384,23 @@ func apply_server_inventory(entries: Array, replace: bool = false) -> void:
 		inventory_ctrl.set_inventory_data_item(int(e.slot) - 1, inventory_ctrl.create_item_record(int(e.id), 0, int(e.count), "", ""))
 
 
-## Moves the player to the server's spawn point when it is on the map this scene shows.
+## Starts the player at the server's spawn point: on this map it moves the player, on another map
+## it loads that map when the game has it (the scene database), and otherwise it does nothing.
 func apply_server_spawn(spawn: Dictionary) -> bool:
-	if player == null or int(spawn.get("map", 0)) != current_map_id:
+	if player == null:
 		return false
-	player.global_position = Vector2(float(spawn.x), float(spawn.y))
-	return true
+	var map_id := int(spawn.get("map", 0))
+	var pos := Vector2(float(spawn.get("x", 0)), float(spawn.get("y", 0)))
+	if map_id == current_map_id:
+		player.global_position = pos
+		return true
+	var host := _world_host("load_map")
+	var db := get_node_or_null("/root/GameDatabase")
+	if host == null or db == null or not ("scenes" in db):
+		return false
+	if db.scenes.get_scene(map_id) == null:
+		return false
+	return bool(host.load_map(map_id, pos))
 
 
 func _on_net_packet(action: int, payload: PackedByteArray) -> void:

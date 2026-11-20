@@ -48,5 +48,13 @@ func _run() -> void:
 		live.append_array(_entry(n + 1, 34000 + n, n + 1))
 	var all := WorldEntry.parse_inventory(live)
 	_record(live.size() == 250 and all.size() == 8 and all[7].slot == 8 and all[7].id == 34007 and all[7].count == 8, "eight entries fill the live 250-byte packet exactly")
+	_record(WorldEntry.parse_inventory_removal(PackedByteArray([23, 9, 4, 2])) == {"slot": 4, "count": 2}, "a removal packet gives the slot and amount")
+	_record(WorldEntry.parse_inventory_removal(PackedByteArray([23, 5, 4, 2])).is_empty(), "an addition is not a removal")
+	# Live capture of a character created with STR 6, CON 7, INT 8, WIS 9, AGI 10 (Water).
+	var live_stats := PackedByteArray([5, 3, 2, 209, 0, 0, 0, 142, 0, 7, 0, 8, 0, 6, 0, 10, 0, 9, 0, 1, 6, 0, 0, 0, 209, 0, 142, 0, 161, 1])
+	var st := WorldEntry.parse_stats(live_stats)
+	_record(st.get("str") == 6 and st.get("con") == 7 and st.get("int") == 8 and st.get("wis") == 9 and st.get("agi") == 10, "the live stats packet gives STR 6, CON 7, INT 8, WIS 9, AGI 10 in the server's order")
+	_record(st.get("element") == 2 and st.get("level") == 1 and st.get("exp") == 6 and st.get("hp") == 209 and st.get("sp") == 142 and st.get("max_hp") == 209 and st.get("max_sp") == 142, "element, level, exp and vitals come from the same packet")
+	_record(WorldEntry.parse_stats(PackedByteArray([5, 3, 2])).is_empty() and WorldEntry.parse_stats(PackedByteArray([5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])).is_empty(), "short packets and other subs are not stats")
 	print("--- %d CHECKS, %d FAILED ---" % [_checks, _failed])
 	quit(1 if _failed > 0 else 0)

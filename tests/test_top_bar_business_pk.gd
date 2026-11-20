@@ -43,6 +43,7 @@ func _run() -> void:
 	bar._on_action_requested("player_battle")
 	_record(not hud.world_pk_window.visible, "World PK does not open during a battle")
 	hud.battle_active_provider = Callable()
+	_record(hud._world_host("is_battle_active") != null, "the HUD finds the world scene that knows about battles")
 	bar._on_action_requested("trade")
 	_record(hud.business_window != null and hud.business_window.visible, "the trade action opens the Business menu")
 	bar._on_action_requested("trade")
